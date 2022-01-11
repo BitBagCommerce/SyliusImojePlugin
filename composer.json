@@ -1,7 +1,7 @@
 {
-    "name": "bitbag/skeleton-plugin",
+    "name": "bitbag/sylius-ing-plugin",
     "type": "sylius-plugin",
-    "description": "Skeleton for starting Sylius plugins.",
+    "description": "Implementation ing api to sylius store",
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
@@ -48,8 +48,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\SyliusExamplePlugin\\": "src/",
-            "Tests\\Acme\\SyliusExamplePlugin\\": "tests/"
+            "BitBag\\SyliusIngPlugin\\": "src/",
+            "Tests\\BitBag\\SyliusIngPlugin\\": ["tests/Application/src/", "tests/"]
         }
     },
     "autoload-dev": {
