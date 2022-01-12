@@ -81,8 +81,4 @@ final class BillingModel
     {
         return $this->countryCodeAlpha2;
     }
-
-    public function getJsonFromObject(self $billingModel)
-    {
-    }
 }
