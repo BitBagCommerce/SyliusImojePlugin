@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Model;
 
-final class CreateTransactionModel
+final class CreateTransactionModel implements CreateTransactionModelInterface
 {
     private string $type;
 

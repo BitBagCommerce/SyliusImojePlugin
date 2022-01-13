@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Model;
 
-final class BillingModel
+final class BillingModel implements BillingModelInterface
 {
     private string $firstName;
 

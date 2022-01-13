@@ -4,11 +4,26 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Model;
 
-final class IngHeaderModel
+final class IngHeaderModel implements IngHeaderModelInterface
 {
-    private string $accept = 'application/json';
+    public string $accept = 'application/json';
 
-    private string $contentType = 'application/json';
+    public string $contentType = 'application/json';
 
-    private string $authorization = 'Bearer j1hdp8u2u4e2mep1uzepx29d8ymy77x4dycs1tyx2dwgswjdcdwlo2jgcb3yagf2';
+    public string $authorization = 'Bearer ' . self::ING_TOKEN_SECRET;
+
+    public function getAccept(): string
+    {
+        return $this->accept;
+    }
+
+    public function getContentType(): string
+    {
+        return $this->contentType;
+    }
+
+    public function getAuthorization(): string
+    {
+        return $this->authorization;
+    }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Model;
 
-final class ShippingModel
+final class ShippingModel implements ShippingModelInterface
 {
     private string $firstName;
 
