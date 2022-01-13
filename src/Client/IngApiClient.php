@@ -54,6 +54,8 @@ final class IngApiClient implements IngApiClientInterface
 
     private function buildRequestParams(CreateTransactionModelInterface $createTransactionModel): array
     {
+        $request = [];
+
         $request['body'] = $this->serializer->serialize($createTransactionModel, 'json');
 
         return $request;
