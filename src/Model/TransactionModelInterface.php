@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Model;
 
-interface CreateTransactionModelInterface
+interface TransactionModelInterface
 {
     public const POST_METHOD = 'POST';
 

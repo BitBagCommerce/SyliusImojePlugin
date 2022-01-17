@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
-use BitBag\SyliusIngPlugin\Model\CreateTransactionModelInterface;
+use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
@@ -25,21 +25,16 @@ final class IngApiClient implements IngApiClientInterface
         $this->baseUrl = $baseUrl;
     }
 
-    public function sendRequest(
-        ?CreateTransactionModelInterface $createTransactionModel,
-        string $method,
+    public function createRequest(
+        TransactionModelInterface $createTransactionModel,
         string $action
     ): ?ResponseInterface {
         $url = $this->buildUrl($action);
 
-        $parameters = [];
-
-        if ($method === CreateTransactionModelInterface::POST_METHOD && $createTransactionModel !== null) {
-            $parameters = $this->buildRequestParams($createTransactionModel);
-        }
+        $parameters = $this->buildRequestParams($createTransactionModel);
 
         try {
-            $response = $this->httpClient->request($method, $url, $parameters);
+            $response = $this->httpClient->request(self::POST_METHOD, $url, $parameters);
         } catch (GuzzleException $e) {
             return null;
         }
@@ -52,7 +47,7 @@ final class IngApiClient implements IngApiClientInterface
         return sprintf('%s/%s', $this->baseUrl, $action);
     }
 
-    private function buildRequestParams(CreateTransactionModelInterface $createTransactionModel): array
+    private function buildRequestParams(TransactionModelInterface $createTransactionModel): array
     {
         $request = [];
 
