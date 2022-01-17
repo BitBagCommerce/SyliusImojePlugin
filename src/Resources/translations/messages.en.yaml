@@ -1,0 +1,5 @@
+bitbag_sylius_ing_plugin:
+  ui:
+    token: Token
+    redirect: Redirect instead of Lightbox?
+    gateway_name: ING

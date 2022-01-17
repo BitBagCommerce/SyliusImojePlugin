@@ -1,0 +1,3 @@
+bitbag_sylius_datatrans_plugin:
+  password:
+    not_blank: Token cannot be blank
