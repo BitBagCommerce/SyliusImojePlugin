@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
+use BitBag\SyliusIngPlugin\Form\Type\BadRequestException;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
@@ -25,18 +26,20 @@ final class IngApiClient implements IngApiClientInterface
         $this->baseUrl = $baseUrl;
     }
 
-    public function createRequest(
-        TransactionModelInterface $createTransactionModel,
+    public function createTransaction(
+        TransactionModelInterface $transactionModel,
         string $action
-    ): ?ResponseInterface {
+    ): ResponseInterface {
         $url = $this->buildUrl($action);
 
-        $parameters = $this->buildRequestParams($createTransactionModel);
+        $parameters = $this->buildRequestParams($transactionModel);
 
         try {
-            $response = $this->httpClient->request(self::POST_METHOD, $url, $parameters);
+            $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
-            return null;
+            $badRequest = new BadRequestException('Bad request');
+
+            return $badRequest->getCode();
         }
 
         return $response;
@@ -44,14 +47,14 @@ final class IngApiClient implements IngApiClientInterface
 
     private function buildUrl(string $action): string
     {
-        return sprintf('%s/%s', $this->baseUrl, $action);
+        return \sprintf('%s/%s', $this->baseUrl, $action);
     }
 
-    private function buildRequestParams(TransactionModelInterface $createTransactionModel): array
+    private function buildRequestParams(TransactionModelInterface $transactionModel): array
     {
         $request = [];
 
-        $request['body'] = $this->serializer->serialize($createTransactionModel, 'json');
+        $request['body'] = $this->serializer->serialize($transactionModel, 'json');
 
         return $request;
     }

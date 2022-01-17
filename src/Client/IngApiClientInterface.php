@@ -9,10 +9,8 @@ use Psr\Http\Message\ResponseInterface;
 
 interface IngApiClientInterface
 {
-    public const POST_METHOD = 'POST';
-
-    public function createRequest(
+    public function createTransaction(
         TransactionModelInterface $createTransactionModel,
         string $action
-    ): ?ResponseInterface;
+    ): ResponseInterface;
 }

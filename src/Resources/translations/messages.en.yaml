@@ -1,5 +1,8 @@
 bitbag_sylius_ing_plugin:
   ui:
     token: Token
-    redirect: Redirect instead of Lightbox?
+    redirect: BLIK redirect
     gateway_name: ING
+    prod_url: Enter the production URL
+    sandbox_url: Enter the sandbox URL
+    is_prod_url: Whether to use the production url

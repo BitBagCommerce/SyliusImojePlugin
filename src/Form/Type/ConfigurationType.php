@@ -26,6 +26,15 @@ class ConfigurationType extends AbstractType
             ])
             ->add('redirect', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.redirect',
+            ])
+            ->add('sandboxUrl', TextType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.sandbox_url',
+            ])
+            ->add('prodUrl', TextType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.prod_url',
+            ])
+            ->add('isProdUrl', CheckboxType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.is_prod_url',
             ]);
     }
 }
