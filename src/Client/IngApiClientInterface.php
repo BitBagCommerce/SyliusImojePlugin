@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
 interface IngApiClientInterface
 {
     public function createTransaction(
-        TransactionModelInterface $createTransactionModel,
+        TransactionModelInterface $transactionModel,
         string $action
     ): ResponseInterface;
 }
