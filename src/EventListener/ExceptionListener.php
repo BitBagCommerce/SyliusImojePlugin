@@ -2,11 +2,8 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\EventListener;
-
-use BitBag\SyliusIngPlugin\Exception\IngClientExceptionInterface;
+use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 final class ExceptionListener
@@ -23,20 +20,13 @@ final class ExceptionListener
     {
         $exception = $event->getThrowable();
 
-        if ($exception instanceof IngClientExceptionInterface) {
-            $this->handleHttpException($exception, $event);
+        if ($exception instanceof IngBadRequestException) {
+            $this->handleLoggableException($exception);
         }
     }
 
-    /**
-     * @param IngClientExceptionInterface|\Throwable $exception
-     */
-    private function handleHttpException($exception, ExceptionEvent $event): void
+    private function handleLoggableException(IngBadRequestException $exception): void
     {
-        $response = $event->getResponse() ?? new Response();
-
-        $response->setStatusCode($exception->getStatusCode());
-
-        $event->setResponse($response);
+        $this->logger->error($exception->getMessage());
     }
 }

@@ -35,11 +35,9 @@ final class IngApiClient implements IngApiClientInterface
         $parameters = $this->buildRequestParams($transactionModel);
 
         try {
-            $response = $this->httpClient->post($url, $parameters);
+            $response = $this->httpClient->request('POST', $url, $parameters);
         } catch (GuzzleException $e) {
-            $badRequest = new IngBadRequestException();
-
-            return $badRequest->getCode();
+            throw new IngBadRequestException();
         }
 
         return $response;

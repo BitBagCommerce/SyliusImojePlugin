@@ -6,5 +6,5 @@ namespace BitBag\SyliusIngPlugin\Exception;
 
 interface IngClientExceptionInterface
 {
-    public const BAD_REQUEST_MESSAGE = "Bad request";
+    public function getStatusCode(): int;
 }

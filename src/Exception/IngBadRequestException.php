@@ -9,6 +9,13 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class IngBadRequestException extends BadRequestHttpException implements IngClientExceptionInterface
 {
+    public function __construct()
+    {
+        parent::__construct(
+            \sprintf('Bad request')
+        );
+    }
+
     public function getStatusCode(): int
     {
         return Response::HTTP_BAD_REQUEST;
