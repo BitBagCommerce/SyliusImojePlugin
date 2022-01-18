@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
-use BitBag\SyliusIngPlugin\Form\Type\BadRequestException;
+use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
@@ -37,7 +37,7 @@ final class IngApiClient implements IngApiClientInterface
         try {
             $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
-            $badRequest = new BadRequestException('Bad request');
+            $badRequest = new IngBadRequestException();
 
             return $badRequest->getCode();
         }
