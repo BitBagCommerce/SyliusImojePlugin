@@ -33,8 +33,8 @@ final class ConfigurationType extends AbstractType
             ->add('prodUrl', TextType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.prod_url',
             ])
-            ->add('isProdUrl', CheckboxType::class, [
-                'label' => 'bitbag_sylius_ing_plugin.ui.is_prod_url',
+            ->add('isProd', CheckboxType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.is_prod',
             ]);
     }
 }

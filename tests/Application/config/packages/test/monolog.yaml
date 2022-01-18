@@ -1,6 +1,14 @@
 monolog:
+    channels: ['datatrans']
+
     handlers:
         main:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: error
+
+        datatrans:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_datatrans.log"
+            level: error
+            channels: [ 'datatrans' ]

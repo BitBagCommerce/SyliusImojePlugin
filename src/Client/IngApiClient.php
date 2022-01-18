@@ -10,7 +10,6 @@ use BitBag\SyliusIngPlugin\Serializer\SerializerFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 final class IngApiClient implements IngApiClientInterface
 {
@@ -35,7 +34,7 @@ final class IngApiClient implements IngApiClientInterface
         $parameters = $this->buildRequestParams($transactionModel);
 
         try {
-            $response = $this->httpClient->post($url,$parameters);
+            $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
             throw new IngBadRequestException($e->getMessage());
         }
