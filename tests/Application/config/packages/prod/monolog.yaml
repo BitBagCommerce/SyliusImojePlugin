@@ -1,4 +1,6 @@
 monolog:
+    channels: ['ing']
+
     handlers:
         main:
             type: fingers_crossed
@@ -8,3 +10,8 @@ monolog:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+        ing:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_ing.log"
+            level: error
+            channels: [ 'ing' ]

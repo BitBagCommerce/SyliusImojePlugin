@@ -4,20 +4,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Exception;
 
-use ECSPrefix20211002\Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class IngBadRequestException extends BadRequestHttpException implements IngClientExceptionInterface
 {
-    public function __construct()
+    public function __construct(string $message)
     {
-        parent::__construct(
-            \sprintf('Bad request')
-        );
-    }
-
-    public function getStatusCode(): int
-    {
-        return Response::HTTP_BAD_REQUEST;
+        parent::__construct($message);
     }
 }

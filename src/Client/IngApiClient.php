@@ -6,53 +6,53 @@ namespace BitBag\SyliusIngPlugin\Client;
 
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
-use GuzzleHttp\ClientInterface;
+use BitBag\SyliusIngPlugin\Serializer\SerializerFactory;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class IngApiClient implements IngApiClientInterface
 {
-    private ClientInterface $httpClient;
+    private Client $httpClient;
 
-    private SerializerInterface $serializer;
+    private SerializerFactory $serializerFactory;
 
     private string $baseUrl;
 
-    public function __construct(ClientInterface $httpClient, SerializerInterface $serializer, string $baseUrl)
+    public function __construct(Client $httpClient, SerializerFactory $serializerFactory, string $baseUrl)
     {
         $this->httpClient = $httpClient;
-        $this->serializer = $serializer;
+        $this->serializerFactory = $serializerFactory;
         $this->baseUrl = $baseUrl;
     }
 
     public function createTransaction(
-        TransactionModelInterface $transactionModel,
-        string $action
+        TransactionModelInterface $transactionModel
     ): ResponseInterface {
-        $url = $this->buildUrl($action);
+        $url = $this->buildUrl();
 
         $parameters = $this->buildRequestParams($transactionModel);
 
         try {
-            $response = $this->httpClient->request('POST', $url, $parameters);
+            $response = $this->httpClient->post($url,$parameters);
         } catch (GuzzleException $e) {
-            throw new IngBadRequestException();
+            throw new IngBadRequestException($e->getMessage());
         }
 
         return $response;
     }
 
-    private function buildUrl(string $action): string
+    private function buildUrl(): string
     {
-        return \sprintf('%s/%s', $this->baseUrl, $action);
+        return \sprintf('%s/', $this->baseUrl);
     }
 
     private function buildRequestParams(TransactionModelInterface $transactionModel): array
     {
         $request = [];
-
-        $request['body'] = $this->serializer->serialize($transactionModel, 'json');
+        $serializer = $this->serializerFactory->createSerializerWithNormalizer();
+        $request['body'] = $serializer->serialize($transactionModel, 'json');
 
         return $request;
     }

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Exception;
 
-interface IngClientExceptionInterface
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
+interface IngClientExceptionInterface extends HttpExceptionInterface
 {
-    public function getStatusCode(): int;
 }
