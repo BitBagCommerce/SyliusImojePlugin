@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NoResultException;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
@@ -33,5 +32,4 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
             ->getOneOrNullResult()
             ;
     }
-
 }
