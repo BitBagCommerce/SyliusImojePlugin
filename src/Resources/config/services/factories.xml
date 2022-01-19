@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service class="BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory"
+                 id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory">
+        </service>
+
+
+        <service class="BitBag\SyliusIngPlugin\Factory\Provider\IngClientConfigurationProviderFactory"
+                 id="bit_bag.sylius_ing_plugin.factory.provider.ing_client_configuration_provider_factory">
+            <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,5 @@
+bitbag_ing_localized:
+  resource: "@SyliusIngPlugin/Resources/config/routing/shop_routing_localized.yaml"
+  prefix: /{_locale}
+  requirements:
+    _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
