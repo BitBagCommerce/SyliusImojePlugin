@@ -9,9 +9,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
 {
-    /**
-     * @var EntityRepository<PaymentMethodInterface>
-     */
+    /** @var EntityRepository<PaymentMethodInterface> */
     private EntityRepository $baseRepository;
 
     /** @param EntityRepository<PaymentMethodInterface> $baseRepository */
