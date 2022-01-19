@@ -10,7 +10,5 @@ interface PaymentMethodRepositoryInterface
 {
     public const FACTORY_NAME = 'bitbag_ing';
 
-    public function getOneForIngCode(string $code): PaymentMethodInterface;
-
-    public function findOneForIngCode(string $code): ?PaymentMethodInterface;
+    public function getOneForIngCode(string $code): ?PaymentMethodInterface;
 }
