@@ -1,4 +1,6 @@
 monolog:
+    channels: ['ing']
+
     handlers:
         main:
             type: stream
@@ -7,3 +9,8 @@ monolog:
         firephp:
             type: firephp
             level: info
+        ing:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_ing.log"
+            level: debug
+            channels: [ 'ing' ]
