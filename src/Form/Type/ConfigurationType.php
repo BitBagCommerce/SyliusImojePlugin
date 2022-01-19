@@ -24,17 +24,50 @@ final class ConfigurationType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('merchantId', TextType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.merchant',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'groups' => ['sylius'],
+                    ]),
+                ],
+            ])
             ->add('redirect', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.redirect',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'groups' => ['sylius'],
+                    ]), z,
+                ],
             ])
             ->add('sandboxUrl', TextType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.sandbox_url',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'groups' => ['sylius'],
+                    ]),
+                ],
             ])
             ->add('prodUrl', TextType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.prod_url',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'groups' => ['sylius'],
+                    ]),
+                ],
             ])
             ->add('isProd', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.is_prod',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'groups' => ['sylius'],
+                    ]),
+                ],
             ]);
     }
 }

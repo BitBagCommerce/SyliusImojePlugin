@@ -8,6 +8,8 @@ interface IngClientConfigurationInterface
 {
     public function getToken(): string;
 
+    public function getMerchantId(): string;
+
     public function isRedirect(): bool;
 
     public function getSandboxUrl(): string;

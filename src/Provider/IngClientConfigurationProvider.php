@@ -43,6 +43,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
 
         return new IngClientConfiguration(
             $resolved['token'],
+            $resolved['merchantId'],
             $resolved['redirect'],
             $resolved['sandboxUrl'],
             $resolved['prodUrl'],

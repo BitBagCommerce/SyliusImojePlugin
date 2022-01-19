@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
+use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
+use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
-use BitBag\SyliusIngPlugin\Serializer\SerializerFactory;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
@@ -17,14 +18,18 @@ final class IngApiClient implements IngApiClientInterface
 
     private SerializerFactory $serializerFactory;
 
-    private string $baseUrl;
+    private IngClientConfigurationInterface $ingClientConfiguration;
 
-    public function __construct(Client $httpClient, SerializerFactory $serializerFactory, string $baseUrl)
-    {
+    public function __construct(
+        Client $httpClient,
+        SerializerFactory $serializerFactory,
+        IngClientConfigurationInterface $ingClientConfiguration
+    ) {
         $this->httpClient = $httpClient;
         $this->serializerFactory = $serializerFactory;
-        $this->baseUrl = $baseUrl;
+        $this->ingClientConfiguration = $ingClientConfiguration;
     }
+
 
     public function createTransaction(
         TransactionModelInterface $transactionModel
@@ -44,7 +49,7 @@ final class IngApiClient implements IngApiClientInterface
 
     private function buildUrl(): string
     {
-        return \sprintf('%s/', $this->baseUrl);
+        return \sprintf('todo');
     }
 
     private function buildRequestParams(TransactionModelInterface $transactionModel): array
