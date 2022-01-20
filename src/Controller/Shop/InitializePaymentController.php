@@ -46,7 +46,7 @@ final class InitializePaymentController
 
         $transactionModel = new TransactionModel('',
             '',
-            '',
+            1,
             '',
             '',
             '',
