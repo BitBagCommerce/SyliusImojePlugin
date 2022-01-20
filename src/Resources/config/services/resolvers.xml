@@ -5,9 +5,5 @@
         <service class="BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolver"
                  id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver">
         </service>
-
-        <service class="BitBag\SyliusIngPlugin\Resolver\UrlResolver\IngUrlResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.url_resolver.ing_url_resolver">
-        </service>
     </services>
 </container>
