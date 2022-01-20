@@ -19,7 +19,7 @@ final class ConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_ing_plugin.ui.token',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'message' => 'bitbag_sylius_ing_plugin.token.not_blank',
                         'groups' => ['sylius'],
                     ]),
                 ],
@@ -28,7 +28,7 @@ final class ConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_ing_plugin.ui.merchant',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'message' => 'bitbag_sylius_ing_plugin.merchant_id.not_blank',
                         'groups' => ['sylius'],
                     ]),
                 ],
@@ -37,7 +37,7 @@ final class ConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_ing_plugin.ui.redirect',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'message' => 'bitbag_sylius_ing_plugin.redirect.not_blank',
                         'groups' => ['sylius'],
                     ]),
                 ],
@@ -46,7 +46,7 @@ final class ConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_ing_plugin.ui.sandbox_url',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'message' => 'bitbag_sylius_ing_plugin.sandbox_url.not_blank',
                         'groups' => ['sylius'],
                     ]),
                 ],
@@ -55,7 +55,7 @@ final class ConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_ing_plugin.ui.prod_url',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'message' => 'bitbag_sylius_ing_plugin.prod_url.not_blank',
                         'groups' => ['sylius'],
                     ]),
                 ],
@@ -64,7 +64,7 @@ final class ConfigurationType extends AbstractType
                 'label' => 'bitbag_sylius_ing_plugin.ui.is_prod',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
+                        'message' => 'bitbag_sylius_ing_plugin.is_prod.not_blank',
                         'groups' => ['sylius'],
                     ]),
                 ],
