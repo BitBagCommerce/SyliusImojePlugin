@@ -7,8 +7,6 @@
                  public="true">
             <argument type="service" id="sylius.http_client" />
             <argument type="service" id="serializer" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.url_resolver.ing_url_resolver" />
         </service>
     </services>
 </container>

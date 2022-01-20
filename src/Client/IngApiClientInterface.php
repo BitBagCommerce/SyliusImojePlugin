@@ -9,6 +9,8 @@ use Psr\Http\Message\ResponseInterface;
 
 interface IngApiClientInterface
 {
+    public const TRANSACTION_ENDPOINT = 'transaction';
+
     public function createTransaction(
         TransactionModelInterface $transactionModel
     ): ResponseInterface;
