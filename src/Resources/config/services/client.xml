@@ -6,7 +6,7 @@
                  class="BitBag\SyliusIngPlugin\Client\IngApiClient"
                  public="true">
             <argument type="service" id="sylius.http_client" />
-            <argument type="service" id="serializer" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory" />
         </service>
     </services>
 </container>
