@@ -6,11 +6,12 @@
                  id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory">
         </service>
 
-
-        <service class="BitBag\SyliusIngPlugin\Factory\Provider\IngClientConfigurationProviderFactory"
-                 id="bit_bag.sylius_ing_plugin.factory.provider.ing_client_configuration_provider_factory">
-            <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver"/>
+        <service class="BitBag\SyliusIngPlugin\Factory\Client\IngClientFactory"
+                 id="bitbag.sylius_ing_plugin.factory.client.ing_client_factory">
+            <argument type="service" id="sylius.http_client"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.url_resolver.ing_url_resolver"/>
         </service>
     </services>
 </container>

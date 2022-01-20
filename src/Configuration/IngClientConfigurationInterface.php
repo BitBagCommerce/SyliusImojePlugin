@@ -14,7 +14,7 @@ interface IngClientConfigurationInterface
 
     public function getSandboxUrl(): string;
 
-    public function isProdUrl(): bool;
+    public function getProdUrl(): string;
 
-    public function getIsProd(): string;
+    public function isProd(): bool;
 }

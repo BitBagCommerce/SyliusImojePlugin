@@ -14,11 +14,9 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 final class IngClientConfigurationProvider implements IngClientConfigurationProviderInterface
 {
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    /** @var ConfigurationResolverInterface */
-    private $configurationResolver;
+    private ConfigurationResolverInterface $configurationResolver;
 
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,

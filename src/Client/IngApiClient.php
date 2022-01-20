@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
 use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusIngPlugin\Resolver\UrlResolver\IngUrlResolver;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
@@ -18,18 +19,17 @@ final class IngApiClient implements IngApiClientInterface
 
     private SerializerFactory $serializerFactory;
 
-    private IngClientConfigurationInterface $ingClientConfiguration;
+    private IngClientConfigurationProviderInterface $clientConfigurationProvider;
 
-    public function __construct(
-        Client $httpClient,
-        SerializerFactory $serializerFactory,
-        IngClientConfigurationInterface $ingClientConfiguration
-    ) {
+    private IngUrlResolver $ingUrlResolver;
+
+    public function __construct(Client $httpClient, SerializerFactory $serializerFactory, IngClientConfigurationProviderInterface $clientConfigurationProvider, IngUrlResolver $ingUrlResolver)
+    {
         $this->httpClient = $httpClient;
         $this->serializerFactory = $serializerFactory;
-        $this->ingClientConfiguration = $ingClientConfiguration;
+        $this->clientConfigurationProvider = $clientConfigurationProvider;
+        $this->ingUrlResolver = $ingUrlResolver;
     }
-
 
     public function createTransaction(
         TransactionModelInterface $transactionModel

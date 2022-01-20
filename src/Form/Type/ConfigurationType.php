@@ -39,7 +39,7 @@ final class ConfigurationType extends AbstractType
                     new NotBlank([
                         'message' => 'bitbag_sylius_ing_plugin.password.not_blank',
                         'groups' => ['sylius'],
-                    ]), z,
+                    ]),
                 ],
             ])
             ->add('sandboxUrl', TextType::class, [
