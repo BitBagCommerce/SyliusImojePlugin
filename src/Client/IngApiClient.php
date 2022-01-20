@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
+use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
 use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
@@ -23,8 +24,12 @@ final class IngApiClient implements IngApiClientInterface
 
     private IngUrlResolver $ingUrlResolver;
 
-    public function __construct(Client $httpClient, SerializerFactory $serializerFactory, IngClientConfigurationProviderInterface $clientConfigurationProvider, IngUrlResolver $ingUrlResolver)
-    {
+    public function __construct(
+        Client $httpClient,
+        SerializerFactory $serializerFactory,
+        IngClientConfigurationProviderInterface $clientConfigurationProvider,
+        IngUrlResolver $ingUrlResolver
+    ) {
         $this->httpClient = $httpClient;
         $this->serializerFactory = $serializerFactory;
         $this->clientConfigurationProvider = $clientConfigurationProvider;
@@ -34,9 +39,9 @@ final class IngApiClient implements IngApiClientInterface
     public function createTransaction(
         TransactionModelInterface $transactionModel
     ): ResponseInterface {
-        $url = $this->buildUrl();
-
-        $parameters = $this->buildRequestParams($transactionModel);
+        $clientConfiguration = $this->clientConfigurationProvider->getPaymentMethodConfiguration('code');
+        $url = $this->ingUrlResolver->buildUrl('code', $clientConfiguration);
+        $parameters = $this->buildRequestParams($transactionModel, $clientConfiguration);
 
         try {
             $response = $this->httpClient->post($url, $parameters);
@@ -47,16 +52,18 @@ final class IngApiClient implements IngApiClientInterface
         return $response;
     }
 
-    private function buildUrl(): string
-    {
-        return \sprintf('todo');
-    }
-
-    private function buildRequestParams(TransactionModelInterface $transactionModel): array
-    {
+    private function buildRequestParams(
+        TransactionModelInterface $transactionModel,
+        IngClientConfigurationInterface $ingClientConfiguration
+    ): array {
         $request = [];
         $serializer = $this->serializerFactory->createSerializerWithNormalizer();
         $request['body'] = $serializer->serialize($transactionModel, 'json');
+        $request['headers'] = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => \sprintf('Bearer %s', $ingClientConfiguration->getToken()),
+        ];
 
         return $request;
     }
