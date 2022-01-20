@@ -3,11 +3,7 @@ bitbag_sylius_ing_plugin:
     not_blank: Token cannot be blank
   merchant_id:
     not_blank: Merchand ID cannot be blank
-  redirect:
-    not_blank: Checkbox cannot be blank
   sandbox_url:
     not_blank: Sandbox URL cannot be blank
   prod_url:
     not_blank: Production URL cannot be blank
-  is_prod:
-    not_blank: Checkbox cannot be blank
