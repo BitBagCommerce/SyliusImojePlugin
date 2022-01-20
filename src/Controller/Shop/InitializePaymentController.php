@@ -9,8 +9,8 @@ use BitBag\SyliusIngPlugin\Model\CustomerModel;
 use BitBag\SyliusIngPlugin\Model\ShippingModel;
 use BitBag\SyliusIngPlugin\Model\TransactionModel;
 use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 final class InitializePaymentController
 {
@@ -21,20 +21,11 @@ final class InitializePaymentController
         $this->ingClientProvider = $ingClientProvider;
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request): ResponseInterface
     {
-        $customerModel = new CustomerModel('','','','','','',);
-        $billingModel = new BillingModel('',
+        $customerModel = new CustomerModel('', '', '', '', '', '', );
+        $billingModel = new BillingModel(
             '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            ''
-        );
-
-        $shippingModel = new ShippingModel('',
             '',
             '',
             '',
@@ -44,7 +35,19 @@ final class InitializePaymentController
             ''
         );
 
-        $transactionModel = new TransactionModel('',
+        $shippingModel = new ShippingModel(
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            ''
+        );
+
+        $transactionModel = new TransactionModel(
+            '',
             '',
             1,
             '',
@@ -58,10 +61,8 @@ final class InitializePaymentController
             $billingModel,
             $shippingModel
         );
-
         $client = $this->ingClientProvider->getClient('ing_code');
-        $response = $client->createTransaction($transactionModel);
 
-        return new Response();
+        return $client->createTransaction($transactionModel);
     }
 }
