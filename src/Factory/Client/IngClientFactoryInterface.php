@@ -1,6 +1,8 @@
 <?php
 
-namespace BitBag\SyliusIngPlugin\Factory\Serializer;
+declare(strict_types=1);
+
+namespace BitBag\SyliusIngPlugin\Factory\Client;
 
 use BitBag\SyliusIngPlugin\Client\IngApiClient;
 
