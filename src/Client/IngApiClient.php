@@ -33,6 +33,7 @@ final class IngApiClient implements IngApiClientInterface
         TransactionModelInterface $transactionModel
     ): ResponseInterface {
         $url = \sprintf('%s%s', $this->url, self::TRANSACTION_ENDPOINT);
+
         $parameters = $this->buildRequestParams($transactionModel, $this->token);
 
         try {

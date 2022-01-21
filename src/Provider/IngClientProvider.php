@@ -38,8 +38,8 @@ final class IngClientProvider implements IngClientProviderInterface
         } else {
             $url = $configuration->getSandboxUrl();
         }
-        $completeUrl = \sprintf('/%s/%s/', $url, $merchantId);
+        $completeUrl = \sprintf('%s/%s/', $url, $merchantId);
 
-        return new IngApiClient($this->httpClient, $this->serializerFactory, $token, $url);
+        return new IngApiClient($this->httpClient, $this->serializerFactory, $token, $completeUrl);
     }
 }
