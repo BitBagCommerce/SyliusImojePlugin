@@ -1,2 +1,3 @@
 bitbag_ing_localized:
   resource: "@SyliusIngPlugin/Resources/config/routing/shop_routing.yaml"
+
