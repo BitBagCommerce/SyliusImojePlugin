@@ -14,6 +14,7 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
 
         $resolver->setDefaults([
             'token' => '',
+            'merchantId' => '',
             'redirect' => '',
             'sandboxUrl' => '',
             'prodUrl' => [],

@@ -1,0 +1,5 @@
+bitbag_ing_initialize_payment:
+  path: /payment/ing/initialize_payment
+  methods: [POST]
+  controller: bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller
+

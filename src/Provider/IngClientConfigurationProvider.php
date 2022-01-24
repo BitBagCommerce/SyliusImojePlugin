@@ -5,19 +5,18 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Provider;
 
 use BitBag\SyliusIngPlugin\Configuration\IngClientConfiguration;
+use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolverInterface;
 use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-final class IngClientConfigurationProvider
+final class IngClientConfigurationProvider implements IngClientConfigurationProviderInterface
 {
-    /** @var PaymentMethodRepositoryInterface */
-    private $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    /** @var ConfigurationResolverInterface */
-    private $configurationResolver;
+    private ConfigurationResolverInterface $configurationResolver;
 
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
@@ -27,7 +26,7 @@ final class IngClientConfigurationProvider
         $this->configurationResolver = $configurationResolver;
     }
 
-    public function getPaymentMethodConfiguration(string $code): IngClientConfiguration
+    public function getPaymentMethodConfiguration(string $code): IngClientConfigurationInterface
     {
         $paymentMethod = $this->paymentMethodRepository->getOneForIngCode($code);
 
@@ -42,6 +41,7 @@ final class IngClientConfigurationProvider
 
         return new IngClientConfiguration(
             $resolved['token'],
+            $resolved['merchantId'],
             $resolved['redirect'],
             $resolved['sandboxUrl'],
             $resolved['prodUrl'],

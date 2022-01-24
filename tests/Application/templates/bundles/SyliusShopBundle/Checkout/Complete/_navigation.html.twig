@@ -1,0 +1,17 @@
+{% set init_path = path('bitbag_ing_initialize_payment') %}
+{% set factory_name = constant('BitBag\\SyliusIngPlugin\\Provider\\IngClientConfigurationProviderInterface::FACTORY_NAME') %}
+
+{% if order.payments.last.method.gatewayConfig.factoryName != factory_name %}
+    <button type="submit" class="ui huge primary fluid icon labeled button" {{ sylius_test_html_attribute('confirmation-button') }}>
+        <i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}
+    </button>
+{% else %}
+    <button
+            type="submit"
+            class="ui huge primary fluid icon labeled button"
+            {{ sylius_test_html_attribute('confirmation-button') }}
+            id="submitPayment"
+            data-init-payment-path="{{ init_path }}">
+        <i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}
+    </button>
+{% endif %}
