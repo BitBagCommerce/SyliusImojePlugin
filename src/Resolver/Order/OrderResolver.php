@@ -45,11 +45,18 @@ final class OrderResolver implements OrderResolverInterface
     private function getCurrentOrder(): ?OrderInterface
     {
         $request = $this->getCurrentRequest();
+
         /**
-         * @var string|null $tokenValue
+         * @var string|null $key
          */
-        $tokenValue = $request->get('sylius_checkout_complete')['_token'];
-        if ($tokenValue === null) {
+        $key = $request->get('sylius_checkout_complete');
+
+        if ($key !== null)
+        {
+            $tokenValue = $request->get('sylius_checkout_complete')['_token'];
+        }
+
+        if (!isset($tokenValue) || $tokenValue === null) {
             return null;
         }
 

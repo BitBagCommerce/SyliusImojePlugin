@@ -33,7 +33,7 @@ final class IngClientProvider implements IngClientProviderInterface
         $merchantId = $configuration->getMerchantId();
         $url = '';
 
-        if ($configuration->isProd() == true) {
+        if ($configuration->isProd()) {
             $url = $configuration->getProdUrl();
         } else {
             $url = $configuration->getSandboxUrl();
