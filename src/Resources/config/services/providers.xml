@@ -3,13 +3,15 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProvider"
-                 id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider">
+                 id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"
+        >
             <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver"/>
         </service>
 
         <service class="BitBag\SyliusIngPlugin\Provider\IngClientProvider"
-                 id="bitbag.sylius_ing_plugin.provider.ing_client_provider">
+                 id="bitbag.sylius_ing_plugin.provider.ing_client_provider"
+        >
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
             <argument type="service" id="sylius.http_client"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"/>

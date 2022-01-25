@@ -3,7 +3,8 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory"
-                 id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory">
+                 id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"
+        >
         </service>
     </services>
 </container>

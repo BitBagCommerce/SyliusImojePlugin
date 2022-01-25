@@ -4,7 +4,8 @@
     <services>
         <service id="bitbag_sylius_ing_plugin.client.ing_api_client"
                  class="BitBag\SyliusIngPlugin\Client\IngApiClient"
-                 public="true">
+                 public="true"
+        >
             <argument type="service" id="sylius.http_client" />
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory" />
         </service>
