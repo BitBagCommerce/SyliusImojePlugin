@@ -3,11 +3,17 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver">
+                 id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver"
+        >
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Resolver\UrlResolver\IngUrlResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.url_resolver.ing_url_resolver">
+        <service class="BitBag\SyliusIngPlugin\Resolver\Order\OrderResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"
+        >
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="sylius.context.cart"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.repository.order.order_repository"/>
         </service>
+
     </services>
 </container>

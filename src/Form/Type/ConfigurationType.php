@@ -35,12 +35,6 @@ final class ConfigurationType extends AbstractType
             ])
             ->add('redirect', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.redirect',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.redirect.not_blank',
-                        'groups' => ['sylius'],
-                    ]),
-                ],
             ])
             ->add('sandboxUrl', TextType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.sandbox_url',
@@ -62,12 +56,6 @@ final class ConfigurationType extends AbstractType
             ])
             ->add('isProd', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.is_prod',
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'bitbag_sylius_ing_plugin.is_prod.not_blank',
-                        'groups' => ['sylius'],
-                    ]),
-                ],
-            ]);
+                ]);
     }
 }

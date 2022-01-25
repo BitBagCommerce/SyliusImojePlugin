@@ -4,7 +4,8 @@
     <services>
         <service id="bitbag_sylius_ing_plugin.event_listener.exception_listener"
                  class="BitBag\SyliusIngPlugin\EventListener\ExceptionListener"
-                 public="true">
+                 public="true"
+        >
             <argument type="service" id="monolog.logger.ing" />
             <tag name="kernel.event_listener" event="kernel.exception"/>
         </service>

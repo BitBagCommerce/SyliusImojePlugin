@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Client;
+namespace BitBag\SyliusIngPlugin\Provider;
 
 use BitBag\SyliusIngPlugin\Client\IngApiClient;
 
-interface IngClientFactoryInterface
+interface IngClientProviderInterface
 {
     public function getClient(string $code): IngApiClient;
 }
