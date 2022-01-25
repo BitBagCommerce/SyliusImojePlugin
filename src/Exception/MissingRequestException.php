@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Exception;
 
-final class MissingRequestException extends IngBadRequestException
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
+final class MissingRequestException extends BadRequestHttpException
 {
     public function __construct()
     {

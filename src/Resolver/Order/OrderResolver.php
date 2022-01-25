@@ -33,7 +33,7 @@ final class OrderResolver implements OrderResolverInterface
 
     private function getCurrentRequest(): Request
     {
-        $result = $this->requestStack->getMasterRequest();
+        $result = $this->requestStack->getMainRequest();
 
         if ($result === null) {
             throw new MissingRequestException();
@@ -49,7 +49,7 @@ final class OrderResolver implements OrderResolverInterface
          * @var string|null $tokenValue
          */
         $tokenValue = $request->get('sylius_checkout_complete')['_token'];
-        if (null === $tokenValue) {
+        if ($tokenValue === null) {
             return null;
         }
 

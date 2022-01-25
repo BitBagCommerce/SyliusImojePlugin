@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Client;
 
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory;
+use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -15,13 +15,13 @@ final class IngApiClient implements IngApiClientInterface
 {
     private Client $httpClient;
 
-    private SerializerFactory $serializerFactory;
+    private SerializerFactoryInterface $serializerFactory;
 
     private string $token;
 
     private string $url;
 
-    public function __construct(Client $httpClient, SerializerFactory $serializerFactory, string $token, string $url)
+    public function __construct(Client $httpClient, SerializerFactoryInterface $serializerFactory, string $token, string $url)
     {
         $this->httpClient = $httpClient;
         $this->serializerFactory = $serializerFactory;

@@ -6,7 +6,7 @@ namespace BitBag\SyliusIngPlugin\Exception;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class IngBadRequestException extends BadRequestHttpException implements IngClientExceptionInterface
+final class IngBadRequestException extends BadRequestHttpException implements IngClientExceptionInterface
 {
     public function __construct(string $message)
     {

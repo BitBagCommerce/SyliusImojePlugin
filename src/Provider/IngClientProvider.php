@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Provider;
 
 use BitBag\SyliusIngPlugin\Client\IngApiClient;
-use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory;
+use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
 use GuzzleHttp\Client;
 
 final class IngClientProvider implements IngClientProviderInterface
@@ -14,12 +14,12 @@ final class IngClientProvider implements IngClientProviderInterface
 
     private Client $httpClient;
 
-    private SerializerFactory $serializerFactory;
+    private SerializerFactoryInterface $serializerFactory;
 
     public function __construct(
         IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
         Client $httpClient,
-        SerializerFactory $serializerFactory
+        SerializerFactoryInterface $serializerFactory
     ) {
         $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
         $this->httpClient = $httpClient;
@@ -33,7 +33,7 @@ final class IngClientProvider implements IngClientProviderInterface
         $merchantId = $configuration->getMerchantId();
         $url = '';
 
-        if ($configuration->isProd() === true) {
+        if ($configuration->isProd() == true) {
             $url = $configuration->getProdUrl();
         } else {
             $url = $configuration->getSandboxUrl();
