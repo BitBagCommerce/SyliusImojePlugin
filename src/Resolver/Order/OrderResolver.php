@@ -47,19 +47,17 @@ final class OrderResolver implements OrderResolverInterface
         $request = $this->getCurrentRequest();
 
         /**
-         * @var string|null $key
+         * @var string|null $tokenValue
          */
-        $key = $request->get('sylius_checkout_complete');
+        $tokenValue = null;
 
-        if ($key !== null)
+        if ($request->get('sylius_checkout_complete') !== null)
         {
             $tokenValue = $request->get('sylius_checkout_complete')['_token'];
         }
-
-        if (!isset($tokenValue) || $tokenValue === null) {
+        if ($tokenValue === null) {
             return null;
         }
-
         return $this->orderRepository->findByTokenValue($tokenValue);
     }
 
