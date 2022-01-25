@@ -31,7 +31,7 @@ final class IngClientProvider implements IngClientProviderInterface
         $configuration = $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($code);
         $token = $configuration->getToken();
         $merchantId = $configuration->getMerchantId();
-        $url = $configuration->isProd() ? $url = $configuration->getProdUrl() : $url = $configuration->getSandboxUrl();
+        $url = $configuration->isProd() ? $configuration->getProdUrl() : $configuration->getSandboxUrl();
 
         $completeUrl = \sprintf('%s/%s/', $url, $merchantId);
 
