@@ -77,7 +77,7 @@ final class IngClientProviderTest extends TestCase
         self::assertInstanceOf(IngApiClientInterface::class, $this->ingClientProvider->getClient('code'));
     }
 
-    public function provider()
+    public function provider(): array
     {
         return [
             [true, 'getProdUrl', 'production'],
