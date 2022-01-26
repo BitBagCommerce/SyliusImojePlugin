@@ -20,7 +20,6 @@ final class SerializerFactoryTest extends TestCase
 
     public function test_return_serializer(): void
     {
-
         $this->assertInstanceOf(
             SerializerInterface::class,
             $this->serializerFactory->createSerializerWithNormalizer()

@@ -29,9 +29,9 @@ final class IngApiClientTest extends TestCase
     {
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
         $this->serializerFactory = $this->createMock(SerializerFactoryInterface::class);
-        $token = "token";
-        $url = "url/";
-        $this->ingApiClient = new IngApiClient( $this->httpClient, $this->serializerFactory, $token,$url);
+        $token = 'token';
+        $url = 'url/';
+        $this->ingApiClient = new IngApiClient($this->httpClient, $this->serializerFactory, $token, $url);
     }
 
     public function test_create_transaction(): void
@@ -43,7 +43,7 @@ final class IngApiClientTest extends TestCase
         $parameters['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer token'
+            'Authorization' => 'Bearer token',
         ];
 
         $this->serializerFactory
@@ -76,7 +76,7 @@ final class IngApiClientTest extends TestCase
         $parameters['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer token'
+            'Authorization' => 'Bearer token',
         ];
 
         $this->serializerFactory
