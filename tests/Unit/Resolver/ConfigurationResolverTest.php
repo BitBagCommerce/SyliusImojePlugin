@@ -19,6 +19,15 @@ final class ConfigurationResolverTest extends TestCase
 
     public function test_return_configuration_options(): void
     {
-        self::assertIsArray($this->configurationResolver->resolve([]));
+        $correctArray = [
+            "token" => "",
+            "merchantId" => "",
+            "redirect" => "",
+            "sandboxUrl" => "",
+            "prodUrl" => [],
+            "isProd" => [],
+        ];
+
+        self::assertEqualsCanonicalizing($correctArray, $this->configurationResolver->resolve([]));
     }
 }
