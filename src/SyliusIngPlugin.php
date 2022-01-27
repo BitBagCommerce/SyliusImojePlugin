@@ -8,7 +8,6 @@ use BitBag\SyliusIngPlugin\DependencyInjection\CompilerPass\MessageBusPolyfillPa
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 
 final class SyliusIngPlugin extends Bundle
 {
@@ -16,10 +15,7 @@ final class SyliusIngPlugin extends Bundle
 
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(
-            new MessageBusPolyfillPass(),
-            PassConfig::TYPE_BEFORE_OPTIMIZATION,
-            1
-        );
+        parent::build($container);
+        $container->addCompilerPass(new MessageBusPolyfillPass());
     }
 }

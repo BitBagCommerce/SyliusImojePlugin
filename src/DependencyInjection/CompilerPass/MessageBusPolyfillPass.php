@@ -9,41 +9,24 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class MessageBusPolyfillPass implements CompilerPassInterface
 {
-    public const TAG_FALLBACK = [
-        'sylius.command_bus' => 'messenger.bus.default',
-        'sylius.event_bus' => 'messenger.bus.default',
+    public const ID_FALLBACK = [
+        'sylius.command_bus' => 'sylius_default.bus'
     ];
-    public const COMMAND_BUS_TAG = 'bitbag.sylius_ing_plugin.command_bus';
+
+    public const COMMAND_BUS_ALIAS = 'bitbag.sylius_ing_plugin.command_bus';
 
     private function setupDefaultCommandBus(array $buses, ContainerBuilder $container): void
     {
-        $targetBusName = in_array('sylius.command_bus', $buses, true) ? 'sylius.command_bus' : 'messenger.default_bus';
+        $targetBusName = in_array('sylius.command_bus', $buses, true) ? 'sylius.command_bus' : 'sylius_default.bus';
         $container->setAlias(
-            self::COMMAND_BUS_TAG,
+            MessageBusPolyfillPass::COMMAND_BUS_ALIAS,
             $targetBusName
         );
     }
 
     public function process(ContainerBuilder $container): void
     {
-        /**
-         * @var array<string, array> $handlers
-         */
-        $handlers = $container->findTaggedServiceIds(self::COMMAND_BUS_TAG);
         $buses = array_keys($container->findTaggedServiceIds('messenger.bus'));
         $this->setupDefaultCommandBus($buses, $container);
-
-        foreach ($handlers as $handler => $tagData) {
-            if (!isset($tagData[0]['bus'])) {
-                continue;
-            }
-
-            $busName = (string) $tagData[0]['bus'];
-
-            $def = $container->findDefinition($handler);
-            $def->addTag('messenger.message_handler', [
-                'bus' => in_array($busName, $buses, true) ? $busName : self::TAG_FALLBACK[$busName],
-            ]);
-        }
     }
 }
