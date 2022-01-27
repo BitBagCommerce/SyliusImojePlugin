@@ -31,6 +31,7 @@ final class IngApiClientTest extends TestCase
 
     protected function setUp(): void
     {
+        // I'm using a mockBuilder because these methods are added via annotations
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
         $this->serializerFactory = $this->createMock(SerializerFactoryInterface::class);
         $this->ingApiClient = new IngApiClient($this->httpClient, $this->serializerFactory, self::TOKEN, self::URL);
