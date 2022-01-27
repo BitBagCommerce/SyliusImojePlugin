@@ -5,29 +5,39 @@ declare(strict_types=1);
 namespace Unit\Resolver;
 
 use BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolver;
-use BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolverInterface;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
 final class ConfigurationResolverTest extends TestCase
 {
-    private ConfigurationResolverInterface $configurationResolver;
+    /** @var ConfigurationResolver */
+    private $resolver;
 
     protected function setUp(): void
     {
-        $this->configurationResolver = new ConfigurationResolver();
+        $this->resolver = new ConfigurationResolver();
     }
 
-    public function test_return_configuration_options(): void
+    public function testValidConfiguration(): void
     {
-        $correctArray = [
-            "token" => "",
-            "merchantId" => "",
-            "redirect" => "",
-            "sandboxUrl" => "",
-            "prodUrl" => [],
-            "isProd" => [],
+        $config = [
+            'token' => '1234',
+            'merchantId' => '1234',
+            'redirect' => true,
+            'sandboxUrl' => 'sandbox',
+            'prodUrl' => 'prod',
+            'isProd' => true,
         ];
 
-        self::assertEqualsCanonicalizing($correctArray, $this->configurationResolver->resolve([]));
+        $resolved = $this->resolver->resolve($config);
+
+        self::assertEquals($config, $resolved);
+    }
+
+    public function testInvalidConfiguration(): void
+    {
+        $this->expectException(UndefinedOptionsException::class);
+
+        $this->resolver->resolve(['nonexistent' => '']);
     }
 }

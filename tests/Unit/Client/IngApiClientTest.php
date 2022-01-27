@@ -25,21 +25,23 @@ final class IngApiClientTest extends TestCase
 
     private IngApiClient $ingApiClient;
 
+    public const TOKEN = 'token';
+    public const URL = 'url/';
+
     protected function setUp(): void
     {
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
         $this->serializerFactory = $this->createMock(SerializerFactoryInterface::class);
-        $token = 'token';
-        $url = 'url/';
-        $this->ingApiClient = new IngApiClient($this->httpClient, $this->serializerFactory, $token, $url);
+        $this->ingApiClient = new IngApiClient($this->httpClient, $this->serializerFactory, self::TOKEN, self::URL);
     }
 
-    public function test_create_transaction(): void
+    public function testCreateTransaction(): void
     {
         $serializer = $this->createMock(SerializerInterface::class);
         $transactionModel = $this->createMock(TransactionModelInterface::class);
 
         $parameters['body'] = 'model';
+
         $parameters['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
@@ -66,7 +68,7 @@ final class IngApiClientTest extends TestCase
         $this->ingApiClient->createTransaction($transactionModel);
     }
 
-    public function test_create_transaction_with_Exception(): void
+    public function testCreateTransactionWithException(): void
     {
         $serializer = $this->createMock(SerializerInterface::class);
         $transactionModel = $this->createMock(TransactionModelInterface::class);

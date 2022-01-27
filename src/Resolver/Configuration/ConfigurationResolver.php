@@ -17,8 +17,8 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
             'merchantId' => '',
             'redirect' => '',
             'sandboxUrl' => '',
-            'prodUrl' => [],
-            'isProd' => [],
+            'prodUrl' => '',
+            'isProd' => '',
         ]);
 
         $resolver->setRequired($resolver->getDefinedOptions());

@@ -25,6 +25,7 @@ final class InitializePaymentController
     {
         $order = $this->orderResolver->resolve();
         $client = $this->ingClientProvider->getClient('ing_code');
+
         return new Response();
     }
 }

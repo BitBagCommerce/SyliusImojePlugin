@@ -9,113 +9,108 @@ use BitBag\SyliusIngPlugin\Exception\MissingRequestException;
 use BitBag\SyliusIngPlugin\Repository\Order\OrderRepositoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolver;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class OrderResolverTest extends TestCase
 {
-    /** @var RequestStack|MockObject */
-    private object $requestStack;
+    private const TOKEN_VALUE = '12345';
 
-    /** @var CartContextInterface|MockObject */
-    private object $cartContext;
+    /** @var RequestStack */
+    protected $requestStack;
 
-    /** @var OrderRepositoryInterface|MockObject */
-    private object $orderRepository;
+    /** @var CartContextInterface */
+    protected $context;
 
-    private OrderResolverInterface $orderResolver;
+    /** @var RepositoryInterface */
+    protected $repository;
+
+    /** @var OrderResolverInterface */
+    protected $resolver;
 
     protected function setUp(): void
     {
-        $this->requestStack = $this->createMock(RequestStack::class);
-        $this->cartContext = $this->createMock(CartContextInterface::class);
-        $this->orderRepository = $this->createMock(OrderRepositoryInterface::class);
-        $this->orderResolver = new OrderResolver($this->requestStack,$this->cartContext,$this->orderRepository);
+        $this->requestStack = new RequestStack();
+        $this->context = $this->createMock(CartContextInterface::class);
+        $this->repository = $this->createMock(OrderRepositoryInterface::class);
+
+        $this->resolver = new OrderResolver(
+            $this->requestStack,
+            $this->context,
+            $this->repository
+        );
     }
 
-    /**
-     * @dataProvider provider
-     */
-    public function test_return_order($order, $valueFromRequest): void
+    public function testFindFromRequest(): void
     {
-        $orderToCart = $this->createMock(OrderInterface::class);
-        $request = $this->createMock(Request::class);
+        $this->setUpRepository();
 
-        $this->orderRepository
-            ->method('findByTokenValue')
-            ->with('tokenValue')
-            ->willReturn($order);
+        $request = new Request([], [
+            'tokenValue' => self::TOKEN_VALUE,
+        ]);
 
-        $this->requestStack
-            ->method('getMasterRequest')
-            ->willReturn($request);
+        $this->requestStack->push($request);
 
-        $request
-            ->method('get')
-            ->with('tokenValue')
-            ->willReturn($valueFromRequest);
+        $order = $this->resolver->resolve();
 
-        $this->cartContext
-            ->method('getCart')
-            ->willReturn($orderToCart);
-
-        $this->assertInstanceOf(OrderInterface::class, $this->orderResolver->resolve('tokenValue'));
+        self::assertNotNull($order);
     }
 
-    public function test_return_request_exception(): void
+    public function testMissingRequest(): void
     {
-        $this->orderRepository
-            ->method('findByTokenValue')
-            ->with('tokenValue')
-            ->willReturn(null);
-
-        $this->requestStack
-            ->method('getMasterRequest')
-            ->willReturn(null);
-
         $this->expectException(MissingRequestException::class);
 
-        $this->assertInstanceOf(OrderInterface::class, $this->orderResolver->resolve('tokenValue'));
+        $this->resolver->resolve();
     }
 
-    public function test_return_cart_not_found_exception(): void
+    public function testFindByProvidedTokenValue(): void
     {
-        $request = $this->createMock(Request::class);
+        $this->setUpRepository();
 
-        $this->orderRepository
-            ->method('findByTokenValue')
-            ->with('tokenValue')
-            ->willReturn(null);
+        $this->requestStack->push(new Request());
 
-        $this->requestStack
-            ->method('getMasterRequest')
-            ->willReturn($request);
+        $order = $this->resolver->resolve(self::TOKEN_VALUE);
 
-        $request
-            ->method('get')
-            ->with('tokenValue')
-            ->willReturn('tokenValue');
+        self::assertNotNull($order);
+    }
 
-        $this->cartContext
+    public function testFindFromCart(): void
+    {
+        $this->requestStack->push(new Request());
+
+        $this->context
+            ->method('getCart')
+            ->willReturn(new Order());
+
+        $order = $this->resolver->resolve();
+
+        self::assertNotNull($order);
+    }
+
+    public function testOrderNotFoundInCart(): void
+    {
+        $this->expectException(MissingOrderException::class);
+
+        $this->requestStack->push(new Request());
+
+        $this->context
             ->method('getCart')
             ->willThrowException(new CartNotFoundException());
 
-        $this->expectException(MissingOrderException::class);
-        $this->expectException(MissingOrderException::class);
-        $this->assertInstanceOf(OrderInterface::class, $this->orderResolver->resolve('tokenValue'));
+        $this->resolver->resolve(self::TOKEN_VALUE);
     }
 
-    public function provider(): array
+    private function setUpRepository(): void
     {
-        return [
-            [$this->createMock(OrderInterface::class), 'tokenValue'],
-            [null,null],
-            [null, 'tokenValue']
-        ];
+        $this->repository
+            ->expects(self::once())
+            ->method('findByTokenValue')
+            ->with(self::TOKEN_VALUE)
+            ->willReturn(new Order());
     }
 }
