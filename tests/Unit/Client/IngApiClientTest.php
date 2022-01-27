@@ -68,7 +68,7 @@ final class IngApiClientTest extends TestCase
 
         $result = $this->ingApiClient->createTransaction($transactionModel);
 
-        self::assertEquals($result, new Response());
+        self::assertEquals($result->getStatusCode(), 200);
     }
 
     public function testCreateTransactionWithException(): void
