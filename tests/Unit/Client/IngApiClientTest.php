@@ -13,6 +13,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class IngApiClientTest extends TestCase
@@ -65,7 +66,9 @@ final class IngApiClientTest extends TestCase
             ->with('url/transaction', $parameters)
             ->willReturn(new Response());
 
-        $this->ingApiClient->createTransaction($transactionModel);
+        $result = $this->ingApiClient->createTransaction($transactionModel);
+
+        self::assertEquals($result, new Response());
     }
 
     public function testCreateTransactionWithException(): void
