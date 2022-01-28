@@ -26,11 +26,11 @@ final class TransactionModel implements TransactionModelInterface
 
     private string $failureReturnUrl;
 
-    private CustomerModel $customer;
+    private CustomerModelInterface $customer;
 
-    private BillingModel $billing;
+    private BillingModelInterface $billing;
 
-    private ShippingModel $shipping;
+    private ShippingModelInterface $shipping;
 
     public function __construct(
         string $type,
@@ -43,9 +43,9 @@ final class TransactionModel implements TransactionModelInterface
         string $paymentMethodCode,
         string $successReturnUrl,
         string $failureReturnUrl,
-        CustomerModel $customer,
-        ?BillingModel $billing,
-        ?ShippingModel $shipping
+        CustomerModelInterface $customer,
+        ?BillingModelInterface $billing,
+        ?ShippingModelInterface $shipping
     ) {
         $this->type = $type;
         $this->serviceId = $serviceId;
@@ -112,17 +112,17 @@ final class TransactionModel implements TransactionModelInterface
         return $this->failureReturnUrl;
     }
 
-    public function getCustomer(): CustomerModel
+    public function getCustomer(): CustomerModelInterface
     {
         return $this->customer;
     }
 
-    public function getBilling(): ?BillingModel
+    public function getBilling(): ?BillingModelInterface
     {
         return $this->billing;
     }
 
-    public function getShipping(): ?ShippingModel
+    public function getShipping(): ?ShippingModelInterface
     {
         return $this->shipping;
     }

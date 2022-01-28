@@ -28,9 +28,9 @@ interface TransactionModelInterface
 
     public function getFailureReturnUrl(): string;
 
-    public function getCustomer(): CustomerModel;
+    public function getCustomer(): CustomerModelInterface;
 
-    public function getBilling(): ?BillingModel;
+    public function getBilling(): ?BillingModelInterface;
 
-    public function getShipping(): ?ShippingModel;
+    public function getShipping(): ?ShippingModelInterface;
 }
