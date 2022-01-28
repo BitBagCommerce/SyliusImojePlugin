@@ -10,15 +10,15 @@ interface ShippingModelInterface
 
     public function getLastName(): string;
 
-    public function getCompany(): string;
+    public function getCompany(): ?string;
 
-    public function getStreet(): string;
+    public function getStreet(): ?string;
 
-    public function getCity(): string;
+    public function getCity(): ?string;
 
-    public function getRegion(): string;
+    public function getRegion(): ?string;
 
-    public function getPostalCode(): string;
+    public function getPostalCode(): ?string;
 
-    public function getCountryCodeAlpha2(): string;
+    public function getCountryCodeAlpha2(): ?string;
 }

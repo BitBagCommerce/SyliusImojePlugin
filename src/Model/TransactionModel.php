@@ -37,15 +37,15 @@ final class TransactionModel implements TransactionModelInterface
         string $serviceId,
         int $amount,
         string $currency,
-        string $title,
+        ?string $title,
         string $orderId,
         string $paymentMethod,
         string $paymentMethodCode,
         string $successReturnUrl,
         string $failureReturnUrl,
         CustomerModel $customer,
-        BillingModel $billing,
-        ShippingModel $shipping
+        ?BillingModel $billing,
+        ?ShippingModel $shipping
     ) {
         $this->type = $type;
         $this->serviceId = $serviceId;
@@ -82,7 +82,7 @@ final class TransactionModel implements TransactionModelInterface
         return $this->currency;
     }
 
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -117,12 +117,12 @@ final class TransactionModel implements TransactionModelInterface
         return $this->customer;
     }
 
-    public function getBilling(): BillingModel
+    public function getBilling(): ?BillingModel
     {
         return $this->billing;
     }
 
-    public function getShipping(): ShippingModel
+    public function getShipping(): ?ShippingModel
     {
         return $this->shipping;
     }

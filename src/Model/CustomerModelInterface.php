@@ -10,11 +10,13 @@ interface CustomerModelInterface
 
     public function getLastName(): string;
 
-    public function getCid(): string;
+    public function getCid(): ?string;
 
-    public function getCompany(): string;
+    public function getCompany(): ?string;
 
-    public function getPhone(): string;
+    public function getPhone(): ?string;
 
     public function getEmail(): string;
+
+    public function getLocale(): ?string;
 }

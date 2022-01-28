@@ -16,7 +16,7 @@ interface TransactionModelInterface
 
     public function getCurrency(): string;
 
-    public function getTitle(): string;
+    public function getTitle(): ?string;
 
     public function getOrderId(): string;
 
@@ -30,7 +30,7 @@ interface TransactionModelInterface
 
     public function getCustomer(): CustomerModel;
 
-    public function getBilling(): BillingModel;
+    public function getBilling(): ?BillingModel;
 
-    public function getShipping(): ShippingModel;
+    public function getShipping(): ?ShippingModel;
 }
