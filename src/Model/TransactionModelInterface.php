@@ -8,6 +8,8 @@ interface TransactionModelInterface
 {
     public const POST_METHOD = 'POST';
 
+    public const TRANSACTION_TITLE = 'Sylius Payment';
+
     public function getType(): string;
 
     public function getServiceId(): string;

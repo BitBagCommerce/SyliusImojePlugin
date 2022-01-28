@@ -26,9 +26,9 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         $amount = $order->getTotal();
         $currency = $order->getCurrencyCode();
         $orderId = $order->getId();
-        $title = 'title';
+        $title = TransactionModelInterface::TRANSACTION_TITLE;
         $successReturnUrl = 'success';
-        $failureReturnUrl = 'success';
+        $failureReturnUrl = 'failure';
         $customer = $customerFactory->createCustomerModel($order);
         $billing = $billingFactory->createBillingModel($order);
         $shipping = $shippingFactory->createShippingModel($order);
