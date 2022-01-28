@@ -10,6 +10,15 @@
         </testsuite>
     </testsuites>
 
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <report>
+            <clover outputFile="clover.xml"/>
+        </report>
+    </coverage>
+
     <php>
         <ini name="error_reporting" value="-1" />
 
