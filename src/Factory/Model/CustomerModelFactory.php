@@ -8,7 +8,7 @@ use BitBag\SyliusIngPlugin\Model\CustomerModel;
 use BitBag\SyliusIngPlugin\Model\CustomerModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class CustomerModelFactory
+final class CustomerModelFactory implements CustomerModelFactoryInterface
 {
     public function createCustomerModel(OrderInterface $order): CustomerModelInterface
     {
@@ -16,12 +16,12 @@ final class CustomerModelFactory
 
         $firstName = $customer->getFirstName();
         $lastName = $customer->getLastName();
-        $cid = (string)$customer->getId();
+        $cid = (string) $customer->getId();
         $company = $order->getBillingAddress()->getCompany();
         $phone = $customer->getPhoneNumber();
         $email = $customer->getEmail();
         $locale = \strtolower($order->getLocaleCode());
 
-        return new CustomerModel($firstName,$lastName,$cid, $company, $phone, $email, $locale);
+        return new CustomerModel($firstName, $lastName, $cid, $company, $phone, $email, $locale);
     }
 }

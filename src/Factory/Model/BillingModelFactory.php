@@ -8,7 +8,7 @@ use BitBag\SyliusIngPlugin\Model\BillingModel;
 use BitBag\SyliusIngPlugin\Model\BillingModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class BillingModelFactory
+final class BillingModelFactory implements BillingModelFactoryInterface
 {
     public function createBillingModel(OrderInterface $order): BillingModelInterface
     {
@@ -24,6 +24,6 @@ final class BillingModelFactory
         $postalCode = $billingAddress->getPostcode();
         $countryCode = $billingAddress->getCountryCode();
 
-        return new BillingModel($firstName,$lastName,$company,$street,$city,$region,$postalCode,$countryCode);
+        return new BillingModel($firstName, $lastName, $company, $street, $city, $region, $postalCode, $countryCode);
     }
 }

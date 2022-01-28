@@ -6,5 +6,10 @@
                  id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"
         >
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory"
+                 id="bitbag.sylius_ing_plugin.factory.model.transaction_model_factory"
+        >
+        </service>
     </services>
 </container>

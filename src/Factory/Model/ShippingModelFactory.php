@@ -8,7 +8,7 @@ use BitBag\SyliusIngPlugin\Model\ShippingModel;
 use BitBag\SyliusIngPlugin\Model\ShippingModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class ShippingModelFactory
+final class ShippingModelFactory implements ShippingModelFactoryInterface
 {
     public function createShippingModel(OrderInterface $order): ShippingModelInterface
     {
@@ -24,6 +24,6 @@ final class ShippingModelFactory
         $postalCode = $shippingAddress->getPostcode();
         $countryCode = $shippingAddress->getCountryCode();
 
-        return new ShippingModel($firstName,$lastName,$company,$street,$city,$region,$postalCode,$countryCode);
+        return new ShippingModel($firstName, $lastName, $company, $street, $city, $region, $postalCode, $countryCode);
     }
 }

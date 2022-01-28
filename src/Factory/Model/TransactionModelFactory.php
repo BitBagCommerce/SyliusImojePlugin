@@ -9,7 +9,7 @@ use BitBag\SyliusIngPlugin\Model\TransactionModel;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class TransactionModelFactory
+final class TransactionModelFactory implements TransactionModelFactoryInterface
 {
     public function createTransactionModel(
         OrderInterface $order,
