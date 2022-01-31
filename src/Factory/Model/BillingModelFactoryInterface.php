@@ -9,5 +9,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface BillingModelFactoryInterface
 {
-    public function createBillingModel(OrderInterface $order): BillingModelInterface;
+    public function create(OrderInterface $order): BillingModelInterface;
 }

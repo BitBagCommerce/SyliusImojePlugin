@@ -3,3 +3,8 @@ bitbag_ing_initialize_payment:
   methods: [PUT]
   controller: bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller
 
+bitbag_ing_redirect:
+  path: /payment/ing/redirect/{status}
+  methods: [GET]
+  controller: bitbag.sylius_ing_plugin.controller.shop.redirect_controller
+

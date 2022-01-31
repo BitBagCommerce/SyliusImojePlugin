@@ -10,7 +10,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class BillingModelFactory implements BillingModelFactoryInterface
 {
-    public function createBillingModel(OrderInterface $order): BillingModelInterface
+    public function create(OrderInterface $order): BillingModelInterface
     {
         $customer = $order->getCustomer();
         $billingAddress = $order->getBillingAddress();
@@ -20,7 +20,7 @@ final class BillingModelFactory implements BillingModelFactoryInterface
         $company = $billingAddress->getCompany();
         $street = $billingAddress->getStreet();
         $city = $billingAddress->getCity();
-        $region = '';
+        $region = $billingAddress->getProvinceName();
         $postalCode = $billingAddress->getPostcode();
         $countryCode = $billingAddress->getCountryCode();
 

@@ -10,7 +10,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class CustomerModelFactory implements CustomerModelFactoryInterface
 {
-    public function createCustomerModel(OrderInterface $order): CustomerModelInterface
+    public function create(OrderInterface $order): CustomerModelInterface
     {
         $customer = $order->getCustomer();
 

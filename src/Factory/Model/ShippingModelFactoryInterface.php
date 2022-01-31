@@ -9,5 +9,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface ShippingModelFactoryInterface
 {
-    public function createShippingModel(OrderInterface $order): ShippingModelInterface;
+    public function create(OrderInterface $order): ShippingModelInterface;
 }

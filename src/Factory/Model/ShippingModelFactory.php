@@ -10,7 +10,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class ShippingModelFactory implements ShippingModelFactoryInterface
 {
-    public function createShippingModel(OrderInterface $order): ShippingModelInterface
+    public function create(OrderInterface $order): ShippingModelInterface
     {
         $customer = $order->getCustomer();
         $shippingAddress = $order->getShippingAddress();
@@ -20,7 +20,7 @@ final class ShippingModelFactory implements ShippingModelFactoryInterface
         $company = $shippingAddress->getCompany();
         $street = $shippingAddress->getStreet();
         $city = $shippingAddress->getCity();
-        $region = '';
+        $region = $shippingAddress->getProvinceName();
         $postalCode = $shippingAddress->getPostcode();
         $countryCode = $shippingAddress->getCountryCode();
 

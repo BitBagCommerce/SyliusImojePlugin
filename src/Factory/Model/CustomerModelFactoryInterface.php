@@ -9,5 +9,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface CustomerModelFactoryInterface
 {
-    public function createCustomerModel(OrderInterface $order): CustomerModelInterface;
+    public function create(OrderInterface $order): CustomerModelInterface;
 }

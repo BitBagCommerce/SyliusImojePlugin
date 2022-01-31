@@ -10,10 +10,13 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface TransactionModelFactoryInterface
 {
-    public function createTransactionModel(
+    public const REDIRECT_URL = 'bitbag_ing_redirect';
+
+    public function create(
         OrderInterface $order,
         IngClientConfigurationInterface $ingClientConfiguration,
-        string $type, string $paymentMethod,
+        string $type,
+        string $paymentMethod,
         string $paymentMethodCode
     ): TransactionModelInterface;
 }
