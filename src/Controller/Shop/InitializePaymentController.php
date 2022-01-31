@@ -6,7 +6,8 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop;
 
 use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
+use BitBag\SyliusIngPlugin\Model\Transaction\TransactionDataInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,7 +19,6 @@ final class InitializePaymentController
 {
     private const CART_SUMMARY_ROUTE = 'sylius_shop_cart_summary';
 
-    private IngClientProviderInterface $ingClientProvider;
 
     private OrderResolverInterface $orderResolver;
 
@@ -29,13 +29,11 @@ final class InitializePaymentController
     private DispatcherInterface $dispatcher;
 
     public function __construct(
-        IngClientProviderInterface $ingClientProvider,
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         UrlGeneratorInterface $urlGenerator,
         DispatcherInterface $dispatcher
     ) {
-        $this->ingClientProvider = $ingClientProvider;
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->urlGenerator = $urlGenerator;
@@ -56,6 +54,8 @@ final class InitializePaymentController
         if ($code !== null) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
+        /** @var TransactionDataInterface $transactionData */
+        $transactionData = $this->dispatcher->dispatch(new GetTransactionData($order, $payment->getMethod()->getCode()));
 
         return new Response();
     }

@@ -5,10 +5,10 @@
         <service class="BitBag\SyliusIngPlugin\Controller\Shop\InitializePaymentController"
                  id="bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_provider"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"/>
             <argument type="service" id="router"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
             <tag name="controller.service_arguments"/>
         </service>
 
