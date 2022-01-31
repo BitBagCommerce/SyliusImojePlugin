@@ -15,5 +15,9 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.repository.order.order_repository"/>
         </service>
 
+        <service class="BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"
+        >
+        </service>
     </services>
 </container>
