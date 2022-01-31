@@ -8,5 +8,5 @@ use BitBag\SyliusIngPlugin\Model\RedirectModelInterface;
 
 interface RedirectFactoryInterface
 {
-    public function createNew(): RedirectModelInterface;
+    public function create(): RedirectModelInterface;
 }

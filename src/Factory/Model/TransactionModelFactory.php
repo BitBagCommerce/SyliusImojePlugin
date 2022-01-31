@@ -8,25 +8,29 @@ use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModel;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class TransactionModelFactory implements TransactionModelFactoryInterface
 {
-    private CustomerModelFactory $customerFactory;
+    private CustomerModelFactoryInterface $customerFactory;
 
-    private BillingModelFactory $billingFactory;
+    private BillingModelFactoryInterface $billingFactory;
 
-    private ShippingModelFactory $shippingFactory;
+    private ShippingModelFactoryInterface $shippingFactory;
 
     private RedirectFactoryInterface $redirectModelFactory;
 
-    public function __construct(UrlGeneratorInterface $generator)
-    {
-        $this->customerFactory = new CustomerModelFactory();
-        $this->billingFactory = new BillingModelFactory();
-        $this->shippingFactory = new ShippingModelFactory();
-        $this->redirectModelFactory = new RedirectFactory($generator);
+    public function __construct(
+        CustomerModelFactoryInterface $customerFactory,
+        BillingModelFactoryInterface $billingFactory,
+        ShippingModelFactoryInterface $shippingFactory,
+        RedirectFactoryInterface $redirectModelFactory
+    ) {
+        $this->customerFactory = $customerFactory;
+        $this->billingFactory = $billingFactory;
+        $this->shippingFactory = $shippingFactory;
+        $this->redirectModelFactory = $redirectModelFactory;
     }
+
 
     public function create(
         OrderInterface $order,
@@ -35,7 +39,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         string $paymentMethod,
         string $paymentMethodCode
     ): TransactionModelInterface {
-        $redirectModel = $this->redirectModelFactory->createNew();
+        $redirectModel = $this->redirectModelFactory->create();
         $serviceId = $ingClientConfiguration->getMerchantId();
         $amount = $order->getTotal();
         $currency = $order->getCurrencyCode();

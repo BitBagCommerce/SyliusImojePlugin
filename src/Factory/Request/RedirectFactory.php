@@ -18,7 +18,7 @@ final class RedirectFactory implements RedirectFactoryInterface
         $this->generator = $generator;
     }
 
-    public function createNew(): RedirectModelInterface
+    public function create(): RedirectModelInterface
     {
         $redirectRequest = new RedirectModel();
         $redirectRequest->setSuccessUrl($this->generateRedirectUrl('success'));
