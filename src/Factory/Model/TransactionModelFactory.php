@@ -31,7 +31,6 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         $this->redirectModelFactory = $redirectModelFactory;
     }
 
-
     public function create(
         OrderInterface $order,
         IngClientConfigurationInterface $ingClientConfiguration,
