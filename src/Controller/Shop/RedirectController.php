@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusDatatransPlugin\Controller\Shop;
+namespace BitBag\SyliusIngPlugin\Controller\Shop;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
