@@ -25,12 +25,12 @@ final class ShippingModel implements ShippingModelInterface
     public function __construct(
         string $firstName,
         string $lastName,
-        string $company,
-        string $street,
-        string $city,
-        string $region,
-        string $postalCode,
-        string $countryCodeAlpha2
+        ?string $company,
+        ?string $street,
+        ?string $city,
+        ?string $region,
+        ?string $postalCode,
+        ?string $countryCodeAlpha2
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -52,32 +52,32 @@ final class ShippingModel implements ShippingModelInterface
         return $this->lastName;
     }
 
-    public function getCompany(): string
+    public function getCompany(): ?string
     {
         return $this->company;
     }
 
-    public function getStreet(): string
+    public function getStreet(): ?string
     {
         return $this->street;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    public function getRegion(): string
+    public function getRegion(): ?string
     {
         return $this->region;
     }
 
-    public function getPostalCode(): string
+    public function getPostalCode(): ?string
     {
         return $this->postalCode;
     }
 
-    public function getCountryCodeAlpha2(): string
+    public function getCountryCodeAlpha2(): ?string
     {
         return $this->countryCodeAlpha2;
     }

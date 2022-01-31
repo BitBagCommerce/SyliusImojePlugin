@@ -9,5 +9,11 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"/>
             <tag name="controller.service_arguments"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Controller\Shop\RedirectController"
+                 id="bitbag.sylius_ing_plugin.controller.shop.redirect_controller"
+        >
+            <tag name="controller.service_arguments"/>
+        </service>
     </services>
 </container>

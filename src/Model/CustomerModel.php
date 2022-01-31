@@ -18,13 +18,16 @@ final class CustomerModel implements CustomerModelInterface
 
     private string $email;
 
+    private string $locale;
+
     public function __construct(
         string $firstName,
         string $lastName,
-        string $cid,
-        string $company,
-        string $phone,
-        string $email
+        ?string $cid,
+        ?string $company,
+        ?string $phone,
+        string $email,
+        ?string $locale
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -32,6 +35,7 @@ final class CustomerModel implements CustomerModelInterface
         $this->company = $company;
         $this->phone = $phone;
         $this->email = $email;
+        $this->locale = $locale;
     }
 
     public function getFirstName(): string
@@ -44,17 +48,17 @@ final class CustomerModel implements CustomerModelInterface
         return $this->lastName;
     }
 
-    public function getCid(): string
+    public function getCid(): ?string
     {
         return $this->cid;
     }
 
-    public function getCompany(): string
+    public function getCompany(): ?string
     {
         return $this->company;
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
@@ -62,5 +66,10 @@ final class CustomerModel implements CustomerModelInterface
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
     }
 }

@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class MessageBusPolyfillPass implements CompilerPassInterface
 {
     public const ID_FALLBACK = [
-        'sylius.command_bus' => 'sylius_default.bus'
+        'sylius.command_bus' => 'sylius_default.bus',
     ];
 
     public const COMMAND_BUS_ALIAS = 'bitbag.sylius_ing_plugin.command_bus';
@@ -19,7 +19,7 @@ class MessageBusPolyfillPass implements CompilerPassInterface
     {
         $targetBusName = in_array('sylius.command_bus', $buses, true) ? 'sylius.command_bus' : 'sylius_default.bus';
         $container->setAlias(
-            MessageBusPolyfillPass::COMMAND_BUS_ALIAS,
+            self::COMMAND_BUS_ALIAS,
             $targetBusName
         );
     }

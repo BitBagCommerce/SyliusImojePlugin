@@ -8,6 +8,8 @@ interface TransactionModelInterface
 {
     public const POST_METHOD = 'POST';
 
+    public const TRANSACTION_TITLE = 'Sylius Payment';
+
     public function getType(): string;
 
     public function getServiceId(): string;
@@ -16,7 +18,7 @@ interface TransactionModelInterface
 
     public function getCurrency(): string;
 
-    public function getTitle(): string;
+    public function getTitle(): ?string;
 
     public function getOrderId(): string;
 
@@ -28,9 +30,9 @@ interface TransactionModelInterface
 
     public function getFailureReturnUrl(): string;
 
-    public function getCustomer(): CustomerModel;
+    public function getCustomer(): CustomerModelInterface;
 
-    public function getBilling(): BillingModel;
+    public function getBilling(): ?BillingModelInterface;
 
-    public function getShipping(): ShippingModel;
+    public function getShipping(): ?ShippingModelInterface;
 }
