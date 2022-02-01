@@ -3,9 +3,18 @@ const paymentMethodHandler = document.querySelector('#sylius_payment_method_gate
 const tooglePayment = () => {
     const paymentTargets = document.querySelectorAll('.bb-pbl-methods')
     paymentTargets.forEach(checkbox => {
-        checkbox.classList.toggle('bb-payment-disabled')
-        // checkbox.closest()
+        checkbox.closest('div div').classList.toggle('bb-payment-disabled')
+
+        if (checkbox.closest('div div').classList.contains('bb-payment-disabled') == true) {
+            toggleCheckboxesOFF(paymentTargets)
+        }
     });
+}
+
+const toggleCheckboxesOFF = (checkboxes) => {
+    for (let index = 0; index < checkboxes.length; index++) {
+        checkboxes[index].checked = false;    
+    }  
 }
 
 const connectListeners = () => {
@@ -14,6 +23,7 @@ const connectListeners = () => {
         setTimeout( () => {
             e.preventDefault();
             tooglePayment();
+
         }, 50)
     });
 }
