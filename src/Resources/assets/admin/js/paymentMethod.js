@@ -11,6 +11,15 @@ const tooglePayment = () => {
     });
 }
 
+const tooglePaymentOff = () => {
+    const paymentTargets = document.querySelectorAll('.bb-pbl-methods')
+    paymentTargets.forEach(checkbox => {
+        checkbox.closest('div div').classList.toggle('bb-payment-disabled')
+    });
+    toggleCheckboxesOFF(paymentTargets)
+    paymentMethodHandler.checked = false;
+}
+
 const toggleCheckboxesOFF = (checkboxes) => {
     for (let index = 0; index < checkboxes.length; index++) {
         checkboxes[index].checked = false;    
@@ -33,7 +42,7 @@ const turnOnListener = () => {
         return;
     }
     connectListeners();
-    tooglePayment();
+    tooglePaymentOff();
 };
 
 turnOnListener();

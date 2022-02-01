@@ -60,9 +60,6 @@ final class ConfigurationType extends AbstractType
             ->add('pbl', CheckboxType::class, [
             'label' => 'bitbag_sylius_ing_plugin.ui.pbl',
             ])
-
-
-
             ->add('mtransfer', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.mtransfer',
                 'attr' => ['class' => 'bb-pbl-methods'],
