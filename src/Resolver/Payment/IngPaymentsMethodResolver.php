@@ -19,6 +19,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
     public function resolve(): ?array
     {
+        $data = [];
         $data['data'] = $this->paymentMethodRepository->getOneForIng()->getGatewayConfig()->getConfig();
         return $data;
     }
