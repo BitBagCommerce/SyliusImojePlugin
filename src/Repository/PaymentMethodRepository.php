@@ -30,4 +30,15 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
             ->getOneOrNullResult()
             ;
     }
+
+    public function getOneForIng(): ?PaymentMethodInterface
+    {
+        return $this->baseRepository->createQueryBuilder('o')
+            ->innerJoin('o.gatewayConfig', 'gatewayConfig')
+            ->where('gatewayConfig.factoryName = :factoryName')
+            ->setParameter('factoryName', self::FACTORY_NAME)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
 }

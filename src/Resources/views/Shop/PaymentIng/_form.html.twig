@@ -1,0 +1,18 @@
+<br class="ui stackable grid online-online-payment__container"
+     data-locale="{{ app.request.locale }}">
+    <br>
+    {% for keyChoice, choice in methodIng.vars.choices %}
+        <div class="online-payment__item online-payment__item--{{ choice.value }}" id="{{ choice.value }}">
+            <input
+                    type="radio"
+                    value="{{ choice.value }}"
+                    id="choice-{{ keyChoice }}"
+                    name="{{ methodIng.vars.full_name }}"
+                    class="online-payment__input"
+            >
+            <label for="choice-{{ keyChoice }}" class="online-payment__label">
+                {{ choice.label }}
+            </label>
+        </div>
+    {% endfor %}
+</div>
