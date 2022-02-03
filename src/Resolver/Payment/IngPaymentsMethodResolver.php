@@ -17,33 +17,41 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
     public function resolve(): ?array
     {
-        $data = [];
-        $data['data'] = $this->paymentMethodRepository->getOneForIng()->getGatewayConfig()->getConfig();
-
-        if (array_key_exists('isProd', $data['data'])) {
-            unset($data['data']['isProd']);
+        $data = $this->paymentMethodRepository->getOneForIng()->getGatewayConfig()->getConfig();
+        if (array_key_exists('isProd', $data)) {
+            unset($data['isProd']);
         }
 
-        if (array_key_exists('token', $data['data'])) {
-            unset($data['data']['token']);
+        if (array_key_exists('token', $data)) {
+            unset($data['token']);
         }
 
-        if (array_key_exists('prodUrl', $data['data'])) {
-            unset($data['data']['prodUrl']);
+        if (array_key_exists('prodUrl', $data)) {
+            unset($data['prodUrl']);
         }
 
-        if (array_key_exists('redirect', $data['data'])) {
-            unset($data['data']['redirect']);
+        if (array_key_exists('redirect', $data)) {
+            unset($data['redirect']);
         }
 
-        if (array_key_exists('sandboxUrl', $data['data'])) {
-            unset($data['data']['sandboxUrl']);
+        if (array_key_exists('sandboxUrl', $data)) {
+            unset($data['sandboxUrl']);
         }
 
-        if (array_key_exists('merchantId', $data['data'])) {
-            unset($data['data']['merchantId']);
+        if (array_key_exists('merchantId', $data)) {
+            unset($data['merchantId']);
         }
 
+        if ($data['pbl'] == true)
+        {
+            foreach ($data as $key => $value)
+            {
+                if (($value == false || $value == null) && ($key != 'ing' && $key != 'card' && $key != 'blik'))
+                {
+                    unset($data[$key]);
+                }
+            }
+        }
         return $data;
     }
 }

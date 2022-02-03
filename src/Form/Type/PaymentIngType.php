@@ -33,9 +33,8 @@ final class PaymentIngType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $methods = $this->methodResolver->resolve();
+        $data = $this->methodResolver->resolve();
 
-        $data = $methods['data'];
 
         $builder
             ->add('ingPaymentMethods', ChoiceType::class, [
