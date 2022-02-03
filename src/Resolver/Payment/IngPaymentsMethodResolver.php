@@ -52,6 +52,18 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
                 }
             }
         }
+
+        if ($data['pbl'] == false)
+        {
+            foreach ($data as $key => $value)
+            {
+                if (($key != 'ing' && $key != 'card' && $key != 'blik'))
+                {
+                    unset($data[$key]);
+                }
+            }
+        }
+
         return $data;
     }
 }
