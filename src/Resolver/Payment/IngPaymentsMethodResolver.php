@@ -64,6 +64,11 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             }
         }
 
-        return $data;
+        foreach ($data as $key => $value)
+        {
+            $finalData[$key] = $key;
+        }
+
+        return $finalData;
     }
 }
