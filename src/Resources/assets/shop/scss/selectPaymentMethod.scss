@@ -1,0 +1,21 @@
+.bb-online-payment-wrapper {
+  
+    &-main {
+        display: flex;
+        justify-content: flex-start;
+  
+        &-item {
+            padding: 1rem 1rem 1rem 0;
+        }
+    }
+  
+    &-child {
+        display: flex;
+        flex-direction: column;
+
+        &.disabled {
+            display: none;
+        }
+    }
+}
+  
