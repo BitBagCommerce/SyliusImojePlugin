@@ -1,8 +1,8 @@
 const pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child')
 
 const connectListeners = () => {
-    const pblOptionCheckbox = document.querySelector('#choice-0')
-    const notPblOptionCheckboxesMain = document.querySelectorAll('#choice-21 , #choice-22 , #choice-23')
+    const pblOptionCheckbox = document.querySelector('#choice-pbl')
+    const notPblOptionCheckboxesMain = document.querySelectorAll('#choice-blik , #choice-ing , #choice-card')
     
     notPblOptionCheckboxesMain.forEach(checkbox => {
         checkbox.addEventListener('change', (e) => {
@@ -20,7 +20,6 @@ const turnOnListener = () => {
     if (!pblMethodsWrapper) {
         return;
     }
-    
     connectListeners();
 };
 
