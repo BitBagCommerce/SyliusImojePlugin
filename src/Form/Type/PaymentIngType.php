@@ -35,7 +35,6 @@ final class PaymentIngType extends AbstractType
     {
         $data = $this->methodResolver->resolve();
 
-
         $builder
             ->add('ingPaymentMethods', ChoiceType::class, [
                 'label' => false,

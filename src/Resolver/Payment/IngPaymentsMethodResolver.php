@@ -42,30 +42,25 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             unset($data['merchantId']);
         }
 
-        if ($data['pbl'] == true)
-        {
-            foreach ($data as $key => $value)
-            {
-                if (($value == false || $value == null) && ($key != 'ing' && $key != 'card' && $key != 'blik'))
-                {
+        if ($data['pbl'] == true) {
+            foreach ($data as $key => $value) {
+                if (($value == false || $value == null) && ($key != 'ing' && $key != 'card' && $key != 'blik')) {
                     unset($data[$key]);
                 }
             }
         }
 
-        if ($data['pbl'] == false)
-        {
-            foreach ($data as $key => $value)
-            {
-                if (($key != 'ing' && $key != 'card' && $key != 'blik'))
-                {
+        if ($data['pbl'] == false) {
+            foreach ($data as $key => $value) {
+                if (($key != 'ing' && $key != 'card' && $key != 'blik')) {
                     unset($data[$key]);
                 }
             }
         }
 
-        foreach ($data as $key => $value)
-        {
+        $finalData = [];
+
+        foreach ($data as $key => $value) {
             $finalData[$key] = $key;
         }
 
