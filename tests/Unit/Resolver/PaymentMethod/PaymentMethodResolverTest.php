@@ -35,4 +35,18 @@ final class PaymentMethodResolverTest extends TestCase
 
         self::assertEquals($paymentMethod, $resolver->resolve($this->payment));
     }
+
+    public function testResolveFails(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->payment
+            ->expects(self::any())
+            ->method('getMethod')
+            ->willReturn(null);
+
+        $resolver = new PaymentMethodResolver();
+
+        self::assertEquals($this->payment, $resolver->resolve($this->payment));
+    }
 }
