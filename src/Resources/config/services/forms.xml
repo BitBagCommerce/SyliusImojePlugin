@@ -14,7 +14,6 @@
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Form\Type\PaymentIngType" id="bitbag_sylius_ing_plugin.form.type.ing_payment">
-            <argument type="service" id="session"/>
             <argument type="service" id="bitbag_sylius_ing_plugin.resolver.payment.payment_methods"/>
             <tag name="form.type"/>
         </service>
