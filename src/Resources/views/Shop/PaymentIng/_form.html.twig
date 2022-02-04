@@ -24,6 +24,7 @@
             {% endif %}
         {% endfor %}
     </div>
+
     <div class="bb-online-payment-wrapper-child disabled">
         {% for keyChoice, choice in methodIng.vars.choices %}
             {% if choice.label != "blik" and choice.label != "ing" and choice.label != "card" and choice.label != "pbl" %}
@@ -31,7 +32,6 @@
                     class="bb-online-payment-wrapper-child-item" 
                     id="{{ choice.value }}"
                 >
-
                     <input
                         type="radio"
                         value="{{ choice.value }}"

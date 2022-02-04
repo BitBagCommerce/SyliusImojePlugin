@@ -42,7 +42,6 @@ export class SelectPaymentMethod {
             this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
         });
     }
-
 }
 
 export default SelectPaymentMethod;

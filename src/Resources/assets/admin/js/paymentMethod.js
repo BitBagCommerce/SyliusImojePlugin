@@ -56,7 +56,7 @@ export class PaymentMethod {
             setTimeout( () => {
                 e.preventDefault();
                 this.tooglePayment();          
-            }, 50)
+            }, 50);
         });
     }
 }
