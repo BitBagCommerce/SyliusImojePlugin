@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop;
 use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
+use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Model\Transaction\TransactionDataInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
@@ -44,7 +45,7 @@ final class InitializePaymentController
         try {
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
-            return new Response();
+            throw new IngNotConfiguredException('Payment method not found');
         }
 
         if ($code !== null) {
