@@ -1,1 +1,1 @@
-import './handleSelectPaymentMethod'
+import './handleSelectPaymentMethod';

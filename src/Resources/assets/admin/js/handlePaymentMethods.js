@@ -6,6 +6,7 @@ const turnOnListener = () => {
     if (!paymentMethodHandler) {
         return;
     }
+    
     new PaymentMethod().init();
 };
 
