@@ -6,6 +6,7 @@ const turnOnListener = () => {
     if (!pblMethodsWrapper) {
         return;
     }
+    
     new SelectPaymentMethod().init();
 };
 

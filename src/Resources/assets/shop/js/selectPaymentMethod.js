@@ -15,7 +15,7 @@ export class SelectPaymentMethod {
             ...this.defaultConfig,
             ...config    
         };
-        this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child')
+        this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child');
     }
 
     init() {
@@ -26,22 +26,21 @@ export class SelectPaymentMethod {
         this.connectListeners();
     }
 
-    
-
     connectListeners = () => {
-        const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId)
-        const notPblOptionCheckboxesMain = document.querySelectorAll(`${ this.finalConfig.blikId } , ${ this.finalConfig.ingId } , ${ this.finalConfig.cardId }`)
+        const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
+        const notPblOptionCheckboxesMain = document.querySelectorAll(
+            `${ this.finalConfig.blikId } , ${ this.finalConfig.ingId } , ${ this.finalConfig.cardId }`
+        );
 
         notPblOptionCheckboxesMain.forEach(checkbox => {
             checkbox.addEventListener('change', e => {
-                this.pblMethodsWrapper.classList.add(this.finalConfig.disabledClass)
+                this.pblMethodsWrapper.classList.add(this.finalConfig.disabledClass);
             });
         });
 
         pblOptionCheckbox.addEventListener('change', e => {
-            this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass)
+            this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
         });
-        
     }
 
 }

@@ -24,7 +24,7 @@ export class PaymentMethod {
     }
 
     tooglePayment = () => {
-        const paymentTargets = document.querySelectorAll(this.finalConfig.paymentTargetsClass)
+        const paymentTargets = document.querySelectorAll(this.finalConfig.paymentTargetsClass);
 
         paymentTargets.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
@@ -36,17 +36,17 @@ export class PaymentMethod {
     }
     
     tooglePaymentOff = () => {
-        const paymentTargets = document.querySelectorAll(this.finalConfig.paymentTargetsClass)
+        const paymentTargets = document.querySelectorAll(this.finalConfig.paymentTargetsClass);
 
         paymentTargets.forEach(checkbox => {
-            checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass)
+            checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
         });
         this.toggleCheckboxesOff(paymentTargets);
         this.paymentMethodHandler.checked = false;
     }
     
     toggleCheckboxesOff = checkboxes => { 
-        checkboxes.forEach( checkbox => {
+        checkboxes.forEach(checkbox => {
             checkbox.checked = false;
         });
     }
