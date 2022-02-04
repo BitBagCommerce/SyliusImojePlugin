@@ -18,7 +18,7 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
         $this->baseRepository = $baseRepository;
     }
 
-    public function getOneForIngCode(string $code): ?PaymentMethodInterface
+    public function findOneForIngCode(string $code): ?PaymentMethodInterface
     {
         return $this->baseRepository->createQueryBuilder('o')
             ->innerJoin('o.gatewayConfig', 'gatewayConfig')
@@ -26,6 +26,17 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
             ->andWhere('o.code = :code')
             ->setParameter('factoryName', self::FACTORY_NAME)
             ->setParameter('code', $code)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findOneForIng(): ?PaymentMethodInterface
+    {
+        return $this->baseRepository->createQueryBuilder('o')
+            ->innerJoin('o.gatewayConfig', 'gatewayConfig')
+            ->where('gatewayConfig.factoryName = :factoryName')
+            ->setParameter('factoryName', self::FACTORY_NAME)
             ->getQuery()
             ->getOneOrNullResult()
             ;

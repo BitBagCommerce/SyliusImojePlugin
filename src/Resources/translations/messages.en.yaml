@@ -7,3 +7,24 @@ bitbag_sylius_ing_plugin:
     sandbox_url: Enter the sandbox URL
     is_prod: Whether to use the production url
     merchant: Enter merchant ID
+    pbl: Transfers online
+    mtransfer: mTransfer - mBank
+    bzwbk: Przelew24 - Santander Bank Polska
+    pekao24: Pekao24Przelew - Bank Pekao
+    inteligo: Inteligo
+    ipko: iPKO
+    getin: Getin Bank
+    noble: Noble Bank
+    creditagricole: Agricole
+    alior: Alior Bank
+    pbs: Bank Nowy BFG
+    millennium: Millennium
+    citi: iti Handlowy
+    bos: BOŚ
+    bnpparibas: BGŻ BNP Paribas
+    pocztowy: Pocztowy24
+    plusbank: Plus Bank
+    bs: Bank Spółdzielczy
+    bspb: Bank Spółdzielczy in Brodnica
+    nest: nestPrzelew
+    envelo: Envelo Bank
