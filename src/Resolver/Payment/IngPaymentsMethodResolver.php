@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 
+use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepository;
 
 final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
@@ -17,7 +18,20 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
     public function resolve(): ?array
     {
-        $data = $this->paymentMethodRepository->getOneForIng()->getGatewayConfig()->getConfig();
+        $payment = $this->paymentMethodRepository->findOneForIng();
+
+        if ($payment === null) {
+            throw new IngNotConfiguredException('Payment method is not configured');
+        }
+
+        $config = $payment->getGatewayConfig();
+
+        if ($config === null) {
+            throw new IngNotConfiguredException('Payment method is not configured');
+        }
+
+        $data = $config->getConfig();
+
         if (array_key_exists('isProd', $data)) {
             unset($data['isProd']);
         }
@@ -42,17 +56,17 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             unset($data['merchantId']);
         }
 
-        if ($data['pbl'] == true) {
+        if ($data['pbl']) {
             foreach ($data as $key => $value) {
-                if (($value == false || $value == null) && ($key != 'ing' && $key != 'card' && $key != 'blik')) {
+                if (!$value && $key !== 'ing' && $key !== 'card' && $key !== 'blik') {
                     unset($data[$key]);
                 }
             }
         }
 
-        if ($data['pbl'] == false) {
+        if (!$data['pbl']) {
             foreach ($data as $key => $value) {
-                if (($key != 'ing' && $key != 'card' && $key != 'blik')) {
+                if (($key !== 'ing' && $key !== 'card' && $key !== 'blik')) {
                     unset($data[$key]);
                 }
             }

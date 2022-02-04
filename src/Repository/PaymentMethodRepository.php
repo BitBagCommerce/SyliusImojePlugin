@@ -31,7 +31,7 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
             ;
     }
 
-    public function getOneForIng(): ?PaymentMethodInterface
+    public function findOneForIng(): ?PaymentMethodInterface
     {
         return $this->baseRepository->createQueryBuilder('o')
             ->innerJoin('o.gatewayConfig', 'gatewayConfig')
