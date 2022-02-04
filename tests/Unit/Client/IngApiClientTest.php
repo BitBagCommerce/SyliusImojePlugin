@@ -13,7 +13,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 final class IngApiClientTest extends TestCase
@@ -27,6 +26,7 @@ final class IngApiClientTest extends TestCase
     private IngApiClient $ingApiClient;
 
     public const TOKEN = 'token';
+
     public const URL = 'url/';
 
     protected function setUp(): void

@@ -8,7 +8,7 @@ use BitBag\SyliusIngPlugin\Exception\MissingPaymentMethodException;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
-final class PaymentMethodResolver
+final class PaymentMethodResolver implements PaymentMethodResolverInterface
 {
     public function resolve(PaymentInterface $payment): PaymentMethodInterface
     {
