@@ -33,12 +33,12 @@ export class SelectPaymentMethod {
         );
 
         notPblOptionCheckboxesMain.forEach(checkbox => {
-            checkbox.addEventListener('change', e => {
+            checkbox.addEventListener('change', () => {
                 this.pblMethodsWrapper.classList.add(this.finalConfig.disabledClass);
             });
         });
 
-        pblOptionCheckbox.addEventListener('change', e => {
+        pblOptionCheckbox.addEventListener('change', () => {
             this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
         });
     }

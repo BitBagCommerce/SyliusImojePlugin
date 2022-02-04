@@ -29,7 +29,7 @@ export class PaymentMethod {
         paymentTargets.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
     
-            if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass) === true) {
+            if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass)) {
                 this.toggleCheckboxesOff(paymentTargets);
             }
         });
