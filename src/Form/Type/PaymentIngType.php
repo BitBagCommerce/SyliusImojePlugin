@@ -15,20 +15,15 @@ use BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class PaymentIngType extends AbstractType
 {
-    private SessionInterface $session;
-
     private IngPaymentsMethodResolverInterface $methodResolver;
 
     public function __construct(
-        SessionInterface $session,
         IngPaymentsMethodResolverInterface $methodResolver
     ) {
         $this->methodResolver = $methodResolver;
-        $this->session = $session;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
