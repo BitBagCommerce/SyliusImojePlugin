@@ -10,16 +10,12 @@ use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Model\Transaction\TransactionDataInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class InitializePaymentController
 {
-    private const CART_SUMMARY_ROUTE = 'sylius_shop_cart_summary';
-
-
     private OrderResolverInterface $orderResolver;
 
     private OrderPaymentResolverInterface $paymentResolver;
@@ -48,7 +44,7 @@ final class InitializePaymentController
         try {
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
-            return $this->cartSummaryResponse();
+            return new Response();
         }
 
         if ($code !== null) {
@@ -58,12 +54,5 @@ final class InitializePaymentController
         $transactionData = $this->dispatcher->dispatch(new GetTransactionData($order, $payment->getMethod()->getCode()));
 
         return new Response();
-    }
-
-    private function cartSummaryResponse(): JsonResponse
-    {
-        return new JsonResponse([
-            'redirectUrl' => $this->urlGenerator->generate(self::CART_SUMMARY_ROUTE),
-        ]);
     }
 }

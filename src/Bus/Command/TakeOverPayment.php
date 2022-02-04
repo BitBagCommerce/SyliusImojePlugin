@@ -8,11 +8,9 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class TakeOverPayment
 {
-    /** @var PaymentInterface */
-    private $payment;
+    private PaymentInterface $payment;
 
-    /** @var string */
-    private $paymentCode;
+    private string $paymentCode;
 
     public function __construct(PaymentInterface $payment, string $paymentCode)
     {
