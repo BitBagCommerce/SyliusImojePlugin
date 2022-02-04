@@ -1,12 +1,1 @@
-.bb-payment-disabled{
-  opacity: .45 !important;
-  pointer-events: none;
-  display: none !important;
-  position: absolute !important;
-  margin: 0;
-  padding: 0;
-}
-
-#sylius_payment_method_gatewayConfig_config_pbl {
-  background-color: rgb(79, 29, 216) !important;
-}
+@import './paymentMethods.scss';

@@ -1,50 +1,58 @@
-const paymentMethodHandler = document.querySelector('#sylius_payment_method_gatewayConfig_config_pbl')
-
-const tooglePayment = () => {
-    const paymentTargets = document.querySelectorAll('.bb-pbl-methods')
-    paymentTargets.forEach(checkbox => {
-        checkbox.closest('div div').classList.toggle('bb-payment-disabled')
-
-        if (checkbox.closest('div div').classList.contains('bb-payment-disabled') == true) {
-            toggleCheckboxesOFF(paymentTargets)
-        }
-    });
-}
-
-const tooglePaymentOff = () => {
-    const paymentTargets = document.querySelectorAll('.bb-pbl-methods')
-    paymentTargets.forEach(checkbox => {
-        checkbox.closest('div div').classList.toggle('bb-payment-disabled')
-    });
-    toggleCheckboxesOFF(paymentTargets)
-    paymentMethodHandler.checked = false;
-}
-
-const toggleCheckboxesOFF = (checkboxes) => {
-    for (let index = 0; index < checkboxes.length; index++) {
-        checkboxes[index].checked = false;    
-    }  
-}
-
-const connectListeners = () => {
-    console.log(paymentMethodHandler)
-    paymentMethodHandler.addEventListener('change', (e) => {
-        setTimeout( () => {
-            e.preventDefault();
-            tooglePayment();
-
-        }, 50)
-    });
-}
-
-const turnOnListener = () => {
-    if (!paymentMethodHandler) {
-        return;
+export class PaymentMethod {
+    constructor(
+        config = {},
+    ) {
+        this.config = config;
+        this.defaultConfig = {
+            paymentTargetsClass: '.bb-pbl-methods',
+            disabledClass: 'bb-payment-disabled'
+        };
+        this.finalConfig = {...this.defaultConfig, ...config};
+        this.paymentMethodHandler = document.querySelector('#sylius_payment_method_gatewayConfig_config_pbl');
     }
-    connectListeners();
-    tooglePaymentOff();
-};
 
-turnOnListener();
+    init() {
+        if (this.config && typeof this.config !== 'object') {
+            throw new Error('BitBag - PaymentMethod - given config is not valid - expected object');
+        }
+        this.connectListeners();
+        this.tooglePaymentOff();
+    }
 
+    tooglePayment = () => {
+        const paymentTargets = document.querySelectorAll(this.finalConfig.paymentTargetsClass)
+        paymentTargets.forEach(checkbox => {
+            checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
+    
+            if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass) === true) {
+                this.toggleCheckboxesOFF(paymentTargets);
+            }
+        });
+    }
+    
+    tooglePaymentOff = () => {
+        const paymentTargets = document.querySelectorAll(this.finalConfig.paymentTargetsClass)
+        paymentTargets.forEach(checkbox => {
+            checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass)
+        });
+        this.toggleCheckboxesOFF(paymentTargets);
+        this.paymentMethodHandler.checked = false;
+    }
+    
+    toggleCheckboxesOFF = (checkboxes) => {
+        for (let index = 0; index < checkboxes.length; index++) {
+            checkboxes[index].checked = false;    
+        }  
+    }
+    
+    connectListeners = () => {
+        this.paymentMethodHandler.addEventListener('change', (e) => {
+            setTimeout( () => {
+                e.preventDefault();
+                this.tooglePayment();          
+            }, 50)
+        });
+    }
+}
 
+export default PaymentMethod;

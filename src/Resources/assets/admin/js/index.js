@@ -1,1 +1,1 @@
-import './paymentMethod'
+import './handlePaymentMethods'
