@@ -6,5 +6,5 @@ namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 
 interface IngPaymentsMethodResolverInterface
 {
-    public function resolve(): ?array;
+    public function resolve(): array;
 }

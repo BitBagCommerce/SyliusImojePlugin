@@ -28,7 +28,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
 
     public function getPaymentMethodConfiguration(string $code): IngClientConfigurationInterface
     {
-        $paymentMethod = $this->paymentMethodRepository->getOneForIngCode($code);
+        $paymentMethod = $this->paymentMethodRepository->findOneForIngCode($code);
 
         if ($paymentMethod === null) {
             throw new IngNotConfiguredException(

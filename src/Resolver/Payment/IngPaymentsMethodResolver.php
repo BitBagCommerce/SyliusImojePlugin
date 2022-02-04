@@ -16,7 +16,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    public function resolve(): ?array
+    public function resolve(): array
     {
         $payment = $this->paymentMethodRepository->findOneForIng();
 
