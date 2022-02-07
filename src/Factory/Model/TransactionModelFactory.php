@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Factory\Model;
 
 use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModel;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
