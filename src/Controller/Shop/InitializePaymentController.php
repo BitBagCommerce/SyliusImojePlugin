@@ -8,6 +8,7 @@ use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusIngPlugin\Factory\Payment\PaymentMethodAndCodeModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\Transaction\TransactionDataInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
@@ -25,16 +26,20 @@ final class InitializePaymentController
 
     private DispatcherInterface $dispatcher;
 
+    private PaymentMethodAndCodeModelFactoryInterface $paymentMethodAndCodeModelFactory;
+
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         UrlGeneratorInterface $urlGenerator,
-        DispatcherInterface $dispatcher
+        DispatcherInterface $dispatcher,
+        PaymentMethodAndCodeModelFactoryInterface $paymentMethodAndCodeModelFactory
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->urlGenerator = $urlGenerator;
         $this->dispatcher = $dispatcher;
+        $this->paymentMethodAndCodeModelFactory = $paymentMethodAndCodeModelFactory;
     }
 
     public function __invoke(Request $request): Response
@@ -51,9 +56,18 @@ final class InitializePaymentController
         if ($code !== null) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
-        /** @var TransactionDataInterface $transactionData */
-        $transactionData = $this->dispatcher->dispatch(new GetTransactionData($order, $payment->getMethod()->getCode()));
 
+        $transactionPaymentData = $this->paymentMethodAndCodeModelFactory->create($payment);
+
+        /** @var TransactionDataInterface $transactionData */
+        $transactionData = $this->dispatcher->dispatch(
+            new GetTransactionData(
+                $order,
+                $payment->getMethod()->getCode(),
+                $transactionPaymentData->getPaymentMethod(),
+                $transactionPaymentData->getPaymentMethodCode()
+            )
+        );
         return new Response();
     }
 }

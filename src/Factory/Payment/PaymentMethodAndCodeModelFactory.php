@@ -9,7 +9,7 @@ use BitBag\SyliusIngPlugin\Model\Payment\PaymentMethodAndCodeModelInterface;
 use BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-final class PaymentMethodAndCodeModelFactory
+final class PaymentMethodAndCodeModelFactory implements PaymentMethodAndCodeModelFactoryInterface
 {
     private TransactionMethodResolverInterface $transactionMethodResolver;
 
