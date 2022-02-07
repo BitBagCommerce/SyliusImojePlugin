@@ -13,6 +13,8 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetTransactionDataHandler implements MessageHandlerInterface
 {
+    public const SALE_TYPE = 'sale';
+
     private IngClientConfigurationProviderInterface $configurationProvider;
 
     private TransactionModelFactory $transactionModelFactory;
@@ -39,9 +41,9 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         $transactionModel = $this->transactionModelFactory->create(
             $query->getOrder(),
             $config,
-            '',
-            '',
-            ''
+            self::SALE_TYPE,
+            $query->getPaymentMethod(),
+            $query->getPaymentMethodCode()
         );
 
         $response = $this->ingClientProvider
