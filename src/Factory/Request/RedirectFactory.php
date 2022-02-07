@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusIngPlugin\Factory\Request;
 
+use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\RedirectModel;
 use BitBag\SyliusIngPlugin\Model\RedirectModelInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
