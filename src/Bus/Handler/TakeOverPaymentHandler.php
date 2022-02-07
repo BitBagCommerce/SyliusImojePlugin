@@ -37,7 +37,7 @@ final class TakeOverPaymentHandler implements MessageHandlerInterface
             return;
         }
 
-        $paymentMethod = $this->paymentMethodRepository->getOneForIngCode($command->getPaymentCode());
+        $paymentMethod = $this->paymentMethodRepository->findOneForIngCode($command->getPaymentCode());
         $payment->setMethod($paymentMethod);
 
         $this->paymentRepository->add($payment);
