@@ -33,7 +33,6 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
 
     public function __invoke(GetTransactionData $query): TransactionData
     {
-        dd('dupa');
         $code = $query->getCode();
 
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
