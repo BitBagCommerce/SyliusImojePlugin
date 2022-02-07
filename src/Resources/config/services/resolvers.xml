@@ -28,5 +28,10 @@
                   id="bitbag.sylius_ing_plugin.resolver.transaction_method.transaction_method_resolver"
         >
         </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.payment_method.payment_method_resolver"
+        >
+        </service>
     </services>
 </container>

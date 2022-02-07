@@ -6,16 +6,28 @@ namespace BitBag\SyliusIngPlugin;
 
 use BitBag\SyliusIngPlugin\DependencyInjection\CompilerPass\MessageBusPolyfillPass;
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class SyliusIngPlugin extends Bundle
 {
     use SyliusPluginTrait;
 
+    public function getContainerExtension(): ?ExtensionInterface
+    {
+        $this->containerExtension = $this->createContainerExtension() ?? false;
+
+        return $this->containerExtension !== false ? $this->containerExtension : null;
+    }
+
     public function build(ContainerBuilder $container): void
     {
-        parent::build($container);
-        $container->addCompilerPass(new MessageBusPolyfillPass());
+        $container->addCompilerPass(
+            new MessageBusPolyfillPass(),
+            PassConfig::TYPE_BEFORE_OPTIMIZATION,
+            1
+        );
     }
 }
