@@ -69,7 +69,7 @@ final class InitializePaymentController
                 $transactionPaymentData->getPaymentMethodCode()
             )
         );
-        $this->dispatcher->dispatch(new SaveTransaction($payment, $transactionData->getTransactionId()));
+        $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
         return $this->redirectResponse();
     }

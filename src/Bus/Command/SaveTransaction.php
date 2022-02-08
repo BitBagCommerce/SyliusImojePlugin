@@ -4,27 +4,19 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Bus\Command;
 
-use Sylius\Component\Core\Model\PaymentInterface;
+use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 
 final class SaveTransaction
 {
-    private PaymentInterface $payment;
+    private IngTransactionInterface $ingTransaction;
 
-    private string $transactionId;
-
-    public function __construct(PaymentInterface $payment, string $transactionId)
+    public function __construct(IngTransactionInterface $ingTransaction)
     {
-        $this->payment = $payment;
-        $this->transactionId = $transactionId;
+        $this->ingTransaction = $ingTransaction;
     }
 
-    public function getPayment(): PaymentInterface
+    public function getIngTransaction(): IngTransactionInterface
     {
-        return $this->payment;
-    }
-
-    public function getTransactionId(): string
-    {
-        return $this->transactionId;
+        return $this->ingTransaction;
     }
 }

@@ -42,5 +42,13 @@
 
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Bus\Handler\SaveTransactionHandler"
+                 id="bitbag.sylius_ing_plugin.bus.handler.save_transaction_handler"
+        >
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+
+            <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
+        </service>
     </services>
 </container>
