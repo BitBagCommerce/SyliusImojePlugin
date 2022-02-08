@@ -40,11 +40,10 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         string $paymentMethodCode
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create();
-        $serviceId = $ingClientConfiguration->getMerchantId();
         $amount = $order->getTotal();
         $currency = $order->getCurrencyCode();
-        $orderId = $order->getId();
-        $title = $order->getId();
+        $orderId = (string) $order->getId();
+        $title = (string) $order->getId();
         $successReturnUrl = $redirectModel->getSuccessUrl();
         $failureReturnUrl = $redirectModel->getFailureUrl();
         $customer = $this->customerFactory->create($order);
@@ -53,7 +52,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
 
         return new TransactionModel(
             $type,
-            $serviceId,
+            self::SERVICE_ID,
             $amount,
             $currency,
             $title,

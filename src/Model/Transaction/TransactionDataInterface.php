@@ -8,5 +8,5 @@ interface TransactionDataInterface
 {
     public function getTransactionId(): string;
 
-    public function getRedirectUrl(): ?string;
+    public function getPaymentUrl(): ?string;
 }

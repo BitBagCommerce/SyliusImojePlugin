@@ -12,11 +12,10 @@ final class BillingModelFactory implements BillingModelFactoryInterface
 {
     public function create(OrderInterface $order): BillingModelInterface
     {
-        $customer = $order->getCustomer();
         $billingAddress = $order->getBillingAddress();
 
-        $firstName = $customer->getFirstName();
-        $lastName = $customer->getLastName();
+        $firstName = $billingAddress->getFirstName();
+        $lastName = $billingAddress->getLastName();
         $company = $billingAddress->getCompany();
         $street = $billingAddress->getStreet();
         $city = $billingAddress->getCity();

@@ -42,5 +42,12 @@
                  id="bitbag.sylius_ing_plugin.factory.model.customer_model_factory"
         >
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactory"
+                 id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory"
+                 decorates="bitbag_sylius_ing_plugin.factory.ing_transaction"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory.inner"/>
+        </service>
     </services>
 </container>

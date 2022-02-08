@@ -1,0 +1,5 @@
+sylius_resource:
+  resources:
+    bitbag_sylius_ing_plugin.ing_transaction:
+      classes:
+        model: BitBag\SyliusIngPlugin\Entity\IngTransaction

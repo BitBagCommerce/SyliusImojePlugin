@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Controller\Shop;
 
+use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
@@ -12,6 +13,7 @@ use BitBag\SyliusIngPlugin\Factory\Payment\PaymentMethodAndCodeModelFactoryInter
 use BitBag\SyliusIngPlugin\Model\Transaction\TransactionDataInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -56,7 +58,6 @@ final class InitializePaymentController
         if ($code !== null) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
-
         $transactionPaymentData = $this->paymentMethodAndCodeModelFactory->create($payment);
 
         /** @var TransactionDataInterface $transactionData */
@@ -68,6 +69,16 @@ final class InitializePaymentController
                 $transactionPaymentData->getPaymentMethodCode()
             )
         );
-        return new Response();
+
+        $this->dispatcher->dispatch(new SaveTransaction($payment, $transactionData->getTransactionId()));
+
+        return $this->redirectResponse($transactionData);
+    }
+
+    private function redirectResponse(TransactionDataInterface $transactionData): Response
+    {
+        return new JsonResponse([
+            'redirectUrl' => $transactionData->getPaymentUrl(),
+        ]);
     }
 }

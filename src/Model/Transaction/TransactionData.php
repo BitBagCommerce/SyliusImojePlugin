@@ -6,16 +6,14 @@ namespace BitBag\SyliusIngPlugin\Model\Transaction;
 
 final class TransactionData implements TransactionDataInterface
 {
-    /** @var string */
-    private $transactionId;
+    private string $transactionId;
 
-    /** @var string */
-    private $redirectUrl;
+    private string $paymentUrl;
 
-    public function __construct(string $transactionId, ?string $redirectUrl)
+    public function __construct(string $transactionId, string $paymentUrl)
     {
         $this->transactionId = $transactionId;
-        $this->redirectUrl = $redirectUrl;
+        $this->paymentUrl = $paymentUrl;
     }
 
     public function getTransactionId(): string
@@ -23,8 +21,8 @@ final class TransactionData implements TransactionDataInterface
         return $this->transactionId;
     }
 
-    public function getRedirectUrl(): ?string
+    public function getPaymentUrl(): ?string
     {
-        return $this->redirectUrl;
+        return $this->paymentUrl;
     }
 }

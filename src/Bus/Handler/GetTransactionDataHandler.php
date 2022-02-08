@@ -34,7 +34,6 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
     public function __invoke(GetTransactionData $query): TransactionData
     {
         $code = $query->getCode();
-
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
         $redirect = $config->isRedirect();
 
@@ -45,15 +44,13 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $query->getPaymentMethod(),
             $query->getPaymentMethodCode()
         );
-
         $response = $this->ingClientProvider
             ->getClient($code)
             ->createTransaction($transactionModel)
         ;
 
-        $transactionId = 'transactionId';
-        $redirectUrl = $config->isProd() ? $config->getProdUrl() : $config->getSandboxUrl();
+        $paymentUrl = 'Example_URL';
 
-        return new TransactionData('$transactionId', $redirect ? $redirectUrl : null);
+        return new TransactionData('$transactionId', $redirect ? $paymentUrl : null);
     }
 }
