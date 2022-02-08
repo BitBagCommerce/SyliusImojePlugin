@@ -11,6 +11,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface TransactionModelFactoryInterface
 {
     public const REDIRECT_URL = 'bitbag_ing_redirect';
+
     public const SERVICE_ID = '2ec212fc-d2a9-46e2-9414-e45afdcb47ea';
 
     public function create(

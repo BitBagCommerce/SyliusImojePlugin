@@ -27,7 +27,6 @@ class MessageBusPolyfillPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-
         /**
          * @var array<string, array> $handlers
          */

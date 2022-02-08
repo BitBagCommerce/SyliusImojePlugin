@@ -8,7 +8,6 @@ use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory;
 use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Transaction\TransactionData;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
