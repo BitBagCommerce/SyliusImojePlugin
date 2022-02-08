@@ -22,7 +22,7 @@ final class CustomerModelFactory implements CustomerModelFactoryInterface
         $company = $order->getBillingAddress()->getCompany();
         $phone = $dataResolver->resolvePhoneNumber($order);
         $email = $customer->getEmail();
-//        $locale = \strtolower($order->getBillingAddress()->getCountryCode());
-        return new CustomerModel($firstName, $lastName, $cid, $company, $phone, $email);
+        $locale = \strtolower($order->getBillingAddress()->getCountryCode());
+        return new CustomerModel($firstName, $lastName, $cid, $company, $phone, $email, $locale);
     }
 }
