@@ -57,7 +57,6 @@ final class IngApiClient implements IngApiClientInterface
             'Content-Type' => 'application/json',
             'Authorization' => \sprintf('Bearer %s', $token),
         ];
-        $request['http_errors'] = true;
 
         return $request;
     }
