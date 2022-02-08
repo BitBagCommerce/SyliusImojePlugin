@@ -17,4 +17,8 @@ interface IngTransactionInterface
     public function getPayment(): ?PaymentInterface;
 
     public function setPayment(?PaymentInterface $payment): void;
+
+    public function getPaymentUrl(): ?string;
+
+    public function setPaymentUrl(?string $paymentUrl): void;
 }

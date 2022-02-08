@@ -8,9 +8,9 @@ use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
+use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Factory\Payment\PaymentMethodAndCodeModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Transaction\TransactionDataInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -60,7 +60,7 @@ final class InitializePaymentController
         }
         $transactionPaymentData = $this->paymentMethodAndCodeModelFactory->create($payment);
 
-        /** @var TransactionDataInterface $transactionData */
+        /** @var IngTransactionInterface $transactionData */
         $transactionData = $this->dispatcher->dispatch(
             new GetTransactionData(
                 $order,
@@ -69,16 +69,15 @@ final class InitializePaymentController
                 $transactionPaymentData->getPaymentMethodCode()
             )
         );
-
         $this->dispatcher->dispatch(new SaveTransaction($payment, $transactionData->getTransactionId()));
 
-        return $this->redirectResponse($transactionData);
+        return $this->redirectResponse();
     }
 
-    private function redirectResponse(TransactionDataInterface $transactionData): Response
+    private function redirectResponse(): Response
     {
         return new JsonResponse([
-            'redirectUrl' => $transactionData->getPaymentUrl(),
+            'redirectUrl' => $this->urlGenerator->generate('sylius_shop_default_locale'),
         ]);
     }
 }

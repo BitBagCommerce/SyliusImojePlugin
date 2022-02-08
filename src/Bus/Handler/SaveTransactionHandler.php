@@ -25,8 +25,6 @@ final class SaveTransactionHandler implements MessageHandlerInterface
 
     public function __invoke(SaveTransaction $command): void
     {
-        $transaction = $this->transactionFactory->createForPayment($command->getPayment(), $command->getTransactionId());
 
-        $this->transactionRepository->add($transaction);
     }
 }

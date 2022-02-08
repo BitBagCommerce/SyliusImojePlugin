@@ -17,12 +17,16 @@ final class IngTransactionFactory implements IngTransactionFactoryInterface
         $this->baseFactory = $baseFactory;
     }
 
-    public function createForPayment(PaymentInterface $payment, string $transactionId): IngTransactionInterface
-    {
+    public function createForPayment(
+        PaymentInterface $payment,
+        string $transactionId,
+        string $paymentUrl
+    ): IngTransactionInterface {
         $result = $this->createNew();
 
         $result->setTransactionId($transactionId);
         $result->setPayment($payment);
+        $result->setPaymentUrl($paymentUrl);
 
         return $result;
     }

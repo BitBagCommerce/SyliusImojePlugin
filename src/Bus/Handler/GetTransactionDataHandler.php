@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Bus\Handler;
 
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
+use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory;
+use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\Transaction\TransactionData;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
@@ -21,21 +23,24 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
 
     private IngClientProviderInterface $ingClientProvider;
 
+    private IngTransactionFactoryInterface $ingTransactionFactory;
+
     public function __construct(
         IngClientConfigurationProviderInterface $configurationProvider,
         TransactionModelFactory $transactionModelFactory,
-        IngClientProviderInterface $ingClientProvider
+        IngClientProviderInterface $ingClientProvider,
+        IngTransactionFactoryInterface $ingTransactionFactory
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
         $this->ingClientProvider = $ingClientProvider;
+        $this->ingTransactionFactory = $ingTransactionFactory;
     }
 
-    public function __invoke(GetTransactionData $query): TransactionData
+    public function __invoke(GetTransactionData $query): IngTransactionInterface
     {
         $code = $query->getCode();
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
-        $redirect = $config->isRedirect();
 
         $transactionModel = $this->transactionModelFactory->create(
             $query->getOrder(),
@@ -44,13 +49,22 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $query->getPaymentMethod(),
             $query->getPaymentMethodCode()
         );
+
         $response = $this->ingClientProvider
             ->getClient($code)
             ->createTransaction($transactionModel)
         ;
 
         $paymentUrl = 'Example_URL';
+        $transactionId = 'id';
 
-        return new TransactionData('$transactionId', $redirect ? $paymentUrl : null);
+        /** @var IngTransactionInterface $transaction */
+        $transaction = $this->ingTransactionFactory->createForPayment(
+            $query->getOrder()->getLastPayment(),
+            $transactionId,
+            $paymentUrl
+        );
+
+        return $transaction;
     }
 }
