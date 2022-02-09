@@ -10,6 +10,7 @@ use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory;
 use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusIngPlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetTransactionDataHandler implements MessageHandlerInterface
@@ -24,16 +25,20 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
 
     private IngTransactionFactoryInterface $ingTransactionFactory;
 
+    private TransactionDataResolverInterface $transactionDataResolver;
+
     public function __construct(
         IngClientConfigurationProviderInterface $configurationProvider,
         TransactionModelFactory $transactionModelFactory,
         IngClientProviderInterface $ingClientProvider,
-        IngTransactionFactoryInterface $ingTransactionFactory
+        IngTransactionFactoryInterface $ingTransactionFactory,
+        TransactionDataResolverInterface $transactionDataResolver
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
         $this->ingClientProvider = $ingClientProvider;
         $this->ingTransactionFactory = $ingTransactionFactory;
+        $this->transactionDataResolver = $transactionDataResolver;
     }
 
     public function __invoke(GetTransactionData $query): IngTransactionInterface
@@ -54,14 +59,20 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             ->createTransaction($transactionModel)
         ;
 
-        $paymentUrl = 'Example_URL';
-        $transactionId = 'id';
+        $data = $this->transactionDataResolver->resolve($response);
+
+        $paymentUrl = $data['paymentUrl'];
+        $transactionId = $data['transactionId'];
+        $serviceId = $data['serviceId'];
+        $orderId = $data['orderId'];
 
         /** @var IngTransactionInterface $transaction */
-        $transaction = $this->ingTransactionFactory->createForPayment(
+        $transaction = $this->ingTransactionFactory->create(
             $query->getOrder()->getLastPayment(),
             $transactionId,
-            $paymentUrl
+            $paymentUrl,
+            $serviceId,
+            $orderId
         );
 
         return $transaction;

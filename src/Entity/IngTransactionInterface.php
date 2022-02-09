@@ -8,17 +8,15 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 interface IngTransactionInterface
 {
-    public function getId(): ?int;
+    public function getId(): int;
 
-    public function getTransactionId(): ?string;
+    public function getTransactionId(): string;
 
-    public function setTransactionId(?string $transactionId): void;
+    public function getPayment(): PaymentInterface;
 
-    public function getPayment(): ?PaymentInterface;
+    public function getPaymentUrl(): string;
 
-    public function setPayment(?PaymentInterface $payment): void;
+    public function getServiceId(): string;
 
-    public function getPaymentUrl(): ?string;
-
-    public function setPaymentUrl(?string $paymentUrl): void;
+    public function getOrderId(): string;
 }

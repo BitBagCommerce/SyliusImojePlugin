@@ -9,11 +9,11 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 interface IngTransactionFactoryInterface
 {
-    public function createForPayment(
+    public function create(
         PaymentInterface $payment,
         string $transactionId,
-        string $paymentUrl
+        string $paymentUrl,
+        string $serviceId,
+        string $orderId
     ): IngTransactionInterface;
-
-    public function createNew(): IngTransactionInterface;
 }

@@ -13,18 +13,15 @@ use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Factory\Payment\PaymentMethodAndCodeModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class InitializePaymentController
 {
     private OrderResolverInterface $orderResolver;
 
     private OrderPaymentResolverInterface $paymentResolver;
-
-    private UrlGeneratorInterface $urlGenerator;
 
     private DispatcherInterface $dispatcher;
 
@@ -33,13 +30,11 @@ final class InitializePaymentController
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
-        UrlGeneratorInterface $urlGenerator,
         DispatcherInterface $dispatcher,
         PaymentMethodAndCodeModelFactoryInterface $paymentMethodAndCodeModelFactory
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
-        $this->urlGenerator = $urlGenerator;
         $this->dispatcher = $dispatcher;
         $this->paymentMethodAndCodeModelFactory = $paymentMethodAndCodeModelFactory;
     }
@@ -69,15 +64,9 @@ final class InitializePaymentController
                 $transactionPaymentData->getPaymentMethodCode()
             )
         );
+
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
-        return $this->redirectResponse();
-    }
-
-    private function redirectResponse(): Response
-    {
-        return new JsonResponse([
-            'redirectUrl' => $this->urlGenerator->generate('sylius_shop_default_locale'),
-        ]);
+        return new RedirectResponse($transactionData->getPaymentUrl());
     }
 }

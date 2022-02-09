@@ -6,7 +6,8 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "sylius/sylius": "^1.9 || ^1.10",
-        "twig/extra-bundle": "^3.3"
+        "twig/extra-bundle": "^3.3",
+      "ext-json": "*"
     },
     "require-dev": {
         "behat/behat": "^3.6.1",

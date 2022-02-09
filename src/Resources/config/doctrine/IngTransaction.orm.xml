@@ -12,7 +12,11 @@
         </id>
         <field name="transactionId" type="string" length="64" unique="true"/>
 
-        <field name="paymentUrl" type="string" length="64" unique="true"/>
+        <field name="paymentUrl" type="string" length="244" unique="true"/>
+
+        <field name="orderId" type="string" length="64" unique="false"/>
+
+        <field name="serviceId" type="string" length="64" unique="false"/>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
