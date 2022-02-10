@@ -6,7 +6,8 @@ namespace BitBag\SyliusIngPlugin\Bus\Handler;
 
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory;
+use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
@@ -15,11 +16,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetTransactionDataHandler implements MessageHandlerInterface
 {
-    public const SALE_TYPE = 'sale';
-
     private IngClientConfigurationProviderInterface $configurationProvider;
 
-    private TransactionModelFactory $transactionModelFactory;
+    private TransactionModelFactoryInterface $transactionModelFactory;
 
     private IngClientProviderInterface $ingClientProvider;
 
@@ -29,7 +28,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
 
     public function __construct(
         IngClientConfigurationProviderInterface $configurationProvider,
-        TransactionModelFactory $transactionModelFactory,
+        TransactionModelFactoryInterface $transactionModelFactory,
         IngClientProviderInterface $ingClientProvider,
         IngTransactionFactoryInterface $ingTransactionFactory,
         TransactionDataResolverInterface $transactionDataResolver
@@ -49,9 +48,10 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         $transactionModel = $this->transactionModelFactory->create(
             $query->getOrder(),
             $config,
-            self::SALE_TYPE,
+            $this->transactionModelFactory::SALE_TYPE,
             $query->getPaymentMethod(),
-            $query->getPaymentMethodCode()
+            $query->getPaymentMethodCode(),
+            $config->getServiceId()
         );
 
         $response = $this->ingClientProvider
@@ -66,15 +66,16 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         $serviceId = $data['serviceId'];
         $orderId = $data['orderId'];
 
-        /** @var IngTransactionInterface $transaction */
-        $transaction = $this->ingTransactionFactory->create(
+        if (!$paymentUrl || !$transactionId || !$serviceId || !$orderId) {
+            throw new IngNotConfiguredException('No configured transaction');
+        }
+
+        return $this->ingTransactionFactory->create(
             $query->getOrder()->getLastPayment(),
             $transactionId,
             $paymentUrl,
             $serviceId,
             $orderId
         );
-
-        return $transaction;
     }
 }

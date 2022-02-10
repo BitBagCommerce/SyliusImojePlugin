@@ -46,6 +46,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
             $resolved['sandboxUrl'],
             $resolved['prodUrl'],
             $resolved['isProd'],
+            $resolved['serviceId'],
         );
     }
 

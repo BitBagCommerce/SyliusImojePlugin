@@ -16,7 +16,7 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.request.redirect_factory"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Payment\PaymentMethodAndCodeModelFactory"
+        <service class="BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.payment.payment_method_and_code_model_factory"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_method.transaction_method_resolver"/>
@@ -41,6 +41,7 @@
         <service class="BitBag\SyliusIngPlugin\Factory\Model\CustomerModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.customer_model_factory"
         >
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.customer.customer_resolver"/>
         </service>
 
         <service class="BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactory"

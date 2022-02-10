@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Factory\Payment;
 
-use BitBag\SyliusIngPlugin\Model\Payment\PaymentMethodAndCodeModel;
-use BitBag\SyliusIngPlugin\Model\Payment\PaymentMethodAndCodeModelInterface;
+use BitBag\SyliusIngPlugin\Model\Payment\PaymentDataModel;
+use BitBag\SyliusIngPlugin\Model\Payment\PaymentDataModelInterface;
 use BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-final class PaymentMethodAndCodeModelFactory implements PaymentMethodAndCodeModelFactoryInterface
+final class PaymentDataModelFactory implements PaymentDataModelFactoryInterface
 {
     private TransactionMethodResolverInterface $transactionMethodResolver;
 
@@ -18,11 +18,11 @@ final class PaymentMethodAndCodeModelFactory implements PaymentMethodAndCodeMode
         $this->transactionMethodResolver = $transactionMethodResolver;
     }
 
-    public function create(PaymentInterface $payment): PaymentMethodAndCodeModelInterface
+    public function create(PaymentInterface $payment): PaymentDataModelInterface
     {
         $paymentMethod = $this->transactionMethodResolver->resolve($payment);
         $paymentMethodCode = implode($payment->getDetails());
 
-        return new PaymentMethodAndCodeModel($paymentMethod, $paymentMethodCode);
+        return new PaymentDataModel($paymentMethod, $paymentMethodCode);
     }
 }

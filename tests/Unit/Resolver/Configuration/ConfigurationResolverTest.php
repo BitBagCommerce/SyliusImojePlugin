@@ -21,12 +21,13 @@ final class ConfigurationResolverTest extends TestCase
     public function testValidConfiguration(): void
     {
         $config = [
-            'token' => '1234',
-            'merchantId' => '1234',
-            'redirect' => true,
-            'sandboxUrl' => 'sandbox',
-            'prodUrl' => 'prod',
-            'isProd' => true,
+            'token' => '',
+            'merchantId' => '',
+            'redirect' => '',
+            'serviceId' => '',
+            'sandboxUrl' => '',
+            'prodUrl' => '',
+            'isProd' => '',
             'blik' => '',
             'card' => '',
             'ing' => '',

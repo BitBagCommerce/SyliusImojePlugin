@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Model\Payment;
 
-final class PaymentMethodAndCodeModel implements PaymentMethodAndCodeModelInterface
+final class PaymentDataModel implements PaymentDataModelInterface
 {
     private string $paymentMethod;
 

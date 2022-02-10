@@ -37,7 +37,8 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         IngClientConfigurationInterface $ingClientConfiguration,
         string $type,
         string $paymentMethod,
-        string $paymentMethodCode
+        string $paymentMethodCode,
+        string $serviceId
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create();
         $amount = $order->getTotal();
@@ -52,7 +53,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
 
         return new TransactionModel(
             $type,
-            self::SERVICE_ID,
+            $serviceId,
             $amount,
             $currency,
             $title,

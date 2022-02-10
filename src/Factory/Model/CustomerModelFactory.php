@@ -6,21 +6,26 @@ namespace BitBag\SyliusIngPlugin\Factory\Model;
 
 use BitBag\SyliusIngPlugin\Model\CustomerModel;
 use BitBag\SyliusIngPlugin\Model\CustomerModelInterface;
-use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolver;
+use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class CustomerModelFactory implements CustomerModelFactoryInterface
 {
+    private CustomerResolverInterface $customerResolver;
+
+    public function __construct(CustomerResolverInterface $customerResolver)
+    {
+        $this->customerResolver = $customerResolver;
+    }
+
     public function create(OrderInterface $order): CustomerModelInterface
     {
-        $dataResolver = new CustomerResolver();
-
         $customer = $order->getCustomer();
-        $firstName = $dataResolver->resolveFirstname($order);
-        $lastName = $dataResolver->resolveLastname($order);
+        $firstName = $this->customerResolver->resolveFirstname($order);
+        $lastName = $this->customerResolver->resolveLastname($order);
         $cid = (string) $customer->getId();
         $company = $order->getBillingAddress()->getCompany();
-        $phone = $dataResolver->resolvePhoneNumber($order);
+        $phone = $this->customerResolver->resolvePhoneNumber($order);
         $email = $customer->getEmail();
         $locale = \strtolower($order->getBillingAddress()->getCountryCode());
 

@@ -18,14 +18,24 @@ final class IngClientConfiguration implements IngClientConfigurationInterface
 
     private bool $isProd;
 
-    public function __construct(string $token, string $merchantId, bool $redirect, string $sandboxUrl, string $prodUrl, bool $isProd)
-    {
+    private string $serviceId;
+
+    public function __construct(
+        string $token,
+        string $merchantId,
+        bool $redirect,
+        string $sandboxUrl,
+        string $prodUrl,
+        bool $isProd,
+        string $serviceId
+    ) {
         $this->token = $token;
         $this->merchantId = $merchantId;
         $this->redirect = $redirect;
         $this->sandboxUrl = $sandboxUrl;
         $this->prodUrl = $prodUrl;
         $this->isProd = $isProd;
+        $this->serviceId = $serviceId;
     }
 
     public function getToken(): string
@@ -56,5 +66,10 @@ final class IngClientConfiguration implements IngClientConfigurationInterface
     public function isProd(): bool
     {
         return $this->isProd;
+    }
+
+    public function getServiceId(): string
+    {
+        return $this->serviceId;
     }
 }

@@ -6,7 +6,7 @@ namespace BitBag\SyliusIngPlugin\Resolver\Customer;
 
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class CustomerResolver
+final class CustomerResolver implements CustomerResolverInterface
 {
     public function resolveFirstname(OrderInterface $order): ?string
     {

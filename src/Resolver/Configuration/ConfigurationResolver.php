@@ -16,6 +16,7 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
             'token' => '',
             'merchantId' => '',
             'redirect' => '',
+            'serviceId' => '',
             'sandboxUrl' => '',
             'prodUrl' => '',
             'isProd' => '',

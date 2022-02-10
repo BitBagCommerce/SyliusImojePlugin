@@ -10,7 +10,7 @@ use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Factory\Payment\PaymentMethodAndCodeModelFactoryInterface;
+use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -25,18 +25,18 @@ final class InitializePaymentController
 
     private DispatcherInterface $dispatcher;
 
-    private PaymentMethodAndCodeModelFactoryInterface $paymentMethodAndCodeModelFactory;
+    private PaymentDataModelFactoryInterface $paymentDataModelFactory;
 
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         DispatcherInterface $dispatcher,
-        PaymentMethodAndCodeModelFactoryInterface $paymentMethodAndCodeModelFactory
+        PaymentDataModelFactoryInterface $paymentDataModelFactory
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->dispatcher = $dispatcher;
-        $this->paymentMethodAndCodeModelFactory = $paymentMethodAndCodeModelFactory;
+        $this->paymentDataModelFactory = $paymentDataModelFactory;
     }
 
     public function __invoke(Request $request): Response
@@ -53,7 +53,7 @@ final class InitializePaymentController
         if ($code !== null) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
-        $transactionPaymentData = $this->paymentMethodAndCodeModelFactory->create($payment);
+        $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
 
         /** @var IngTransactionInterface $transactionData */
         $transactionData = $this->dispatcher->dispatch(

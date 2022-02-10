@@ -34,6 +34,15 @@ final class ConfigurationType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('serviceId', TextType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.service',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.serviceid.not_blank',
+                        'groups' => ['sylius'],
+                    ]),
+                ],
+            ])
             ->add('redirect', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.redirect',
             ])
