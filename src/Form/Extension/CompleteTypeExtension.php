@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Form\Extension;
 
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
@@ -39,7 +38,7 @@ final class CompleteTypeExtension extends AbstractTypeExtension
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($paymentCode): void {
                 if ($paymentCode === 'blik') {
                     $form = $event->getForm();
-                    $form->add('blik', NumberType::class, [
+                    $form->add('blik_code', NumberType::class, [
                         'label' => 'Blik',
                         'mapped' => false,
                         'constraints' => [

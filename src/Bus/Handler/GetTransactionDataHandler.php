@@ -44,15 +44,27 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
     {
         $code = $query->getCode();
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
-
-        $transactionModel = $this->transactionModelFactory->create(
-            $query->getOrder(),
-            $config,
-            $this->transactionModelFactory::SALE_TYPE,
-            $query->getPaymentMethod(),
-            $query->getPaymentMethodCode(),
-            $config->getServiceId()
-        );
+        if ($query->getPaymentMethod() === 'blik') {
+            $transactionModel = $this->transactionModelFactory->create(
+                $query->getOrder(),
+                $config,
+                $this->transactionModelFactory::SALE_TYPE,
+                $query->getPaymentMethod(),
+                $query->getPaymentMethodCode(),
+                $config->getServiceId(),
+                $query->getBlikModel()
+            );
+        } else {
+            $transactionModel = $this->transactionModelFactory->create(
+                $query->getOrder(),
+                $config,
+                $this->transactionModelFactory::SALE_TYPE,
+                $query->getPaymentMethod(),
+                $query->getPaymentMethodCode(),
+                $config->getServiceId(),
+                null
+            );
+        }
 
         $response = $this->ingClientProvider
             ->getClient($code)

@@ -30,7 +30,6 @@ interface TransactionModelInterface
 
     public function getFailureReturnUrl(): string;
 
-
     public function getClientIp(): ?string;
 
     public function getBlikCode(): ?string;
@@ -38,5 +37,6 @@ interface TransactionModelInterface
     public function getCustomer(): CustomerModelInterface;
 
     public function getBilling(): ?BillingModelInterface;
+
     public function getShipping(): ?ShippingModelInterface;
 }

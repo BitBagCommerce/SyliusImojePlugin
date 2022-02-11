@@ -6,6 +6,7 @@ namespace BitBag\SyliusIngPlugin\Factory\Model;
 
 use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModel;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -38,7 +39,8 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         string $type,
         string $paymentMethod,
         string $paymentMethodCode,
-        string $serviceId
+        string $serviceId,
+        ?BlikModelInterface $blikModel
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create();
         $amount = $order->getTotal();
@@ -51,6 +53,29 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         $billing = $this->billingFactory->create($order);
         $shipping = $this->shippingFactory->create($order);
 
+        if ($blikModel !== null) {
+            $blikCode = $blikModel->getBlikCode();
+            $clientIp = $blikModel->getClientIp();
+
+            return new TransactionModel(
+                $type,
+                $serviceId,
+                $amount,
+                $currency,
+                $title,
+                $orderId,
+                $paymentMethod,
+                $paymentMethodCode,
+                $successReturnUrl,
+                $failureReturnUrl,
+                $clientIp,
+                $blikCode,
+                $customer,
+                $billing,
+                $shipping
+            );
+        }
+
         return new TransactionModel(
             $type,
             $serviceId,
@@ -62,6 +87,8 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
             $paymentMethodCode,
             $successReturnUrl,
             $failureReturnUrl,
+            null,
+            null,
             $customer,
             $billing,
             $shipping

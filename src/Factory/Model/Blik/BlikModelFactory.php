@@ -9,8 +9,8 @@ use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
 
 final class BlikModelFactory implements BlikModelFactoryInterface
 {
-    public function create(string $blikCode,string $clientIp): BlikModelInterface
+    public function create(string $blikCode, string $clientIp): BlikModelInterface
     {
-        return new BlikModel($blikCode,$clientIp);
+        return new BlikModel($blikCode, $clientIp);
     }
 }

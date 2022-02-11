@@ -50,5 +50,10 @@
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory.inner"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Factory\Model\Blik\BlikModelFactory"
+                 id="bitbag.sylius_ing_plugin.factory.model.blik.blik_model_factory"
+        >
+        </service>
     </services>
 </container>

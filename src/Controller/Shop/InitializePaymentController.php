@@ -10,6 +10,7 @@ use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusIngPlugin\Factory\Model\Blik\BlikModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
@@ -27,16 +28,20 @@ final class InitializePaymentController
 
     private PaymentDataModelFactoryInterface $paymentDataModelFactory;
 
+    private BlikModelFactoryInterface $blikModelFactory;
+
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         DispatcherInterface $dispatcher,
-        PaymentDataModelFactoryInterface $paymentDataModelFactory
+        PaymentDataModelFactoryInterface $paymentDataModelFactory,
+        BlikModelFactoryInterface $blikModelFactory
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->dispatcher = $dispatcher;
         $this->paymentDataModelFactory = $paymentDataModelFactory;
+        $this->blikModelFactory = $blikModelFactory;
     }
 
     public function __invoke(Request $request): Response
@@ -54,6 +59,30 @@ final class InitializePaymentController
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
+        $isBlik = implode($payment->getDetails()) === 'blik' ? true : false;
+
+        if ($isBlik)
+        {
+            /** @var array $blikData */
+            $blikData = $request->request->get('sylius_checkout_complete');
+            $blikCode = $blikData['blik_code'];
+            $blikModel = $this->blikModelFactory->create($blikCode, $request->getClientIp());
+
+            /** @var IngTransactionInterface $transactionData */
+            $transactionData = $this->dispatcher->dispatch(
+                new GetTransactionData(
+                    $order,
+                    $payment->getMethod()->getCode(),
+                    $transactionPaymentData->getPaymentMethod(),
+                    $transactionPaymentData->getPaymentMethodCode(),
+                    $blikModel
+                )
+            );
+
+            $this->dispatcher->dispatch(new SaveTransaction($transactionData));
+
+            return new RedirectResponse($transactionData->getPaymentUrl());
+        }
 
         /** @var IngTransactionInterface $transactionData */
         $transactionData = $this->dispatcher->dispatch(
@@ -61,7 +90,8 @@ final class InitializePaymentController
                 $order,
                 $payment->getMethod()->getCode(),
                 $transactionPaymentData->getPaymentMethod(),
-                $transactionPaymentData->getPaymentMethodCode()
+                $transactionPaymentData->getPaymentMethodCode(),
+                null
             )
         );
 
