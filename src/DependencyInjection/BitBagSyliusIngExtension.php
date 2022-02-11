@@ -19,7 +19,7 @@ final class BitBagSyliusIngExtension extends Extension
         $loader->load('services.xml');
 
         if (!$container->has('sylius.command_bus')) {
-            $container->setAlias('bitbag.sylius_ing_plugin.command_bus', 'messenger.bus.default');
+            $container->setAlias('bitbag.sylius_ing_plugin.command_bus', 'sylius_default.bus');
         }
     }
 

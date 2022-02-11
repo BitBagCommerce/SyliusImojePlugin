@@ -11,4 +11,6 @@ bitbag_sylius_ing_plugin:
     not_blank: Production URL cannot be blank
   is_prod:
     not_blank: Checkbox cannot be blank
+  serviceid:
+    not_blank: ServiceId cannot be blank
 

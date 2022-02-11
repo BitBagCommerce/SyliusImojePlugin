@@ -1,3 +1,4 @@
 imports:
   - { resource: config/*.yml }
   - { resource: config/services/*.xml }
+  - { resource: "@SyliusIngPlugin/Resources/config/sylius/resources.yaml" }

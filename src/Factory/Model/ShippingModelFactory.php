@@ -12,11 +12,10 @@ final class ShippingModelFactory implements ShippingModelFactoryInterface
 {
     public function create(OrderInterface $order): ShippingModelInterface
     {
-        $customer = $order->getCustomer();
         $shippingAddress = $order->getShippingAddress();
 
-        $firstName = $customer->getFirstName();
-        $lastName = $customer->getLastName();
+        $firstName = $shippingAddress->getFirstName();
+        $lastName = $shippingAddress->getLastName();
         $company = $shippingAddress->getCompany();
         $street = $shippingAddress->getStreet();
         $city = $shippingAddress->getCity();

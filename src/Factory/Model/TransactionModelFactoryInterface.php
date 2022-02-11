@@ -12,11 +12,14 @@ interface TransactionModelFactoryInterface
 {
     public const REDIRECT_URL = 'bitbag_ing_redirect';
 
+    public const SALE_TYPE = 'sale';
+
     public function create(
         OrderInterface $order,
         IngClientConfigurationInterface $ingClientConfiguration,
         string $type,
         string $paymentMethod,
-        string $paymentMethodCode
+        string $paymentMethodCode,
+        string $serviceId
     ): TransactionModelInterface;
 }

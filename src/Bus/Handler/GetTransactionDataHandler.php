@@ -5,43 +5,53 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Bus\Handler;
 
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
-use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory;
-use BitBag\SyliusIngPlugin\Model\Transaction\TransactionData;
+use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusIngPlugin\Exception\NoDataFromResponseException;
+use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactoryInterface;
+use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusIngPlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetTransactionDataHandler implements MessageHandlerInterface
 {
     private IngClientConfigurationProviderInterface $configurationProvider;
 
-    private TransactionModelFactory $transactionModelFactory;
+    private TransactionModelFactoryInterface $transactionModelFactory;
 
     private IngClientProviderInterface $ingClientProvider;
 
+    private IngTransactionFactoryInterface $ingTransactionFactory;
+
+    private TransactionDataResolverInterface $transactionDataResolver;
+
     public function __construct(
         IngClientConfigurationProviderInterface $configurationProvider,
-        TransactionModelFactory $transactionModelFactory,
-        IngClientProviderInterface $ingClientProvider
+        TransactionModelFactoryInterface $transactionModelFactory,
+        IngClientProviderInterface $ingClientProvider,
+        IngTransactionFactoryInterface $ingTransactionFactory,
+        TransactionDataResolverInterface $transactionDataResolver
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
         $this->ingClientProvider = $ingClientProvider;
+        $this->ingTransactionFactory = $ingTransactionFactory;
+        $this->transactionDataResolver = $transactionDataResolver;
     }
 
-    public function __invoke(GetTransactionData $query): TransactionData
+    public function __invoke(GetTransactionData $query): IngTransactionInterface
     {
         $code = $query->getCode();
-
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
-        $redirect = $config->isRedirect();
 
         $transactionModel = $this->transactionModelFactory->create(
             $query->getOrder(),
             $config,
-            '',
-            '',
-            ''
+            $this->transactionModelFactory::SALE_TYPE,
+            $query->getPaymentMethod(),
+            $query->getPaymentMethodCode(),
+            $config->getServiceId()
         );
 
         $response = $this->ingClientProvider
@@ -49,9 +59,23 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             ->createTransaction($transactionModel)
         ;
 
-        $transactionId = 'transactionId';
-        $redirectUrl = $config->isProd() ? $config->getProdUrl() : $config->getSandboxUrl();
+        $data = $this->transactionDataResolver->resolve($response);
 
-        return new TransactionData('$transactionId', $redirect ? $redirectUrl : null);
+        $paymentUrl = $data['paymentUrl'];
+        $transactionId = $data['transactionId'];
+        $serviceId = $data['serviceId'];
+        $orderId = $data['orderId'];
+
+        if (!$paymentUrl || !$transactionId || !$serviceId || !$orderId) {
+            throw new NoDataFromResponseException('No configured transaction');
+        }
+
+        return $this->ingTransactionFactory->create(
+            $query->getOrder()->getLastPayment(),
+            $transactionId,
+            $paymentUrl,
+            $serviceId,
+            $orderId
+        );
     }
 }

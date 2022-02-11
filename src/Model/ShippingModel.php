@@ -16,7 +16,7 @@ final class ShippingModel implements ShippingModelInterface
 
     private string $city;
 
-    private string $region;
+    private ?string $region;
 
     private string $postalCode;
 

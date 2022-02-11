@@ -17,4 +17,6 @@ interface IngClientConfigurationInterface
     public function getProdUrl(): string;
 
     public function isProd(): bool;
+
+    public function getServiceId(): string;
 }

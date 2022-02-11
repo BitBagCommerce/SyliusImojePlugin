@@ -28,3 +28,5 @@ bitbag_sylius_ing_plugin:
     bspb: Bank Spółdzielczy in Brodnica
     nest: nestPrzelew
     envelo: Envelo Bank
+    service: ServiceID
+
