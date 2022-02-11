@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class CompleteTypeExtension extends AbstractTypeExtension
 {
@@ -20,16 +21,12 @@ final class CompleteTypeExtension extends AbstractTypeExtension
 
     private OrderPaymentResolverInterface $paymentResolver;
 
-    private IngClientConfigurationProviderInterface $configurationProvider;
-
     public function __construct(
         OrderResolverInterface $orderResolver,
-        OrderPaymentResolverInterface $paymentResolver,
-        IngClientConfigurationProviderInterface $configurationProvider
+        OrderPaymentResolverInterface $paymentResolver
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
-        $this->configurationProvider = $configurationProvider;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -45,6 +42,12 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                     $form->add('blik', NumberType::class, [
                         'label' => 'Blik',
                         'mapped' => false,
+                        'constraints' => [
+                            new NotBlank([
+                                'message' => 'bitbag_sylius_ing_plugin.blik_code.not_blank',
+                                'groups' => ['sylius'],
+                            ]),
+                        ],
                     ]);
                 }
             });

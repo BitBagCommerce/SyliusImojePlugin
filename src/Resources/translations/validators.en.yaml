@@ -13,4 +13,6 @@ bitbag_sylius_ing_plugin:
     not_blank: Checkbox cannot be blank
   serviceid:
     not_blank: ServiceId cannot be blank
+  blik_code:
+    not_blank: Blik code cannot be blank
 
