@@ -32,6 +32,10 @@ final class TransactionModel implements TransactionModelInterface
 
     private ShippingModelInterface $shipping;
 
+    private ?string $clientIp;
+
+    private ?string $blikCode;
+
     public function __construct(
         string $type,
         string $serviceId,
@@ -43,6 +47,8 @@ final class TransactionModel implements TransactionModelInterface
         string $paymentMethodCode,
         string $successReturnUrl,
         string $failureReturnUrl,
+        ?string $clientIp,
+        ?string $blikCode,
         CustomerModelInterface $customer,
         ?BillingModelInterface $billing,
         ?ShippingModelInterface $shipping
@@ -57,6 +63,8 @@ final class TransactionModel implements TransactionModelInterface
         $this->paymentMethodCode = $paymentMethodCode;
         $this->successReturnUrl = $successReturnUrl;
         $this->failureReturnUrl = $failureReturnUrl;
+        $this->clientIp = $clientIp;
+        $this->blikCode = $blikCode;
         $this->customer = $customer;
         $this->billing = $billing;
         $this->shipping = $shipping;
@@ -110,6 +118,16 @@ final class TransactionModel implements TransactionModelInterface
     public function getFailureReturnUrl(): string
     {
         return $this->failureReturnUrl;
+    }
+
+    public function getClientIp(): ?string
+    {
+        return $this->clientIp;
+    }
+
+    public function getBlikCode(): ?string
+    {
+        return $this->blikCode;
     }
 
     public function getCustomer(): CustomerModelInterface
