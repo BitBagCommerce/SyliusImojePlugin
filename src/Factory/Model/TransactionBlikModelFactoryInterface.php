@@ -11,6 +11,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface TransactionBlikModelFactoryInterface
 {
+    public const SALE_TYPE = 'sale';
+
     public function create(
         OrderInterface $order,
         IngClientConfigurationInterface $ingClientConfiguration,
@@ -18,6 +20,6 @@ interface TransactionBlikModelFactoryInterface
         string $paymentMethod,
         string $paymentMethodCode,
         string $serviceId,
-        ?BlikModelInterface $blikModel
+        BlikModelInterface $blikModel
     ): TransactionModelInterface;
 }

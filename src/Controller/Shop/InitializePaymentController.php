@@ -7,11 +7,12 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop;
 use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
+use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionBlikData;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Factory\Model\Blik\BlikModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
+use BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,20 +29,20 @@ final class InitializePaymentController
 
     private PaymentDataModelFactoryInterface $paymentDataModelFactory;
 
-    private BlikModelFactoryInterface $blikModelFactory;
+    private BlikModelProviderInterface $blikModelProvider;
 
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         DispatcherInterface $dispatcher,
         PaymentDataModelFactoryInterface $paymentDataModelFactory,
-        BlikModelFactoryInterface $blikModelFactory
+        BlikModelProviderInterface $blikModelProvider
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->dispatcher = $dispatcher;
         $this->paymentDataModelFactory = $paymentDataModelFactory;
-        $this->blikModelFactory = $blikModelFactory;
+        $this->blikModelProvider = $blikModelProvider;
     }
 
     public function __invoke(Request $request): Response
@@ -59,17 +60,14 @@ final class InitializePaymentController
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
-        $isBlik = implode($payment->getDetails()) === 'blik' ? true : false;
+        $isBlik = implode($payment->getDetails()) === 'blik';
 
         if ($isBlik) {
-            /** @var array $blikData */
-            $blikData = $request->request->get('sylius_checkout_complete');
-            $blikCode = $blikData['blik_code'];
-            $blikModel = $this->blikModelFactory->create($blikCode, $request->getClientIp());
+            $blikModel = $this->blikModelProvider->provideDataToBlikModel();
 
             /** @var IngTransactionInterface $transactionData */
             $transactionData = $this->dispatcher->dispatch(
-                new GetTransactionData(
+                new GetTransactionBlikData(
                     $order,
                     $payment->getMethod()->getCode(),
                     $transactionPaymentData->getPaymentMethod(),
@@ -77,22 +75,19 @@ final class InitializePaymentController
                     $blikModel
                 )
             );
-
-            $this->dispatcher->dispatch(new SaveTransaction($transactionData));
-
-            return new RedirectResponse($transactionData->getPaymentUrl());
         }
 
-        /** @var IngTransactionInterface $transactionData */
-        $transactionData = $this->dispatcher->dispatch(
-            new GetTransactionData(
-                $order,
-                $payment->getMethod()->getCode(),
-                $transactionPaymentData->getPaymentMethod(),
-                $transactionPaymentData->getPaymentMethodCode(),
-                null
-            )
-        );
+        if (!$isBlik) {
+            /** @var IngTransactionInterface $transactionData */
+            $transactionData = $this->dispatcher->dispatch(
+                new GetTransactionData(
+                    $order,
+                    $payment->getMethod()->getCode(),
+                    $transactionPaymentData->getPaymentMethod(),
+                    $transactionPaymentData->getPaymentMethodCode(),
+                )
+            );
+        }
 
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
