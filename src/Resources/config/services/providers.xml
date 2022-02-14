@@ -16,5 +16,13 @@
             <argument type="service" id="sylius.http_client"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProvider"
+                 id="bitbag.sylius_ing_plugin.provider.blik_model.blik_model_provider"
+        >
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.model.blik.blik_model_factory"/>
+
+        </service>
     </services>
 </container>

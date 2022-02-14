@@ -35,6 +35,18 @@
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>
 
+        <service class="BitBag\SyliusIngPlugin\Bus\Handler\GetBlikTransactionDataHandler"
+                 id="bitbag.sylius_ing_plugin.bus.handler.get_blik_transaction_data_handler"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.model.transaction_blik_model_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_data.transaction_data_resolver"/>
+
+            <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
+        </service>
+
         <service class="BitBag\SyliusIngPlugin\Bus\Handler\TakeOverPaymentHandler"
                  id="bitbag.sylius_ing_plugin.bus.handler.take_over_payment_handler">
             <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
