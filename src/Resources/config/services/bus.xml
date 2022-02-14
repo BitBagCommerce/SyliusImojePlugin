@@ -35,8 +35,8 @@
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Bus\Handler\GetTransactionBlikDataHandler"
-                 id="bitbag.sylius_ing_plugin.bus.handler.get_transaction_blik_data_handler"
+        <service class="BitBag\SyliusIngPlugin\Bus\Handler\GetBlikTransactionDataHandler"
+                 id="bitbag.sylius_ing_plugin.bus.handler.get_blik_transaction_data_handler"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.model.transaction_blik_model_factory"/>

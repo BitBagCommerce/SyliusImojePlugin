@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionBlikData;
+use BitBag\SyliusIngPlugin\Bus\Query\GetBlikTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\NoDataFromResponseException;
 use BitBag\SyliusIngPlugin\Factory\Model\TransactionBlikModelFactoryInterface;
@@ -14,7 +14,7 @@ use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class GetTransactionBlikDataHandler implements MessageHandlerInterface
+final class GetBlikTransactionDataHandler implements MessageHandlerInterface
 {
     private IngClientConfigurationProviderInterface $configurationProvider;
 
@@ -40,7 +40,7 @@ final class GetTransactionBlikDataHandler implements MessageHandlerInterface
         $this->transactionDataResolver = $transactionDataResolver;
     }
 
-    public function __invoke(GetTransactionBlikData $query): IngTransactionInterface
+    public function __invoke(GetBlikTransactionData $query): IngTransactionInterface
     {
         $code = $query->getCode();
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);

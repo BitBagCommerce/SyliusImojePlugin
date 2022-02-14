@@ -7,14 +7,17 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop;
 use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionBlikData;
+use BitBag\SyliusIngPlugin\Bus\Query\GetBlikTransactionData;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
+use BitBag\SyliusIngPlugin\Model\Payment\PaymentDataModelInterface;
 use BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,15 +62,29 @@ final class InitializePaymentController
         if ($code !== null) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
+
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
         $isBlik = implode($payment->getDetails()) === 'blik';
 
+        $transactionData = $this->getTransactionData($isBlik, $order, $payment, $transactionPaymentData);
+
+        $this->dispatcher->dispatch(new SaveTransaction($transactionData));
+
+        return new RedirectResponse($transactionData->getPaymentUrl());
+    }
+
+    private function getTransactionData(
+        bool $isBlik,
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentDataModelInterface $transactionPaymentData
+    ): IngTransactionInterface {
         if ($isBlik) {
             $blikModel = $this->blikModelProvider->provideDataToBlikModel();
 
             /** @var IngTransactionInterface $transactionData */
             $transactionData = $this->dispatcher->dispatch(
-                new GetTransactionBlikData(
+                new GetBlikTransactionData(
                     $order,
                     $payment->getMethod()->getCode(),
                     $transactionPaymentData->getPaymentMethod(),
@@ -77,20 +94,13 @@ final class InitializePaymentController
             );
         }
 
-        if (!$isBlik) {
-            /** @var IngTransactionInterface $transactionData */
-            $transactionData = $this->dispatcher->dispatch(
-                new GetTransactionData(
-                    $order,
-                    $payment->getMethod()->getCode(),
-                    $transactionPaymentData->getPaymentMethod(),
-                    $transactionPaymentData->getPaymentMethodCode(),
-                )
-            );
-        }
-
-        $this->dispatcher->dispatch(new SaveTransaction($transactionData));
-
-        return new RedirectResponse($transactionData->getPaymentUrl());
+        return $this->dispatcher->dispatch(
+            new GetTransactionData(
+                $order,
+                $payment->getMethod()->getCode(),
+                $transactionPaymentData->getPaymentMethod(),
+                $transactionPaymentData->getPaymentMethodCode(),
+            )
+        );
     }
 }

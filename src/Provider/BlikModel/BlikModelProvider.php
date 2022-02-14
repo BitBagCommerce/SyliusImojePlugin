@@ -23,7 +23,7 @@ final class BlikModelProvider implements BlikModelProviderInterface
 
     public function provideDataToBlikModel(): BlikModelInterface
     {
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getCurrentRequest();
 
         /** @var array $blikData */
         $blikData = $request->request->get('sylius_checkout_complete');

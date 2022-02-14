@@ -7,7 +7,7 @@ namespace BitBag\SyliusIngPlugin\Bus\Query;
 use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
-final class GetTransactionBlikData
+final class GetBlikTransactionData
 {
     private OrderInterface $order;
 
