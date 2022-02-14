@@ -66,7 +66,16 @@ final class InitializePaymentController
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
         $isBlik = implode($payment->getDetails()) === 'blik';
 
-        $transactionData = $this->getTransactionData($isBlik, $order, $payment, $transactionPaymentData);
+        if ($isBlik)
+        {
+            $transactionData = $this->getTransactionDataForBlik($order,$payment,$transactionPaymentData);
+        }
+
+        if (!$isBlik)
+        {
+            $transactionData = $this->getTransactionData($order,$payment,$transactionPaymentData);
+        }
+
 
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
@@ -74,27 +83,11 @@ final class InitializePaymentController
     }
 
     private function getTransactionData(
-        bool $isBlik,
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData
     ): IngTransactionInterface {
-        if ($isBlik) {
-            $blikModel = $this->blikModelProvider->provideDataToBlikModel();
-
-            /** @var IngTransactionInterface $transactionData */
-            $transactionData = $this->dispatcher->dispatch(
-                new GetBlikTransactionData(
-                    $order,
-                    $payment->getMethod()->getCode(),
-                    $transactionPaymentData->getPaymentMethod(),
-                    $transactionPaymentData->getPaymentMethodCode(),
-                    $blikModel
-                )
-            );
-        }
-
-        return $this->dispatcher->dispatch(
+         return $this->dispatcher->dispatch(
             new GetTransactionData(
                 $order,
                 $payment->getMethod()->getCode(),
@@ -103,4 +96,24 @@ final class InitializePaymentController
             )
         );
     }
+
+    private function getTransactionDataForBlik(
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentDataModelInterface $transactionPaymentData
+    ): IngTransactionInterface
+    {
+        $blikModel = $this->blikModelProvider->provideDataToBlikModel();
+
+        return $this->dispatcher->dispatch(
+            new GetBlikTransactionData(
+                $order,
+                $payment->getMethod()->getCode(),
+                $transactionPaymentData->getPaymentMethod(),
+                $transactionPaymentData->getPaymentMethodCode(),
+                $blikModel
+            )
+        );
+    }
+
 }
