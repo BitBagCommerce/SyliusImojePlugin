@@ -64,22 +64,28 @@ final class InitializePaymentController
         }
 
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
+
         $isBlik = implode($payment->getDetails()) === 'blik';
 
-        if ($isBlik)
-        {
-            $transactionData = $this->getTransactionDataForBlik($order,$payment,$transactionPaymentData);
-        }
-
-        if (!$isBlik)
-        {
-            $transactionData = $this->getTransactionData($order,$payment,$transactionPaymentData);
-        }
-
+        $transactionData = $this->getCorrectData($isBlik, $order, $payment, $transactionPaymentData);
 
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
         return new RedirectResponse($transactionData->getPaymentUrl());
+    }
+
+    private function getCorrectData(
+        bool $isBlik,
+        OrderInterface $order,
+        PaymentInterface $payment,
+        PaymentDataModelInterface $transactionPaymentData
+    ): IngTransactionInterface {
+        if ($isBlik)
+        {
+            return $this->getTransactionDataForBlik($order,$payment,$transactionPaymentData);
+        }
+
+        return $this->getTransactionData($order,$payment,$transactionPaymentData);
     }
 
     private function getTransactionData(
