@@ -64,28 +64,14 @@ final class InitializePaymentController
         }
 
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
-
         $isBlik = implode($payment->getDetails()) === 'blik';
 
-        $transactionData = $this->getCorrectData($isBlik, $order, $payment, $transactionPaymentData);
+        $transactionData = $isBlik ? $this->getTransactionDataForBlik($order, $payment, $transactionPaymentData)
+            : $this->getTransactionData($order, $payment, $transactionPaymentData);
 
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
         return new RedirectResponse($transactionData->getPaymentUrl());
-    }
-
-    private function getCorrectData(
-        bool $isBlik,
-        OrderInterface $order,
-        PaymentInterface $payment,
-        PaymentDataModelInterface $transactionPaymentData
-    ): IngTransactionInterface {
-        if ($isBlik)
-        {
-            return $this->getTransactionDataForBlik($order,$payment,$transactionPaymentData);
-        }
-
-        return $this->getTransactionData($order,$payment,$transactionPaymentData);
     }
 
     private function getTransactionData(
@@ -93,7 +79,7 @@ final class InitializePaymentController
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData
     ): IngTransactionInterface {
-         return $this->dispatcher->dispatch(
+        return $this->dispatcher->dispatch(
             new GetTransactionData(
                 $order,
                 $payment->getMethod()->getCode(),
@@ -107,8 +93,7 @@ final class InitializePaymentController
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData
-    ): IngTransactionInterface
-    {
+    ): IngTransactionInterface {
         $blikModel = $this->blikModelProvider->provideDataToBlikModel();
 
         return $this->dispatcher->dispatch(
@@ -121,5 +106,4 @@ final class InitializePaymentController
             )
         );
     }
-
 }
