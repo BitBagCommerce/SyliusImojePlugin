@@ -36,6 +36,10 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             unset($data['isProd']);
         }
 
+        if (array_key_exists('serviceId', $data)) {
+            unset($data['serviceId']);
+        }
+
         if (array_key_exists('token', $data)) {
             unset($data['token']);
         }

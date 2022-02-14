@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Bus\Handler;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\NoDataFromResponseException;
+use BitBag\SyliusIngPlugin\Factory\Model\TransactionBlikModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
@@ -20,6 +21,8 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
 
     private TransactionModelFactoryInterface $transactionModelFactory;
 
+    private TransactionBlikModelFactoryInterface $transactionBlikModelFactory;
+
     private IngClientProviderInterface $ingClientProvider;
 
     private IngTransactionFactoryInterface $ingTransactionFactory;
@@ -29,12 +32,14 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
     public function __construct(
         IngClientConfigurationProviderInterface $configurationProvider,
         TransactionModelFactoryInterface $transactionModelFactory,
+        TransactionBlikModelFactoryInterface $transactionBlikModelFactory,
         IngClientProviderInterface $ingClientProvider,
         IngTransactionFactoryInterface $ingTransactionFactory,
         TransactionDataResolverInterface $transactionDataResolver
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
+        $this->transactionBlikModelFactory = $transactionBlikModelFactory;
         $this->ingClientProvider = $ingClientProvider;
         $this->ingTransactionFactory = $ingTransactionFactory;
         $this->transactionDataResolver = $transactionDataResolver;
@@ -45,7 +50,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         $code = $query->getCode();
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
         if ($query->getPaymentMethod() === 'blik') {
-            $transactionModel = $this->transactionModelFactory->create(
+            $transactionModel = $this->transactionBlikModelFactory->create(
                 $query->getOrder(),
                 $config,
                 $this->transactionModelFactory::SALE_TYPE,
@@ -61,8 +66,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
                 $this->transactionModelFactory::SALE_TYPE,
                 $query->getPaymentMethod(),
                 $query->getPaymentMethodCode(),
-                $config->getServiceId(),
-                null
+                $config->getServiceId()
             );
         }
 

@@ -61,8 +61,7 @@ final class InitializePaymentController
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
         $isBlik = implode($payment->getDetails()) === 'blik' ? true : false;
 
-        if ($isBlik)
-        {
+        if ($isBlik) {
             /** @var array $blikData */
             $blikData = $request->request->get('sylius_checkout_complete');
             $blikCode = $blikData['blik_code'];
