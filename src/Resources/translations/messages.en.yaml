@@ -30,5 +30,6 @@ bitbag_sylius_ing_plugin:
     envelo: Envelo Bank
     service: ServiceID
     payment_failure: Payment failure
-    canceled: Payment has been canceled
+    payment_canceled: Payment has been canceled
+    payment_process: Payment is processing
 
