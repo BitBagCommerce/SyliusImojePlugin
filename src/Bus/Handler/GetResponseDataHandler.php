@@ -12,6 +12,7 @@ use BitBag\SyliusIngPlugin\Factory\ReadyTransaction\ReadyTransactionFactoryInter
 use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetResponseDataHandler implements MessageHandlerInterface
@@ -24,16 +25,20 @@ final class GetResponseDataHandler implements MessageHandlerInterface
 
     private ReadyTransactionFactoryInterface $readyTransactionFactory;
 
+    private OrderRepository $orderRepository;
+
     public function __construct(
         IngTransactionRepositoryInterface $ingTransactionRepository,
         IngApiRequestClientInterface $ingApiRequestClient,
         IngClientConfigurationProviderInterface $configurationProvider,
-        ReadyTransactionFactoryInterface $readyTransactionFactory
+        ReadyTransactionFactoryInterface $readyTransactionFactory,
+        OrderRepository $orderRepository
     ) {
         $this->ingTransactionRepository = $ingTransactionRepository;
         $this->ingApiRequestClient = $ingApiRequestClient;
         $this->configurationProvider = $configurationProvider;
         $this->readyTransactionFactory = $readyTransactionFactory;
+        $this->orderRepository = $orderRepository;
     }
 
     public function __invoke(GetResponseData $query): ReadyTransactionModelInterface
@@ -55,10 +60,12 @@ final class GetResponseDataHandler implements MessageHandlerInterface
         if (!$transactionData->transaction || !$transactionData->transaction->status) {
             throw new NoDataFromResponseException('No data from response');
         }
+        $order = $this->orderRepository->find($ingTransaction->getOrderId());
 
         return $this->readyTransactionFactory->createReadyTransaction(
             $transactionData->transaction->status,
-            $ingTransaction
+            $ingTransaction,
+            $order
         );
     }
 }
