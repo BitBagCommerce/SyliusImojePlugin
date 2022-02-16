@@ -18,7 +18,7 @@ final class IngApiRequestClient implements IngApiRequestClientInterface
         $this->httpClient = $httpClient;
     }
 
-    public function GettingTransactionData(string $url, string $token): ResponseInterface
+    public function gettingTransactionData(string $url, string $token): ResponseInterface
     {
         $parameters = $this->buildRequestParams($token);
 

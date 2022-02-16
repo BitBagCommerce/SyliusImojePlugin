@@ -10,5 +10,5 @@ interface IngApiRequestClientInterface
 {
     public const TRANSACTION_ENDPOINT = 'transaction';
 
-    public function GettingTransactionData(string $url, string $token): ResponseInterface;
+    public function gettingTransactionData(string $url, string $token): ResponseInterface;
 }
