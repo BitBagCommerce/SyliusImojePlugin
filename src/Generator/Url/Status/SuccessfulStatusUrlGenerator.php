@@ -28,6 +28,7 @@ final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInter
 
     public function generate(Request $request, OrderInterface $order): string
     {
-        return $this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_THANK_YOU);
+        $url = $request->getSchemeAndHttpHost() .$this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_THANK_YOU);
+        return $url;
     }
 }

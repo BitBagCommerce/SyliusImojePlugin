@@ -56,7 +56,6 @@ final class RedirectController
         $paymentStatus = $this->statusResolver->resolve($readyTransaction->getStatus());
 
         $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $paymentStatus);
-
         return new RedirectResponse($url);
     }
 }
