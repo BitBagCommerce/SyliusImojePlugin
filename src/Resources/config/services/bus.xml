@@ -70,6 +70,7 @@
             <argument type="service" id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.client.ing_api_request_client"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.ready_transaction.ready_transaction_factory"/>
 
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>

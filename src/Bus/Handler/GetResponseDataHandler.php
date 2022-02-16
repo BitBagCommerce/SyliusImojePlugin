@@ -8,6 +8,8 @@ use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
 use BitBag\SyliusIngPlugin\Client\IngApiRequestClientInterface;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\NoDataFromResponseException;
+use BitBag\SyliusIngPlugin\Factory\ReadyTransaction\ReadyTransactionFactoryInterface;
+use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
@@ -20,14 +22,21 @@ final class GetResponseDataHandler implements MessageHandlerInterface
 
     private IngClientConfigurationProviderInterface $configurationProvider;
 
-    public function __construct(IngTransactionRepositoryInterface $ingTransactionRepository, IngApiRequestClientInterface $ingApiRequestClient, IngClientConfigurationProviderInterface $configurationProvider)
-    {
+    private ReadyTransactionFactoryInterface $readyTransactionFactory;
+
+    public function __construct(
+        IngTransactionRepositoryInterface $ingTransactionRepository,
+        IngApiRequestClientInterface $ingApiRequestClient,
+        IngClientConfigurationProviderInterface $configurationProvider,
+        ReadyTransactionFactoryInterface $readyTransactionFactory
+    ) {
         $this->ingTransactionRepository = $ingTransactionRepository;
         $this->ingApiRequestClient = $ingApiRequestClient;
         $this->configurationProvider = $configurationProvider;
+        $this->readyTransactionFactory = $readyTransactionFactory;
     }
 
-    public function __invoke(GetResponseData $query): string
+    public function __invoke(GetResponseData $query): ReadyTransactionModelInterface
     {
         /** @var IngTransactionInterface $ingTransaction */
         $ingTransaction = $this->ingTransactionRepository->findByPaymentId($query->getPaymentId());
@@ -41,13 +50,15 @@ final class GetResponseDataHandler implements MessageHandlerInterface
             $ingTransaction->getTransactionId()
         );
         $response = $this->ingApiRequestClient->GettingTransactionData($url, $config->getToken());
-
         $transactionData = json_decode($response->getBody()->getContents());
 
         if (!$transactionData->transaction || !$transactionData->transaction->status) {
             throw new NoDataFromResponseException('No data from response');
         }
 
-        return $transactionData->transaction->status;
+        return $this->readyTransactionFactory->createReadyTransaction(
+            $transactionData->transaction->status,
+            $ingTransaction
+        );
     }
 }
