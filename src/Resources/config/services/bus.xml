@@ -63,5 +63,13 @@
 
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Bus\Handler\GetResponseDataHandler"
+                 id="bitbag.sylius_ing_plugin.bus.handler.get_response_data_handler"
+        >
+            <argument type="service" id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository"/>
+
+            <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
+        </service>
     </services>
 </container>

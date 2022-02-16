@@ -42,7 +42,7 @@ final class TransactionBlikModelFactory implements TransactionBlikModelFactoryIn
         string $serviceId,
         BlikModelInterface $blikModel
     ): TransactionModelInterface {
-        $redirectModel = $this->redirectModelFactory->create();
+        $redirectModel = $this->redirectModelFactory->create($order->getLastPayment());
         $amount = $order->getTotal();
         $currency = $order->getCurrencyCode();
         $orderId = (string) $order->getId();

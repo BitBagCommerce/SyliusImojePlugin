@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Factory\Request;
 use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\RedirectModel;
 use BitBag\SyliusIngPlugin\Model\RedirectModelInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -19,20 +20,24 @@ final class RedirectFactory implements RedirectFactoryInterface
         $this->generator = $generator;
     }
 
-    public function create(): RedirectModelInterface
+    public function create(PaymentInterface $payment): RedirectModelInterface
     {
         $redirectRequest = new RedirectModel();
-        $redirectRequest->setSuccessUrl($this->generateRedirectUrl('success'));
-        $redirectRequest->setFailureUrl($this->generateRedirectUrl('failure'));
+        $paymentId = $payment->getId();
+        $redirectRequest->setSuccessUrl($this->generateRedirectUrl('success', $paymentId));
+        $redirectRequest->setFailureUrl($this->generateRedirectUrl('failure', $paymentId));
 
         return $redirectRequest;
     }
 
-    private function generateRedirectUrl(string $slug): string
+    private function generateRedirectUrl(string $slug, int $id): string
     {
         return $this->generator->generate(
             TransactionModelFactoryInterface::REDIRECT_URL,
-            ['status' => $slug],
+            [
+                'status' => $slug,
+                'paymentId' => $id,
+            ],
             Router::ABSOLUTE_URL
         );
     }

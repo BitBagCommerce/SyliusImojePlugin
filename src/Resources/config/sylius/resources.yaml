@@ -3,3 +3,5 @@ sylius_resource:
     bitbag_sylius_ing_plugin.ing_transaction:
       classes:
         model: BitBag\SyliusIngPlugin\Entity\IngTransaction
+        repository: BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository
+        interface: BitBag\SyliusIngPlugin\Entity\IngTransactionInterface
