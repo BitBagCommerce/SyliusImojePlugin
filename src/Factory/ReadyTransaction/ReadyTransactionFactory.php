@@ -14,8 +14,7 @@ final class ReadyTransactionFactory implements ReadyTransactionFactoryInterface
         string $status,
         IngTransactionInterface $ingTransaction,
         OrderInterface $order
-    ): ReadyTransactionModel
-    {
+    ): ReadyTransactionModel {
         return new ReadyTransactionModel($status, $ingTransaction, $order);
     }
 }

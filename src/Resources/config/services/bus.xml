@@ -75,5 +75,14 @@
 
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Bus\Handler\PaymentFinalizationHandler"
+                 id="bitbag.sylius_ing_plugin.bus.handler.payment_finalization_handler"
+        >
+            <argument type="service" id="sm.factory"/>
+            <argument type="service" id="sylius.repository.payment"/>
+
+            <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
+        </service>
     </services>
 </container>
