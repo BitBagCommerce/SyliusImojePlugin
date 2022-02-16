@@ -40,7 +40,15 @@ final class CanceledStatusUrlGenerator implements StatusBasedUrlGeneratorInterfa
         $session
             ->getFlashBag()
             ->add('error', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_canceled'));
-        $url = $request->getSchemeAndHttpHost() .$this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_SHOW);
+
+        $url = \sprintf(
+            '%s%s',
+            $request->getSchemeAndHttpHost(),
+            $this->urlGenerator->generate(
+                self::SYLIUS_SHOP_ORDER_SHOW,
+                ['tokenValue' => $order->getTokenValue()]
+            )
+        );
         return $url;
     }
 }
