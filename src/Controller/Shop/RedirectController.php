@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Controller\Shop;
 
+use BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
 use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
@@ -11,6 +12,7 @@ use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterfac
 use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 final class RedirectController
 {
@@ -18,11 +20,15 @@ final class RedirectController
 
     private PaymentFinalizationCommandFactoryInterface $commandFactory;
 
-    public function __construct(DispatcherInterface $dispatcher, PaymentFinalizationCommandFactoryInterface $commandFactory)
+    private AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator;
+
+    public function __construct(DispatcherInterface $dispatcher, PaymentFinalizationCommandFactoryInterface $commandFactory, AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator)
     {
         $this->dispatcher = $dispatcher;
         $this->commandFactory = $commandFactory;
+        $this->aggregateStatusBasedUrlGenerator = $aggregateStatusBasedUrlGenerator;
     }
+
 
     public function __invoke(Request $request, string $status, int $paymentId): Response
     {
@@ -30,13 +36,16 @@ final class RedirectController
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
 
         $payment = $readyTransaction->getIngTransaction()->getPayment();
+        $order = $readyTransaction->getOrder();
 
-        $this->dispatcher->dispatch(new FinalizeOrder($readyTransaction->getOrder()));
+        $this->dispatcher->dispatch(new FinalizeOrder($order));
 
         $this->dispatcher->dispatch(
             $this->commandFactory->createNew($readyTransaction->getStatus(), $payment)
         );
 
-        return new Response();
+        $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $status);
+
+        return new RedirectResponse($url);
     }
 }
