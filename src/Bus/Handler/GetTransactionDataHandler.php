@@ -75,7 +75,8 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $transactionId,
             $paymentUrl,
             $serviceId,
-            $orderId
+            $orderId,
+            $query->getCode()
         );
     }
 }

@@ -9,7 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
-final class IngApiRequestClient
+final class IngApiRequestClient implements IngApiRequestClientInterface
 {
     private Client $httpClient;
 

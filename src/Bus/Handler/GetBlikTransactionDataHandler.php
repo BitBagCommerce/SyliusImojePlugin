@@ -76,7 +76,8 @@ final class GetBlikTransactionDataHandler implements MessageHandlerInterface
             $transactionId,
             $paymentUrl,
             $serviceId,
-            $orderId
+            $orderId,
+            $query->getCode()
         );
     }
 }

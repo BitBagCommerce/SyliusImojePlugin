@@ -14,6 +14,7 @@ interface IngTransactionFactoryInterface
         string $transactionId,
         string $paymentUrl,
         string $serviceId,
-        string $orderId
+        string $orderId,
+        string $gatewayCode
     ): IngTransactionInterface;
 }

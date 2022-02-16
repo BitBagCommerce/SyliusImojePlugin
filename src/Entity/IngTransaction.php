@@ -25,18 +25,22 @@ class IngTransaction implements IngTransactionInterface, ResourceInterface, Time
 
     protected string $orderId;
 
+    protected string $gatewayCode;
+
     public function __construct(
         string $transactionId,
         PaymentInterface $payment,
         string $paymentUrl,
         string $serviceId,
-        string $orderId
+        string $orderId,
+        string $gatewayCode
     ) {
         $this->transactionId = $transactionId;
         $this->payment = $payment;
         $this->paymentUrl = $paymentUrl;
         $this->serviceId = $serviceId;
         $this->orderId = $orderId;
+        $this->gatewayCode = $gatewayCode;
     }
 
     public function getId(): int
@@ -67,5 +71,10 @@ class IngTransaction implements IngTransactionInterface, ResourceInterface, Time
     public function getOrderId(): string
     {
         return $this->orderId;
+    }
+
+    public function getGatewayCode(): string
+    {
+        return $this->gatewayCode;
     }
 }

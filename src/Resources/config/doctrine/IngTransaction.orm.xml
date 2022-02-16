@@ -18,6 +18,8 @@
 
         <field name="serviceId" type="string" length="64" unique="false"/>
 
+        <field name="gatewayCode" type="string" length="64" unique="false"/>
+
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

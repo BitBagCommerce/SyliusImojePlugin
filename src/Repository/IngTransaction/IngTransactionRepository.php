@@ -11,6 +11,12 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
 {
     public function findByPaymentId(int $paymentId): ?IngTransaction
     {
-        return $this->findOneBy(['payment_id' => $paymentId]);
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.payment', 'payment')
+            ->where('payment.id = :paymentId')
+            ->setParameter('paymentId', $paymentId)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 }
