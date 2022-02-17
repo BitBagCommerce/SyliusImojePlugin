@@ -15,5 +15,5 @@ interface IngApiClientInterface
         TransactionModelInterface $transactionModel
     ): ResponseInterface;
 
-    public function gettingTransactionData(string $url): ResponseInterface;
+    public function getTransactionData(string $url): ResponseInterface;
 }

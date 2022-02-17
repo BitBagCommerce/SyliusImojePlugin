@@ -37,7 +37,7 @@ final class ProcessStatusUrlGenerator implements StatusBasedUrlGeneratorInterfac
         $session = $request->getSession();
         $session
             ->getFlashBag()
-            ->add('error', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_process'));
+            ->add('notice', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_process'));
 
         return $this->urlGenerator->generate(
             self::SYLIUS_SHOP_ORDER_SHOW,

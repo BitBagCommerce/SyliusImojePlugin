@@ -45,7 +45,7 @@ final class IngApiClient implements IngApiClientInterface
         return $response;
     }
 
-    public function gettingTransactionData(string $url): ResponseInterface
+    public function getTransactionData(string $url): ResponseInterface
     {
         $parameters = $this->buildRequestParams(null);
 

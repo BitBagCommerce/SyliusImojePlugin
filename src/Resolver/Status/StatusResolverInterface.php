@@ -10,6 +10,8 @@ interface StatusResolverInterface
 
     public const CANCEL_STATUS = 'cancel';
 
+    public const PROCESS_STATUS = 'process';
+
     public const ERROR_STATUS = 'error';
 
     public function resolve(string $status): string;
