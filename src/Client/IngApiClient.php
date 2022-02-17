@@ -34,7 +34,7 @@ final class IngApiClient implements IngApiClientInterface
     ): ResponseInterface {
         $url = \sprintf('%s%s', $this->url, self::TRANSACTION_ENDPOINT);
 
-        $parameters = $this->buildRequestParams($transactionModel, $this->token);
+        $parameters = $this->buildRequestParams($transactionModel);
 
         try {
             $response = $this->httpClient->post($url, $parameters);
@@ -45,9 +45,9 @@ final class IngApiClient implements IngApiClientInterface
         return $response;
     }
 
-    public function gettingTransactionData(string $url, string $token): ResponseInterface
+    public function gettingTransactionData(string $url): ResponseInterface
     {
-        $parameters = $this->buildRequestParams(null, $token);
+        $parameters = $this->buildRequestParams(null);
 
         try {
             $response = $this->httpClient->get($url, $parameters);
@@ -59,8 +59,7 @@ final class IngApiClient implements IngApiClientInterface
     }
 
     private function buildRequestParams(
-        ?TransactionModelInterface $transactionModel,
-        string $token
+        ?TransactionModelInterface $transactionModel
     ): array {
         $request = [];
         $serializer = $this->serializerFactory->createSerializerWithNormalizer();
@@ -72,7 +71,7 @@ final class IngApiClient implements IngApiClientInterface
         $request['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Authorization' => \sprintf('Bearer %s', $token),
+            'Authorization' => \sprintf('Bearer %s', $this->token),
         ];
 
         return $request;

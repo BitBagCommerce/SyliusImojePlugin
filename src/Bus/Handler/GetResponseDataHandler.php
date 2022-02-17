@@ -57,7 +57,7 @@ final class GetResponseDataHandler implements MessageHandlerInterface
         $client = $this->ingClientProvider->getClient($code);
         $url = $this->createUrl($config, $ingTransaction, $client);
 
-        $response = $client->gettingTransactionData($url, $config->getToken());
+        $response = $client->gettingTransactionData($url);
 
         /** @var array $transactionData */
         $transactionData = json_decode($response->getBody()->getContents(), true);
