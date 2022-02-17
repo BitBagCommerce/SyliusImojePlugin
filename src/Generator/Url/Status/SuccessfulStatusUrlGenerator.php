@@ -6,7 +6,6 @@ namespace BitBag\SyliusIngPlugin\Generator\Url\Status;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInterface
@@ -29,6 +28,6 @@ final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInter
 
     public function generate(Request $request, OrderInterface $order): string
     {
-        return $this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_THANK_YOU,['tokenValue' => $order->getTokenValue()]);
+        return $this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_THANK_YOU, ['tokenValue' => $order->getTokenValue()]);
     }
 }

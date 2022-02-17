@@ -14,4 +14,6 @@ interface IngApiClientInterface
     public function createTransaction(
         TransactionModelInterface $transactionModel
     ): ResponseInterface;
+
+    public function gettingTransactionData(string $url, string $token): ResponseInterface;
 }

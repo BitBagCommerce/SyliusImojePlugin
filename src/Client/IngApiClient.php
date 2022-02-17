@@ -45,13 +45,30 @@ final class IngApiClient implements IngApiClientInterface
         return $response;
     }
 
+    public function gettingTransactionData(string $url, string $token): ResponseInterface
+    {
+        $parameters = $this->buildRequestParams(null, $token);
+
+        try {
+            $response = $this->httpClient->get($url, $parameters);
+        } catch (GuzzleException $e) {
+            throw new IngBadRequestException($e->getMessage());
+        }
+
+        return $response;
+    }
+
     private function buildRequestParams(
-        TransactionModelInterface $transactionModel,
+        ?TransactionModelInterface $transactionModel,
         string $token
     ): array {
         $request = [];
         $serializer = $this->serializerFactory->createSerializerWithNormalizer();
-        $request['body'] = $serializer->serialize($transactionModel, 'json');
+
+        if ($transactionModel !== null) {
+            $request['body'] = $serializer->serialize($transactionModel, 'json');
+        }
+
         $request['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',

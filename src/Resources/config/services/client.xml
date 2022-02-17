@@ -9,12 +9,5 @@
             <argument type="service" id="sylius.http_client" />
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory" />
         </service>
-
-        <service id="bitbag.sylius_ing_plugin.client.ing_api_request_client"
-                 class="BitBag\SyliusIngPlugin\Client\IngApiRequestClient"
-                 public="true"
-        >
-            <argument type="service" id="sylius.http_client" />
-        </service>
     </services>
 </container>
