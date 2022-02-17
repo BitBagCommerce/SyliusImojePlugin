@@ -8,6 +8,7 @@ use BitBag\SyliusIngPlugin\Client\IngApiClient;
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
 use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
@@ -20,8 +21,8 @@ final class IngApiClientTest extends TestCase
     /** @var Client|MockObject */
     private object $httpClient;
 
-    /** @var SerializerFactoryInterface|MockObject */
-    private object $serializerFactory;
+    /** @var RequestParamsProviderInterface|MockObject */
+    private object $requestParamsProvider;
 
     private IngApiClient $ingApiClient;
 
@@ -33,13 +34,12 @@ final class IngApiClientTest extends TestCase
     {
         // I'm using a mockBuilder because these methods are added via annotations
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
-        $this->serializerFactory = $this->createMock(SerializerFactoryInterface::class);
-        $this->ingApiClient = new IngApiClient($this->httpClient, $this->serializerFactory, self::TOKEN, self::URL);
+        $this->requestParamsProvider = $this->createMock(RequestParamsProviderInterface::class);
+        $this->ingApiClient = new IngApiClient($this->httpClient, $this->requestParamsProvider, self::TOKEN, self::URL);
     }
 
     public function testCreateTransaction(): void
     {
-        $serializer = $this->createMock(SerializerInterface::class);
         $transactionModel = $this->createMock(TransactionModelInterface::class);
 
         $parameters['body'] = 'model';
@@ -50,16 +50,10 @@ final class IngApiClientTest extends TestCase
             'Authorization' => 'Bearer token',
         ];
 
-        $this->serializerFactory
+        $this->requestParamsProvider
             ->expects($this->once())
-            ->method('createSerializerWithNormalizer')
-            ->willReturn($serializer);
-
-        $serializer
-            ->expects($this->once())
-            ->method('serialize')
-            ->with($transactionModel, 'json')
-            ->willReturn('model');
+            ->method('buildRequestParams')
+            ->willReturn($parameters);
 
         $this->httpClient
             ->expects($this->once())
@@ -74,7 +68,6 @@ final class IngApiClientTest extends TestCase
 
     public function testCreateTransactionWithException(): void
     {
-        $serializer = $this->createMock(SerializerInterface::class);
         $transactionModel = $this->createMock(TransactionModelInterface::class);
         $exception = $this->createMock(GuzzleException::class);
 
@@ -85,16 +78,10 @@ final class IngApiClientTest extends TestCase
             'Authorization' => 'Bearer token',
         ];
 
-        $this->serializerFactory
+        $this->requestParamsProvider
             ->expects($this->once())
-            ->method('createSerializerWithNormalizer')
-            ->willReturn($serializer);
-
-        $serializer
-            ->expects($this->once())
-            ->method('serialize')
-            ->with($transactionModel, 'json')
-            ->willReturn('model');
+            ->method('buildRequestParams')
+            ->willReturn($parameters);
 
         $this->httpClient
             ->expects($this->once())
