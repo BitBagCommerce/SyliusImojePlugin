@@ -7,7 +7,7 @@
                  public="true"
         >
             <argument type="service" id="sylius.http_client" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.request_params.request_params_provider" />
         </service>
     </services>
 </container>

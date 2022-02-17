@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Provider;
 
 use BitBag\SyliusIngPlugin\Client\IngApiClient;
-use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
+use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 
 final class IngClientProvider implements IngClientProviderInterface
@@ -14,16 +14,16 @@ final class IngClientProvider implements IngClientProviderInterface
 
     private Client $httpClient;
 
-    private SerializerFactoryInterface $serializerFactory;
+    private RequestParamsProviderInterface $requestParamsProvider;
 
     public function __construct(
         IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
         Client $httpClient,
-        SerializerFactoryInterface $serializerFactory
+        RequestParamsProviderInterface $requestParamsProvider
     ) {
         $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
         $this->httpClient = $httpClient;
-        $this->serializerFactory = $serializerFactory;
+        $this->requestParamsProvider = $requestParamsProvider;
     }
 
     public function getClient(string $code): IngApiClient
@@ -35,6 +35,6 @@ final class IngClientProvider implements IngClientProviderInterface
 
         $completeUrl = \sprintf('%s/%s/', $url, $merchantId);
 
-        return new IngApiClient($this->httpClient, $this->serializerFactory, $token, $completeUrl);
+        return new IngApiClient($this->httpClient, $this->requestParamsProvider, $token, $completeUrl);
     }
 }
