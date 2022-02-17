@@ -29,19 +29,6 @@ final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInter
 
     public function generate(Request $request, OrderInterface $order): string
     {
-        /** @var Session $session */
-        $session = $request->getSession();
-        $session
-            ->getFlashBag()
-            ->add('success', 'Your order is completed');
-        $url = \sprintf(
-            '%s%s',
-            $request->getSchemeAndHttpHost(),
-            $this->urlGenerator->generate(
-                self::SYLIUS_SHOP_ORDER_THANK_YOU,
-                ['tokenValue' => $order->getTokenValue()]
-            )
-        );
-        return $url;
+        return $this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_THANK_YOU,['tokenValue' => $order->getTokenValue()]);
     }
 }

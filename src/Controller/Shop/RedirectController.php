@@ -7,7 +7,6 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop;
 use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
-use BitBag\SyliusIngPlugin\Exception\MissingPaymentException;
 use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
 use BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
 use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
@@ -56,6 +55,9 @@ final class RedirectController
         $paymentStatus = $this->statusResolver->resolve($readyTransaction->getStatus());
 
         $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $paymentStatus);
+        $session = $request->getSession();
+        $session->set('sylius_order_id', $order->getId());
+
         return new RedirectResponse($url);
     }
 }
