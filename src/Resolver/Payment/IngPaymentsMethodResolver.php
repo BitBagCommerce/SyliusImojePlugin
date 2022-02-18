@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepository;
+use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 
 final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
 {
-    private PaymentMethodRepository $paymentMethodRepository;
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    public function __construct(PaymentMethodRepository $paymentMethodRepository)
+    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
