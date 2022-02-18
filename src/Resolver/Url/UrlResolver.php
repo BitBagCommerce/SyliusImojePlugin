@@ -29,6 +29,16 @@ final class UrlResolver implements UrlResolverInterface
         IngTransactionInterface $ingTransaction,
         IngApiClientInterface $client
     ): string {
+        if ($config->isProd()) {
+            return \sprintf(
+                '%s/%s/%s/%s',
+                $config->getProdUrl(),
+                $config->getMerchantId(),
+                $client::TRANSACTION_ENDPOINT,
+                $ingTransaction->getTransactionId()
+            );
+        }
+
         return \sprintf(
             '%s/%s/%s/%s',
             $config->getSandboxUrl(),
