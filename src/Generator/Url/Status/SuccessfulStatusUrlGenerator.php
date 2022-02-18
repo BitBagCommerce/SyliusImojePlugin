@@ -28,6 +28,12 @@ final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInter
 
     public function generate(Request $request, OrderInterface $order): string
     {
-        return $this->urlGenerator->generate(self::SYLIUS_SHOP_ORDER_THANK_YOU, ['tokenValue' => $order->getTokenValue()]);
+        $session = $request->getSession();
+        $session->set('sylius_order_id', $order->getId());
+
+        return $this->urlGenerator->generate(
+            self::SYLIUS_SHOP_ORDER_THANK_YOU,
+            ['tokenValue' => $order->getTokenValue()]
+        );
     }
 }

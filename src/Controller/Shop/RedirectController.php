@@ -55,8 +55,6 @@ final class RedirectController
         $paymentStatus = $this->statusResolver->resolve($readyTransaction->getStatus());
 
         $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $paymentStatus);
-        $session = $request->getSession();
-        $session->set('sylius_order_id', $order->getId());
 
         return new RedirectResponse($url);
     }
