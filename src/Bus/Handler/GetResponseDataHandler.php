@@ -6,7 +6,6 @@ namespace BitBag\SyliusIngPlugin\Bus\Handler;
 
 use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Exception\NoDataFromResponseException;
 use BitBag\SyliusIngPlugin\Factory\ReadyTransaction\ReadyTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
@@ -49,23 +48,17 @@ final class GetResponseDataHandler implements MessageHandlerInterface
     public function __invoke(GetResponseData $query): ReadyTransactionModelInterface
     {
         /** @var IngTransactionInterface|null $ingTransaction */
-        $ingTransaction = $this->ingTransactionRepository->findByPaymentId($query->getPaymentId());
+        $ingTransaction = $this->ingTransactionRepository->getByPaymentId($query->getPaymentId());
         $client = $this->ingClientProvider->getClient($ingTransaction->getGatewayCode());
 
         $url = $this->urlResolver->resolve($ingTransaction, $this->configurationProvider, $this->ingClientProvider);
 
         $response = $client->getTransactionData($url);
 
-        /** @var array $transactionData */
-        $transactionData = json_decode($response->getBody()->getContents(), true);
-
-        if ($transactionData['transaction'] === null || $transactionData['transaction']['status'] === null) {
-            throw new NoDataFromResponseException('No data from response');
-        }
         $order = $this->orderRepository->find($ingTransaction->getOrderId());
 
         return $this->readyTransactionFactory->createReadyTransaction(
-            $transactionData['transaction']['status'],
+            $response->getBody()->getContents(),
             $ingTransaction,
             $order
         );

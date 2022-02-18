@@ -25,6 +25,6 @@ final class StatusResolver implements StatusResolverInterface
                 return self::CANCEL_STATUS;
         }
 
-        throw new NoCorrectStatusException('Could not found payment status');
+        throw new NoCorrectStatusException('Could not find payment status');
     }
 }

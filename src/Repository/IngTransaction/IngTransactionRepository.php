@@ -10,7 +10,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 final class IngTransactionRepository extends EntityRepository implements IngTransactionRepositoryInterface
 {
-    public function findByPaymentId(int $paymentId): IngTransaction
+    public function getByPaymentId(int $paymentId): IngTransaction
     {
         $transaction = $this->createQueryBuilder('o')
             ->innerJoin('o.payment', 'payment')

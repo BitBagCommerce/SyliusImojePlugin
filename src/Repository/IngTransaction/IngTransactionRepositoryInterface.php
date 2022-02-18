@@ -9,5 +9,5 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface IngTransactionRepositoryInterface extends RepositoryInterface
 {
-    public function findByPaymentId(int $paymentId): ?IngTransaction;
+    public function getByPaymentId(int $paymentId): ?IngTransaction;
 }

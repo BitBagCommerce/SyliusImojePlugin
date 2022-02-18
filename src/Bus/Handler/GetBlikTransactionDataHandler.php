@@ -6,7 +6,7 @@ namespace BitBag\SyliusIngPlugin\Bus\Handler;
 
 use BitBag\SyliusIngPlugin\Bus\Query\GetBlikTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Exception\NoDataFromResponseException;
+use BitBag\SyliusIngPlugin\Exception\InvalidIngResponseException;
 use BitBag\SyliusIngPlugin\Factory\Model\TransactionBlikModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
@@ -68,7 +68,7 @@ final class GetBlikTransactionDataHandler implements MessageHandlerInterface
         $orderId = $data['orderId'];
 
         if (!$paymentUrl || !$transactionId || !$serviceId || !$orderId) {
-            throw new NoDataFromResponseException('No configured transaction');
+            throw new InvalidIngResponseException('No configured transaction');
         }
 
         return $this->ingTransactionFactory->create(

@@ -11,7 +11,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 interface ReadyTransactionFactoryInterface
 {
     public function createReadyTransaction(
-        string $status,
+        string $contents,
         IngTransactionInterface $ingTransaction,
         OrderInterface $order
     ): ReadyTransactionModel;
