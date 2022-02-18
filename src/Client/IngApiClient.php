@@ -51,7 +51,7 @@ final class IngApiClient implements IngApiClientInterface
 
     public function getTransactionData(string $url): ResponseInterface
     {
-        $parameters = $this->requestParamsProvider->buildRequestParams(null, $this->token);
+        $parameters = $this->requestParamsProvider->buildAuthorizeRequest($this->token);
 
         try {
             $response = $this->httpClient->get($url, $parameters);

@@ -16,15 +16,23 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
         $this->serializerFactory = $serializerFactory;
     }
 
-    public function buildRequestParams(?TransactionModelInterface $transactionModel, string $token): array
+    public function buildRequestParams(TransactionModelInterface $transactionModel, string $token): array
     {
         $request = [];
         $serializer = $this->serializerFactory->createSerializerWithNormalizer();
 
-        if ($transactionModel !== null) {
-            $request['body'] = $serializer->serialize($transactionModel, 'json');
-        }
+        $request['body'] = $serializer->serialize($transactionModel, 'json');
+        $request['headers'] = [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => \sprintf('Bearer %s', $token),
+        ];
 
+        return $request;
+    }
+
+    public function buildAuthorizeRequest(string $token): array
+    {
         $request['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
