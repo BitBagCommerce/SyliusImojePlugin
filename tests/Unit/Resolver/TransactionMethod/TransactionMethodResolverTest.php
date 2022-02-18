@@ -22,7 +22,7 @@ final class TransactionMethodResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provider
+     * @dataProvider statusProvider
      */
     public function testResolveStatus(array $status, string $result): void
     {
@@ -33,7 +33,7 @@ final class TransactionMethodResolverTest extends TestCase
         self::assertEquals($result, $this->transactionMethodResolver->resolve($this->payment));
     }
 
-    public function provider()
+    public function statusProvider()
     {
         return [
             [['status' => 'blik'], 'blik'],

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Unit\Resolver\Url;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClient;
 use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
 use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
@@ -49,7 +48,7 @@ final class UrlResolverTest extends TestCase
     }
 
     /**
-     * @dataProvider provider
+     * @dataProvider dataToUrlProvider
      */
     public function testResolveUrl(bool $isProd,string $url,string $result): void
     {
@@ -96,7 +95,7 @@ final class UrlResolverTest extends TestCase
         );
     }
 
-    public function provider()
+    public function dataToUrlProvider()
     {
         return [
             [true, self::PROD_URL, self::COMPLETE_PROD_URL],

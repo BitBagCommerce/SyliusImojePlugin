@@ -18,22 +18,22 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
 
     public function buildRequestParams(TransactionModelInterface $transactionModel, string $token): array
     {
-        $request = [];
         $serializer = $this->serializerFactory->createSerializerWithNormalizer();
-
+        $request = $this->addAuthorizationHeaders($token);
         $request['body'] = $serializer->serialize($transactionModel, 'json');
-        $request['headers'] = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => \sprintf('Bearer %s', $token),
-        ];
 
         return $request;
     }
 
     public function buildAuthorizeRequest(string $token): array
     {
+        return $this->addAuthorizationHeaders($token);
+    }
+
+    private function addAuthorizationHeaders(string $token)
+    {
         $request = [];
+
         $request['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
