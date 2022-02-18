@@ -33,6 +33,7 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
 
     public function buildAuthorizeRequest(string $token): array
     {
+        $request = [];
         $request['headers'] = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
