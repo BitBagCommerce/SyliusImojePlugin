@@ -11,14 +11,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class TransactionMethodResolverTest extends TestCase
 {
-    public const PAYMENT_METHOD_BLIK = 'blik';
-
-    public const PAYMENT_METHOD_CARD = 'card';
-
-    public const PAYMENT_METHOD_ING = 'ing';
-
-    public const PAYMENT_METHOD_PBL = 'pbl';
-
     protected TransactionMethodResolverInterface $transactionMethodResolver;
 
     protected PaymentInterface $payment;
@@ -44,10 +36,10 @@ final class TransactionMethodResolverTest extends TestCase
     public function provider()
     {
         return [
-            [[self::PAYMENT_METHOD_BLIK => self::PAYMENT_METHOD_BLIK], self::PAYMENT_METHOD_BLIK],
-            [[self::PAYMENT_METHOD_CARD => self::PAYMENT_METHOD_CARD], self::PAYMENT_METHOD_CARD],
-            [[self::PAYMENT_METHOD_ING => self::PAYMENT_METHOD_ING], self::PAYMENT_METHOD_ING],
-            [[self::PAYMENT_METHOD_PBL => self::PAYMENT_METHOD_PBL], self::PAYMENT_METHOD_PBL],
+            [['status' => 'blik'], 'blik'],
+            [['status' => 'card'], 'card'],
+            [['status'=> 'ing'], 'ing'],
+            [['status'=> 'pbl'], 'pbl'],
         ];
     }
 }

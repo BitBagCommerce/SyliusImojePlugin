@@ -64,18 +64,21 @@ final class IngPaymentMethodResolverTest extends TestCase
 
     public function testResolveEmptyPaymentException(): void
     {
+        $this->expectException(IngNotConfiguredException::class);
+
         $this->paymentMethodRepository
             ->expects($this->once())
             ->method('findOneForIng')
             ->willReturn(null);
 
-        $this->expectException(IngNotConfiguredException::class);
 
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver($this->paymentMethodRepository);
         $ingPaymentsMethodResolver->resolve();
     }
     public function testResolveEmptyConfigException(): void
     {
+        $this->expectException(IngNotConfiguredException::class);
+
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
         $paymentMethod = new PaymentMethod();
 
@@ -88,8 +91,6 @@ final class IngPaymentMethodResolverTest extends TestCase
         $paymentMethodMock
             ->method('getGatewayConfig')
             ->willReturn(null);
-
-        $this->expectException(IngNotConfiguredException::class);
 
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver($this->paymentMethodRepository);
         $ingPaymentsMethodResolver->resolve();

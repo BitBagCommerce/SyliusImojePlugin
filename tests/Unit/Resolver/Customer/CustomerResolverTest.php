@@ -42,15 +42,10 @@ final class CustomerResolverTest extends TestCase
     {
         $customer = new Customer();
         $address = $this->createMock(AddressInterface::class);
-        $customerMock = $this->createMock(CustomerInterface::class);
 
         $this->order
             ->method('getCustomer')
             ->willReturn($customer);
-
-        $customerMock
-            ->method('getFirstName')
-            ->willReturn(null);
 
         $this->order
             ->method('getBillingAddress')
@@ -79,15 +74,10 @@ final class CustomerResolverTest extends TestCase
     {
         $customer = new Customer();
         $address = $this->createMock(AddressInterface::class);
-        $customerMock = $this->createMock(CustomerInterface::class);
 
         $this->order
             ->method('getCustomer')
             ->willReturn($customer);
-
-        $customerMock
-            ->method('getLastName')
-            ->willReturn(null);
 
         $this->order
             ->method('getBillingAddress')
@@ -116,15 +106,10 @@ final class CustomerResolverTest extends TestCase
     {
         $customer = new Customer();
         $address = $this->createMock(AddressInterface::class);
-        $customerMock = $this->createMock(CustomerInterface::class);
 
         $this->order
             ->method('getCustomer')
             ->willReturn($customer);
-
-        $customerMock
-            ->method('getPhoneNumber')
-            ->willReturn(null);
 
         $this->order
             ->method('getBillingAddress')
