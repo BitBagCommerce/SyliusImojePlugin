@@ -30,7 +30,7 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
         return $this->addAuthorizationHeaders($token);
     }
 
-    private function addAuthorizationHeaders(string $token)
+    private function addAuthorizationHeaders(string $token): array
     {
         $request = [];
 
