@@ -40,7 +40,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         string $paymentMethodCode,
         string $serviceId
     ): TransactionModelInterface {
-        $redirectModel = $this->redirectModelFactory->create();
+        $redirectModel = $this->redirectModelFactory->create($order->getLastPayment());
         $amount = $order->getTotal();
         $currency = $order->getCurrencyCode();
         $orderId = (string) $order->getId();

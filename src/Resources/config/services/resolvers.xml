@@ -43,5 +43,15 @@
                   id="bitbag.sylius_ing_plugin.resolver.customer.customer_resolver"
         >
         </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\Status\StatusResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"
+        >
+        </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\Url\UrlResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.url.url_resolver"
+        >
+        </service>
     </services>
 </container>

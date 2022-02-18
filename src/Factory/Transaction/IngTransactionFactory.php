@@ -15,8 +15,9 @@ final class IngTransactionFactory implements IngTransactionFactoryInterface
         string $transactionId,
         string $paymentUrl,
         string $serviceId,
-        string $orderId
+        string $orderId,
+        string $gatewayCode
     ): IngTransactionInterface {
-        return new IngTransaction($transactionId, $payment, $paymentUrl, $serviceId, $orderId);
+        return new IngTransaction($transactionId, $payment, $paymentUrl, $serviceId, $orderId, $gatewayCode);
     }
 }

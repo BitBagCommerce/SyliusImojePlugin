@@ -12,11 +12,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class FinalizeOrderHandler implements MessageHandlerInterface
 {
-    /** @var FactoryInterface */
-    private $stateMachineFactory;
+    private FactoryInterface $stateMachineFactory;
 
-    /** @var RepositoryInterface */
-    private $orderRepository;
+    private RepositoryInterface $orderRepository;
 
     public function __construct(
         FactoryInterface $stateMachineFactory,

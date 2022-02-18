@@ -16,6 +16,10 @@
         <service class="BitBag\SyliusIngPlugin\Controller\Shop\RedirectController"
                  id="bitbag.sylius_ing_plugin.controller.shop.redirect_controller"
         >
+            <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"/>
+            <argument type="service" id="bitbag.sylius_Ing_plugin.generator.url.status.aggregate_status_based_url_generator"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"/>
             <tag name="controller.service_arguments"/>
         </service>
     </services>

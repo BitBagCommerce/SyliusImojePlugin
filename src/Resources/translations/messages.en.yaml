@@ -29,4 +29,7 @@ bitbag_sylius_ing_plugin:
     nest: nestPrzelew
     envelo: Envelo Bank
     service: ServiceID
+    payment_failure: Payment failure
+    payment_canceled: Payment has been canceled
+    payment_process: Payment is processing
 

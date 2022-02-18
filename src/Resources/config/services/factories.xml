@@ -64,5 +64,13 @@
                  id="bitbag.sylius_ing_plugin.factory.model.blik.blik_model_factory"
         >
         </service>
+        <service class="BitBag\SyliusIngPlugin\Factory\ReadyTransaction\ReadyTransactionFactory"
+                 id="bitbag.sylius_ing_plugin.factory.ready_transaction.ready_transaction_factory"
+        >
+        </service>
+        <service class="BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactory"
+                 id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"
+        >
+        </service>
     </services>
 </container>

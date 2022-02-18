@@ -19,4 +19,6 @@ interface IngTransactionInterface
     public function getServiceId(): string;
 
     public function getOrderId(): string;
+
+    public function getGatewayCode(): string;
 }

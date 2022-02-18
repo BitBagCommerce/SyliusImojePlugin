@@ -50,7 +50,7 @@ final class OrderResolver implements OrderResolverInterface
          */
         $tokenValue = $request->get('tokenValue');
 
-        if (null === $tokenValue) {
+        if ($tokenValue === null) {
             return null;
         }
 
