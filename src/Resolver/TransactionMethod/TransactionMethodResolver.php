@@ -12,15 +12,15 @@ final class TransactionMethodResolver implements TransactionMethodResolverInterf
     {
         $paymentDetails = implode($payment->getDetails());
 
-        if ($paymentDetails === 'blik') {
+        if ('blik' === $paymentDetails) {
             return self::PAYMENT_METHOD_BLIK;
         }
 
-        if ($paymentDetails === 'card') {
+        if ('card' === $paymentDetails) {
             return self::PAYMENT_METHOD_CARD;
         }
 
-        if ($paymentDetails === 'ing') {
+        if ('ing' === $paymentDetails) {
             return self::PAYMENT_METHOD_ING;
         }
 

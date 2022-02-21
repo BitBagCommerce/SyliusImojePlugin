@@ -20,13 +20,13 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
     {
         $payment = $this->paymentMethodRepository->findOneForIng();
 
-        if ($payment === null) {
+        if (null === $payment) {
             throw new IngNotConfiguredException('Payment method is not configured');
         }
 
         $config = $payment->getGatewayConfig();
 
-        if ($config === null) {
+        if (null === $config) {
             throw new IngNotConfiguredException('Payment method is not configured');
         }
 
@@ -62,7 +62,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if ($data['pbl']) {
             foreach ($data as $key => $value) {
-                if (!$value && $key !== 'ing' && $key !== 'card' && $key !== 'blik') {
+                if (!$value && 'ing' !== $key && 'card' !== $key && 'blik' !== $key) {
                     unset($data[$key]);
                 }
             }
@@ -70,7 +70,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (!$data['pbl']) {
             foreach ($data as $key => $value) {
-                if (($key !== 'ing' && $key !== 'card' && $key !== 'blik')) {
+                if (('ing' !== $key && 'card' !== $key && 'blik' !== $key)) {
                     unset($data[$key]);
                 }
             }

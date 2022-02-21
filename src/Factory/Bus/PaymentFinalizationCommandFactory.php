@@ -26,7 +26,7 @@ final class PaymentFinalizationCommandFactory implements PaymentFinalizationComm
     {
         $class = self::STATUSES[$status] ?? null;
 
-        if ($class === null) {
+        if (null === $class) {
             throw new \InvalidArgumentException(
                 \sprintf('Payment finalization command for status %s not found.', $status)
             );

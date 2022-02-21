@@ -37,7 +37,11 @@ final class RedirectController
         $this->statusResolver = $statusResolver;
     }
 
-    public function __invoke(Request $request, string $status, int $paymentId): Response
+    public function __invoke(
+        Request $request,
+        string $status,
+        int $paymentId
+    ): Response
     {
         /** @var ReadyTransactionModelInterface $readyTransaction */
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));

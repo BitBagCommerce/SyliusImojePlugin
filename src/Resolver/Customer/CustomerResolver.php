@@ -12,7 +12,7 @@ final class CustomerResolver implements CustomerResolverInterface
     {
         $customer = $order->getCustomer();
 
-        if ($customer->getFirstName() !== null) {
+        if (null !== $customer->getFirstName()) {
             return $customer->getFirstName();
         }
 
@@ -23,7 +23,7 @@ final class CustomerResolver implements CustomerResolverInterface
     {
         $customer = $order->getCustomer();
 
-        if ($customer->getLastName() !== null) {
+        if (null !== $customer->getLastName()) {
             return $customer->getLastName();
         }
 
@@ -34,7 +34,7 @@ final class CustomerResolver implements CustomerResolverInterface
     {
         $customer = $order->getCustomer();
 
-        if ($customer->getPhoneNumber() !== null) {
+        if (null !== $customer->getPhoneNumber()) {
             return $customer->getPhoneNumber();
         }
 

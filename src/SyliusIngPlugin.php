@@ -19,7 +19,7 @@ final class SyliusIngPlugin extends Bundle
     {
         $this->containerExtension = $this->createContainerExtension() ?? false;
 
-        return $this->containerExtension !== false ? $this->containerExtension : null;
+        return false !== $this->containerExtension ? $this->containerExtension : null;
     }
 
     public function build(ContainerBuilder $container): void

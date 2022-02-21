@@ -30,7 +30,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
     {
         $paymentMethod = $this->paymentMethodRepository->findOneForIngCode($code);
 
-        if ($paymentMethod === null) {
+        if (null === $paymentMethod) {
             throw new IngNotConfiguredException(
                 \sprintf('Payment method with code %s is not configured', $code)
             );
@@ -54,7 +54,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
     {
         $gatewayConfig = $paymentMethod->getGatewayConfig();
 
-        if ($gatewayConfig === null) {
+        if (null === $gatewayConfig) {
             throw new IngNotConfiguredException((string) $paymentMethod->getCode());
         }
 

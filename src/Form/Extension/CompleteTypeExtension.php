@@ -36,7 +36,7 @@ final class CompleteTypeExtension extends AbstractTypeExtension
 
         $builder
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($paymentCode): void {
-                if ($paymentCode === 'blik') {
+                if ('blik' === $paymentCode) {
                     $form = $event->getForm();
                     $form->add('blik_code', NumberType::class, [
                         'label' => 'Blik',

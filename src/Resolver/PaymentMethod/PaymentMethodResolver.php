@@ -14,7 +14,7 @@ final class PaymentMethodResolver implements PaymentMethodResolverInterface
     {
         $paymentMethod = $payment->getMethod();
 
-        if ($paymentMethod === null) {
+        if (null === $paymentMethod) {
             throw new MissingPaymentMethodException($payment);
         }
 
