@@ -59,12 +59,12 @@ final class InitializePaymentController
             throw new IngNotConfiguredException('Payment method not found');
         }
 
-        if ($code !== null) {
+        if (null !== $code) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
         }
 
         $transactionPaymentData = $this->paymentDataModelFactory->create($payment);
-        $isBlik = implode($payment->getDetails()) === 'blik';
+        $isBlik = 'blik' === implode($payment->getDetails());
 
         $transactionData = $isBlik ? $this->getTransactionDataForBlik($order, $payment, $transactionPaymentData)
             : $this->getTransactionData($order, $payment, $transactionPaymentData);

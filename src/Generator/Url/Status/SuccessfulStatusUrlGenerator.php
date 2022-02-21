@@ -23,7 +23,7 @@ final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInter
 
     public function accepts(string $status): bool
     {
-        return $status === self::STATUS;
+        return self::STATUS === $status;
     }
 
     public function generate(Request $request, OrderInterface $order): string

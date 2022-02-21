@@ -9,5 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface AggregateStatusBasedUrlGeneratorInterface
 {
-    public function generate(OrderInterface $order, Request $request, string $status): string;
+    public function generate(
+        OrderInterface $order,
+        Request $request,
+        string $status
+    ): string;
 }

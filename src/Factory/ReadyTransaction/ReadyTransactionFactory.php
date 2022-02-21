@@ -19,7 +19,7 @@ final class ReadyTransactionFactory implements ReadyTransactionFactoryInterface
         /** @var array $transactionData */
         $transactionData = json_decode($contents, true);
 
-        if ($transactionData['transaction'] === null || $transactionData['transaction']['status'] === null) {
+        if (null === $transactionData['transaction'] || null === $transactionData['transaction']['status']) {
             throw new InvalidIngResponseException('Invalid data from response');
         }
 

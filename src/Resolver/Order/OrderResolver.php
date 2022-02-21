@@ -34,7 +34,7 @@ final class OrderResolver implements OrderResolverInterface
     private function getCurrentRequest(): Request
     {
         $result = $this->requestStack->getMasterRequest();
-        if ($result === null) {
+        if (null === $result) {
             throw new MissingRequestException();
         }
 
@@ -50,7 +50,7 @@ final class OrderResolver implements OrderResolverInterface
          */
         $tokenValue = $request->get('tokenValue');
 
-        if ($tokenValue === null) {
+        if (null === $tokenValue) {
             return null;
         }
 
@@ -61,7 +61,7 @@ final class OrderResolver implements OrderResolverInterface
     {
         $order = null;
 
-        if ($tokenValue !== null) {
+        if (null !== $tokenValue) {
             $order = $this->orderRepository->findByTokenValue($tokenValue);
         }
 

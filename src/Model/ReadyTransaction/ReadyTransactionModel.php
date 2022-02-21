@@ -15,7 +15,11 @@ final class ReadyTransactionModel implements ReadyTransactionModelInterface
 
     private OrderInterface $order;
 
-    public function __construct(string $status, IngTransactionInterface $ingTransaction, OrderInterface $order)
+    public function __construct(
+        string $status,
+        IngTransactionInterface $ingTransaction,
+        OrderInterface $order
+    )
     {
         $this->status = $status;
         $this->ingTransaction = $ingTransaction;

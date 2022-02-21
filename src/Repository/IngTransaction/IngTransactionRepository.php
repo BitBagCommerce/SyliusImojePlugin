@@ -20,7 +20,7 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
             ->getOneOrNullResult()
             ;
 
-        if ($transaction === null) {
+        if (null === $transaction) {
             throw new NoTransactionException('Could not find transaction');
         }
 

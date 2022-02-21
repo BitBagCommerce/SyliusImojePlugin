@@ -24,7 +24,11 @@ final class AggregateStatusBasedUrlGenerator implements AggregateStatusBasedUrlG
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function generate(OrderInterface $order, Request $request, string $status): string
+    public function generate(
+        OrderInterface $order,
+        Request $request,
+        string $status
+    ): string
     {
         /** @var StatusBasedUrlGeneratorInterface $generator */
         foreach ($this->generators as $generator) {
