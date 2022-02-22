@@ -4,46 +4,27 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\EventSubscriber;
 
+use BitBag\SyliusIngPlugin\Calculator\SignatureCalculatorInterface;
 use BitBag\SyliusIngPlugin\Controller\Shop\Webhook\WebhookController;
-use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
+use BitBag\SyliusIngPlugin\Resolver\Signature\OwnSignatureResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Signature\SignatureResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\TransactionId\TransactionIdResolverInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 final class AuthorizationSubscriber implements EventSubscriberInterface
 {
-    private LoggerInterface $logger;
-
     private SignatureResolverInterface $signatureResolver;
 
-    private RequestStack $requestStack;
+    private OwnSignatureResolverInterface $ownSignatureResolver;
 
-    private GatewayCodeResolverInterface $gatewayCodeResolver;
+    private SignatureCalculatorInterface $signatureCalculator;
 
-    private TransactionIdResolverInterface $transactionIdResolver;
-
-    private IngClientConfigurationProviderInterface $configurationProvider;
-
-    public function __construct(
-        LoggerInterface $logger,
-        SignatureResolverInterface $signatureResolver,
-        RequestStack $requestStack,
-        GatewayCodeResolverInterface $gatewayCodeResolver,
-        TransactionIdResolverInterface $transactionIdResolver,
-        IngClientConfigurationProviderInterface $configurationProvider
-    ) {
-        $this->logger = $logger;
+    public function __construct(SignatureResolverInterface $signatureResolver, OwnSignatureResolverInterface $ownSignatureResolver, SignatureCalculatorInterface $signatureCalculator)
+    {
         $this->signatureResolver = $signatureResolver;
-        $this->requestStack = $requestStack;
-        $this->gatewayCodeResolver = $gatewayCodeResolver;
-        $this->transactionIdResolver = $transactionIdResolver;
-        $this->configurationProvider = $configurationProvider;
+        $this->ownSignatureResolver = $ownSignatureResolver;
+        $this->signatureCalculator = $signatureCalculator;
     }
 
     public function onKernelController(ControllerEvent $event): void
@@ -55,20 +36,10 @@ final class AuthorizationSubscriber implements EventSubscriberInterface
         }
 
         if ($controller instanceof WebhookController) {
-            $request = $this->requestStack->getCurrentRequest();
-            $body = $request->getContent();
-            $transactionId = $this->transactionIdResolver->resolve($body);
-            $code = $this->gatewayCodeResolver->resolve($transactionId);
             $signature = $this->signatureResolver->resolve();
-            $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
-            $ownSignature = \sprintf('%s%s', $body, $config->getShopKey());
+            $ownSignature = $this->ownSignatureResolver->resolve();
             $ownHashSignature = \hash($this->signatureResolver::SIGNATURE_ALG, $ownSignature);
-
-            if (hash_equals($ownHashSignature, $signature)) {
-                $this->logger->info('Authorized request from ing');
-            } else {
-                throw new IngBadRequestException('Bad request from ing');
-            }
+            $this->signatureCalculator->calculate($signature, $ownHashSignature);
         }
     }
 

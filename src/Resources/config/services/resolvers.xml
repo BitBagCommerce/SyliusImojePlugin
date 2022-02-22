@@ -64,7 +64,6 @@
                   id="bitbag.sylius_ing_plugin.resolver.signature.signature_resolver"
         >
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Resolver\TransactionId\TransactionIdResolver"
@@ -76,6 +75,15 @@
                   id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_resolver"
         >
             <argument type="service" id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository"/>
+        </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\Signature\OwnSignatureResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.signature.own_signature_resolver"
+        >
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_resolver"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_id.transaction_id_resolver"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
         </service>
     </services>
 </container>

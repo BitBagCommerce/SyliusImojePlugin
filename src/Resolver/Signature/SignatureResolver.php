@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Resolver\Signature;
 
 use BitBag\SyliusIngPlugin\Exception\InvalidSignatureException;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class SignatureResolver implements SignatureResolverInterface
 {
     private RequestStack $requestStack;
 
-    private IngClientConfigurationProviderInterface $ingClientConfiguration;
-
-    public function __construct(RequestStack $requestStack, IngClientConfigurationProviderInterface $ingClientConfiguration)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->ingClientConfiguration = $ingClientConfiguration;
     }
 
     public function resolve(): string
