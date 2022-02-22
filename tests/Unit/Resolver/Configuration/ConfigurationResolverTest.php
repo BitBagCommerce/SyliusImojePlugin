@@ -28,6 +28,7 @@ final class ConfigurationResolverTest extends TestCase
             'sandboxUrl' => '',
             'prodUrl' => '',
             'isProd' => '',
+            'shopKey' => '',
             'blik' => '',
             'card' => '',
             'ing' => '',

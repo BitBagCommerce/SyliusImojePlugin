@@ -19,4 +19,6 @@ interface IngClientConfigurationInterface
     public function isProd(): bool;
 
     public function getServiceId(): string;
+
+    public function getShopKey(): string;
 }

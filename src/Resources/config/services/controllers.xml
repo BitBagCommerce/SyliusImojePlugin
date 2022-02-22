@@ -22,5 +22,13 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"/>
             <tag name="controller.service_arguments"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Controller\Shop\Webhook\WebhookController"
+                 id="bitbag.sylius_ing_plugin.controller.shop.webhook.webhook_controller"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.ing_transaction_payment_resolver"/>
+            <tag name="controller.service_arguments"/>
+        </service>
     </services>
 </container>

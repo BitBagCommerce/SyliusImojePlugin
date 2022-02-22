@@ -64,6 +64,15 @@ final class ConfigurationType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('shopKey', TextType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.shop_key',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'bitbag_sylius_ing_plugin.shop_key.not_blank',
+                        'groups' => ['sylius'],
+                    ]),
+                ],
+            ])
             ->add('isProd', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.is_prod',
                 ])

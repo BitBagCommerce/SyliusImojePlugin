@@ -1,5 +1,10 @@
+bitbag_ing_webhook:
+  path: /payment/ing/webhook
+  controller: bitbag.sylius_ing_plugin.controller.shop.webhook.webhook_controller
+
 bitbag_ing_localized:
   resource: "@SyliusIngPlugin/Resources/config/routing/shop_routing_localized.yaml"
   prefix: /{_locale}
   requirements:
     _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
+
