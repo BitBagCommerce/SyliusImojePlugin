@@ -12,7 +12,7 @@ final class TransactionIdResolver implements TransactionIdResolverInterface
     {
         $data = json_decode($content, true);
 
-        if ($data['transaction'] === null || $data['transaction']['id'] === null) {
+        if (!isset($data['transaction']) || !isset($data['transaction']['id'])) {
             throw new NoTransactionException('No data in request');
         }
 
