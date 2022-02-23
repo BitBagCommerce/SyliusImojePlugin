@@ -27,12 +27,12 @@ final class SignatureResolverTest extends TestCase
     public function testResolveSignature(): void
     {
         $header = $this->createMock(HeaderBag::class);
-        $requestBetter = new Request();
-        $requestBetter->headers = $header;
+        $request = new Request();
+        $request->headers = $header;
 
         $this->requestStack
             ->method('getCurrentRequest')
-            ->willReturn($requestBetter);
+            ->willReturn($request);
 
         $header
             ->method('get')
@@ -46,12 +46,12 @@ final class SignatureResolverTest extends TestCase
     {
         $this->expectException(InvalidSignatureException::class);
         $header = $this->createMock(HeaderBag::class);
-        $requestBetter = new Request();
-        $requestBetter->headers = $header;
+        $request = new Request();
+        $request->headers = $header;
 
         $this->requestStack
             ->method('getCurrentRequest')
-            ->willReturn($requestBetter);
+            ->willReturn($request);
 
         $header
             ->method('get')
@@ -66,12 +66,12 @@ final class SignatureResolverTest extends TestCase
         $this->expectException(InvalidSignatureException::class);
 
         $header = $this->createMock(HeaderBag::class);
-        $requestBetter = new Request();
-        $requestBetter->headers = $header;
+        $request = new Request();
+        $request->headers = $header;
 
         $this->requestStack
             ->method('getCurrentRequest')
-            ->willReturn($requestBetter);
+            ->willReturn($request);
 
         $header
             ->method('get')
