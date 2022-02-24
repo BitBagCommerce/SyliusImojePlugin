@@ -72,5 +72,10 @@
                  id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"
         >
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Factory\Status\StatusResponseModelFactory"
+                 id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"
+        >
+        </service>
     </services>
 </container>
