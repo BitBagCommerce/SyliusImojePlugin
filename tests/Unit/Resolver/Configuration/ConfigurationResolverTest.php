@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Configuration;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Configuration;
 
 use BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolver;
 use PHPUnit\Framework\TestCase;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\PaymentMethod;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\PaymentMethod;
 
 use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolver;
 use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;

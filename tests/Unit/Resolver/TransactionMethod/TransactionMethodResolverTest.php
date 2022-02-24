@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\TransactionMethod;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\TransactionMethod;
 
 use BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolver;
 use BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;

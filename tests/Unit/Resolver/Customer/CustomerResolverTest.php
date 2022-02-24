@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Customer;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Customer;
 
 use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolver;
 use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolverInterface;

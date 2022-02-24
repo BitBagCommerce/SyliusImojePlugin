@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Order;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Order;
 
 use BitBag\SyliusIngPlugin\Exception\MissingOrderException;
 use BitBag\SyliusIngPlugin\Exception\MissingRequestException;

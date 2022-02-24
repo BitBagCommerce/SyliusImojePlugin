@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Payment;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Payment;
 
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
