@@ -19,7 +19,7 @@ final class SignatureCalculator implements SignatureCalculatorInterface
     public function calculate(string $incomingSignature, string $ownSignature): void
     {
         if (hash_equals($ownSignature, $incomingSignature)) {
-            $this->logger->info('Authorized request from ing');
+            $this->logger->debug('Authorized request from ing');
         } else {
             $this->logger->error('Unauthorized request');
 

@@ -15,13 +15,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class SignatureResolverTest extends TestCase
 {
     protected const SIGNATURE = '59186f338f4c3b24a2fa66b5dd029f58f42e397d30c5a13059a2e4468ff5ec4a';
-    protected SignatureResolverInterface $statusResolver;
+    protected SignatureResolverInterface $signatureResolver;
     protected RequestStack $requestStack;
 
     protected function setUp(): void
     {
         $this->requestStack = $this->createMock(RequestStack::class);
-        $this->statusResolver = new SignatureResolver($this->requestStack);
+        $this->signatureResolver = new SignatureResolver($this->requestStack);
     }
 
     public function testResolveSignature(): void
@@ -36,12 +36,15 @@ final class SignatureResolverTest extends TestCase
 
         $header
             ->method('get')
-            ->with('X-Imoje-Signature')
+            ->with($this->signatureResolver::SIGNATURE_HEADER)
             ->willReturn(sprintf('signature=%s;alg=sha256', self::SIGNATURE));
 
-        self::assertEquals(self::SIGNATURE, $this->statusResolver->resolve());
+        self::assertEquals(self::SIGNATURE, $this->signatureResolver->resolve());
     }
 
+    /**
+     * @dataProvider providerDataSignature
+     */
     public function testBadSignature(): void
     {
         $this->expectException(InvalidSignatureException::class);
@@ -55,10 +58,10 @@ final class SignatureResolverTest extends TestCase
 
         $header
             ->method('get')
-            ->with('X-Imoje-Signature')
-            ->willReturn('Bad signature');
+            ->with($this->signatureResolver::SIGNATURE_HEADER)
+            ->willReturn('signature=123$=1#$;alg=bad123');
 
-        $this->statusResolver->resolve();
+        $this->signatureResolver->resolve();
     }
 
     public function testBadAlgorithm(): void
@@ -75,9 +78,19 @@ final class SignatureResolverTest extends TestCase
 
         $header
             ->method('get')
-            ->with('X-Imoje-Signature')
+            ->with($this->signatureResolver::SIGNATURE_HEADER)
             ->willReturn(sprintf('signature=%s;alg=bad123', self::SIGNATURE));
 
-        $this->statusResolver->resolve();
+        $this->signatureResolver->resolve();
+    }
+
+    public function providerDataSignature()
+    {
+        return [
+          ['signature=123$=1#$;alg=sha256'],
+          ['signature=6f338f4c3b24a2fa66b5dd029f58f42e397d=1#$;alg=sha256'],
+          ['signature==6f338f4c3b24a2fa66b5dd029f58f42e397d;alg=sha256'],
+          ['signature=123$=1#$,.;alg=sha256'],
+        ];
     }
 }

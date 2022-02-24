@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class OwnSignatureResolverTest extends TestCase
 {
+    protected const PRIVATE_KEY = 'ShopKey';
+
     protected RequestStack $requestStack;
 
     protected GatewayCodeResolverInterface $gatewayCodeResolver;
@@ -70,7 +72,7 @@ final class OwnSignatureResolverTest extends TestCase
 
         $config
             ->method('getShopKey')
-            ->willReturn('ShopKey');
+            ->willReturn(self::PRIVATE_KEY);
 
         $result = $this->ownSignatureResolver->resolve();
         self::assertEquals('contentShopKey', $result);

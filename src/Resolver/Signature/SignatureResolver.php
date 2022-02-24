@@ -18,7 +18,8 @@ final class SignatureResolver implements SignatureResolverInterface
 
     public function resolve(): string
     {
-        $headerSignature = $this->requestStack->getCurrentRequest()->headers->get('X-Imoje-Signature');
+        $headerSignature = $this->requestStack->getCurrentRequest()->headers->get(self::SIGNATURE_HEADER) ?? '';
+
         if (!\preg_match(self::SIGNATURE_REGEX, $headerSignature, $matches)) {
             throw new InvalidSignatureException(
                 \sprintf('Invalid signature: [%s]', $headerSignature)
@@ -30,7 +31,7 @@ final class SignatureResolver implements SignatureResolverInterface
 
         if ($alg !== self::SIGNATURE_ALG) {
             throw new InvalidSignatureException(
-                \sprintf('Invalid signature: [%s]', $headerSignature)
+                \sprintf('Invalid hash algorithm: [%s]', $headerSignature)
             );
         }
 

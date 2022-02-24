@@ -10,5 +10,7 @@ interface SignatureResolverInterface
 
     public const SIGNATURE_ALG = 'sha256';
 
+    public const SIGNATURE_HEADER = 'X-Imoje-Signature';
+
     public function resolve(): string;
 }

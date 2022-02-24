@@ -35,12 +35,14 @@ final class AuthorizationSubscriber implements EventSubscriberInterface
             $controller = $controller[0];
         }
 
-        if ($controller instanceof WebhookController) {
-            $signature = $this->signatureResolver->resolve();
-            $ownSignature = $this->ownSignatureResolver->resolve();
-            $ownHashSignature = \hash($this->signatureResolver::SIGNATURE_ALG, $ownSignature);
-            $this->signatureCalculator->calculate($signature, $ownHashSignature);
+        if (!$controller instanceof WebhookController) {
+            return;
         }
+
+        $signature = $this->signatureResolver->resolve();
+        $ownSignature = $this->ownSignatureResolver->resolve();
+        $ownHashSignature = \hash($this->signatureResolver::SIGNATURE_ALG, $ownSignature);
+        $this->signatureCalculator->calculate($signature, $ownHashSignature);
     }
 
     public static function getSubscribedEvents()
