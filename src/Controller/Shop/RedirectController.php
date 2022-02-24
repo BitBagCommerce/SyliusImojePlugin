@@ -52,11 +52,11 @@ final class RedirectController
 
         $this->dispatcher->dispatch(new FinalizeOrder($order));
 
-        $this->dispatcher->dispatch(
-            $this->commandFactory->createNew($readyTransaction->getStatus(), $payment)
-        );
-
         $paymentStatus = $this->statusResolver->resolve($readyTransaction->getStatus());
+
+        $this->dispatcher->dispatch(
+            $this->commandFactory->createNew($paymentStatus, $payment)
+        );
 
         $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $paymentStatus);
 

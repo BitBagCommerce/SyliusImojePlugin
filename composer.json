@@ -52,7 +52,7 @@
     "autoload": {
         "psr-4": {
             "BitBag\\SyliusIngPlugin\\": "src/",
-            "Tests\\BitBag\\SyliusIngPlugin\\": ["tests/Application/src/", "tests/"]
+            "Tests\\BitBag\\SyliusIngPlugin\\": ["tests/"]
         }
     },
     "autoload-dev": {

@@ -14,12 +14,10 @@ use Sylius\Component\Core\Model\PaymentInterface;
 final class PaymentFinalizationCommandFactory implements PaymentFinalizationCommandFactoryInterface
 {
     private const STATUSES = [
-        'cancelled' => MarkAsCanceled::class,
+        'cancel' => MarkAsCanceled::class,
         'error' => MarkAsFailed::class,
-        'pending' => MarkAsProcessed::class,
-        'submitted' => MarkAsProcessed::class,
-        'rejected' => MarkAsFailed::class,
-        'settled' => MarkAsSuccessful::class,
+        'process' => MarkAsProcessed::class,
+        'success' => MarkAsSuccessful::class,
     ];
 
     public function createNew(string $status, PaymentInterface $payment): PaymentFinalizationCommandInterface

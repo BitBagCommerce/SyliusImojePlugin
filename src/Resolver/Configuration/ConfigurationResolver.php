@@ -20,6 +20,7 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
             'sandboxUrl' => '',
             'prodUrl' => '',
             'isProd' => '',
+            'shopKey' => '',
             'blik' => '',
             'card' => '',
             'ing' => '',

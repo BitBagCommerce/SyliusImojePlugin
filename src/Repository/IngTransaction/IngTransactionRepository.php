@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Repository\IngTransaction;
 
 use BitBag\SyliusIngPlugin\Entity\IngTransaction;
+use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusIngPlugin\Exception\MissingIngTransactionException;
 use BitBag\SyliusIngPlugin\Exception\NoTransactionException;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -22,6 +24,19 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
 
         if (null === $transaction) {
             throw new NoTransactionException('Could not find transaction');
+        }
+
+        return $transaction;
+    }
+
+    public function getOneByTransactionId(string $transactionId): IngTransactionInterface
+    {
+        $transaction = $this->findOneBy([
+            'transactionId' => $transactionId,
+        ]);
+
+        if ($transaction === null) {
+            throw new MissingIngTransactionException($transactionId);
         }
 
         return $transaction;

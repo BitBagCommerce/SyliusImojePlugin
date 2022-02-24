@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Unit\Client;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Client;
 
 use BitBag\SyliusIngPlugin\Client\IngApiClient;
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
@@ -14,7 +13,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Serializer\SerializerInterface;
 
 final class IngApiClientTest extends TestCase
 {

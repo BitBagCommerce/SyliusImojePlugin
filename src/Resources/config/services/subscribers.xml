@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="bitbag.sylius_ing_plugin.event_subscriber.authorization_subscriber"
+                 class="BitBag\SyliusIngPlugin\EventSubscriber\AuthorizationSubscriber"
+                 public="true"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.signature.signature_resolver" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.signature.own_signature_resolver" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.calculator.signature_calculator" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>
