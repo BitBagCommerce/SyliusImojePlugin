@@ -40,12 +40,8 @@ final class WebhookResponseProcessor implements WebhookResponseProcessorInterfac
         $statusCode = $response->getStatus();
         $status = $this->statusResolver->resolve($statusCode);
 
-        if ($this->isFailure($status)) {
-            $this->logger->error(\sprintf(
-                'Got failure for transaction [%s]. Payment status code: [%s]',
-                $response->getTransactionId(),
-                $statusCode
-            ));
+        if ('success' !== $status) {
+            $this->logOnError($response->getTransactionId(), $status);
         }
 
         $this->logger->debug(
@@ -59,20 +55,20 @@ final class WebhookResponseProcessor implements WebhookResponseProcessorInterfac
         $this->dispatcher->dispatch($command);
     }
 
-    private function isFailure(string $status): bool
+    private function logOnError(string $transactionId, string $statusCode): void
     {
-        if ('success' !== $status) {
-            return true;
-        }
-
-        return false;
+        $this->logger->error(\sprintf(
+            'Got failure for transaction [%s]. Payment status code: [%s]',
+            $transactionId,
+            $statusCode
+        ));
     }
 
     private function finalizeOrderIfNotAlreadyComplete(PaymentInterface $payment): void
     {
         $order = $payment->getOrder();
 
-        if ($order->getState() !== OrderCheckoutTransitions::TRANSITION_COMPLETE) {
+        if (OrderCheckoutTransitions::TRANSITION_COMPLETE !== $order->getState()) {
             $this->dispatcher->dispatch(new FinalizeOrder($order));
         }
     }

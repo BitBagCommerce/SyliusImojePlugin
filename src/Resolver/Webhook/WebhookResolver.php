@@ -31,10 +31,14 @@ final class WebhookResolver implements WebhookResolverInterface
             throw new IngBadRequestException('No found data in request');
         }
 
-        $transactionId = $content['transaction']['id'];
-        $paymentId = $content['payment']['id'];
-        $orderId = $content['transaction']['orderId'];
-        $transactionStatus = $content['transaction']['status'];
+        $transactionId = $content['transaction']['id'] ?? '';
+        $paymentId = $content['payment']['id'] ?? '';
+        $orderId = $content['transaction']['orderId'] ?? '';
+        $transactionStatus = $content['transaction']['status'] ?? '';
+
+        if ('' === $transactionId || '' === $paymentId || '' === $orderId || '' === $transactionStatus) {
+            throw new IngBadRequestException('No found data in request');
+        }
 
         return $this->statusResponseModelFactory->create($transactionId, $paymentId, $orderId, $transactionStatus);
     }

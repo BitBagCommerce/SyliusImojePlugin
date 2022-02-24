@@ -14,7 +14,12 @@ final class StatusResponseModel implements StatusResponseModelInterface
 
     private string $status;
 
-    public function __construct(string $transactionId, string $paymentId, string $orderId, string $status)
+    public function __construct(
+        string $transactionId,
+        string $paymentId,
+        string $orderId,
+        string $status
+    )
     {
         $this->transactionId = $transactionId;
         $this->paymentId = $paymentId;
