@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Controller\Shop;
+namespace BitBag\SyliusIngPlugin\Controller\Shop\Oneclick;
 
 use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
 use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
 use BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
-use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
 use BitBag\SyliusIngPlugin\Resolver\Status\StatusResolverInterface;
-use Psr\Log\LoggerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class RedirectController
+final class RedirectOneClickController
 {
     private DispatcherInterface $dispatcher;
 
@@ -24,47 +24,41 @@ final class RedirectController
 
     private AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator;
 
-    private StatusResolverInterface $statusResolver;
+    private PaymentRepositoryInterface $paymentRepository;
 
-    private LoggerInterface $logger;
+    private StatusResolverInterface $statusResolver;
 
     public function __construct(
         DispatcherInterface $dispatcher,
         PaymentFinalizationCommandFactoryInterface $commandFactory,
         AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator,
-        StatusResolverInterface $statusResolver,
-        LoggerInterface $logger
-    )
-    {
+        PaymentRepositoryInterface $paymentRepository,
+        StatusResolverInterface $statusResolver
+    ) {
         $this->dispatcher = $dispatcher;
         $this->commandFactory = $commandFactory;
         $this->aggregateStatusBasedUrlGenerator = $aggregateStatusBasedUrlGenerator;
+        $this->paymentRepository = $paymentRepository;
         $this->statusResolver = $statusResolver;
-        $this->logger = $logger;
     }
 
     public function __invoke(
         Request $request,
         string $status,
         int $paymentId
-    ): Response
-    {
-        /** @var ReadyTransactionModelInterface $readyTransaction */
-        $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
+    ): Response {
+        /** @var PaymentInterface $payment */
+        $payment = $this->paymentRepository->find($paymentId);
 
-        $payment = $readyTransaction->getIngTransaction()->getPayment();
-
-        $order = $readyTransaction->getOrder();
-
+        /** @var OrderInterface $order */
+        $order = $payment->getOrder();
+        $solvedStatus = $this->statusResolver->resolve($status);
         $this->dispatcher->dispatch(new FinalizeOrder($order));
-
-        $paymentStatus = $this->statusResolver->resolve($readyTransaction->getStatus());
-
         $this->dispatcher->dispatch(
-            $this->commandFactory->createNew($paymentStatus, $payment)
+            $this->commandFactory->createNew($solvedStatus, $payment)
         );
 
-        $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $paymentStatus);
+        $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $solvedStatus);
 
         return new RedirectResponse($url);
     }

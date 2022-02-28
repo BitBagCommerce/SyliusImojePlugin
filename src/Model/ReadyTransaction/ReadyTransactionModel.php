@@ -19,8 +19,7 @@ final class ReadyTransactionModel implements ReadyTransactionModelInterface
         string $status,
         IngTransactionInterface $ingTransaction,
         OrderInterface $order
-    )
-    {
+    ) {
         $this->status = $status;
         $this->ingTransaction = $ingTransaction;
         $this->order = $order;

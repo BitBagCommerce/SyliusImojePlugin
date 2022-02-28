@@ -20,6 +20,7 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"/>
             <argument type="service" id="bitbag.sylius_Ing_plugin.generator.url.status.aggregate_status_based_url_generator"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"/>
+            <argument type="service" id="monolog.logger.ing"/>
             <tag name="controller.service_arguments"/>
         </service>
 
@@ -28,6 +29,27 @@
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.ing_transaction_payment_resolver"/>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service class="BitBag\SyliusIngPlugin\Controller\Shop\Oneclick\OneClickController"
+                 id="bitbag.sylius_ing_plugin.controller.shop.oneclick.one_click_controller"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_from_order_resolver"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.ing_one_click_signature.ing_one_click_signature_resolver"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.request.redirect_factory"/>
+            <tag name="controller.service_arguments"/>
+        </service>
+
+        <service class="BitBag\SyliusIngPlugin\Controller\Shop\Oneclick\RedirectOneClickController"
+                 id="bitbag.sylius_ing_plugin.controller.shop.oneclick.redirect_one_click_controller"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"/>
+            <argument type="service" id="bitbag.sylius_Ing_plugin.generator.url.status.aggregate_status_based_url_generator"/>
+            <argument type="service" id="sylius.repository.payment"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"/>
             <tag name="controller.service_arguments"/>
         </service>
     </services>

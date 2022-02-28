@@ -10,4 +10,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 interface RedirectFactoryInterface
 {
     public function create(PaymentInterface $payment): RedirectModelInterface;
+
+    public function createForOneClick(PaymentInterface $payment): RedirectModelInterface;
 }

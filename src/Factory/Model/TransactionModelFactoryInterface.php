@@ -12,6 +12,8 @@ interface TransactionModelFactoryInterface
 {
     public const REDIRECT_URL = 'bitbag_ing_redirect';
 
+    public const REDIRECT_ONECLICK_URL = 'bitbag_ing_one_click_redirect';
+
     public const SALE_TYPE = 'sale';
 
     public function create(

@@ -85,5 +85,16 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_id.transaction_id_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
         </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_from_order_resolver"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
+        </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.ing_one_click_signature.ing_one_click_signature_resolver"
+        >
+        </service>
     </services>
 </container>

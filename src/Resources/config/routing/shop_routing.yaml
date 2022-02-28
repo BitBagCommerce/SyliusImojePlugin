@@ -8,3 +8,8 @@ bitbag_ing_localized:
   requirements:
     _locale: ^[a-z]{2}(?:_[A-Z]{2})?$
 
+
+bitbag_one_click:
+  path: /payment/oneclick/{orderId}
+  methods: [ GET ]
+  controller: bitbag.sylius_ing_plugin.controller.shop.oneclick.one_click_controller

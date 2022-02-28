@@ -29,7 +29,7 @@ final class SignatureResolver implements SignatureResolverInterface
         $signature = $matches[1];
         $alg = $matches[2];
 
-        if ($alg !== self::SIGNATURE_ALG) {
+        if (self::SIGNATURE_ALG !== $alg) {
             throw new InvalidSignatureException(
                 \sprintf('Invalid hash algorithm: [%s]', $headerSignature)
             );

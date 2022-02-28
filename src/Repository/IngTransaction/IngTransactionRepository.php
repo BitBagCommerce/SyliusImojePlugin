@@ -35,7 +35,7 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
             'transactionId' => $transactionId,
         ]);
 
-        if ($transaction === null) {
+        if (null === $transaction) {
             throw new MissingIngTransactionException($transactionId);
         }
 

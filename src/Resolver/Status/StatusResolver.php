@@ -12,6 +12,7 @@ final class StatusResolver implements StatusResolverInterface
     {
         switch ($status) {
             case 'settled':
+            case 'success':
                 return self::SUCCESS_STATUS;
             case 'new':
             case 'authorized':
@@ -20,6 +21,7 @@ final class StatusResolver implements StatusResolverInterface
                 return self::PROCESS_STATUS;
             case 'rejected':
             case 'error':
+            case 'failure':
                 return self::ERROR_STATUS;
             case 'cancelled':
                 return self::CANCEL_STATUS;

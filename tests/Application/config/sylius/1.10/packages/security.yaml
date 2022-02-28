@@ -31,6 +31,14 @@ security:
             pattern: ^/payment/ing/webhook
             anonymous: true
             stateless: true
+        bitbag_one_click:
+            pattern: ^/payment/oneclick
+            anonymous: true
+            stateless: true
+        bitbag_ing_one_click_redirect:
+            pattern: ^/payment/ing/oneclick/redirect/{status}/{paymentId}
+            anonymous: true
+            stateless: true
         admin:
             switch_user: true
             context: admin

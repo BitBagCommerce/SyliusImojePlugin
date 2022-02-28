@@ -17,9 +17,11 @@
         {{ form_start(form, {'action': path('bitbag_ing_initialize_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         {{ form_errors(form) }}
         <input type="hidden" name="_method" value="PUT" />
+        <input type="hidden" data-bb-order-id="{{ order.id }}"/>
+        <input type="hidden" data-bb-is-payment-method="{{ order.payments.last.details | join('|') }}"/>
+        <input type="hidden" data-bb-is-ing-method="{{ order.payments.last.details | keys | join('|') }}"/>
 
         {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
-
         <div class="ui hidden divider"></div>
         {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
 
@@ -30,4 +32,47 @@
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        async function performAction() {
+            const paymentMethod = document.querySelector('[data-bb-is-payment-method]').dataset.bbIsPaymentMethod;
+            const isIng = document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;//card ingPaymentMethods
+
+            if ('card' === paymentMethod && 'ingPaymentMethods' === isIng) {
+
+                const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
+                const url = `/payment/oneclick/${orderId}`;
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    console.log(data);
+
+                    const script = document.createElement('script');
+                    script.src = "https://sandbox.paywall.imoje.pl/js/widget.min.js";
+                    script.id = "imoje-widget__script";
+
+                    script.dataset.merchantId = data.merchantId;
+                    script.dataset.serviceId = data.serviceId;
+                    script.dataset.amount = data.amount;
+                    script.dataset.currency = data.currency;
+                    script.dataset.orderId = data.orderId;
+                    script.dataset.customerId = data.customerId;
+                    script.dataset.customerFirstName = data.customerFirstName;
+                    script.dataset.customerLastName = data.customerLastName;
+                    script.dataset.customerEmail = data.customerEmail;
+                    script.dataset.urlSuccess = data.urlSuccess;
+                    script.dataset.urlFailure = data.urlFailure;
+                    script.dataset.signature = data.signature;
+                    document.querySelector('head').appendChild(script);
+
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                }
+            }
+        }
+        performAction();
+    </script>
 {% endblock %}
