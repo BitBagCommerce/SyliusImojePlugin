@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Signature;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Signature;
 
 use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;

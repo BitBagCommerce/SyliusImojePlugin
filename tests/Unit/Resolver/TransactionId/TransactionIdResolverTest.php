@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\TransactionId;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\TransactionId;
 
 use BitBag\SyliusIngPlugin\Exception\NoTransactionException;
 use BitBag\SyliusIngPlugin\Resolver\TransactionId\TransactionIdResolver;
