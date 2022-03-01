@@ -73,6 +73,21 @@
                 }
             }
         }
-        performAction();
+
+        const widgetIng = document.querySelector('.js-widget-ing-action');
+
+        const turnOnListener = () => {
+
+            if (widgetIng)
+            {
+                widgetIng.addEventListener('click', e => {
+                    e.preventDefault();
+                    this.performAction();
+                });
+            }
+        };
+
+        turnOnListener();
     </script>
 {% endblock %}
+
