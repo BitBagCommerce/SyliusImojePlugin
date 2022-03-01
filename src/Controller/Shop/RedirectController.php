@@ -34,8 +34,7 @@ final class RedirectController
         AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator,
         StatusResolverInterface $statusResolver,
         LoggerInterface $logger
-    )
-    {
+    ) {
         $this->dispatcher = $dispatcher;
         $this->commandFactory = $commandFactory;
         $this->aggregateStatusBasedUrlGenerator = $aggregateStatusBasedUrlGenerator;
@@ -47,8 +46,7 @@ final class RedirectController
         Request $request,
         string $status,
         int $paymentId
-    ): Response
-    {
+    ): Response {
         /** @var ReadyTransactionModelInterface $readyTransaction */
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
 
