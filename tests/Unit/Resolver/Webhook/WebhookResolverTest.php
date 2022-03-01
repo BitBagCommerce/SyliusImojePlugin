@@ -50,7 +50,6 @@ final class WebhookResolverTest extends TestCase
             ->willReturn($statusModel);
 
         $result = $this->webhookResolver->resolve();
-
-        self::assertEquals('145',$result->getOrderId());
+        self::assertEquals('145', $result->getOrderId());
     }
 }

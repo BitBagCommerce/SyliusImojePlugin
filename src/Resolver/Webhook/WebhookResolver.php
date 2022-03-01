@@ -25,7 +25,7 @@ final class WebhookResolver implements WebhookResolverInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
-        $content = json_decode($request->getContent(), true);
+        $content = \json_decode($request->getContent(), true);
 
         if (null === $content['transaction'] || null === $content['payment']) {
             throw new IngBadRequestException('No found data in request');
