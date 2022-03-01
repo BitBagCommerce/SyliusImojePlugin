@@ -67,24 +67,24 @@ export class SelectPaymentMethod {
             });
         });
 
-        nextStepButton.addEventListener('click', () => {
-
-            
-            if (pblOptionCheckbox.checked && IngCheckbox.checked) {
-                return;
-            }else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
-                this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
-            }
-            
-            otherThanIngCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    this._turnOffNotNeededCheckboxes(notPblOptionCheckboxesMain.concat(pblOptionCheckbox))
-                    this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren)
-                    this.pblMethodsWrapper.classList.add('disabled')
-                    paymentMethodsWrapper.classList.add('disabled')
-                }
-            });
-        });
+        // nextStepButton.addEventListener('click', () => {
+        //
+        //
+        //     if (pblOptionCheckbox.checked && IngCheckbox.checked) {
+        //         return;
+        //     }else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
+        //         this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
+        //     }
+        //
+        //     otherThanIngCheckboxes.forEach(checkbox => {
+        //         if (checkbox.checked) {
+        //             this._turnOffNotNeededCheckboxes(notPblOptionCheckboxesMain.concat(pblOptionCheckbox))
+        //             this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren)
+        //             this.pblMethodsWrapper.classList.add('disabled')
+        //             paymentMethodsWrapper.classList.add('disabled')
+        //         }
+        //     });
+        // });
     }
 }
 

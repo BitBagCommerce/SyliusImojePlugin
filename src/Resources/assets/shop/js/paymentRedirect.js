@@ -26,32 +26,45 @@ export class PaymentRedirect {
         this._connectListeners();
     }
 
-
     _connectListeners = () => {
         const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper')
-        const IngCheckbox = document.querySelector('[value="ing_code"]')
-        const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]')
-        const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
+        const blikCheckbox = document.querySelector(this.finalConfig.blikId)
+        const path = document.querySelector('[data-bb-path-inicialize]').dataset.bbPathInicialize;
+        const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
 
+        const cardCheckbox = document.querySelector(this.finalConfig.cardId);
         const nextStepButton = document.querySelector('.data-bb-is-payment-button')
-        const notPblOptionCheckboxesMain = [...document.querySelectorAll(
-            `${ this.finalConfig.ingId } , ${ this.finalConfig.cardId }`
+
+        const pblIngCheckboxes = [...document.querySelectorAll(
+            `${ this.finalConfig.ingId } , ${ this.finalConfig.pblId }`
         )];
+
+        blikCheckbox.addEventListener('click', (e) => {
+            const form = document.querySelector('.ui.loadable.form')
+
+            const input = document.createElement('div');
+            input.innerHTML = `
+                    <input type="number" class='js-blik-input'/>
+            `;
+            form.appendChild(input)
+        });
 
         nextStepButton.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log('next button')
 
-            if (notPblOptionCheckboxesMain.some(checkbox => checkbox.checked)) {
-                console.log('card, blik')
-                // window.location.replace("http://stackoverflow.com");
+            if (cardCheckbox.checked) {
+                performAction(true)
+
+            }else if (pblIngCheckboxes.some(checkbox => checkbox.checked)) {
+                const form = document.getElementById("theForm");
+                form.submit();
+                window.location.pathname = `${path}/${orderId}`;
             }else {
-                console.log('pbl ing')
-            
+                const blikNumber = document.querySelector('.js-blik-input').value;
+                window.location.pathname = `${path}/blik/${blikNumber}`;
             }
-            
         });
     }
 }
 
-export default SelectPaymentMethod;
+export default PaymentRedirect;

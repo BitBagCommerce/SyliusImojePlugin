@@ -1,7 +1,8 @@
 bitbag_ing_initialize_payment:
-  path: /payment/ing/initialize_payment
-  methods: [PUT]
+  path: /payment/ing/initialize_payment/{orderId}/{blikCode}
   controller: bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller
+  defaults: {orderId: none, blikCode: none}
+
 
 bitbag_ing_redirect:
   path: /payment/ing/redirect/{status}/{paymentId}

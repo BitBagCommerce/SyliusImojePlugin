@@ -10,6 +10,7 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.payment.payment_method_and_code_model_factory"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.blik_model.blik_model_provider"/>
+            <argument type="service" id="sylius.repository.order"/>
             <tag name="controller.service_arguments"/>
         </service>
 

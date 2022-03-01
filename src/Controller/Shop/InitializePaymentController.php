@@ -18,6 +18,7 @@ use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,30 +35,36 @@ final class InitializePaymentController
 
     private BlikModelProviderInterface $blikModelProvider;
 
-    public function __construct(
-        OrderResolverInterface $orderResolver,
-        OrderPaymentResolverInterface $paymentResolver,
-        DispatcherInterface $dispatcher,
-        PaymentDataModelFactoryInterface $paymentDataModelFactory,
-        BlikModelProviderInterface $blikModelProvider
-    ) {
+    private OrderRepositoryInterface $orderRepository;
+
+    public function __construct(OrderResolverInterface $orderResolver, OrderPaymentResolverInterface $paymentResolver, DispatcherInterface $dispatcher, PaymentDataModelFactoryInterface $paymentDataModelFactory, BlikModelProviderInterface $blikModelProvider, OrderRepositoryInterface $orderRepository)
+    {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->dispatcher = $dispatcher;
         $this->paymentDataModelFactory = $paymentDataModelFactory;
         $this->blikModelProvider = $blikModelProvider;
+        $this->orderRepository = $orderRepository;
     }
 
-    public function __invoke(Request $request): Response
+
+    public function __invoke(Request $request, ?string $orderId, ?string $blikCode): Response
     {
-        $code = $request->query->get('code');
-        $order = $this->orderResolver->resolve();
+        if ($orderId !== 'none')
+        {
+            /** @var OrderInterface $order */
+            $order = $this->orderRepository->find($orderId);
+
+        } else {
+            $order = $this->orderResolver->resolve();
+        }
 
         try {
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
             throw new IngNotConfiguredException('Payment method not found');
         }
+        $code = $payment->getMethod()->getCode();
 
         if (null !== $code) {
             $this->dispatcher->dispatch(new TakeOverPayment($payment, $code));
