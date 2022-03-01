@@ -41,8 +41,7 @@ final class RedirectController
         Request $request,
         string $status,
         int $paymentId
-    ): Response
-    {
+    ): Response {
         /** @var ReadyTransactionModelInterface $readyTransaction */
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
 

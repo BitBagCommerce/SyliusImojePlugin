@@ -85,5 +85,13 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_id.transaction_id_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
         </service>
+
+        <service  class="BitBag\SyliusIngPlugin\Resolver\Webhook\WebhookResolver"
+                  id="bitbag.sylius_ing_plugin.resolver.url.webhook_resolver"
+        >
+            <argument type="service" id="request_stack"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"/>
+        </service>
+
     </services>
 </container>

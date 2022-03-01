@@ -28,8 +28,7 @@ final class AggregateStatusBasedUrlGenerator implements AggregateStatusBasedUrlG
         OrderInterface $order,
         Request $request,
         string $status
-    ): string
-    {
+    ): string {
         /** @var StatusBasedUrlGeneratorInterface $generator */
         foreach ($this->generators as $generator) {
             if ($generator->accepts($status)) {
