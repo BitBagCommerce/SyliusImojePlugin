@@ -16,6 +16,7 @@ export class SelectPaymentMethod {
             ...config    
         };
         this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child');
+        this.pblCheckboxesChildren = document.querySelectorAll('.online-payment__input-pbl-child')
     }
 
     init() {
@@ -23,14 +24,28 @@ export class SelectPaymentMethod {
             throw new Error('BitBag - SelectPaymentMethod - given config is not valid - expected object');
         }
 
-        this.connectListeners();
+        this._connectListeners();
     }
 
-    connectListeners = () => {
+    _turnOffNotNeededCheckboxes = checkboxesArray => {
+        checkboxesArray.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+    }
+
+    _checkIfAnyChecked = checkboxesArray => {
+        return checkboxesArray.some(checkbox => checkbox.checked === true);
+    }
+
+    _connectListeners = () => {
+        const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper')
+        const IngCheckbox = document.querySelector('[value="ing_code"]')
+        const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]')
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
-        const notPblOptionCheckboxesMain = document.querySelectorAll(
+        const nextStepButton = document.getElementById('next-step');
+        const notPblOptionCheckboxesMain = [...document.querySelectorAll(
             `${ this.finalConfig.blikId } , ${ this.finalConfig.ingId } , ${ this.finalConfig.cardId }`
-        );
+        )];
 
         notPblOptionCheckboxesMain.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
@@ -40,6 +55,35 @@ export class SelectPaymentMethod {
 
         pblOptionCheckbox.addEventListener('change', () => {
             this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
+        });
+
+        IngCheckbox.addEventListener('change', () => {
+            paymentMethodsWrapper.classList.toggle('disabled')
+        });
+
+        otherThanIngCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                paymentMethodsWrapper.classList.add('disabled')
+            });
+        });
+
+        nextStepButton.addEventListener('click', () => {
+
+            
+            if (pblOptionCheckbox.checked && IngCheckbox.checked) {
+                return;
+            }else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
+                this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
+            }
+            
+            otherThanIngCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    this._turnOffNotNeededCheckboxes(notPblOptionCheckboxesMain.concat(pblOptionCheckbox))
+                    this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren)
+                    this.pblMethodsWrapper.classList.add('disabled')
+                    paymentMethodsWrapper.classList.add('disabled')
+                }
+            });
         });
     }
 }
