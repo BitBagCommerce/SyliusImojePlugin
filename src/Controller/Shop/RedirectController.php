@@ -26,20 +26,16 @@ final class RedirectController
 
     private StatusResolverInterface $statusResolver;
 
-    private LoggerInterface $logger;
-
     public function __construct(
         DispatcherInterface $dispatcher,
         PaymentFinalizationCommandFactoryInterface $commandFactory,
         AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator,
-        StatusResolverInterface $statusResolver,
-        LoggerInterface $logger
+        StatusResolverInterface $statusResolver
     ) {
         $this->dispatcher = $dispatcher;
         $this->commandFactory = $commandFactory;
         $this->aggregateStatusBasedUrlGenerator = $aggregateStatusBasedUrlGenerator;
         $this->statusResolver = $statusResolver;
-        $this->logger = $logger;
     }
 
     public function __invoke(

@@ -47,18 +47,18 @@ final class RedirectOneClickController
         string $status,
         int $paymentId
     ): Response {
-        /** @var PaymentInterface $payment */
+        /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->find($paymentId);
 
         /** @var OrderInterface $order */
         $order = $payment->getOrder();
-        $solvedStatus = $this->statusResolver->resolve($status);
+        $resolvedStatus = $this->statusResolver->resolve($status);
         $this->dispatcher->dispatch(new FinalizeOrder($order));
         $this->dispatcher->dispatch(
-            $this->commandFactory->createNew($solvedStatus, $payment)
+            $this->commandFactory->createNew($resolvedStatus, $payment)
         );
 
-        $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $solvedStatus);
+        $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $resolvedStatus);
 
         return new RedirectResponse($url);
     }

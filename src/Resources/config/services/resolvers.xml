@@ -89,6 +89,7 @@
                   id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_from_order_resolver"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"/>
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolver"

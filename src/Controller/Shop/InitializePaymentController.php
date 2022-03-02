@@ -61,7 +61,6 @@ final class InitializePaymentController
             throw new IngNotConfiguredException('Payment method not found');
         }
 
-        /** @var PaymentDataModelInterface $transactionPaymentData */
         $transactionPaymentData = $this->transactionPaymentDataResolver->resolve($paymentMethodCode, $payment, $blikCode);
         $isBlik = 'blik' === $transactionPaymentData->getPaymentMethod();
 
