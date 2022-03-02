@@ -17,6 +17,7 @@
             <input type="hidden" data-bb-is-ing-method="{{ order.payments.last.details | keys | join('|') }}"/>
             <input type="hidden" data-bb-order-id="{{ order.id }}"/>
             <input type="hidden" data-bb-path-inicialize="{{ path('bitbag_ing_initialize_payment') }}"/>
+
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
             <div class="ui hidden divider"></div>
             <button type="submit" class="ui large blue icon labeled button data-bb-is-payment-button" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>

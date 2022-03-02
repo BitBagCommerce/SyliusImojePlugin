@@ -10,8 +10,6 @@ interface IngClientConfigurationInterface
 
     public function getMerchantId(): string;
 
-    public function isRedirect(): bool;
-
     public function getSandboxUrl(): string;
 
     public function getProdUrl(): string;

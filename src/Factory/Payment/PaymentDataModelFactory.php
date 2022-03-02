@@ -18,8 +18,12 @@ final class PaymentDataModelFactory implements PaymentDataModelFactoryInterface
         $this->transactionMethodResolver = $transactionMethodResolver;
     }
 
-    public function create(PaymentInterface $payment): PaymentDataModelInterface
+    public function create(PaymentInterface $payment, bool $isBlik): PaymentDataModelInterface
     {
+        if ($isBlik) {
+            return new PaymentDataModel('blik', 'blik');
+        }
+
         $paymentMethod = $this->transactionMethodResolver->resolve($payment);
         $paymentMethodCode = implode($payment->getDetails());
 

@@ -21,14 +21,16 @@ final class BlikModelProvider implements BlikModelProviderInterface
         $this->blikModelFactory = $blikModelFactory;
     }
 
-    public function provideDataToBlikModel(): BlikModelInterface
+    public function provideDataToBlikModel(?string $blikCode): BlikModelInterface
     {
         $request = $this->requestStack->getCurrentRequest();
 
+        if (null !== $blikCode) {
+            return $this->blikModelFactory->create($blikCode, $request->getClientIp());
+        }
         /** @var array $blikData */
         $blikData = $request->request->get('sylius_checkout_complete');
         $blikCode = $blikData['blik_code'];
-
         if (!$blikCode) {
             throw new BlikNoDataException('The Blik data has not been entered');
         }

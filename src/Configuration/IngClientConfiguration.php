@@ -10,8 +10,6 @@ final class IngClientConfiguration implements IngClientConfigurationInterface
 
     private string $merchantId;
 
-    private bool $redirect;
-
     private string $sandboxUrl;
 
     private string $prodUrl;
@@ -25,7 +23,6 @@ final class IngClientConfiguration implements IngClientConfigurationInterface
     public function __construct(
         string $token,
         string $merchantId,
-        bool $redirect,
         string $sandboxUrl,
         string $prodUrl,
         bool $isProd,
@@ -34,7 +31,6 @@ final class IngClientConfiguration implements IngClientConfigurationInterface
     ) {
         $this->token = $token;
         $this->merchantId = $merchantId;
-        $this->redirect = $redirect;
         $this->sandboxUrl = $sandboxUrl;
         $this->prodUrl = $prodUrl;
         $this->isProd = $isProd;
@@ -50,11 +46,6 @@ final class IngClientConfiguration implements IngClientConfigurationInterface
     public function getMerchantId(): string
     {
         return $this->merchantId;
-    }
-
-    public function isRedirect(): bool
-    {
-        return $this->redirect;
     }
 
     public function getSandboxUrl(): string

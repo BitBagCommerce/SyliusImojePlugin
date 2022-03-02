@@ -24,7 +24,7 @@ final class CustomerModelFactory implements CustomerModelFactoryInterface
         $firstName = $this->customerResolver->resolveFirstname($order);
         $lastName = $this->customerResolver->resolveLastname($order);
         $cid = (string) $customer->getId();
-        $company = $order->getBillingAddress()->getCompany();
+        $company = null === $order->getBillingAddress()->getCompany() ? '' : $order->getBillingAddress()->getCompany();
         $phone = $this->customerResolver->resolvePhoneNumber($order);
         $email = $customer->getEmail();
         $locale = \strtolower($order->getBillingAddress()->getCountryCode());

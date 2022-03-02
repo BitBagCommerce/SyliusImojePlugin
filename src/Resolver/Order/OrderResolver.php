@@ -5,68 +5,31 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Resolver\Order;
 
 use BitBag\SyliusIngPlugin\Exception\MissingOrderException;
-use BitBag\SyliusIngPlugin\Exception\MissingRequestException;
-use BitBag\SyliusIngPlugin\Repository\Order\OrderRepositoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 final class OrderResolver implements OrderResolverInterface
 {
-    private RequestStack $requestStack;
-
     private CartContextInterface $cartContext;
 
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
-        RequestStack $requestStack,
         CartContextInterface $cartContext,
         OrderRepositoryInterface $orderRepository
     ) {
-        $this->requestStack = $requestStack;
         $this->cartContext = $cartContext;
         $this->orderRepository = $orderRepository;
     }
 
-    private function getCurrentRequest(): Request
-    {
-        $result = $this->requestStack->getMasterRequest();
-        if (null === $result) {
-            throw new MissingRequestException();
-        }
-
-        return $result;
-    }
-
-    private function getCurrentOrder(): ?OrderInterface
-    {
-        $request = $this->getCurrentRequest();
-
-        /**
-         * @var string|null $tokenValue
-         */
-        $tokenValue = $request->get('tokenValue');
-
-        if (null === $tokenValue) {
-            return null;
-        }
-
-        return $this->orderRepository->findByTokenValue($tokenValue);
-    }
-
-    public function resolve(?string $tokenValue = null): OrderInterface
+    public function resolve(?string $orderId = null): OrderInterface
     {
         $order = null;
 
-        if (null !== $tokenValue) {
-            $order = $this->orderRepository->findByTokenValue($tokenValue);
-        }
-
-        if (!$order instanceof OrderInterface) {
-            $order = $this->getCurrentOrder();
+        if (null !== $orderId) {
+            $order = $this->orderRepository->find($orderId);
         }
 
         if (!$order instanceof OrderInterface) {

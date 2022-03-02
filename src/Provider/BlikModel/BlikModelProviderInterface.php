@@ -8,5 +8,5 @@ use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
 
 interface BlikModelProviderInterface
 {
-    public function provideDataToBlikModel(): BlikModelInterface;
+    public function provideDataToBlikModel(?string $blikCode): BlikModelInterface;
 }

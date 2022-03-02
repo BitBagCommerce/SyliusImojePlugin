@@ -16,7 +16,7 @@ final class ShippingModelFactory implements ShippingModelFactoryInterface
 
         $firstName = $shippingAddress->getFirstName();
         $lastName = $shippingAddress->getLastName();
-        $company = $shippingAddress->getCompany();
+        $company = null === $shippingAddress->getCompany() ? '' : $shippingAddress->getCompany();
         $street = $shippingAddress->getStreet();
         $city = $shippingAddress->getCity();
         $region = $shippingAddress->getProvinceName();
