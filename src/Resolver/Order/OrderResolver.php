@@ -29,7 +29,6 @@ final class OrderResolver implements OrderResolverInterface
         $order = null;
 
         if (null !== $orderId) {
-
             /** @var OrderInterface|null $order */
             $order = $this->orderRepository->find($orderId);
         }
