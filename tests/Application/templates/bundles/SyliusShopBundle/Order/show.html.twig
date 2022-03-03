@@ -20,7 +20,7 @@
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
             <div class="ui hidden divider"></div>
-            <button type="submit" class="ui large blue icon labeled button data-bb-is-payment-button" id="sylius-pay-link" {{ sylius_test_html_attribute('pay-link') }}>
+            <button type="submit" class="ui large blue icon labeled button data-bb-is-payment-button" id="next-step" {{ sylius_test_html_attribute('pay-link') }}>
                 <i class="check icon"></i> {{ 'sylius.ui.pay'|trans }}
             </button>
 
@@ -31,65 +31,5 @@
         {% endif %}
     </div>
 {% endblock %}
-{#{% block javascripts %}#}
-{#    {{ parent() }}#}
-{#    <script>#}
-{#        async function performAction(isAfterPayment = false) {#}
-{#            let paymentMethod = '';#}
 
-{#            if (isAfterPayment === false) {#}
-{#                let paymentMethod = document.querySelector('[data-bb-is-payment-method]').dataset.bbIsPaymentMethod;#}
-{#                const isIng = document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;#}
-{#            }#}
-
-{#            if ('card' === paymentMethod && 'ingPaymentMethods' === isIng || isAfterPayment) {#}
-{#                console.log("isIng")#}
-{#                const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;#}
-{#                const url = `/payment/oneclick/${orderId}`;#}
-{#                try {#}
-{#                    const response = await fetch(url);#}
-{#                    const data = await response.json();#}
-{#                    console.log(data);#}
-
-{#                    const script = document.createElement('script');#}
-{#                    script.src = "https://sandbox.paywall.imoje.pl/js/widget.min.js";#}
-{#                    script.id = "imoje-widget__script";#}
-
-{#                    script.dataset.merchantId = data.merchantId;#}
-{#                    script.dataset.serviceId = data.serviceId;#}
-{#                    script.dataset.amount = data.amount;#}
-{#                    script.dataset.currency = data.currency;#}
-{#                    script.dataset.orderId = data.orderId;#}
-{#                    script.dataset.customerId = data.customerId;#}
-{#                    script.dataset.customerFirstName = data.customerFirstName;#}
-{#                    script.dataset.customerLastName = data.customerLastName;#}
-{#                    script.dataset.customerEmail = data.customerEmail;#}
-{#                    script.dataset.urlSuccess = data.urlSuccess;#}
-{#                    script.dataset.urlFailure = data.urlFailure;#}
-{#                    script.dataset.signature = data.signature;#}
-{#                    document.querySelector('head').appendChild(script);#}
-
-{#                } catch (error) {#}
-{#                    console.error(error);#}
-{#                } finally {#}
-{#                }#}
-{#            }#}
-{#        }#}
-
-{#        const widgetIng = document.querySelector('.js-widget-ing-action');#}
-
-{#        const turnOnListener = () => {#}
-
-{#            if (widgetIng)#}
-{#            {#}
-{#                widgetIng.addEventListener('click', e => {#}
-{#                    e.preventDefault();#}
-{#                    this.performAction();#}
-{#                });#}
-{#            }#}
-{#        };#}
-
-{#        turnOnListener();#}
-{#    </script>#}
-{% endblock %}
 

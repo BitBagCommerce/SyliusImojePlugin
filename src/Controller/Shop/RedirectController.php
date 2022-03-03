@@ -11,7 +11,6 @@ use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterfac
 use BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
 use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
 use BitBag\SyliusIngPlugin\Resolver\Status\StatusResolverInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

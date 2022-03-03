@@ -36,10 +36,9 @@
                  id="bitbag.sylius_ing_plugin.controller.shop.oneclick.one_click_controller"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_from_order_resolver"/>
-            <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.ing_one_click_signature.ing_one_click_signature_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.request.redirect_factory"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"/>
+            <argument type="service" id="sylius.repository.order"/>
             <tag name="controller.service_arguments"/>
         </service>
 

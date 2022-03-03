@@ -1,3 +1,4 @@
+import { performAction } from "../../sdk_ing/entry"
 export class PaymentRedirect {
     constructor(
         config = {},
@@ -33,8 +34,6 @@ export class PaymentRedirect {
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
         const cardCheckbox = document.querySelector(this.finalConfig.cardId);
         const nextStepButton = document.querySelector('.data-bb-is-payment-button')
-        console.log(cardCheckbox.checked)
-
         blikCheckbox.addEventListener('click', (e) => {
             const form = document.querySelector('.ui.loadable.form')
 
@@ -52,8 +51,8 @@ export class PaymentRedirect {
             e.preventDefault();
             if (cardCheckbox.checked) {
                 performAction(true)
-            } else if (pblCheckbox.checked) {
-                console.log('pbl');
+            }
+            else if (pblCheckbox.checked) {
                 const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value
                 window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
             } else if (blikCheckbox.checked) {
