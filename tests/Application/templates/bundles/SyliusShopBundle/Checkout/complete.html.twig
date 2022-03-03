@@ -12,7 +12,6 @@
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
 
         {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
-        {{ dump('zwykle') }}
         {% include '@SyliusShop/_flashes.html.twig' %}
         {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         {{ form_errors(form) }}
@@ -40,7 +39,6 @@
             {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
 
             {% include '@SyliusShop/_flashes.html.twig' %}
-            {{ dump('ing') }}
             {{ form_start(form, {'action': path('bitbag_ing_initialize_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
 
