@@ -24,8 +24,7 @@ final class AuthorizationSubscriber implements EventSubscriberInterface
         SignatureResolverInterface $signatureResolver,
         OwnSignatureResolverInterface $ownSignatureResolver,
         SignatureCalculatorInterface $signatureCalculator
-    )
-    {
+    ) {
         $this->signatureResolver = $signatureResolver;
         $this->ownSignatureResolver = $ownSignatureResolver;
         $this->signatureCalculator = $signatureCalculator;
