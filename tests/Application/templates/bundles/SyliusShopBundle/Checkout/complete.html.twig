@@ -7,15 +7,16 @@
 {% block content %}
     {{ sylius_template_event(['sylius.shop.checkout.complete.steps', 'sylius.shop.checkout.steps'], _context|merge({'active': 'complete', 'orderTotal': order.total})) }}
 
+    {% if order.payments.last.details | join('|') == "" %}
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
 
         {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
-
+        {{ dump('zwykle') }}
         {% include '@SyliusShop/_flashes.html.twig' %}
-
-        {{ form_start(form, {'action': path('bitbag_ing_initialize_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
         {{ form_errors(form) }}
+
         <input type="hidden" name="_method" value="PUT" />
         <input type="hidden" data-bb-order-id="{{ order.id }}"/>
         <input type="hidden" data-bb-is-payment-method="{{ order.payments.last.details | join('|') }}"/>
@@ -32,12 +33,39 @@
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
+    {% elseif order.payments.last.details | join('|') != "" and order.payments.last.details | keys | join('|') == 'ingPaymentMethods' %}
+    <div class="ui padded segment">
+            {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
+
+            {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
+
+            {% include '@SyliusShop/_flashes.html.twig' %}
+            {{ dump('ing') }}
+            {{ form_start(form, {'action': path('bitbag_ing_initialize_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+            {{ form_errors(form) }}
+
+            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" data-bb-order-id="{{ order.id }}"/>
+            <input type="hidden" data-bb-is-payment-method="{{ order.payments.last.details | join('|') }}"/>
+            <input type="hidden" data-bb-is-ing-method="{{ order.payments.last.details | keys | join('|') }}"/>
+
+            {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
+            <div class="ui hidden divider"></div>
+            {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
+
+            {{ sylius_template_event('sylius.shop.checkout.complete.before_navigation', {'order': order}) }}
+
+            {% include '@SyliusShop/Checkout/Complete/_navigation.html.twig' %}
+
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    {% endif %}
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script>
         async function performAction(type) {
-            console.log('dupa');
             let paymentMethod = document.querySelector('[data-bb-is-payment-method]').dataset.bbIsPaymentMethod;
             const isIng = document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;//card ingPaymentMethods
 
@@ -46,14 +74,12 @@
             }
 
             if ('card' === paymentMethod && 'ingPaymentMethods' === isIng) {
-                console.log("isIng")
                 const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
                 const url = `/payment/oneclick/${orderId}`;
                 try {
                     const response = await fetch(url);
                     const data = await response.json();
                     console.log(data);
-
                     const script = document.createElement('script');
                     script.src = "https://sandbox.paywall.imoje.pl/js/widget.min.js";
                     script.id = "imoje-widget__script";

@@ -39,7 +39,8 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                 if ('blik' === $paymentCode) {
                     $form = $event->getForm();
                     $form->add('blik_code', NumberType::class, [
-                        'label' => 'Blik',
+                        'label' => 'Blik Code',
+                        'attr' => ['type' => 'number'],
                         'mapped' => false,
                         'constraints' => [
                             new NotBlank([

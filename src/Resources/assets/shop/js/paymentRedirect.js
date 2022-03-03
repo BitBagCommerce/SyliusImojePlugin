@@ -33,14 +33,17 @@ export class PaymentRedirect {
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
         const cardCheckbox = document.querySelector(this.finalConfig.cardId);
         const nextStepButton = document.querySelector('.data-bb-is-payment-button')
-
+        console.log(cardCheckbox.checked)
 
         blikCheckbox.addEventListener('click', (e) => {
             const form = document.querySelector('.ui.loadable.form')
 
             const input = document.createElement('div');
             input.innerHTML = `
-                    <input type="number" class='js-blik-input'/>
+                    <div class="three wide field removeArrows" style="margin-top: 10px">
+                            <label>Blik Code</label>
+                            <input type="number" class='js-blik-input' maxlength="6"/>
+                    </div>
             `;
             form.appendChild(input)
         });
