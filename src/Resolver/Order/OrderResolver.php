@@ -33,7 +33,7 @@ final class OrderResolver implements OrderResolverInterface
 
     private function getCurrentRequest(): Request
     {
-        $result = $this->requestStack->getMasterRequest();
+        $result = $this->requestStack->getMainRequest();
         if (null === $result) {
             throw new MissingRequestException();
         }

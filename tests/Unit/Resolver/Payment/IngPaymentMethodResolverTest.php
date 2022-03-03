@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Payment;
 
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolver;
 use PHPUnit\Framework\TestCase;
@@ -14,32 +15,54 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 final class IngPaymentMethodResolverTest extends TestCase
 {
-    protected const ING_CODE = 'ing_code';
+    private const ING_CODE = 'ing_code';
 
-    protected PaymentMethodRepositoryInterface $paymentMethodRepository;
+    private const SERVICE_ID = '123';
+
+    private PaymentMethodRepositoryInterface $paymentMethodRepository;
+
+    private AvailablePaymentMethodsFilterInterface $paymentMethodsFilter;
 
     protected function setUp(): void
     {
         $this->paymentMethodRepository = $this->createMock(PaymentMethodRepositoryInterface::class);
+        $this->paymentMethodsFilter = $this->createMock(AvailablePaymentMethodsFilterInterface::class);
+
     }
 
     public function testResolveWithNewPayment(): void
     {
         $config = [
             'isProd' => true,
+            'serviceId' => self::SERVICE_ID,
             'pbl' => 'pbl',
             'ing' => 'ing',
             'ipko' => 'ipko',
         ];
 
+        $this->paymentMethodsFilter
+            ->expects(self::once())
+            ->method('filter')
+            ->willReturn([
+                'pbl' => 'pbl',
+                'ing' => 'ing',
+                'ipko' => 'ipko'
+            ]);
+
         $paymentMethod = new PaymentMethod();
         $paymentMethod->setCode(self::ING_CODE);
+
         $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
+        $gatewayConfig
+            ->expects(self::once())
+            ->method('getGatewayName')
+            ->willReturn('');
+
         $paymentMethod->setGatewayConfig($gatewayConfig);
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
 
         $this->paymentMethodRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findOneForIng')
             ->willReturn($paymentMethod);
 
@@ -57,7 +80,10 @@ final class IngPaymentMethodResolverTest extends TestCase
             'ipko' => 'ipko',
         ];
 
-        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver($this->paymentMethodRepository);
+        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
+            $this->paymentMethodRepository,
+            $this->paymentMethodsFilter
+        );
 
         self::assertEqualsCanonicalizing($finalConfig, $ingPaymentsMethodResolver->resolve());
     }
@@ -67,12 +93,15 @@ final class IngPaymentMethodResolverTest extends TestCase
         $this->expectException(IngNotConfiguredException::class);
 
         $this->paymentMethodRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findOneForIng')
             ->willReturn(null);
 
 
-        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver($this->paymentMethodRepository);
+        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
+            $this->paymentMethodRepository,
+            $this->paymentMethodsFilter
+        );
         $ingPaymentsMethodResolver->resolve();
     }
     public function testResolveEmptyConfigException(): void
@@ -83,7 +112,7 @@ final class IngPaymentMethodResolverTest extends TestCase
         $paymentMethod = new PaymentMethod();
 
         $this->paymentMethodRepository
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('findOneForIng')
             ->willReturn($paymentMethod);
 
@@ -92,7 +121,10 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->method('getGatewayConfig')
             ->willReturn(null);
 
-        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver($this->paymentMethodRepository);
+        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
+            $this->paymentMethodRepository,
+            $this->paymentMethodsFilter
+        );
         $ingPaymentsMethodResolver->resolve();
     }
 }

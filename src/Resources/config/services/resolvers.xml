@@ -22,6 +22,7 @@
 
         <service  class="BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolver" id="bitbag_sylius_ing_plugin.resolver.payment.payment_methods">
             <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.filter.available_payment_methods_filter"/>
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolver"

@@ -15,6 +15,7 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
             <argument type="service" id="sylius.http_client"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.request_params.request_params_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"/>
         </service>
 
         <service class="BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProvider"

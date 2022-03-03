@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Client;
 
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
+use BitBag\SyliusIngPlugin\Model\PaymentMethod\ServiceModel;
+use BitBag\SyliusIngPlugin\Model\PaymentMethod\ServiceModelInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\Serializer\Serializer;
 
 final class IngApiClient implements IngApiClientInterface
 {
@@ -21,9 +24,12 @@ final class IngApiClient implements IngApiClientInterface
 
     private string $url;
 
+    private Serializer $serializer;
+
     public function __construct(
         Client $httpClient,
         RequestParamsProviderInterface $requestParamsProvider,
+        Serializer $serializer,
         string $token,
         string $url
     ) {
@@ -31,12 +37,13 @@ final class IngApiClient implements IngApiClientInterface
         $this->requestParamsProvider = $requestParamsProvider;
         $this->token = $token;
         $this->url = $url;
+        $this->serializer = $serializer;
     }
 
     public function createTransaction(
         TransactionModelInterface $transactionModel
     ): ResponseInterface {
-        $url = \sprintf('%s%s', $this->url, self::TRANSACTION_ENDPOINT);
+        $url = $this->url . self::TRANSACTION_ENDPOINT;
 
         $parameters = $this->requestParamsProvider->buildRequestParams($transactionModel, $this->token);
 
@@ -47,6 +54,25 @@ final class IngApiClient implements IngApiClientInterface
         }
 
         return $response;
+    }
+
+    public function getShopInfo(string $serviceId): ServiceModelInterface
+    {
+//        $url = \sprintf('%sservice/%s', $this->url, $serviceId);
+        $url = $this->url . 'service/' . $serviceId;
+        $parameters = $this->requestParamsProvider->buildAuthorizeRequest($this->token);
+
+        try {
+            $response = $this->httpClient->get($url, $parameters);
+        } catch (GuzzleException $e) {
+            throw new IngBadRequestException($e->getMessage());
+        }
+
+        $json = \json_decode($response->getBody()->getContents(), true);
+        $servicePayload = $json['service'] ?? [];
+        $result = $this->serializer->denormalize($servicePayload, ServiceModel::class, 'json');
+
+        return $result;
     }
 
     public function getTransactionData(string $url): ResponseInterface
