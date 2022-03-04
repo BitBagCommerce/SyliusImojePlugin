@@ -51,6 +51,7 @@ export class PaymentRedirect {
 
         nextStepButton.addEventListener('click', e => {
             e.preventDefault();
+
             if (cardCheckbox.checked) {
                 performAction(true);
             } else if (pblCheckbox.checked) {
