@@ -28,7 +28,7 @@
                  id="bitbag.sylius_ing_plugin.controller.shop.webhook.webhook_controller"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.ing_transaction_payment_resolver"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.url.webhook_resolver"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.webhook.webhook_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.processor.webhook.status.webhook_response_processor"/>
             <tag name="controller.service_arguments"/>
         </service>
