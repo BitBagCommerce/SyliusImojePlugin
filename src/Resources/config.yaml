@@ -7,5 +7,5 @@ imports:
 knp_snappy:
   pdf:
     enabled: true
-    binary: /usr/local/bin/wkhtmltopdf # Change this! :)
+    binary: /piotr/local/bin/wkhtmltopdf
     options: []
