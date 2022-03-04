@@ -9,5 +9,5 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 interface PaymentDataModelFactoryInterface
 {
-    public function create(PaymentInterface $payment): PaymentDataModelInterface;
+    public function create(PaymentInterface $payment, bool $isBlik): PaymentDataModelInterface;
 }

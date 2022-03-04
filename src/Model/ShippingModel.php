@@ -10,17 +10,17 @@ final class ShippingModel implements ShippingModelInterface
 
     private string $lastName;
 
-    private string $company;
+    private ?string $company;
 
-    private string $street;
+    private ?string $street;
 
-    private string $city;
+    private ?string $city;
 
     private ?string $region;
 
-    private string $postalCode;
+    private ?string $postalCode;
 
-    private string $countryCodeAlpha2;
+    private ?string $countryCodeAlpha2;
 
     public function __construct(
         string $firstName,

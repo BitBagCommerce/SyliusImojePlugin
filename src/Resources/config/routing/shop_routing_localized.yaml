@@ -1,9 +1,15 @@
 bitbag_ing_initialize_payment:
-  path: /payment/ing/initialize_payment
-  methods: [PUT]
+  path: /payment/ing/initialize_payment/{orderId}/{paymentMethodCode}/{blikCode}
   controller: bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller
+  defaults: {orderId: null, paymentMethodCode: null, blikCode: null}
+
 
 bitbag_ing_redirect:
   path: /payment/ing/redirect/{status}/{paymentId}
   methods: [GET]
   controller: bitbag.sylius_ing_plugin.controller.shop.redirect_controller
+
+
+bitbag_ing_one_click_redirect:
+  path: /payment/ing/oneclick/redirect/{status}/{paymentId}
+  controller: bitbag.sylius_ing_plugin.controller.shop.oneclick.redirect_one_click_controller

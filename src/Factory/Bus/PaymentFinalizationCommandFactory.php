@@ -16,6 +16,7 @@ final class PaymentFinalizationCommandFactory implements PaymentFinalizationComm
     private const STATUSES = [
         'cancel' => MarkAsCanceled::class,
         'error' => MarkAsFailed::class,
+        'failure' => MarkAsFailed::class,
         'process' => MarkAsProcessed::class,
         'success' => MarkAsSuccessful::class,
     ];

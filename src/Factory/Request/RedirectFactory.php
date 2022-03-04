@@ -30,10 +30,32 @@ final class RedirectFactory implements RedirectFactoryInterface
         return $redirectRequest;
     }
 
+    public function createForOneClick(PaymentInterface $payment): RedirectModelInterface
+    {
+        $redirectRequest = new RedirectModel();
+        $paymentId = $payment->getId();
+        $redirectRequest->setSuccessUrl($this->generateRedirectForOneClickUrl('success', $paymentId));
+        $redirectRequest->setFailureUrl($this->generateRedirectForOneClickUrl('failure', $paymentId));
+
+        return $redirectRequest;
+    }
+
     private function generateRedirectUrl(string $slug, int $id): string
     {
         return $this->generator->generate(
             TransactionModelFactoryInterface::REDIRECT_URL,
+            [
+                'status' => $slug,
+                'paymentId' => $id,
+            ],
+            Router::ABSOLUTE_URL
+        );
+    }
+
+    private function generateRedirectForOneClickUrl(string $slug, int $id): string
+    {
+        return $this->generator->generate(
+            TransactionModelFactoryInterface::REDIRECT_ONECLICK_URL,
             [
                 'status' => $slug,
                 'paymentId' => $id,

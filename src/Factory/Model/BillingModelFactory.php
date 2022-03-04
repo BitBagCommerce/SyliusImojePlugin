@@ -16,10 +16,10 @@ final class BillingModelFactory implements BillingModelFactoryInterface
 
         $firstName = $billingAddress->getFirstName();
         $lastName = $billingAddress->getLastName();
-        $company = $billingAddress->getCompany();
+        $company = null === $billingAddress->getCompany() ? '' : $billingAddress->getCompany();
         $street = $billingAddress->getStreet();
         $city = $billingAddress->getCity();
-        $region = $billingAddress->getProvinceName();
+        $region = $billingAddress->getProvinceName() ?? '';
         $postalCode = $billingAddress->getPostcode();
         $countryCode = $billingAddress->getCountryCode();
 

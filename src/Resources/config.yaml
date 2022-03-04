@@ -2,3 +2,10 @@ imports:
   - { resource: config/*.yml }
   - { resource: config/services/*.xml }
   - { resource: "@SyliusIngPlugin/Resources/config/sylius/resources.yaml" }
+  - { resource: "@SyliusRefundPlugin/Resources/config/app/config.yml" }
+
+knp_snappy:
+  pdf:
+    enabled: true
+    binary: /usr/local/bin/wkhtmltopdf # Change this! :)
+    options: []

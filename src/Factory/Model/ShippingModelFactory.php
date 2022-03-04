@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Factory\Model;
 use BitBag\SyliusIngPlugin\Model\ShippingModel;
 use BitBag\SyliusIngPlugin\Model\ShippingModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Webmozart\Assert\Assert;
 
 final class ShippingModelFactory implements ShippingModelFactoryInterface
 {
@@ -14,12 +15,14 @@ final class ShippingModelFactory implements ShippingModelFactoryInterface
     {
         $shippingAddress = $order->getShippingAddress();
 
+        Assert::notNull($shippingAddress);
+
         $firstName = $shippingAddress->getFirstName();
         $lastName = $shippingAddress->getLastName();
-        $company = $shippingAddress->getCompany();
+        $company = null === $shippingAddress->getCompany() ? '' : $shippingAddress->getCompany();
         $street = $shippingAddress->getStreet();
         $city = $shippingAddress->getCity();
-        $region = $shippingAddress->getProvinceName();
+        $region = $shippingAddress->getProvinceName() ?? '';
         $postalCode = $shippingAddress->getPostcode();
         $countryCode = $shippingAddress->getCountryCode();
 

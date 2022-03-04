@@ -5,6 +5,10 @@
     <button type="submit" class="ui huge primary fluid icon labeled button" {{ sylius_test_html_attribute('confirmation-button') }}>
         <i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}
     </button>
+{% elseif order.payments.last.details | join('|') == "card" and order.payments.last.details | keys | join('|') == "ingPaymentMethods" %}
+    <button type="button" class="ui huge primary fluid icon labeled button js-widget-ing-action">
+        <i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}
+    </button>
 {% else %}
     <button
             type="submit"

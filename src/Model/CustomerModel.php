@@ -10,15 +10,15 @@ final class CustomerModel implements CustomerModelInterface
 
     private string $lastName;
 
-    private string $cid;
+    private ?string $cid;
 
-    private string $company;
+    private ?string $company;
 
-    private string $phone;
+    private ?string $phone;
 
     private string $email;
 
-    private string $locale;
+    private ?string $locale;
 
     public function __construct(
         string $firstName,

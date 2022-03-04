@@ -23,7 +23,6 @@ final class ConfigurationResolverTest extends TestCase
         $config = [
             'token' => '',
             'merchantId' => '',
-            'redirect' => '',
             'serviceId' => '',
             'sandboxUrl' => '',
             'prodUrl' => '',
