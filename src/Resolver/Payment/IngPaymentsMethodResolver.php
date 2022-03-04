@@ -5,15 +5,21 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 
 final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
 {
     private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
-    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
-    {
+    private AvailablePaymentMethodsFilterInterface $paymentMethodsFilter;
+
+    public function __construct(
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        AvailablePaymentMethodsFilterInterface $paymentMethodsFilter
+    ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->paymentMethodsFilter = $paymentMethodsFilter;
     }
 
     public function resolve(): array
@@ -80,6 +86,10 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             }
         }
 
+        $paymentMethodConfig = $config->getConfig();
+        $serviceId = $paymentMethodConfig['serviceId'] ?? '';
+
+        $data = $this->paymentMethodsFilter->filter($config->getGatewayName(), $serviceId, $data);
         $finalData = [];
 
         foreach ($data as $key => $value) {

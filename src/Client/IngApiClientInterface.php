@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Client;
 
+use BitBag\SyliusIngPlugin\Model\PaymentMethod\ServiceModelInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,4 +17,6 @@ interface IngApiClientInterface
     ): ResponseInterface;
 
     public function getTransactionData(string $url): ResponseInterface;
+
+    public function getShopInfo(string $serviceId): ServiceModelInterface;
 }

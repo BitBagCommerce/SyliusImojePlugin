@@ -11,16 +11,16 @@ use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Serializer\Serializer;
 
 final class IngApiClientTest extends TestCase
 {
-    /** @var Client|MockObject */
-    private object $httpClient;
+    private Client $httpClient;
 
-    /** @var RequestParamsProviderInterface|MockObject */
-    private object $requestParamsProvider;
+    private RequestParamsProviderInterface $requestParamsProvider;
+
+    private Serializer $serializer;
 
     private IngApiClient $ingApiClient;
 
@@ -33,7 +33,14 @@ final class IngApiClientTest extends TestCase
         // I'm using a mockBuilder because these methods are added via annotations
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
         $this->requestParamsProvider = $this->createMock(RequestParamsProviderInterface::class);
-        $this->ingApiClient = new IngApiClient($this->httpClient, $this->requestParamsProvider, self::TOKEN, self::URL);
+        $this->serializer = $this->createMock(Serializer::class);
+        $this->ingApiClient = new IngApiClient(
+            $this->httpClient,
+            $this->requestParamsProvider,
+            $this->serializer,
+            self::TOKEN,
+            self::URL
+        );
     }
 
     public function testCreateTransaction(): void

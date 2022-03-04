@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Url;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Url;
 
 use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
 use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;

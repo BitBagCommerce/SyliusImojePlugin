@@ -35,5 +35,14 @@
             <argument type="tagged_iterator" tag="bitbag.sylius_Ing_plugin.url_generator.status"/>
             <argument type="service" id="router"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Processor\Webhook\Status\WebhookResponseProcessor"
+                 id="bitbag.sylius_ing_plugin.processor.webhook.status.webhook_response_processor"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
+            <argument type="service" id="monolog.logger.ing"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"/>
+        </service>
     </services>
 </container>

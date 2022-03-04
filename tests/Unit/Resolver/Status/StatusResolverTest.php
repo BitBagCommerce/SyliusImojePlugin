@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Status;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Status;
 
 use BitBag\SyliusIngPlugin\Exception\NoCorrectStatusException;
 use BitBag\SyliusIngPlugin\Resolver\Status\StatusResolver;

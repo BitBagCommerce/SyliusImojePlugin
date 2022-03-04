@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Unit\Resolver\Signature;
+namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Signature;
 
 use BitBag\SyliusIngPlugin\Exception\InvalidSignatureException;
 use BitBag\SyliusIngPlugin\Resolver\Signature\SignatureResolver;
