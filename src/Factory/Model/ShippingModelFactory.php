@@ -22,7 +22,7 @@ final class ShippingModelFactory implements ShippingModelFactoryInterface
         $company = null === $shippingAddress->getCompany() ? '' : $shippingAddress->getCompany();
         $street = $shippingAddress->getStreet();
         $city = $shippingAddress->getCity();
-        $region = $shippingAddress->getProvinceName();
+        $region = $shippingAddress->getProvinceName() ?? '';
         $postalCode = $shippingAddress->getPostcode();
         $countryCode = $shippingAddress->getCountryCode();
 
