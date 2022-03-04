@@ -1,13 +1,11 @@
 import { PaymentRedirect } from './paymentRedirect';
 
-const isPaymentButton = document.querySelector('.data-bb-is-payment-button');
-
 const turnOnListener = () => {
-    if (!isPaymentButton) {
-        return;
-    }
+    const isPaymentButton = document.querySelector('.data-bb-is-payment-button');
     
-    new PaymentRedirect().init();
+    if (isPaymentButton) {
+        new PaymentRedirect().init();
+    }
 };
 
 turnOnListener();

@@ -58,21 +58,27 @@ export class PaymentMethod {
     }
 
     storeDataInSession = () => { 
-        const checkboxesCheckedData = [...this.paymentCheckboxes].map(checkbox => ([checkbox.id, checkbox.checked]))
-        const sessionData = Object.fromEntries(checkboxesCheckedData)
-        
-        window.sessionStorage.setItem("checkboxesState", JSON.stringify(sessionData));
+        // const checkboxesCheckedData = [...this.paymentCheckboxes].map(checkbox => ([checkbox.id, checkbox.checked]))
+        // const sessionData = Object.fromEntries(checkboxesCheckedData)
+
+        const sessionData = [...this.paymentCheckboxes].reduce((accumulator, checkbox) => ({
+            ...accumulator,
+            [checkbox.id]: checkbox.checked
+        }), {});
+
+        window.sessionStorage.setItem('checkboxesState', JSON.stringify(sessionData));
     }
 
     loadDataInSession = () => {
-        const sessionData = JSON.parse(sessionStorage.getItem("checkboxesState"));
+        const sessionData = JSON.parse(sessionStorage.getItem('checkboxesState'));
         
         if (sessionData) {
             this.paymentMethodHandler.checked = true;
 
             this.paymentCheckboxes.forEach(checkbox => {
                 checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
-                checkbox.checked = sessionData[checkbox.id] ?? false;
+                // checkbox.checked = sessionData[checkbox.id] ?? false;
+                checkbox.checked = !!sessionData[checkbox.id];
             });
         } else {
             this.toggleMargin(this.paymentCheckboxes);

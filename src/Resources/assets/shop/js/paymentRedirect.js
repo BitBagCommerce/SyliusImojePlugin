@@ -1,4 +1,4 @@
-import { performAction } from "../../sdk_ing/entry"
+import { performAction } from '../../sdk_ing/entry';
 
 export class PaymentRedirect {
     constructor(
@@ -28,23 +28,16 @@ export class PaymentRedirect {
     }
 
     _connectListeners = () => {
-        const blikCheckbox = document.querySelector(this.finalConfig.blikId)
-
-        const pblCheckbox = document.querySelector(this.finalConfig.pblId)
-
-        const ingCheckbox = document.querySelector(this.finalConfig.ingId)
-
+        const blikCheckbox = document.querySelector(this.finalConfig.blikId);
+        const pblCheckbox = document.querySelector(this.finalConfig.pblId);
+        const ingCheckbox = document.querySelector(this.finalConfig.ingId);
         const path = document.querySelector('[data-bb-path-inicialize]').dataset.bbPathInicialize;
-
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
-
         const cardCheckbox = document.querySelector(this.finalConfig.cardId);
+        const nextStepButton = document.querySelector('.data-bb-is-payment-button');
 
-        const nextStepButton = document.querySelector('.data-bb-is-payment-button')
-
-        blikCheckbox.addEventListener('click', (e) => {
+        blikCheckbox.addEventListener('click', () => {
             const form = document.querySelector('.ui.loadable.form');
-
             const input = document.createElement('div');
 
             input.innerHTML = `
@@ -56,7 +49,7 @@ export class PaymentRedirect {
             form.appendChild(input)
         });
 
-        nextStepButton.addEventListener('click', (e) => {
+        nextStepButton.addEventListener('click', e => {
             e.preventDefault();
             if (cardCheckbox.checked) {
                 performAction(true);

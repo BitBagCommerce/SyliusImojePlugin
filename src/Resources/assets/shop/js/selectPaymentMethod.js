@@ -39,17 +39,14 @@ export class SelectPaymentMethod {
 
     _connectListeners = () => {
         const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper');
-
         const IngCheckbox = document.querySelector('.ing-payments');
-
         const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]');
-
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
-
         const nextStepButton = document.getElementById('next-step');
-
         const notPblOptionCheckboxesMain = [...document.querySelectorAll(
-            `${ this.finalConfig.blikId } , ${ this.finalConfig.ingId } , ${ this.finalConfig.cardId }`
+            `${ this.finalConfig.blikId },
+            ${ this.finalConfig.ingId },
+            ${ this.finalConfig.cardId }`
         )];
 
         IngCheckbox.click();
@@ -67,12 +64,12 @@ export class SelectPaymentMethod {
         });
 
         IngCheckbox.addEventListener('change', () => {
-            paymentMethodsWrapper.classList.toggle('disabled')
+            paymentMethodsWrapper.classList.toggle('disabled');
         });
 
         otherThanIngCheckboxes.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
-                paymentMethodsWrapper.classList.add('disabled')
+                paymentMethodsWrapper.classList.add('disabled');
             });
         });
 
