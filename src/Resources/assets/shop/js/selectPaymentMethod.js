@@ -74,8 +74,6 @@ export class SelectPaymentMethod {
         });
 
         nextStepButton.addEventListener('click', () => {
-
-
             if (pblOptionCheckbox.checked && IngCheckbox.checked) {
                 return;
             } else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {

@@ -58,7 +58,6 @@ export class PaymentMethod {
     }
 
     storeDataInSession = () => {
-
         const sessionData = [...this.paymentCheckboxes].reduce((accumulator, checkbox) => ({
             ...accumulator,
             [checkbox.id]: checkbox.checked
@@ -75,7 +74,6 @@ export class PaymentMethod {
 
             this.paymentCheckboxes.forEach(checkbox => {
                 checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
-                // checkbox.checked = sessionData[checkbox.id] ?? false;
                 checkbox.checked = !!sessionData[checkbox.id];
             });
         } else {
