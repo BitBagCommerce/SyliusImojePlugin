@@ -116,5 +116,18 @@
             <argument type="service" id="request_stack"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver"
+        >
+                <argument type="service" id="sylius.repository.gateway_config"/>
+        </service>
+
+        <service class="BitBag\SyliusIngPlugin\Resolver\Refund\RefundUrlResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.refund.refund_url_resolver"
+        >
+            <argument id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository" type="service"/>
+        </service>
+
     </services>
 </container>

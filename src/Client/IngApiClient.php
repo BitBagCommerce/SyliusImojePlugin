@@ -87,4 +87,20 @@ final class IngApiClient implements IngApiClientInterface
 
         return $response;
     }
+
+    public function refundTransaction(
+        string $url,
+        string $serviceId,
+        int $amount
+    ): ResponseInterface {
+        $parameters = $this->requestParamsProvider->buildRequestRefundParams($this->token, $serviceId, $amount);
+
+        try {
+            $response = $this->httpClient->post($url, $parameters);
+        } catch (GuzzleException $e) {
+            throw new IngBadRequestException($e->getMessage());
+        }
+
+        return $response;
+    }
 }

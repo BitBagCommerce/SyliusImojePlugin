@@ -35,7 +35,7 @@ final class WebhookResolver implements WebhookResolverInterface
         $paymentId = $content['payment']['id'] ?? '';
         $orderId = $content['transaction']['orderId'] ?? '';
         $transactionStatus = $content['transaction']['status'] ?? '';
-
+        //TODO do zrobienia warunek z płatnością kartą
         if ('' === $transactionId || '' === $paymentId || '' === $orderId || '' === $transactionStatus) {
             throw new IngBadRequestException('No found data in request');
         }
