@@ -30,7 +30,6 @@ export class PaymentMethod {
     tooglePayment = () => {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
-            // this.toggleMargin(this.paymentCheckboxes);
 
             if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass)) { 
                 this.toggleCheckboxesOff(this.paymentCheckboxes);
@@ -75,7 +74,7 @@ export class PaymentMethod {
                 checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
                 checkbox.checked = sessionData[checkbox.id] ?? false;
             });
-        }else {
+        } else {
             this.toggleMargin(this.paymentCheckboxes);
         }
 

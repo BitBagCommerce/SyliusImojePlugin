@@ -12,7 +12,7 @@
 
         {% if order.paymentState in ['awaiting_payment'] %}
             {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate', 'id': 'theForm'}}) }}
-            <input type="hidden" name="_method" value="PUT" />
+            <input type="hidden" name="_method" value="PUT"/>
             <input type="hidden" data-bb-is-payment-method="{{ order.payments.last.details | join('|') }}"/>
             <input type="hidden" data-bb-is-ing-method="{{ order.payments.last.details | keys | join('|') }}"/>
             <input type="hidden" data-bb-order-id="{{ order.id }}"/>
@@ -31,5 +31,3 @@
         {% endif %}
     </div>
 {% endblock %}
-
-

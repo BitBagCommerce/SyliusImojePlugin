@@ -16,7 +16,7 @@ export class SelectPaymentMethod {
             ...config    
         };
         this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child');
-        this.pblCheckboxesChildren = document.querySelectorAll('.online-payment__input-pbl-child')
+        this.pblCheckboxesChildren = document.querySelectorAll('.online-payment__input-pbl-child');
     }
 
     init() {
@@ -38,11 +38,16 @@ export class SelectPaymentMethod {
     }
 
     _connectListeners = () => {
-        const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper')
-        const IngCheckbox = document.querySelector('.ing-payments')
-        const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]')
+        const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper');
+
+        const IngCheckbox = document.querySelector('.ing-payments');
+
+        const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]');
+
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
+
         const nextStepButton = document.getElementById('next-step');
+
         const notPblOptionCheckboxesMain = [...document.querySelectorAll(
             `${ this.finalConfig.blikId } , ${ this.finalConfig.ingId } , ${ this.finalConfig.cardId }`
         )];
@@ -76,16 +81,16 @@ export class SelectPaymentMethod {
 
             if (pblOptionCheckbox.checked && IngCheckbox.checked) {
                 return;
-            }else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
+            } else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
                 this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
             }
 
             otherThanIngCheckboxes.forEach(checkbox => {
                 if (checkbox.checked) {
-                    this._turnOffNotNeededCheckboxes(notPblOptionCheckboxesMain.concat(pblOptionCheckbox))
-                    this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren)
-                    this.pblMethodsWrapper.classList.add('disabled')
-                    paymentMethodsWrapper.classList.add('disabled')
+                    this._turnOffNotNeededCheckboxes(notPblOptionCheckboxesMain.concat(pblOptionCheckbox));
+                    this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
+                    this.pblMethodsWrapper.classList.add('disabled');
+                    paymentMethodsWrapper.classList.add('disabled');
                 }
             });
         });

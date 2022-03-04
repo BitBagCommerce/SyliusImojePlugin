@@ -1,3 +1,5 @@
 sylius_admin:
     resource: "@SyliusAdminBundle/Resources/config/routing.yml"
     prefix: /admin
+sylius_refund:
+    resource: "@SyliusRefundPlugin/Resources/config/routing.yml"

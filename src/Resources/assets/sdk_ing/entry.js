@@ -1,17 +1,24 @@
 export const performAction = async (isAfterPayment = false) => {
     let paymentMethod = '';
+
     let isIng = '';
+
     if (isAfterPayment === false ) {
         paymentMethod = document.querySelector('[data-bb-is-payment-method]').dataset.bbIsPaymentMethod;
         isIng = document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;
     }
     if ('card' === paymentMethod && 'ingPaymentMethods' === isIng || isAfterPayment) {
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
+
         const url = `/payment/oneclick/${orderId}`;
+
         try {
             const response = await fetch(url);
+
             const data = await response.json();
+
             const script = document.createElement('script');
+
             script.src = "https://sandbox.paywall.imoje.pl/js/widget.min.js";
             script.id = "imoje-widget__script";
             script.dataset.merchantId = data.merchantId;
