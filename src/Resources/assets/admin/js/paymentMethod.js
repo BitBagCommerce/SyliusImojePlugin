@@ -57,9 +57,7 @@ export class PaymentMethod {
         });
     }
 
-    storeDataInSession = () => { 
-        // const checkboxesCheckedData = [...this.paymentCheckboxes].map(checkbox => ([checkbox.id, checkbox.checked]))
-        // const sessionData = Object.fromEntries(checkboxesCheckedData)
+    storeDataInSession = () => {
 
         const sessionData = [...this.paymentCheckboxes].reduce((accumulator, checkbox) => ({
             ...accumulator,

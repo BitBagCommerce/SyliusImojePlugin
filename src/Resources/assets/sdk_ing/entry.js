@@ -8,14 +8,6 @@ export const performAction = async (isAfterPayment = false) => {
         ? ''
         : document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;
 
-    // let paymentMethod = '';
-    // let isIng = '';
-
-    // if (isAfterPayment === false ) {
-    //     paymentMethod = document.querySelector('[data-bb-is-payment-method]').dataset.bbIsPaymentMethod;
-    //     isIng = document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;
-    // }
-
     if ('card' === paymentMethod && 'ingPaymentMethods' === isIng || isAfterPayment) {
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
 
