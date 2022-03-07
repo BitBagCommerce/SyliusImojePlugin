@@ -12,7 +12,7 @@
         </id>
         <field name="transactionId" type="string" length="64" unique="true"/>
 
-        <field name="paymentUrl" type="string" length="244" unique="true"/>
+        <field name="paymentUrl" type="string" length="244" nullable="true" unique="false"/>
 
         <field name="orderId" type="string" length="64" unique="false"/>
 

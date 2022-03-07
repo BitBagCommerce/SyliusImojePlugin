@@ -35,8 +35,7 @@ final class OwnSignatureResolver implements OwnSignatureResolverInterface
     {
         $request = $this->requestStack->getCurrentRequest();
         $body = $request->getContent();
-        $transactionId = $this->transactionIdResolver->resolve($body);
-        $code = $this->gatewayCodeResolver->resolve($transactionId);
+        $code = $this->gatewayCodeResolver->resolve(IngClientConfigurationProviderInterface::FACTORY_NAME);
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
 
         return \sprintf('%s%s', $body, $config->getShopKey());

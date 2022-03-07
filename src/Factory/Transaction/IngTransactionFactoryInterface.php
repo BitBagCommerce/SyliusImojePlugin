@@ -12,7 +12,7 @@ interface IngTransactionFactoryInterface
     public function create(
         PaymentInterface $payment,
         string $transactionId,
-        string $paymentUrl,
+        ?string $paymentUrl,
         string $serviceId,
         string $orderId,
         string $gatewayCode
