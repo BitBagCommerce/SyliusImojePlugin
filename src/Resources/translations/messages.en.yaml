@@ -32,4 +32,5 @@ bitbag_sylius_ing_plugin:
     payment_failure: Payment failure
     payment_canceled: Payment has been canceled
     payment_process: Payment is processing
+    shop_key: Shop key
 
