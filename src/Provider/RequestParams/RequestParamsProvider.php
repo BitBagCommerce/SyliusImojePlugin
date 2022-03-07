@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Provider\RequestParams;
 
+use BitBag\SyliusIngPlugin\Factory\Refund\RefundModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
 
@@ -11,9 +12,14 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
 {
     private SerializerFactoryInterface $serializerFactory;
 
-    public function __construct(SerializerFactoryInterface $serializerFactory)
-    {
+    private RefundModelFactoryInterface $refundModelFactory;
+
+    public function __construct(
+        SerializerFactoryInterface $serializerFactory,
+        RefundModelFactoryInterface $refundModelFactory
+    ) {
         $this->serializerFactory = $serializerFactory;
+        $this->refundModelFactory = $refundModelFactory;
     }
 
     public function buildRequestParams(TransactionModelInterface $transactionModel, string $token): array
@@ -28,6 +34,19 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
     public function buildAuthorizeRequest(string $token): array
     {
         return $this->addAuthorizationHeaders($token);
+    }
+
+    public function buildRequestRefundParams(
+        string $token,
+        string $serviceId,
+        int $amount
+    ): array {
+        $serializer = $this->serializerFactory->createSerializerWithNormalizer();
+        $request = $this->addAuthorizationHeaders($token);
+        $refundModel = $this->refundModelFactory->create('refund', $serviceId, $amount);
+        $request['body'] = $serializer->serialize($refundModel, 'json');
+
+        return $request;
     }
 
     private function addAuthorizationHeaders(string $token): array
