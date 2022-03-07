@@ -11,8 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 final class StatusResolverTest extends TestCase
 {
-    protected const REJECTED_STATUS = 'rejected';
-    protected const BAD_STATUS = 'bad_status';
+    private const REJECTED_STATUS = 'rejected';
+
+    private const BAD_STATUS = 'bad_status';
 
     protected StatusResolverInterface $statusResolver;
 

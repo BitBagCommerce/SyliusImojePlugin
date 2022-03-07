@@ -15,29 +15,29 @@ use PHPUnit\Framework\TestCase;
 
 final class UrlResolverTest extends TestCase
 {
-    protected const GATEWAY_CODE = 'ing_code';
+    public const GATEWAY_CODE = 'ing_code';
 
-    protected const SANDBOX_URL = 'http://sandbox';
+    public const SANDBOX_URL = 'http://sandbox';
 
-    protected const PROD_URL = 'http://prod';
+    public const PROD_URL = 'http://prod';
 
-    protected const MERCHANT_ID = 'MerchantId';
+    public const MERCHANT_ID = 'MerchantId';
 
-    protected const TRANSACTION_ID = 'TR-12345';
+    public const TRANSACTION_ID = 'TR-12345';
 
-    protected const TRANSACTION_ENDPOINT = 'transaction';
+    public const TRANSACTION_ENDPOINT = 'transaction';
 
-    protected const COMPLETE_SANDBOX_URL = 'http://sandbox/MerchantId/transaction/TR-12345';
+    public const COMPLETE_SANDBOX_URL = 'http://sandbox/MerchantId/transaction/TR-12345';
 
-    protected const COMPLETE_PROD_URL = 'http://prod/MerchantId/transaction/TR-12345';
+    public const COMPLETE_PROD_URL = 'http://prod/MerchantId/transaction/TR-12345';
 
-    protected IngTransactionInterface $ingTransaction;
+    private IngTransactionInterface $ingTransaction;
 
-    protected IngClientConfigurationProviderInterface $ingClientConfiguration;
+    private IngClientConfigurationProviderInterface $ingClientConfiguration;
 
-    protected IngClientProviderInterface $ingClientProvide;
+    private IngClientProviderInterface $ingClientProvide;
 
-    protected UrlResolverInterface $urlResolver;
+    private UrlResolverInterface $urlResolver;
 
     protected function setUp(): void
     {

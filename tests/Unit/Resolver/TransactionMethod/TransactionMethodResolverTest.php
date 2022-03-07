@@ -11,9 +11,9 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class TransactionMethodResolverTest extends TestCase
 {
-    protected TransactionMethodResolverInterface $transactionMethodResolver;
+    private TransactionMethodResolverInterface $transactionMethodResolver;
 
-    protected PaymentInterface $payment;
+    private PaymentInterface $payment;
 
     protected function setUp(): void
     {
