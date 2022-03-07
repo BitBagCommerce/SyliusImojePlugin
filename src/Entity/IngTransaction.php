@@ -19,7 +19,7 @@ class IngTransaction implements IngTransactionInterface, ResourceInterface, Time
 
     protected PaymentInterface $payment;
 
-    protected string $paymentUrl;
+    protected ?string $paymentUrl;
 
     protected string $serviceId;
 
@@ -30,7 +30,7 @@ class IngTransaction implements IngTransactionInterface, ResourceInterface, Time
     public function __construct(
         string $transactionId,
         PaymentInterface $payment,
-        string $paymentUrl,
+        ?string $paymentUrl,
         string $serviceId,
         string $orderId,
         string $gatewayCode
@@ -58,7 +58,7 @@ class IngTransaction implements IngTransactionInterface, ResourceInterface, Time
         return $this->payment;
     }
 
-    public function getPaymentUrl(): string
+    public function getPaymentUrl(): ?string
     {
         return $this->paymentUrl;
     }

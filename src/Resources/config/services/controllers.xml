@@ -30,6 +30,7 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.ing_transaction_payment_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.webhook.webhook_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.processor.webhook.status.webhook_response_processor"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.webhook.one_click_webhook_resolver"/>
             <tag name="controller.service_arguments"/>
         </service>
 

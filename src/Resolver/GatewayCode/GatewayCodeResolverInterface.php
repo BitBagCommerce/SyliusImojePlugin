@@ -6,5 +6,5 @@ namespace BitBag\SyliusIngPlugin\Resolver\GatewayCode;
 
 interface GatewayCodeResolverInterface
 {
-    public function resolve(string $transactionId): string;
+    public function resolve(string $factoryName): string;
 }

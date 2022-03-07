@@ -14,7 +14,7 @@ interface IngTransactionInterface
 
     public function getPayment(): PaymentInterface;
 
-    public function getPaymentUrl(): string;
+    public function getPaymentUrl(): ?string;
 
     public function getServiceId(): string;
 

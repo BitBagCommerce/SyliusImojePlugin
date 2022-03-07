@@ -66,15 +66,10 @@
             <argument type="service" id="request_stack"/>
         </service>
 
-        <service  class="BitBag\SyliusIngPlugin\Resolver\TransactionId\TransactionIdResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.transaction_id.transaction_id_resolver"
-        >
-        </service>
-
         <service  class="BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeResolver"
                   id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_resolver"
         >
-            <argument type="service" id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository"/>
+            <argument id="sylius.repository.gateway_config" type="service"/>
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Resolver\Signature\OwnSignatureResolver"
@@ -82,7 +77,6 @@
         >
             <argument type="service" id="request_stack"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_resolver"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_id.transaction_id_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
         </service>
 
@@ -115,6 +109,18 @@
         >
             <argument type="service" id="request_stack"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"/>
+        </service>
+
+        <service class="BitBag\SyliusIngPlugin\Resolver\Webhook\OneClickWebhookResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.webhook.one_click_webhook_resolver"
+        >
+            <argument id="request_stack" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory" type="service"/>
+            <argument id="sylius.repository.order" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.bus.dispatcher" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.resolver.payment_method.payment_method_resolver" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver" type="service"/>
         </service>
 
         <service class="BitBag\SyliusIngPlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolver"

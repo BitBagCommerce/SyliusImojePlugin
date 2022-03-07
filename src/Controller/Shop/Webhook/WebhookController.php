@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop\Webhook;
 use BitBag\SyliusIngPlugin\Model\Status\StatusResponseModelInterface;
 use BitBag\SyliusIngPlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\IngTransactionPaymentResolverInterface;
+use BitBag\SyliusIngPlugin\Resolver\Webhook\oneClickWebhookResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Webhook\WebhookResolverInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,18 +23,29 @@ final class WebhookController
 
     private WebhookResponseProcessorInterface $webhookResponseProcessor;
 
+    private oneClickWebhookResolverInterface $oneClickWebhookResolver;
+
     public function __construct(
         IngTransactionPaymentResolverInterface $ingTransactionPaymentResolver,
         WebhookResolverInterface $webhookResolver,
-        WebhookResponseProcessorInterface $webhookResponseProcessor
+        WebhookResponseProcessorInterface $webhookResponseProcessor,
+        oneClickWebhookResolverInterface $oneClickWebhookResolver
     ) {
         $this->ingTransactionPaymentResolver = $ingTransactionPaymentResolver;
         $this->webhookResolver = $webhookResolver;
         $this->webhookResponseProcessor = $webhookResponseProcessor;
+        $this->oneClickWebhookResolver = $oneClickWebhookResolver;
     }
 
     public function __invoke(Request $request): Response
     {
+        $isOneClickNotification = $this->oneClickWebhookResolver->resolve();
+
+        if ($isOneClickNotification) {
+            return new JsonResponse([
+                'status' => 'ok',
+            ]);
+        }
         /** @var StatusResponseModelInterface $webhookModel */
         $webhookModel = $this->webhookResolver->resolve();
         $payment = $this->ingTransactionPaymentResolver->resolve($webhookModel->getTransactionId());
