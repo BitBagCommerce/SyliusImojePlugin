@@ -13,10 +13,13 @@ use Psr\Http\Message\StreamInterface;
 
 final class TransactionDataResolverTest extends TestCase
 {
-    protected const TRANSACTION_ID = '2f82-id-2f82';
-    protected const SERVICE_ID = '2ec212fc-2fghm82';
-    protected const ORDER_ID = '142';
-    protected const TRANSACTION_URL = 'https://sandbox.paywall.test.pl';
+    private const TRANSACTION_ID = '2f82-id-2f82';
+
+    private const SERVICE_ID = '2ec212fc-2fghm82';
+
+    private const ORDER_ID = '142';
+
+    private const TRANSACTION_URL = 'https://sandbox.paywall.test.pl';
 
     protected TransactionDataResolverInterface $transactionDataResolver;
 

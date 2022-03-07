@@ -14,9 +14,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class SignatureResolverTest extends TestCase
 {
-    protected const SIGNATURE = '59186f338f4c3b24a2fa66b5dd029f58f42e397d30c5a13059a2e4468ff5ec4a';
-    protected SignatureResolverInterface $signatureResolver;
-    protected RequestStack $requestStack;
+    private const SIGNATURE = '59186f338f4c3b24a2fa66b5dd029f58f42e397d30c5a13059a2e4468ff5ec4a';
+
+    private SignatureResolverInterface $signatureResolver;
+
+    private RequestStack $requestStack;
 
     protected function setUp(): void
     {

@@ -14,11 +14,11 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class CustomerResolverTest extends TestCase
 {
-    protected const PHONE_NUMBER = '111222333';
+    private const PHONE_NUMBER = '111222333';
 
-    protected OrderInterface $order;
+    private OrderInterface $order;
 
-    protected CustomerResolverInterface $customerResolver;
+    private CustomerResolverInterface $customerResolver;
 
     protected function setUp(): void
     {

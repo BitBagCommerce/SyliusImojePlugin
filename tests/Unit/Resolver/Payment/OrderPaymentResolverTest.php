@@ -12,9 +12,9 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 final class OrderPaymentResolverTest extends TestCase
 {
-    protected PaymentInterface $payment;
+    private PaymentInterface $payment;
 
-    protected OrderInterface $order;
+    private OrderInterface $order;
 
     protected function setUp(): void
     {

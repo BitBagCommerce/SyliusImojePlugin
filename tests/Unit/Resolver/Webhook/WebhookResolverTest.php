@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class WebhookResolverTest extends TestCase
 {
-    protected RequestStack $requestStack;
+    private RequestStack $requestStack;
 
-    protected StatusResponseModelFactoryInterface $statusResponseModelFactory;
+    private StatusResponseModelFactoryInterface $statusResponseModelFactory;
 
-    protected WebhookResolverInterface $webhookResolver;
+    private WebhookResolverInterface $webhookResolver;
 
     protected function setUp(): void
     {

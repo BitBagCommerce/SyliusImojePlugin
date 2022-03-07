@@ -18,14 +18,11 @@ final class OrderResolverTest extends TestCase
 {
     private const TOKEN_VALUE = '12345';
 
-    /** @var CartContextInterface */
-    protected $context;
+    private CartContextInterface $context;
 
-    /** @var RepositoryInterface */
-    protected $repository;
+    private RepositoryInterface $repository;
 
-    /** @var OrderResolverInterface */
-    protected $resolver;
+    private OrderResolverInterface $resolver;
 
     protected function setUp(): void
     {
