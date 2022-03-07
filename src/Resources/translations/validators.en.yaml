@@ -16,5 +16,5 @@ bitbag_sylius_ing_plugin:
   blik_code:
     not_blank: Blik code cannot be blank
   shop_key:
-    not_key: Shop key cannot be null
+    not_blank: Shop key cannot be null
 
