@@ -58,7 +58,6 @@ final class IngApiClient implements IngApiClientInterface
 
     public function getShopInfo(string $serviceId): ServiceModelInterface
     {
-//        $url = \sprintf('%sservice/%s', $this->url, $serviceId);
         $url = $this->url . 'service/' . $serviceId;
         $parameters = $this->requestParamsProvider->buildAuthorizeRequest($this->token);
 
