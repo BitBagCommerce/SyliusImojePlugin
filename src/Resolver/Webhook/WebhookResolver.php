@@ -30,7 +30,7 @@ final class WebhookResolver implements WebhookResolverInterface
         $payment = $content['payment'];
 
         if (null === $transaction || null === $payment) {
-            throw new IngBadRequestException('No found data in request');
+            throw new IngBadRequestException('Missing transaction data');
         }
 
         $transactionId = $transaction['id'] ?? '';
@@ -39,7 +39,7 @@ final class WebhookResolver implements WebhookResolverInterface
         $transactionStatus = $transaction['status'] ?? '';
 
         if ('' === $transactionId || '' === $paymentId || '' === $orderId || '' === $transactionStatus) {
-            throw new IngBadRequestException('No found data in request');
+            throw new IngBadRequestException('Missing transaction data');
         }
 
         return $this->statusResponseModelFactory->create($transactionId, $paymentId, $orderId, $transactionStatus);

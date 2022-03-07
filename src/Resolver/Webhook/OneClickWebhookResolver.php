@@ -65,7 +65,7 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         $orderId = $transactionPayload['orderId'] ?? '';
 
         if ('' === $transactionId || '' === $paymentMethod || '' === $orderId || '' === $paymentMethodCode) {
-            throw new IngBadRequestException('No found data in request');
+            throw new IngBadRequestException('No valid transaction data could be found');
         }
 
         if ('card' === $paymentMethod && 'oneclick' === $paymentMethodCode) {
