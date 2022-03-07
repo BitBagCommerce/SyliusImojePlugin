@@ -11,5 +11,17 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.calculator.signature_calculator" />
             <tag name="kernel.event_subscriber" />
         </service>
+
+        <service
+                class="BitBag\SyliusIngPlugin\Refund\IngRefundStep"
+                id="bitbag.sylius_ing_plugin.refund.ing_refund_step"
+        >
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_provider" />
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider" />
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.refund.refund_url_resolver" />
+            <tag name="sylius_refund.units_refunded.process_step"/>
+        </service>
     </services>
 </container>

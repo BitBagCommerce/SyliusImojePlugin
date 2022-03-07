@@ -58,7 +58,6 @@ final class IngApiClient implements IngApiClientInterface
 
     public function getShopInfo(string $serviceId): ServiceModelInterface
     {
-//        $url = \sprintf('%sservice/%s', $this->url, $serviceId);
         $url = $this->url . 'service/' . $serviceId;
         $parameters = $this->requestParamsProvider->buildAuthorizeRequest($this->token);
 
@@ -81,6 +80,22 @@ final class IngApiClient implements IngApiClientInterface
 
         try {
             $response = $this->httpClient->get($url, $parameters);
+        } catch (GuzzleException $e) {
+            throw new IngBadRequestException($e->getMessage());
+        }
+
+        return $response;
+    }
+
+    public function refundTransaction(
+        string $url,
+        string $serviceId,
+        int $amount
+    ): ResponseInterface {
+        $parameters = $this->requestParamsProvider->buildRequestRefundParams($this->token, $serviceId, $amount);
+
+        try {
+            $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
             throw new IngBadRequestException($e->getMessage());
         }

@@ -4,8 +4,18 @@ imports:
   - { resource: "@SyliusIngPlugin/Resources/config/sylius/resources.yaml" }
   - { resource: "@SyliusRefundPlugin/Resources/config/app/config.yml" }
 
+parameters:
+  sylius_refund.supported_gateways:
+    - offline
+    - bitbag_ing
+
 knp_snappy:
   pdf:
-    enabled: true
-    binary: /usr/local/bin/wkhtmltopdf # Change this! :)
-    options: []
+    enabled:    true
+    binary:     '%env(WKHTMLTOPDF_PATH)%'
+    options:
+      enable-local-file-access: true
+  image:
+    enabled:    true
+    binary:     '%env(WKHTMLTOIMAGE_PATH)%'
+    options:    []

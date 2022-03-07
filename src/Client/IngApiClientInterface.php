@@ -19,4 +19,10 @@ interface IngApiClientInterface
     public function getTransactionData(string $url): ResponseInterface;
 
     public function getShopInfo(string $serviceId): ServiceModelInterface;
+
+    public function refundTransaction(
+        string $url,
+        string $serviceId,
+        int $amount
+    ): ResponseInterface;
 }

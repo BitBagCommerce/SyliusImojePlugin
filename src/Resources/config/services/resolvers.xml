@@ -122,5 +122,18 @@
             <argument id="bitbag.sylius_ing_plugin.resolver.payment_method.payment_method_resolver" type="service"/>
             <argument id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver" type="service"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver"
+        >
+                <argument type="service" id="sylius.repository.gateway_config"/>
+        </service>
+
+        <service class="BitBag\SyliusIngPlugin\Resolver\Refund\RefundUrlResolver"
+                 id="bitbag.sylius_ing_plugin.resolver.refund.refund_url_resolver"
+        >
+            <argument id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository" type="service"/>
+        </service>
+
     </services>
 </container>

@@ -77,5 +77,10 @@
                  id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"
         >
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Factory\Refund\RefundModelFactory"
+                 id="bitbag.sylius_ing_plugin.factory.status.refund_model_factory"
+        />
+
     </services>
 </container>

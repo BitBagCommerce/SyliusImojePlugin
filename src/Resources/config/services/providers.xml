@@ -29,6 +29,7 @@
                  id="bitbag.sylius_ing_plugin.provider.request_params.request_params_provider"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.factory.status.refund_model_factory"/>
         </service>
     </services>
 </container>
