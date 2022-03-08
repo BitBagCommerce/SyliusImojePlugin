@@ -57,10 +57,9 @@ final class InitializePaymentController extends AbstractController
         ?string $paymentMethodCode,
         ?string $blikCode
     ): Response {
-
         $order = $this->orderResolver->resolve($orderId);
 
-        if ($paymentMethodCode === null && $blikCode === null) {
+        if (null === $paymentMethodCode && null === $blikCode) {
             $form = $this->createForm(CompleteType::class, $order);
             $form->handleRequest($request);
 
@@ -71,28 +70,21 @@ final class InitializePaymentController extends AbstractController
                 ]);
             }
         }
-        if ($paymentMethodCode === 'blik') {
+
+        if ('blik' === $paymentMethodCode) {
             $formShowOrder = $this->createForm(SelectPaymentType::class, $order);
             $formShowOrder->handleRequest($request);
 
-
-            if ($blikCode === null) {
-                $formShowOrder->addError(new FormError('Blik code cannot be blank'));
-
+            if (null === $blikCode) {
                 return $this->render('@SyliusShop/Order/show.html.twig', [
                     'form' => $formShowOrder->createView(),
                     'order' => $order,
                     'isFailure' => true,
                 ]);
             }
-
         }
 
-        try {
-            $payment = $this->paymentResolver->resolve($order);
-        } catch (\InvalidArgumentException $e) {
-            throw new IngNotConfiguredException('Payment method not found');
-        }
+        $payment = $this->getPaymentFromOrder($order);
 
         $transactionPaymentData = $this->transactionPaymentDataResolver->resolve($paymentMethodCode, $payment, $blikCode);
         $isBlik = 'blik' === $transactionPaymentData->getPaymentMethod();
@@ -103,6 +95,16 @@ final class InitializePaymentController extends AbstractController
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
         return new RedirectResponse($transactionData->getPaymentUrl());
+    }
+
+    private function getPaymentFromOrder(OrderInterface $order): PaymentInterface
+    {
+        try {
+            $payment = $this->paymentResolver->resolve($order);
+        } catch (\InvalidArgumentException $e) {
+            throw new IngNotConfiguredException('Payment method not found');
+        }
+        return $payment;
     }
 
     private function getTransactionData(
