@@ -16,9 +16,11 @@ use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\TransactionPaymentDataResolverInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
+use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,16 +59,34 @@ final class InitializePaymentController extends AbstractController
     ): Response {
 
         $order = $this->orderResolver->resolve($orderId);
-        $form = $this->createForm(CompleteType::class, $order);
-        $form->handleRequest($request);
 
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->renderForm('@SyliusShop/Checkout/complete.html.twig', [
-                'form' => $form,
-                'order' => $order
-            ]);
+        if ($paymentMethodCode === null && $blikCode === null) {
+            $form = $this->createForm(CompleteType::class, $order);
+            $form->handleRequest($request);
+
+            if (!$form->isSubmitted() || !$form->isValid()) {
+                return $this->render('@SyliusShop/Checkout/complete.html.twig', [
+                    'form' => $form->createView(),
+                    'order' => $order,
+                ]);
+            }
         }
+        if ($paymentMethodCode === 'blik') {
+            $formShowOrder = $this->createForm(SelectPaymentType::class, $order);
+            $formShowOrder->handleRequest($request);
 
+
+            if ($blikCode === null) {
+                $formShowOrder->addError(new FormError('Blik code cannot be blank'));
+
+                return $this->render('@SyliusShop/Order/show.html.twig', [
+                    'form' => $formShowOrder->createView(),
+                    'order' => $order,
+                    'isFailure' => true,
+                ]);
+            }
+
+        }
 
         try {
             $payment = $this->paymentResolver->resolve($order);
