@@ -8,8 +8,10 @@
 
 {% block content %}
 
-    {% if isFailure == true %}
-        {{ messages.error('bitbag_sylius_ing_plugin.ui.blik_code.not_blank' | trans) }}
+    {% if isFailure is defined %}
+        {% if isFailure == true %}
+            {{ messages.error('bitbag_sylius_ing_plugin.ui.blik_code.not_blank' | trans) }}
+        {% endif %}
     {% endif %}
 
     <div class="ui segment">
