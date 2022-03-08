@@ -36,3 +36,4 @@ bitbag_sylius_ing_plugin:
     blik_code:
       not_blank: Blik code cannot be blank
 
+
