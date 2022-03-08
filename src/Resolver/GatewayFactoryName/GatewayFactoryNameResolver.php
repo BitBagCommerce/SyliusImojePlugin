@@ -18,7 +18,7 @@ final class GatewayFactoryNameResolver implements GatewayFactoryNameResolverInte
 
     public function resolve(string $gatewayCode): string
     {
-        /** @var GatewayConfigInterface|null  $config */
+        /** @var GatewayConfigInterface|null $config */
         $config = $this->repository->findOneBy(['gatewayName' => $gatewayCode]);
         if (null === $config) {
             return '';

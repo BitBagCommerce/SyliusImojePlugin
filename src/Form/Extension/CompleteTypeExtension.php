@@ -40,7 +40,7 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                     $form = $event->getForm();
                     $form->add('blik_code', NumberType::class, [
                         'label' => 'Blik Code',
-                        'attr' => ['type' => 'number'],
+                        'attr' => ['type' => 'number', 'pattern' => '[0-9]{6}'],
                         'mapped' => false,
                         'constraints' => [
                             new NotBlank([

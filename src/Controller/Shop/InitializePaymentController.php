@@ -15,13 +15,17 @@ use BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\TransactionPaymentDataResolverInterface;
+use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
+use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class InitializePaymentController
+final class InitializePaymentController extends AbstractController
 {
     private OrderResolverInterface $orderResolver;
 
@@ -55,11 +59,32 @@ final class InitializePaymentController
     ): Response {
         $order = $this->orderResolver->resolve($orderId);
 
-        try {
-            $payment = $this->paymentResolver->resolve($order);
-        } catch (\InvalidArgumentException $e) {
-            throw new IngNotConfiguredException('Payment method not found');
+        if (null === $paymentMethodCode && null === $blikCode) {
+            $form = $this->createForm(CompleteType::class, $order);
+            $form->handleRequest($request);
+
+            if (!$form->isSubmitted() || !$form->isValid()) {
+                return $this->render('@SyliusShop/Checkout/complete.html.twig', [
+                    'form' => $form->createView(),
+                    'order' => $order,
+                ]);
+            }
         }
+
+        if ('blik' === $paymentMethodCode) {
+            $formShowOrder = $this->createForm(SelectPaymentType::class, $order);
+            $formShowOrder->handleRequest($request);
+
+            if (null === $blikCode) {
+                return $this->render('@SyliusShop/Order/show.html.twig', [
+                    'form' => $formShowOrder->createView(),
+                    'order' => $order,
+                    'isFailure' => true,
+                ]);
+            }
+        }
+
+        $payment = $this->getPaymentFromOrder($order);
 
         $transactionPaymentData = $this->transactionPaymentDataResolver->resolve($paymentMethodCode, $payment, $blikCode);
         $isBlik = 'blik' === $transactionPaymentData->getPaymentMethod();
@@ -70,6 +95,16 @@ final class InitializePaymentController
         $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
         return new RedirectResponse($transactionData->getPaymentUrl());
+    }
+
+    private function getPaymentFromOrder(OrderInterface $order): PaymentInterface
+    {
+        try {
+            $payment = $this->paymentResolver->resolve($order);
+        } catch (\InvalidArgumentException $e) {
+            throw new IngNotConfiguredException('Payment method not found');
+        }
+        return $payment;
     }
 
     private function getTransactionData(

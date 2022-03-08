@@ -4,12 +4,16 @@
     <services>
         <service class="BitBag\SyliusIngPlugin\Controller\Shop\InitializePaymentController"
                  id="bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller"
+                 public="true"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.provider.blik_model.blik_model_provider"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.transaction_payment_data_resolver"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
             <tag name="controller.service_arguments"/>
         </service>
 

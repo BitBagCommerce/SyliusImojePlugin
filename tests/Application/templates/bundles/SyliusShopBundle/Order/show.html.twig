@@ -7,6 +7,11 @@
 {% block title %}{{ 'sylius.ui.summary_of_your_order'|trans }} | {{ parent() }}{% endblock %}
 
 {% block content %}
+
+    {% if isFailure is defined %}
+        {{ messages.error('bitbag_sylius_ing_plugin.ui.blik_code.not_blank' | trans) }}
+    {% endif %}
+
     <div class="ui segment">
         {% include '@SyliusShop/Order/_summary.html.twig' %}
 
