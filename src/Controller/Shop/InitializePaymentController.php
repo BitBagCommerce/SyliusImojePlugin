@@ -15,13 +15,15 @@ use BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\TransactionPaymentDataResolverInterface;
+use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class InitializePaymentController
+final class InitializePaymentController extends AbstractController
 {
     private OrderResolverInterface $orderResolver;
 
@@ -53,7 +55,18 @@ final class InitializePaymentController
         ?string $paymentMethodCode,
         ?string $blikCode
     ): Response {
+
         $order = $this->orderResolver->resolve($orderId);
+        $form = $this->createForm(CompleteType::class, $order);
+        $form->handleRequest($request);
+
+        if (!$form->isSubmitted() || !$form->isValid()) {
+            return $this->renderForm('@SyliusShop/Checkout/complete.html.twig', [
+                'form' => $form,
+                'order' => $order
+            ]);
+        }
+
 
         try {
             $payment = $this->paymentResolver->resolve($order);
