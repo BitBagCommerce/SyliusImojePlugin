@@ -73,7 +73,7 @@ RUN set -eux; \
 WORKDIR /var/www
 
 COPY --from=root_php /var/www/vendor ./vendor
-COPY package.json webpack.config.js ./
+COPY package.json webpack.config.js yarn.lock ./
 COPY src/Resources/public ./src/Resources/public
 COPY src/Resources/assets ./src/Resources/assets
 
@@ -81,7 +81,7 @@ WORKDIR /var/www/tests/Application
 
 # prevent the reinstallation of vendors at every changes in the source code
 
-COPY tests/Application/package.json tests/Application/webpack.config.js tests/Application/yarn.lock tests/Application/.babelrc ./
+COPY tests/Application/package.json tests/Application/webpack.config.js tests/Application/.babelrc ./
 COPY tests/Application/assets ./assets
 COPY tests/Application/gulpfile.babel.js ./
 COPY --from=root_php /var/www/tests/Application/public/bundles ./public/bundles
