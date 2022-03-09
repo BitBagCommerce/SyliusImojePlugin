@@ -63,6 +63,7 @@ export class SelectPaymentMethod {
 
         pblOptionCheckbox.addEventListener('change', () => {
             this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
+            this.pblCheckboxesChildren[0].checked = true;
         });
 
         IngCheckbox.addEventListener('change', () => {
