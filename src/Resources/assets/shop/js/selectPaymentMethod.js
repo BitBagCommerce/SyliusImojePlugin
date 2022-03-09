@@ -61,10 +61,13 @@ export class SelectPaymentMethod {
             });
         });
 
-        pblOptionCheckbox.addEventListener('change', () => {
-            this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
-            this.pblCheckboxesChildren[0].checked = true;
-        });
+        if (pblOptionCheckbox !== null) {
+            pblOptionCheckbox.addEventListener('change', () => {
+                this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
+                this.pblCheckboxesChildren[0].checked = true;
+            });
+        }
+
 
         IngCheckbox.addEventListener('change', () => {
             paymentMethodsWrapper.classList.toggle('disabled');
@@ -81,8 +84,10 @@ export class SelectPaymentMethod {
         });
 
         nextStepButton.addEventListener('click', () => {
-            if (pblOptionCheckbox.checked && IngCheckbox.checked) {
-                return;
+            if (pblOptionCheckbox !== null){
+                if (pblOptionCheckbox.checked && IngCheckbox.checked) {
+                    return;
+                }
             } else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
                 this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
             }

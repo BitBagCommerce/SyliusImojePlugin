@@ -54,10 +54,12 @@ export class PaymentRedirect {
 
             if (cardCheckbox.checked) {
                 performAction(true);
-            } else if (pblCheckbox.checked) {
-                const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value;
+            } else if (pblCheckbox !== null) {
+                if (pblCheckbox.checked) {
+                    const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value;
 
-                window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
+                    window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
+                }
             } else if (blikCheckbox.checked) {
                 const blikNumber = document.querySelector('.js-blik-input').value;
 
