@@ -43,6 +43,7 @@ export class SelectPaymentMethod {
         const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]');
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
         const nextStepButton = document.getElementById('next-step');
+        const ingPayment = document.querySelector(this.finalConfig.ingId);
         const notPblOptionCheckboxesMain = [...document.querySelectorAll(
             `${ this.finalConfig.blikId },
             ${ this.finalConfig.ingId },
@@ -52,6 +53,7 @@ export class SelectPaymentMethod {
         IngCheckbox.click();
         otherThanIngCheckboxes[0].click();
         IngCheckbox.click();
+        ingPayment.click();
 
         notPblOptionCheckboxesMain.forEach(checkbox => {
             checkbox.addEventListener('change', () => {
@@ -59,9 +61,13 @@ export class SelectPaymentMethod {
             });
         });
 
-        pblOptionCheckbox.addEventListener('change', () => {
-            this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
-        });
+        if (pblOptionCheckbox !== null) {
+            pblOptionCheckbox.addEventListener('change', () => {
+                this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
+                this.pblCheckboxesChildren[0].checked = true;
+            });
+        }
+
 
         IngCheckbox.addEventListener('change', () => {
             paymentMethodsWrapper.classList.toggle('disabled');
@@ -73,9 +79,13 @@ export class SelectPaymentMethod {
             });
         });
 
+        IngCheckbox.addEventListener('change', () =>  ingPayment.checked = true );
+
         nextStepButton.addEventListener('click', () => {
-            if (pblOptionCheckbox.checked && IngCheckbox.checked) {
-                return;
+            if (pblOptionCheckbox !== null) {
+                if (pblOptionCheckbox.checked && IngCheckbox.checked) {
+                    return;
+                }
             } else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
                 this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
             }

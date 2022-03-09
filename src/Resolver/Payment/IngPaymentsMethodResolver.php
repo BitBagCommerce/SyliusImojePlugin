@@ -89,11 +89,16 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         $paymentMethodConfig = $config->getConfig();
         $serviceId = $paymentMethodConfig['serviceId'] ?? '';
 
+        $isPblPayment = \array_key_exists('pbl', $data);
         $data = $this->paymentMethodsFilter->filter($config->getGatewayName(), $serviceId, $data);
         $finalData = [];
 
         foreach ($data as $key => $value) {
             $finalData[$key] = $key;
+        }
+
+        if (!$isPblPayment) {
+            unset($finalData['pbl']);
         }
 
         return $finalData;
