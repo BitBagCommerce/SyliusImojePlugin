@@ -89,7 +89,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         $paymentMethodConfig = $config->getConfig();
         $serviceId = $paymentMethodConfig['serviceId'] ?? '';
 
-        $isPblPayment = in_array('pbl', $data);
+        $isPblPayment = \array_key_exists('pbl', $data);
         $data = $this->paymentMethodsFilter->filter($config->getGatewayName(), $serviceId, $data);
         $finalData = [];
 

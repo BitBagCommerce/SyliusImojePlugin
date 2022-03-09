@@ -20,7 +20,6 @@ use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -104,6 +103,7 @@ final class InitializePaymentController extends AbstractController
         } catch (\InvalidArgumentException $e) {
             throw new IngNotConfiguredException('Payment method not found');
         }
+
         return $payment;
     }
 
