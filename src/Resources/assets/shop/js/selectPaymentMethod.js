@@ -79,12 +79,10 @@ export class SelectPaymentMethod {
             });
         });
 
-        IngCheckbox.addEventListener('change', () => {
-            ingPayment.checked = true;
-        });
+        IngCheckbox.addEventListener('change', () => { ingPayment.checked = true; });
 
         nextStepButton.addEventListener('click', () => {
-            if (pblOptionCheckbox !== null){
+            if (pblOptionCheckbox !== null) {
                 if (pblOptionCheckbox.checked && IngCheckbox.checked) {
                     return;
                 }
