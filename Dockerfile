@@ -21,7 +21,7 @@ COPY tests/Application/Kernel.php tests/Application/Kernel.php
 COPY composer.json ./
 
 RUN set -eux; \
-	composer install; \
+	COMPOSER_MEMORY_LIMIT=-1 composer install; \
 	composer dump-autoload;
 
 WORKDIR /var/www/tests/Application
