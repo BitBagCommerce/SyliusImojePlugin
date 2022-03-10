@@ -114,16 +114,16 @@ And now, we can configure our payment method in admin panel
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
 * Now we need to go for MerchantId, ServiceID and ShopKey. So we need go to "Settings" and after go to "data for integration", and there is our data
   
-![Screenshot showing payment method config in admin](doc/data_integration.png)
+  ![Screenshot showing payment method config in admin](doc/data_integration.png)
 * We also need authorization token, so we need to go to:
   Settings->Api Keys. And to our action. There is our authorization token
  
-![Screenshot showing payment method config in admin](doc/api_keys.png)
+  ![Screenshot showing payment method config in admin](doc/api_keys.png)
   
-![Screenshot showing payment method config in admin](doc/token.png)
+  ![Screenshot showing payment method config in admin](doc/token.png)
 * Also, we need write path for our webhooks. So write your shop url and paste "/payment/ing/webhook". Like in screen bellow
  
-![Screenshot showing payment method config in admin](doc/webhook.png)
+  ![Screenshot showing payment method config in admin](doc/webhook.png)
 * Now we need paste url in our admin panel for production and sandbox gateway
 
 ```
@@ -136,7 +136,7 @@ https://api.imoje.pl/v1/merchant
 
 * And now, we can choose witch payment by link we want. After that we need add name for out gateway and click "create"
 
-![Screenshot showing payment method config in admin](doc/finish.png)
+  ![Screenshot showing payment method config in admin](doc/finish.png)
 
 
 
