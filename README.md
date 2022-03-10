@@ -58,8 +58,7 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 
 | Package | Version |
 | --- | --- |
-| PHP |  ^7.2 |
-| ext-json: * |  |
+| PHP |  ^7.4 |
 | sylius/refund-plugin |  ^1.0.0-RC.3 |
 | sylius/sylius |  ^1.9.0 |
 
