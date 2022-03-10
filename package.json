@@ -1,11 +1,21 @@
 {
-  "name": "@bitbag/skeleton-plugin",
+  "name": "@bitbag/ing-plugin",
   "version": "1.0.0",
-  "description": "Skeleton for starting Sylius plugins.",
-  "repository": "git@github.com:BitBagCommerce/SyliusPluginSkeleton.git",
+  "description": "Sylius Ing Plugin",
+  "repository": "git@github.com:BitBagCommerce/SyliusIngPlugin.git",
+  "author": "BitBag <hello@bitbag.io>",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
-    "dist": "yarn encore production --config-name bitbag-plugin-dist"
+    "prod": "yarn encore production -o src/Resources/public/bitbag/"
+  },
+  "dependencies": {
+    "@symfony/webpack-encore": "^1.5.0",
+    "bazinga-translator": "^4.0.1",
+    "intl-messageformat": "^9.8.0",
+    "lodash.get": "^4.4.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^9.0.1",
+    "shepherd.js": "^8.3.1"
   }
 }
