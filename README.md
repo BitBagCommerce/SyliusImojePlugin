@@ -80,7 +80,7 @@ $ open http://localhost:8080 // or the port showed in your terminal while runing
 ```
 
 ### Configuration:
-In your .env file, you need put there environment variables with data where is your wkhtmltopdf
+You need to put path to wkhtmltopdf in your .env file
 ```
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
