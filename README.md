@@ -94,6 +94,7 @@ WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 
 ### Configuration in Admin tanel:
 First you need to add ing payment method. So you need to go in admin panel to "Configuration" and after to "Payment methods".
+
 ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
 After that, you need to add ING payment :
