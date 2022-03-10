@@ -18,4 +18,5 @@ sylius_fixtures:
                 code: "ups_eu"
                 name: "UPS_eu"
                 enabled: true
-                channel: "FASHION_WEB"
+                channels:
+                - "FASHION_WEB"
