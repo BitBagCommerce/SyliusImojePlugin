@@ -64,7 +64,7 @@ We work on stable, supported and up-to-date versions of packages. We recommend y
 
 ## Usage
 
-This plugin allows you to use the payment gateway delivered from ing
+This plugin allows you to use the payment gateway delivered by ING
 
 ### Instalation
 ```
@@ -86,7 +86,7 @@ WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
 ### Configuration in Admin tanel:
-First you need to add ing payment method. So you need to go in admin panel to "Configuration" and after to "Payment methods".
+To create IngPaymentMethod , go to PaymentMethods
 
 
 ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
@@ -97,37 +97,37 @@ After that, you need to add ING payment :
 ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
 And now, we can configure our payment method in admin panel
-* first we need write some gateway code for example "ing_code" and add position, for egzample 1
+* first we need to add gateway code for example "ing_code" and set position
  
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configuration gateway we need to go to our imoje account and login there. After that we have a administration panel
+* To configure gateway we need to go to imoje account and log in to an administration panel
   
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
-* Now we need to go for MerchantId, ServiceID and ShopKey. So we need go to "Settings" and after go to "data for integration", and there is our data
+* Now we need to get MerchantId, ServiceID and ShopKey. So go to "Settings" -> "Data for integration", and there is our data
   
   ![Screenshot showing payment method config in admin](doc/data_integration.png)
 * We also need authorization token, so we need to go to:
-  Settings->Api Keys. And to our action. There is our authorization token
+  Settings->Api Keys. And click on your api key. There is our authorization token
  
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
   
   ![Screenshot showing payment method config in admin](doc/token.png)
-* Also, we need write path for our webhooks. So write your shop url and paste "/payment/ing/webhook". Like in screen bellow
+* Also, we need to configure path to our webhooks , just write your shop url followed by /payment/ing/webhook
  
   ![Screenshot showing payment method config in admin](doc/webhook.png)
-* Now we need paste url in our admin panel for production and sandbox gateway
+* Now we need to add url in admin panel for production gateway
 
 ```
 https://sandbox.api.imoje.pl/v1/merchant
 ```
-or
+* And sandbox gateway
 ```
 https://api.imoje.pl/v1/merchant
 ```
 
-* And now, we can choose witch payment by link we want. After that we need add name for out gateway and click "create"
+* And now, we can choose witch payment by link we want. After that we need add name for our gateway and click "create"
 
   ![Screenshot showing payment method config in admin](doc/finish.png)
 
