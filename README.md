@@ -79,6 +79,7 @@ $ symfony server:start
 $ open http://localhost:8080 // or the port showed in your terminal while runing command with symfony server:start
 ```
 
+For the full installation guide please go to [installation](doc/installation.md)
 ### Configuration:
 You need to put path to wkhtmltopdf in your .env file
 ```
