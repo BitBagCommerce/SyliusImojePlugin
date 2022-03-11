@@ -11,7 +11,7 @@
 ## Documentation
 
 For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, that is full of examples.
+there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, which is full of examples.
 
 ## Quickstart Installation
 
@@ -28,19 +28,19 @@ there you will find the <a href="https://docs.sylius.com/en/latest/plugin-develo
     $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
     ```
 
-To be able to setup a plugin's database, remember to configure you database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
+To be able to set up a plugin's database, remember to configure your database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
 
 ## ING Payments Plugin for Sylius
-At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mollie).
+At BitBag we do believe in open source. However, we can do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like we can work together, feel free to reach out. You will find out more about our professional services, technologies, and contact details at [https://bitbag.io/](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mollie).
 
 
 ## Overview
 
-![Screenshot showing payment methods show in shop](doc/select_payment_ing.png)
+  ![Screenshot showing payment methods show in the shop](doc/select_payment_ing.png)
 
-![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
+  ![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
 
-![Screenshot showing payment method config in admin](doc/widget_ing.png)
+  ![Screenshot showing payment method config in admin](doc/widget_ing.png)
 
 The integration currently supports the following payment methods:
 
@@ -54,7 +54,7 @@ The integration currently supports the following payment methods:
 
 ### Requirements
 
-We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
+We work on stable, supported, and up-to-date versions of packages. We recommend you do the same.
 
 | Package | Version |
 | --- | --- |
@@ -81,48 +81,48 @@ $ open http://localhost:8080 // or the port showed in your terminal while runing
 
 For the full installation guide please go to [installation](doc/installation.md)
 ### Configuration:
-You need to put path to wkhtmltopdf in your .env file
+You need to put a path to wkhtmltopdf in your .env file
 ```
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
-### Configuration in Admin tanel:
+### Configuration in Admin panel:
 To create an ING-based payment method, go to Payment methods in the Sylius admin panel.
 
 
-![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
+  ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
 After that, you need to add ING payment :
 
 
-![Screenshot showing payment method config in admin](doc/create_ing_method.png)
+  ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
-And now, we can configure our payment method in admin panel
+And now, you can configure our payment method in the admin panel
 * first you need to add gateway code for example "ing_code" and set position
- 
+
 
   ![Screenshot showing payment method config in admin](doc/details.png)
 * To configure the gateway, iMoje, log in to the admin panel
-  
+
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
 * From "Settings" -> "Data for integration" you can acquire all the needed keys:
-  
+
 * merchantId,
 * serviceId,
 * shopKey
-  
+
   ![Screenshot showing payment method config in admin](doc/data_integration.png)
-* You also need an authorization token, so we need to go to:
-  "Settings"->"Api Keys". And click on your api key. There is our authorization token
- 
+* You also need an authorization token, so you need to go to:
+  "Settings" -> "API Keys". And click on your API key. There is our authorization token
+
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
-  
+
   ![Screenshot showing payment method config in admin](doc/token.png)
-* Also, you need to configure path to our webhooks , just write your shop url followed by /payment/ing/webhook
- 
+* Also, you need to configure the path to our webhooks, just write your shop URL followed by /payment/ing/webhook
+
   ![Screenshot showing payment method config in admin](doc/webhook.png)
-* Now you need to add url in admin panel for the production API URL
+* Now you need to add a URL in the admin panel for the production API URL
 
 ```
 https://sandbox.api.imoje.pl/v1/merchant
@@ -132,7 +132,7 @@ https://sandbox.api.imoje.pl/v1/merchant
 https://api.imoje.pl/v1/merchant
 ```
 
-* And now, you can choose which payment-by-link we want to use. After that you need add a name for our gateway and click "Create"
+* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for our gateway and click "Create"
 
   ![Screenshot showing payment method config in admin](doc/finish.png)
 
@@ -141,7 +141,7 @@ https://api.imoje.pl/v1/merchant
 # About us
 ---
 
-BitBag is a company of people who **love what they do** and do it right. We fulfill the eCommerce technology stack with **Sylius**, Shopware, Akeneo and Pimcore for PIM, eZ Platform for CMS and VueStorefront for PWA. Our goal is to provide real digital transformation with an agile solution that scales with the **clients’ needs**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces.  
+BitBag is a company of people who **love what they do** and do it right. We fulfill the eCommerce technology stack with **Sylius**, Shopware, Akeneo, and Pimcore for PIM, eZ Platform for CMS and VueStorefront for PWA. Our goal is to provide real digital transformation with an agile solution that scales with the **clients’ needs**. Our main area of expertise includes eCommerce consulting and development for B2C, B2B, and Multi-vendor Marketplaces.  
 We are advisers in the first place. We start each project with a diagnosis of problems, and an analysis of the needs and **goals** that the client wants to achieve.  
 We build **unforgettable**, consistent digital customer journeys on top of the **best technologies**.Based on a detailed analysis of the goals and needs of a given organization we create dedicated systems and applications that let businesses grow.  
 Our team is fluent in **Polish, English, German and French**. That is why our cooperation with clients from all over the world is smooth.
