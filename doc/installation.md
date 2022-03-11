@@ -30,7 +30,7 @@ imports:
 # config/routes.yaml
 
 bitbag_sylius_ing_plugin:
-    resource: "@BitBagSyliusIngPlugin/Resources/config/shop_routing.yaml"
+    resource: "@BitBagSyliusIngPlugin/Resources/config/routing.yaml"
 ```
 
 5. Add Ing payment method as supported refund gateway in `config/packages/_sylius.yaml`
