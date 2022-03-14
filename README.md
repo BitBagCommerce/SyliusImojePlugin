@@ -59,7 +59,7 @@ We work on stable, supported, and up-to-date versions of packages. We recommend 
 | --- | --- |
 | PHP |  ^7.4 |
 | sylius/refund-plugin |  ^1.0.0 |
-| sylius/sylius |  ^1.9 II ^1.10|
+| sylius/sylius |  ^1.9ㅤorㅤ^1.10|
 
 ## Usage
 
@@ -96,7 +96,7 @@ After that, you need to add ING payment :
 
   ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
-And now, you can configure our payment method in the admin panel
+And now, you can configure your payment method in the admin panel
 * first you need to add gateway code for example "ing_code" and set position
 
 
@@ -113,12 +113,12 @@ And now, you can configure our payment method in the admin panel
 
   ![Screenshot showing payment method config in admin](doc/data_integration.png)
 * You also need an authorization token, so you need to go to:
-  "Settings" -> "API Keys". And click on your API key. There is our authorization token
+  "Settings" -> "API Keys". And click on your API key. There is your authorization token
 
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
 
   ![Screenshot showing payment method config in admin](doc/token.png)
-* Also, you need to configure the path to our webhooks, just write your shop URL followed by /payment/ing/webhook
+* Also, you need to configure the path to your webhooks, just write your shop URL followed by /payment/ing/webhook
 
   ![Screenshot showing payment method config in admin](doc/webhook.png)
 * Now you need to add a URL in the admin panel for the production API URL
@@ -131,7 +131,7 @@ https://sandbox.api.imoje.pl/v1/merchant
 https://api.imoje.pl/v1/merchant
 ```
 
-* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for our gateway and click "Create"
+* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for your![img.png](img.png) gateway and click "Create"
 
   ![Screenshot showing payment method config in admin](doc/finish.png)
 
