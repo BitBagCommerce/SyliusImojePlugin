@@ -45,7 +45,7 @@ The integration currently supports the following payment methods:
 
 1. Cards
 2. Blik
-3. ING
+3. ING payment method
 4. Pay by link
 
 # Installation
@@ -63,7 +63,7 @@ We work on stable, supported, and up-to-date versions of packages. We recommend 
 
 ## Usage
 
-This plugin allows you to use the payment solution delivered by ING
+This plugin allows you to use the payment solution delivered by ING.
 
 ### Instalation
 ```
@@ -78,9 +78,9 @@ $ symfony server:start
 $ open http://localhost:8080 // or the port showed in your terminal while runing command with symfony server:start
 ```
 
-For the full installation guide please go to [installation](doc/installation.md)
+For the full installation guide please go to [installation](doc/installation.md).
 ### Configuration:
-You need to put a path to wkhtmltopdf in your .env file
+You need to put a path to wkhtmltopdf in your .env file.
 ```
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
@@ -91,17 +91,17 @@ To create an ING-based payment method, go to Payment methods in the Sylius admin
 
   ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
-After that, you need to add ING payment :
+After that, you need to add ING payment:
 
 
   ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
-And now, you can configure your payment method in the admin panel
-* first you need to add gateway code for example "ing_code" and set position
+And now, you can configure your payment method in the admin panel:
+* first you need to add gateway code, for example "ing_code" and set position.
 
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configure the gateway, iMoje, log in to the admin panel
+* To configure the gateway, iMoje gateway, log in to the admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
@@ -113,25 +113,25 @@ And now, you can configure your payment method in the admin panel
 
   ![Screenshot showing payment method config in admin](doc/data_integration.png)
 * You also need an authorization token, so you need to go to:
-  "Settings" -> "API Keys". And click on your API key. There is your authorization token
+  "Settings" -> "API Keys". And click on your "API key". There is your authorization token.
 
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
 
   ![Screenshot showing payment method config in admin](doc/token.png)
-* Also, you need to configure the path to your webhooks, just write your shop URL followed by /payment/ing/webhook
+* Also, you need to configure the path to your webhooks, just type in your shop URL followed by /payment/ing/webhook.
 
   ![Screenshot showing payment method config in admin](doc/webhook.png)
-* Now you need to add a URL in the admin panel for the production API URL
+* Now you need to add a URL in the admin panel for the production API URL:
 
 ```
 https://sandbox.api.imoje.pl/v1/merchant
 ```
-* And the sandbox API URL
+* And the sandbox API URL:
 ```
 https://api.imoje.pl/v1/merchant
 ```
 
-* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for your![img.png](img.png) gateway and click "Create"
+* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for your![img.png](img.png) gateway and click "Create".
 
   ![Screenshot showing payment method config in admin](doc/finish.png)
 

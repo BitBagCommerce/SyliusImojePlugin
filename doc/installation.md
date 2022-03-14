@@ -1,6 +1,6 @@
 ## Installation
 
-1. Require with composer
+1. Require with composer:
 
 ```bash
 composer require bitbag/sylius-ing-plugin
@@ -33,7 +33,7 @@ bitbag_sylius_ing_plugin:
     resource: "@BitBagSyliusIngPlugin/Resources/config/routing.yaml"
 ```
 
-5. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`
+5. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`:
 
 ```yaml
 # config/packages/_sylius.yaml
@@ -44,7 +44,7 @@ bitbag_sylius_ing_plugin:
          - bitbag_ing
 ``` 
 
-6. Copy Sylius templates overridden by plug-in to your templates directory (`templates/bundles/`):
+6. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
 
 ```
 mkdir -p templates/bundles/SyliusAdminBundle/
@@ -54,9 +54,9 @@ cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/Sylius
 cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
 ```
 
-7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (e.g. templates and so on)
+7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (e.g. templates and so on).
 
-8. Install assets
+8. Install assets:
 
 ```
 bin/console assets:install
@@ -64,13 +64,13 @@ bin/console assets:install
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
-9. Synchronize the database
+9. Synchronize the database:
 
 ```
 bin/console doctrine:schema:update
 ```
 
-10. Add logging to your environment in {dev, prod, staging}/monolog.yaml
+10. Add logging to your environment in {dev, prod, staging}/monolog.yaml:
 
 ```yaml
 monolog:
