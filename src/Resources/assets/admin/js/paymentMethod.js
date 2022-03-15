@@ -22,38 +22,32 @@ export class PaymentMethod {
         }
 
         this.connectListeners();
-        this.tooglePaymentOff();
+        this.togglePaymentOff();
         this.loadDataInSession();
     }
 
-    tooglePayment = () => {
+    togglePayment = () => {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
 
             if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass)) {
-                this.toggleCheckboxesOff(this.paymentCheckboxes);
+                this.toggleCheckboxes(this.paymentCheckboxes, false);
                 this.paymentMethodHandler.checked = false;
             }
         });
     }
 
-    tooglePaymentOff = () => {
+    togglePaymentOff = () => {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
         });
-        this.toggleCheckboxesOff(this.paymentCheckboxes);
+        this.toggleCheckboxes(this.paymentCheckboxes, false);
         this.paymentMethodHandler.checked = false;
     }
 
-    toggleCheckboxesOff = checkboxes => {
+    toggleCheckboxes = (checkboxes, bool) => {
         checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
-    }
-
-    toggleCheckboxesOn = checkboxes => {
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = true;
+            checkbox.checked = bool;
         });
     }
 
@@ -68,7 +62,7 @@ export class PaymentMethod {
 
         if (!isAnyChecked) {
             this.paymentMethodHandler.checked = false;
-            this.tooglePayment();
+            this.togglePayment();
         }
     }
 
@@ -96,12 +90,12 @@ export class PaymentMethod {
     connectListeners = () => {
         this.paymentMethodHandler.addEventListener('change', e => {
             if (this.paymentMethodHandler.checked) {
-                this.toggleCheckboxesOn(this.paymentCheckboxes);
+                this.toggleCheckboxes(this.paymentCheckboxes, true);
             }
 
             setTimeout( () => {
                 e.preventDefault();
-                this.tooglePayment();
+                this.togglePayment();
             }, 50);
         });
 
