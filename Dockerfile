@@ -126,6 +126,8 @@ COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
 COPY .docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY .docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 
+RUN apk add --no-cache freetype freetype-dev ttf-freefont libxrender libx11
+
 RUN chmod +x /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
