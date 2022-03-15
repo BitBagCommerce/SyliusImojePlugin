@@ -114,8 +114,7 @@ COPY --from=root_php /var/www/tests/Application/public public/
 COPY --from=nodejs /var/www/tests/Application/public public/
 
 ########################## WKHTMLTOPDF ##########################
-FROM
-madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf_image
+FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf_image
 
 ########################## PHP ##########################
 FROM registry.bitbag.shop/bitbag-php-fpm:${PHP_VERSION} AS result_php
