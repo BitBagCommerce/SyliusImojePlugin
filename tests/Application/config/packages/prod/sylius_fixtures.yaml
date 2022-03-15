@@ -1,0 +1,22 @@
+sylius_fixtures:
+  suites:
+    default:
+      fixtures:
+        currency:
+        channel:
+          options:
+            custom:
+              fashion_web_store:
+                locales:
+                  - "%locale%"
+                base_currency: "PLN"
+                enabled: true
+        shipping_method:
+          options:
+            custom:
+              ups_eu:
+                code: "ups_eu"
+                name: "UPS_eu"
+                enabled: true
+                channels:
+                - "FASHION_WEB"

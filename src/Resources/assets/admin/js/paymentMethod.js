@@ -6,10 +6,9 @@ export class PaymentMethod {
         this.defaultConfig = {
             paymentCheckboxesClass: '.bb-pbl-methods',
             disabledClass: 'bb-payment-disabled'
-            
         };
         this.finalConfig = {
-            ...this.defaultConfig, 
+            ...this.defaultConfig,
             ...config
         };
         this.paymentMethodHandler = document.getElementById('sylius_payment_method_gatewayConfig_config_pbl');
@@ -23,31 +22,32 @@ export class PaymentMethod {
         }
 
         this.connectListeners();
-        this.tooglePaymentOff();
-        this.loadDataInSession(); 
+        this.togglePaymentOff();
+        this.loadDataInSession();
     }
 
-    tooglePayment = () => {
+    togglePayment = () => {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
 
-            if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass)) { 
-                this.toggleCheckboxesOff(this.paymentCheckboxes);
+            if (checkbox.closest('.required.field').classList.contains(this.finalConfig.disabledClass)) {
+                this.toggleCheckboxes(this.paymentCheckboxes, false);
+                this.paymentMethodHandler.checked = false;
             }
         });
     }
-    
-    tooglePaymentOff = () => {
+
+    togglePaymentOff = () => {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
         });
-        this.toggleCheckboxesOff(this.paymentCheckboxes);
+        this.toggleCheckboxes(this.paymentCheckboxes, false);
         this.paymentMethodHandler.checked = false;
     }
-    
-    toggleCheckboxesOff = checkboxes => { 
+
+    toggleCheckboxes = (checkboxes, bool) => {
         checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
+            checkbox.checked = bool;
         });
     }
 
@@ -55,6 +55,15 @@ export class PaymentMethod {
         checkboxes.forEach(checkbox => {
             checkbox.closest('.two.fields').classList.add('bb-pbl-margin-zero');
         });
+    }
+
+    handleChildCheckbox() {
+        const isAnyChecked = [...this.paymentCheckboxes].some(checkbox => checkbox.checked);
+
+        if (!isAnyChecked) {
+            this.paymentMethodHandler.checked = false;
+            this.togglePayment();
+        }
     }
 
     storeDataInSession = () => {
@@ -68,7 +77,6 @@ export class PaymentMethod {
 
     loadDataInSession = () => {
         const sessionData = JSON.parse(sessionStorage.getItem('checkboxesState'));
-        
         if (sessionData) {
             this.paymentMethodHandler.checked = true;
 
@@ -76,22 +84,29 @@ export class PaymentMethod {
                 checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
                 checkbox.checked = !!sessionData[checkbox.id];
             });
-        } else {
-            this.toggleMargin(this.paymentCheckboxes);
         }
-
     }
 
     connectListeners = () => {
         this.paymentMethodHandler.addEventListener('change', e => {
+            if (this.paymentMethodHandler.checked) {
+                this.toggleCheckboxes(this.paymentCheckboxes, true);
+            }
+
             setTimeout( () => {
                 e.preventDefault();
-                this.tooglePayment();          
+                this.togglePayment();
             }, 50);
         });
 
         this.saveMethodForm.addEventListener('submit', () => {
             this.storeDataInSession();
+        });
+
+        this.paymentCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                this.handleChildCheckbox(checkbox);
+            });
         });
     }
 }
