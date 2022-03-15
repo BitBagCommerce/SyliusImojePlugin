@@ -59,7 +59,7 @@ We work on stable, supported, and up-to-date versions of packages. We recommend 
 | --- | --- |
 | PHP |  ^7.4 |
 | sylius/refund-plugin |  ^1.0.0 |
-| sylius/sylius |  ^1.9ㅤorㅤ^1.10|
+| sylius/sylius |  ^1.9ㅤ or ㅤ^1.10|
 
 ## Usage
 
