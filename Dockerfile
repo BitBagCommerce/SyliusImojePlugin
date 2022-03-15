@@ -113,10 +113,15 @@ WORKDIR /var/www
 COPY --from=root_php /var/www/tests/Application/public public/
 COPY --from=nodejs /var/www/tests/Application/public public/
 
+########################## WKHTMLTOPDF ##########################
+FROM madnight/docker-alpine-wkhtmltopdf as wkhtmltopdf_image
+
 ########################## PHP ##########################
 FROM registry.bitbag.shop/bitbag-php-fpm:${PHP_VERSION} AS result_php
 
 RUN apk add --no-cache fcgi;
+
+COPY --from=wkhtmltopdf_image /bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf
 
 COPY .docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY .docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
@@ -154,9 +159,3 @@ WORKDIR /var/www/tests/Application
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
-
-FROM openjdk:8-jre-alpine
-
-RUN apk add --no-cache wkhtmltopdf
-
-ENTRYPOINT ["wkhtmltopdf"]
