@@ -80,28 +80,28 @@ $ open http://localhost:8080 // or the port showed in your terminal while runing
 
 For the full installation guide please go to [installation](doc/installation.md).
 ### Configuration:
-You need to put a path to wkhtmltopdf in your .env file.
+You need to put the path to wkhtmltopdf in your .env file.
 ```
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
-### Configuration in Admin panel:
+### Configuration in the admin panel:
 To create an ING-based payment method, go to Payment methods in the Sylius admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
-After that, you need to add ING payment:
+After that, you need to add an ING payment:
 
 
   ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
 And now, you can configure your payment method in the admin panel:
-* first you need to add gateway code, for example "ing_code" and set position.
+* first you need to add a gateway code, for example "ing_code" and set its position.
 
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configure the gateway, iMoje gateway, log in to the admin panel.
+* To configure the iMoje gateway, log in to ING the admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
@@ -113,7 +113,7 @@ And now, you can configure your payment method in the admin panel:
 
   ![Screenshot showing payment method config in admin](doc/data_integration.png)
 * You also need an authorization token, so you need to go to:
-  "Settings" -> "API Keys". And click on your "API key". There is your authorization token.
+  "Settings" -> "API Keys". And click on your "API key". This will be your authorization token.
 
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
 
@@ -131,11 +131,9 @@ https://sandbox.api.imoje.pl/v1/merchant
 https://api.imoje.pl/v1/merchant
 ```
 
-* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for your![img.png](img.png) gateway and click "Create".
+* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for your ![img.png](img.png) gateway and click "Create".
 
   ![Screenshot showing payment method config in admin](doc/finish.png)
-
-
 
 # About us
 ---

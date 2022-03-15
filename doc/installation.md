@@ -1,6 +1,6 @@
 ## Installation
 
-1. Require with composer:
+1. Require it with composer:
 
 ```bash
 composer require bitbag/sylius-ing-plugin
@@ -54,7 +54,7 @@ cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/Sylius
 cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
 ```
 
-7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (e.g. templates and so on).
+7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (templates etc.).
 
 8. Install assets:
 
