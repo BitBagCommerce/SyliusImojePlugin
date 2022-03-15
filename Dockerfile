@@ -154,3 +154,9 @@ WORKDIR /var/www/tests/Application
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
+
+FROM openjdk:8-jre-alpine
+
+RUN apk add --no-cache wkhtmltopdf
+
+ENTRYPOINT ["wkhtmltopdf"]
