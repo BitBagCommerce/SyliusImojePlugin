@@ -118,6 +118,21 @@ FROM registry.bitbag.shop/bitbag-php-fpm:${PHP_VERSION} AS result_php
 
 RUN apk add --no-cache fcgi;
 
+FROM alpine:3.13
+
+RUN apk add --update --no-cache \
+    libgcc libstdc++ libx11 glib libxrender libxext libintl \
+    ttf-dejavu ttf-droid ttf-freefont ttf-liberation ttf-ubuntu-font-family
+
+COPY --from=madnight/alpine-wkhtmltopdf-builder:0.12.5-alpine3.10-606718795 \
+    /bin/wkhtmltopdf /bin/wkhtmltopdf
+ENV BUILD_LOG=https://api.travis-ci.org/v3/job/606718795/log.txt
+
+RUN [ "$(sha256sum /bin/wkhtmltopdf | awk '{ print $1 }')" == \
+      "$(wget -q -O - $BUILD_LOG | sed -n '13685p' | awk '{ print $1 }')" ]
+
+ENTRYPOINT ["wkhtmltopdf"]
+
 COPY .docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY .docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 
