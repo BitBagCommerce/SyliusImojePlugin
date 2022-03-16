@@ -32,7 +32,7 @@ final class CustomerModelFactory implements CustomerModelFactoryInterface
         $email = $customer->getEmail();
         $cid = (string) $customer->getId();
         $company = $billingAddress->getCompany() ?? '';
-        $phone = $this->customerResolver->resolvePhoneNumber($order);
+        $phone = $this->customerResolver->resolvePhoneNumber($order) ?? '';
         $locale = \strtolower($billingAddress->getCountryCode() ?? '');
 
         return new CustomerModel($firstName, $lastName, $cid, $company, $phone, $email, $locale);
