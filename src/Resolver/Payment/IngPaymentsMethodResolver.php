@@ -7,6 +7,9 @@ namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
 {
@@ -14,16 +17,41 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
     private AvailablePaymentMethodsFilterInterface $paymentMethodsFilter;
 
+    private CartContextInterface $cartContext;
+
+    private RequestStack $requestStack;
+
+    private OrderRepositoryInterface $orderRepository;
+
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        AvailablePaymentMethodsFilterInterface $paymentMethodsFilter
+        AvailablePaymentMethodsFilterInterface $paymentMethodsFilter,
+        CartContextInterface $cartContext,
+        RequestStack $requestStack,
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodsFilter = $paymentMethodsFilter;
+        $this->cartContext = $cartContext;
+        $this->requestStack = $requestStack;
+        $this->orderRepository = $orderRepository;
     }
 
     public function resolve(): array
     {
+        $total = 0;
+        $cart = $this->cartContext->getCart();
+        $session = $this->requestStack->getSession();
+        $orderId = $session->get('sylius_order_id');
+
+        if ('' !== $orderId && $cart->getId() !== null) {
+            $total = $cart->getTotal();
+        } elseif (null !== $orderId) {
+            $order = $this->orderRepository->find($orderId);
+            $total = $order->getTotal();
+        }
+
+
         $payment = $this->paymentMethodRepository->findOneForIng();
 
         if (null === $payment) {
@@ -98,6 +126,19 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         }
 
         if (!$isPblPayment) {
+            unset($finalData['pbl']);
+        }
+
+        if ($total < 5) {
+            unset($finalData['card']);
+            unset($finalData['ing']);
+        }
+
+        if ($total < 10) {
+            unset($finalData['blik']);
+        }
+
+        if ($total < 100) {
             unset($finalData['pbl']);
         }
 
