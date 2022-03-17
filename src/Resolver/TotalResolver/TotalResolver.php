@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Resolver\TotalResolver;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 final class TotalResolver implements TotalResolverInterface
 {
@@ -29,6 +30,8 @@ final class TotalResolver implements TotalResolverInterface
     public function resolve(): int
     {
         $cart = $this->cartContext->getCart();
+
+        /** @var Session $session */
         $session = $this->requestStack->getSession();
         $orderId = $session->get('sylius_order_id');
 
