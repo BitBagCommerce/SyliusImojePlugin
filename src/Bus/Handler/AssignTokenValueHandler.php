@@ -15,7 +15,7 @@ final class AssignTokenValueHandler
         $request = $command->getRequest();
         $order = $command->getOrder();
 
-        if ($request->get('tokenValue') === null) {
+        if (null === $request->get('tokenValue')) {
             $request->getSession()->set(self::ORDER_ID_KEY, $order->getId());
         }
     }

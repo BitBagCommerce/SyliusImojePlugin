@@ -27,7 +27,6 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         $this->totalResolver = $totalResolver;
     }
 
-
     public function resolve(): array
     {
         $total = $this->totalResolver->resolve();
@@ -108,16 +107,15 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             unset($finalData['pbl']);
         }
 
-        if ($total < 5) {
-            unset($finalData['card']);
-            unset($finalData['ing']);
+        if (self::MIN_TOTAL_5 > $total) {
+            unset($finalData['card'], $finalData['ing']);
         }
 
-        if ($total < 10) {
+        if (self::MIN_TOTAL_10 > $total) {
             unset($finalData['blik']);
         }
 
-        if ($total < 100) {
+        if (self::MIN_TOTAL_100 > $total) {
             unset($finalData['pbl']);
         }
 
