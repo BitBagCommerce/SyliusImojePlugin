@@ -36,31 +36,34 @@ export class PaymentRedirect {
         const cardCheckbox = document.querySelector(this.finalConfig.cardId);
         const nextStepButton = document.querySelector('.data-bb-is-payment-button');
 
-        blikCheckbox.addEventListener('click', () => {
-            const form = document.querySelector('.ui.loadable.form');
-            const input = document.createElement('div');
 
-            input.innerHTML = `
-                    <div class="three wide field removeArrows" style="margin-top: 10px">
-                            <label>Blik Code</label>
-                            <input type="number" class='js-blik-input' maxlength="6"/>
-                    </div>
-            `;
-            form.appendChild(input)
-        });
+        if (blikCheckbox) {
+            blikCheckbox.addEventListener('click', () => {
+                const form = document.querySelector('.ui.loadable.form');
+                const input = document.createElement('div');
+
+                input.innerHTML = `
+                        <div class="three wide field removeArrows" style="margin-top: 10px">
+                                <label>Blik Code</label>
+                                <input type="number" class='js-blik-input' maxlength="6"/>
+                        </div>
+                `;
+                form.appendChild(input)
+            });
+        }
 
         nextStepButton.addEventListener('click', e => {
             e.preventDefault();
             if (cardCheckbox.checked) {
                 performAction(true);
-            } else if (pblCheckbox !== null && pblCheckbox.checked) {
+            } else if (pblCheckbox && pblCheckbox.checked) {
                     const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value;
                     window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
-            } else if (blikCheckbox.checked) {
+            } else if (blikCheckbox && blikCheckbox.checked) {
                 const blikNumber = document.querySelector('.js-blik-input').value;
 
                 window.location.pathname = `${path}/${orderId}/blik/${blikNumber}`;
-            } else if (ingCheckbox.checked) {
+            } else if (ingCheckbox && ingCheckbox.checked) {
                 window.location.pathname = `${path}/${orderId}/ing/`;
             } else {
                 const form = document.getElementById("theForm");

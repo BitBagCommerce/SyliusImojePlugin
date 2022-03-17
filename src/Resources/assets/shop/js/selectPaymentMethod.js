@@ -13,7 +13,7 @@ export class SelectPaymentMethod {
         };
         this.finalConfig = {
             ...this.defaultConfig,
-            ...config    
+            ...config
         };
         this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child');
         this.pblCheckboxesChildren = document.querySelectorAll('.online-payment__input-pbl-child');
@@ -49,6 +49,13 @@ export class SelectPaymentMethod {
             ${ this.finalConfig.ingId },
             ${ this.finalConfig.cardId }`
         )];
+
+        if (!pblOptionCheckbox && notPblOptionCheckboxesMain.length === 0) {
+            const ingGateway = IngCheckbox.closest('.item');
+
+            ingGateway.style.display = 'none';
+            return;
+        }
 
         IngCheckbox.click();
         otherThanIngCheckboxes[0].click();

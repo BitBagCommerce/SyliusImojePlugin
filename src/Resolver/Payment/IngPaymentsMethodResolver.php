@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
+use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
 
 final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
 {
@@ -14,16 +15,21 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
     private AvailablePaymentMethodsFilterInterface $paymentMethodsFilter;
 
+    private TotalResolverInterface $totalResolver;
+
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        AvailablePaymentMethodsFilterInterface $paymentMethodsFilter
+        AvailablePaymentMethodsFilterInterface $paymentMethodsFilter,
+        TotalResolverInterface $totalResolver
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodsFilter = $paymentMethodsFilter;
+        $this->totalResolver = $totalResolver;
     }
 
     public function resolve(): array
     {
+        $total = $this->totalResolver->resolve();
         $payment = $this->paymentMethodRepository->findOneForIng();
 
         if (null === $payment) {
@@ -98,6 +104,18 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         }
 
         if (!$isPblPayment) {
+            unset($finalData['pbl']);
+        }
+
+        if (self::MIN_TOTAL_5 > $total) {
+            unset($finalData['card'], $finalData['ing']);
+        }
+
+        if (self::MIN_TOTAL_10 > $total) {
+            unset($finalData['blik']);
+        }
+
+        if (self::MIN_TOTAL_100 > $total) {
             unset($finalData['pbl']);
         }
 

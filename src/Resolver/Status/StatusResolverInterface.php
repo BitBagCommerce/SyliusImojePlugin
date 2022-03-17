@@ -8,6 +8,8 @@ interface StatusResolverInterface
 {
     public const SUCCESS_STATUS = 'success';
 
+    public const SUCCESS_SETTLED = 'settled';
+
     public const CANCEL_STATUS = 'cancel';
 
     public const PROCESS_STATUS = 'process';

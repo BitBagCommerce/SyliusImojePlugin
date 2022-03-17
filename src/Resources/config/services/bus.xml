@@ -85,5 +85,11 @@
 
             <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
         </service>
+
+        <service class="BitBag\SyliusIngPlugin\Bus\Handler\AssignTokenValueHandler"
+                 id="bitbag.sylius_ing_plugin.bus.handler.assign_token_value_handler"
+        >
+            <tag name="bitbag.sylius_ing_plugin.command_bus" bus="sylius.command_bus"/>
+        </service>
     </services>
 </container>

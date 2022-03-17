@@ -22,6 +22,7 @@
         <service  class="BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolver" id="bitbag_sylius_ing_plugin.resolver.payment.payment_methods">
             <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
             <argument type="service" id="bitbag.sylius_ing_plugin.filter.available_payment_methods_filter"/>
+            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.total_resolver.total_resolver"/>
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolver"
@@ -135,5 +136,10 @@
             <argument id="BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepository" type="service"/>
         </service>
 
+        <service class="BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolver" id="bitbag.sylius_ing_plugin.resolver.total_resolver.total_resolver">
+            <argument id="sylius.context.cart" type="service"/>
+            <argument id="request_stack" type="service"/>
+            <argument id="sylius.repository.order" type="service"/>
+        </service>
     </services>
 </container>
