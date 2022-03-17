@@ -8,6 +8,7 @@ use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
 use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolver;
+use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
@@ -23,11 +24,13 @@ final class IngPaymentMethodResolverTest extends TestCase
 
     private AvailablePaymentMethodsFilterInterface $paymentMethodsFilter;
 
+    private TotalResolverInterface $totalResolver;
+
     protected function setUp(): void
     {
         $this->paymentMethodRepository = $this->createMock(PaymentMethodRepositoryInterface::class);
         $this->paymentMethodsFilter = $this->createMock(AvailablePaymentMethodsFilterInterface::class);
-
+        $this->totalResolver = $this->createMock(TotalResolverInterface::class);
     }
 
     public function testResolveWithNewPayment(): void
@@ -39,6 +42,11 @@ final class IngPaymentMethodResolverTest extends TestCase
             'ing' => 'ing',
             'ipko' => 'ipko',
         ];
+
+        $this->totalResolver
+            ->expects(self::once())
+            ->method('resolve')
+            ->willReturn(105);
 
         $this->paymentMethodsFilter
             ->expects(self::once())
@@ -82,7 +90,8 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
             $this->paymentMethodRepository,
-            $this->paymentMethodsFilter
+            $this->paymentMethodsFilter,
+            $this->totalResolver
         );
 
         self::assertEqualsCanonicalizing($finalConfig, $ingPaymentsMethodResolver->resolve());
@@ -92,6 +101,11 @@ final class IngPaymentMethodResolverTest extends TestCase
     {
         $this->expectException(IngNotConfiguredException::class);
 
+        $this->totalResolver
+            ->expects(self::once())
+            ->method('resolve')
+            ->willReturn(105);
+
         $this->paymentMethodRepository
             ->expects(self::once())
             ->method('findOneForIng')
@@ -100,13 +114,19 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
             $this->paymentMethodRepository,
-            $this->paymentMethodsFilter
+            $this->paymentMethodsFilter,
+            $this->totalResolver
         );
         $ingPaymentsMethodResolver->resolve();
     }
     public function testResolveEmptyConfigException(): void
     {
         $this->expectException(IngNotConfiguredException::class);
+
+        $this->totalResolver
+            ->expects(self::once())
+            ->method('resolve')
+            ->willReturn(105);
 
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
         $paymentMethod = new PaymentMethod();
@@ -123,7 +143,8 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
             $this->paymentMethodRepository,
-            $this->paymentMethodsFilter
+            $this->paymentMethodsFilter,
+            $this->totalResolver
         );
         $ingPaymentsMethodResolver->resolve();
     }
