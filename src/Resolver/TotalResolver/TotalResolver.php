@@ -30,9 +30,9 @@ final class TotalResolver implements TotalResolverInterface
     public function resolve(): int
     {
         $cart = $this->cartContext->getCart();
+        $request = $this->requestStack->getCurrentRequest();
 
-        /** @var Session $session */
-        $session = $this->requestStack->getSession();
+        $session = $request->getSession();
         $orderId = $session->get('sylius_order_id');
 
         if ('' !== $orderId && $cart->getId() !== null) {
