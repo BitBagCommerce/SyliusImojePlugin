@@ -54,8 +54,9 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         $request = $this->requestStack->getCurrentRequest();
         $content = \json_decode($request->getContent(), true);
         $transactionPayload = $content['transaction'] ?? [];
+        $paymentProfile = $transactionPayload['paymentProfile'] ?? '';
 
-        if (null === $transactionPayload['paymentProfile']) {
+        if ('' === $paymentProfile) {
             return false;
         }
 

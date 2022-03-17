@@ -40,7 +40,7 @@ final class WebhookResponseProcessor implements WebhookResponseProcessorInterfac
         $statusCode = $response->getStatus();
         $status = $this->statusResolver->resolve($statusCode);
 
-        if ('success' !== $status) {
+        if ('success' !== $status && 'settled' !== $status) {
             $this->logOnError($response->getTransactionId(), $status);
         }
 

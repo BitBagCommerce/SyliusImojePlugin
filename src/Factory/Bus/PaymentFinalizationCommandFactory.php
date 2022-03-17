@@ -7,6 +7,7 @@ namespace BitBag\SyliusIngPlugin\Factory\Bus;
 use BitBag\SyliusIngPlugin\Bus\Command\Status\MarkAsCanceled;
 use BitBag\SyliusIngPlugin\Bus\Command\Status\MarkAsFailed;
 use BitBag\SyliusIngPlugin\Bus\Command\Status\MarkAsProcessed;
+use BitBag\SyliusIngPlugin\Bus\Command\Status\MarkAsSettled;
 use BitBag\SyliusIngPlugin\Bus\Command\Status\MarkAsSuccessful;
 use BitBag\SyliusIngPlugin\Bus\Command\Status\PaymentFinalizationCommandInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -19,6 +20,7 @@ final class PaymentFinalizationCommandFactory implements PaymentFinalizationComm
         'failure' => MarkAsFailed::class,
         'process' => MarkAsProcessed::class,
         'success' => MarkAsSuccessful::class,
+        'settled' => MarkAsSettled::class,
     ];
 
     public function createNew(string $status, PaymentInterface $payment): PaymentFinalizationCommandInterface
