@@ -36,14 +36,46 @@ export class PaymentRedirect {
         const cardCheckbox = document.querySelector(this.finalConfig.cardId);
         const nextStepButton = document.querySelector('.data-bb-is-payment-button');
 
+        if (ingCheckbox) {
+            ingCheckbox.addEventListener('click', () => {
+                const blikInputWrapper = document.querySelector('.js-blik-input-wrapper');
+                if (blikInputWrapper) {
+                    blikInputWrapper.classList.add('disabled')
+                }
+            });
+        }
+
+        if (pblCheckbox) {
+            pblCheckbox.addEventListener('click', () => {
+                const blikInputWrapper = document.querySelector('.js-blik-input-wrapper');
+                if (blikInputWrapper) {
+                    blikInputWrapper.classList.add('disabled')
+                }
+            });
+        }
+
+        if (cardCheckbox) {
+            cardCheckbox.addEventListener('click', () => {
+                const blikInputWrapper = document.querySelector('.js-blik-input-wrapper');
+                if (blikInputWrapper) {
+                    blikInputWrapper.classList.add('disabled')
+                }
+            });
+        }
 
         if (blikCheckbox) {
             blikCheckbox.addEventListener('click', () => {
                 const form = document.querySelector('.ui.loadable.form');
                 const input = document.createElement('div');
+                const blikInputWrapper = form.querySelector('.js-blik-input-wrapper');
 
+
+                if (blikInputWrapper) {
+                    blikInputWrapper.classList.remove('disabled')
+                    return;
+                }
                 input.innerHTML = `
-                        <div class="three wide field removeArrows" style="margin-top: 10px">
+                        <div class="three wide field removeArrows js-blik-input-wrapper" style="margin-top: 10px">
                                 <label>Blik Code</label>
                                 <input type="number" class='js-blik-input' maxlength="6"/>
                         </div>

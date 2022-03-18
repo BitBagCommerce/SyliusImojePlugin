@@ -9,5 +9,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 
 interface PaymentDataModelFactoryInterface
 {
+    public const BLIK_LENGTH = 6;
+
     public function create(PaymentInterface $payment, bool $isBlik): PaymentDataModelInterface;
 }
