@@ -11,7 +11,7 @@ use BitBag\SyliusIngPlugin\Bus\Query\GetBlikTransactionData;
 use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
 use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Form\Extension\CompleteTypeExtension;
+use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Model\Payment\PaymentDataModelInterface;
 use BitBag\SyliusIngPlugin\Provider\BlikModel\BlikModelProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
@@ -77,7 +77,7 @@ final class InitializePaymentController extends AbstractController
             $formShowOrder = $this->createForm(SelectPaymentType::class, $order);
             $formShowOrder->handleRequest($request);
 
-            if (null === $blikCode || CompleteTypeExtension::BLIK_LENGTH !== strlen($blikCode)) {
+            if (null === $blikCode || PaymentDataModelFactoryInterface::BLIK_LENGTH !== strlen($blikCode)) {
                 return $this->render('@SyliusShop/Order/show.html.twig', [
                     'form' => $formShowOrder->createView(),
                     'order' => $order,

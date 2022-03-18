@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Form\Extension;
 
+use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
@@ -17,8 +18,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class CompleteTypeExtension extends AbstractTypeExtension
 {
-    public const BLIK_LENGTH = 6;
-
     private OrderResolverInterface $orderResolver;
 
     private OrderPaymentResolverInterface $paymentResolver;
@@ -51,8 +50,8 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                                 'groups' => ['sylius'],
                             ]),
                             new Length([
-                                'min' => self::BLIK_LENGTH,
-                                'max' => self::BLIK_LENGTH,
+                                'min' => PaymentDataModelFactoryInterface::BLIK_LENGTH,
+                                'max' => PaymentDataModelFactoryInterface::BLIK_LENGTH,
                                 'groups' => ['sylius'],
                             ]),
                         ],
