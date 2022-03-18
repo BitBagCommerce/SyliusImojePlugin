@@ -14,7 +14,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'bin/console' ]; then
     setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var public
     setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var public
 
-    echo "Waiting for db to be ready..."
+    echo "Waiting for db to be ready...."
     ATTEMPTS_LEFT_TO_REACH_DATABASE=60
 
     cd $pluginApplicationDirectory;
