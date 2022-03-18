@@ -1,2 +1,3 @@
 framework:
+    trusted_hosts:  ['bitbag\.shop$']
     profiler: { only_exceptions: false }
