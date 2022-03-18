@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class CompleteTypeExtension extends AbstractTypeExtension
@@ -45,6 +46,11 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                         'constraints' => [
                             new NotBlank([
                                 'message' => 'bitbag_sylius_ing_plugin.blik_code.not_blank',
+                                'groups' => ['sylius'],
+                            ]),
+                            new Length([
+                                'min' => 6,
+                                'max' => 6,
                                 'groups' => ['sylius'],
                             ]),
                         ],

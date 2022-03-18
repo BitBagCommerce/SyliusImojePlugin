@@ -34,4 +34,4 @@ bitbag_sylius_ing_plugin:
     payment_process: Payment is processing
     shop_key: Shop key
     blik_code:
-      not_blank: Blik code cannot be blank
+      not_blank: Blik code must be 6 digits long

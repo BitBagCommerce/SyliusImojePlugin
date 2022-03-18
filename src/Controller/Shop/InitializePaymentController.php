@@ -76,7 +76,7 @@ final class InitializePaymentController extends AbstractController
             $formShowOrder = $this->createForm(SelectPaymentType::class, $order);
             $formShowOrder->handleRequest($request);
 
-            if (null === $blikCode) {
+            if (null === $blikCode || 6 !== strlen($blikCode)) {
                 return $this->render('@SyliusShop/Order/show.html.twig', [
                     'form' => $formShowOrder->createView(),
                     'order' => $order,
