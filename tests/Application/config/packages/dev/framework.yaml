@@ -1,2 +1,3 @@
 framework:
+    trusted_proxies: '%env(TRUSTED_PROXIES)%'
     profiler: { only_exceptions: false }
