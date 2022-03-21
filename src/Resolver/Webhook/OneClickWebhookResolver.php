@@ -100,17 +100,8 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
                 $orderId,
                 $gatewayCode
             );
+
             $this->dispatcher->dispatch(new SaveTransaction($transaction));
-
-            if (
-                '' === (string)$transactionId
-                || '' === (string)$paymentId
-                || '' === (string)$orderId
-                || '' === (string)$transactionStatus
-            ) {
-                throw new IngBadRequestException('Missing transaction data');
-            }
-
             $webhookModel = $this->statusResponseModelFactory->create($transactionId, (string) $paymentId, (string) $orderId, $transactionStatus);
             $this->webhookResponseProcessor->process($webhookModel, $payment);
         }
