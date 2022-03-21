@@ -11,8 +11,11 @@ use BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolver;
 use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
 
 final class IngPaymentMethodResolverTest extends TestCase
 {
@@ -26,15 +29,21 @@ final class IngPaymentMethodResolverTest extends TestCase
 
     private TotalResolverInterface $totalResolver;
 
+    private CartContextInterface $cartContext;
+
     protected function setUp(): void
     {
         $this->paymentMethodRepository = $this->createMock(PaymentMethodRepositoryInterface::class);
         $this->paymentMethodsFilter = $this->createMock(AvailablePaymentMethodsFilterInterface::class);
         $this->totalResolver = $this->createMock(TotalResolverInterface::class);
+        $this->cartContext = $this->createMock(CartContextInterface::class);
     }
 
     public function testResolveWithNewPayment(): void
     {
+        $order = $this->createMock(OrderInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+
         $config = [
             'isProd' => true,
             'serviceId' => self::SERVICE_ID,
@@ -47,6 +56,21 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->expects(self::once())
             ->method('resolve')
             ->willReturn(105);
+
+        $this->cartContext
+            ->expects(self::once())
+            ->method('getCart')
+            ->willReturn($order);
+
+        $order
+            ->expects(self::once())
+            ->method('getLastPayment')
+            ->willReturn($payment);
+
+        $payment
+            ->expects(self::once())
+            ->method('getCurrencyCode')
+            ->willReturn('PLN');
 
         $this->paymentMethodsFilter
             ->expects(self::once())
@@ -91,7 +115,8 @@ final class IngPaymentMethodResolverTest extends TestCase
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
-            $this->totalResolver
+            $this->totalResolver,
+            $this->cartContext
         );
 
         self::assertEqualsCanonicalizing($finalConfig, $ingPaymentsMethodResolver->resolve());
@@ -99,7 +124,24 @@ final class IngPaymentMethodResolverTest extends TestCase
 
     public function testResolveEmptyPaymentException(): void
     {
+        $order = $this->createMock(OrderInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
         $this->expectException(IngNotConfiguredException::class);
+
+        $this->cartContext
+            ->expects(self::once())
+            ->method('getCart')
+            ->willReturn($order);
+
+        $order
+            ->expects(self::once())
+            ->method('getLastPayment')
+            ->willReturn($payment);
+
+        $payment
+            ->expects(self::once())
+            ->method('getCurrencyCode')
+            ->willReturn('PLN');
 
         $this->totalResolver
             ->expects(self::once())
@@ -115,7 +157,8 @@ final class IngPaymentMethodResolverTest extends TestCase
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
-            $this->totalResolver
+            $this->totalResolver,
+            $this->cartContext
         );
         $ingPaymentsMethodResolver->resolve();
     }
@@ -123,10 +166,28 @@ final class IngPaymentMethodResolverTest extends TestCase
     {
         $this->expectException(IngNotConfiguredException::class);
 
+        $order = $this->createMock(OrderInterface::class);
+        $payment = $this->createMock(PaymentInterface::class);
+
         $this->totalResolver
             ->expects(self::once())
             ->method('resolve')
             ->willReturn(105);
+
+        $this->cartContext
+            ->expects(self::once())
+            ->method('getCart')
+            ->willReturn($order);
+
+        $order
+            ->expects(self::once())
+            ->method('getLastPayment')
+            ->willReturn($payment);
+
+        $payment
+            ->expects(self::once())
+            ->method('getCurrencyCode')
+            ->willReturn('PLN');
 
         $paymentMethodMock = $this->createMock(PaymentMethodInterface::class);
         $paymentMethod = new PaymentMethod();
@@ -144,7 +205,8 @@ final class IngPaymentMethodResolverTest extends TestCase
         $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
-            $this->totalResolver
+            $this->totalResolver,
+            $this->cartContext
         );
         $ingPaymentsMethodResolver->resolve();
     }

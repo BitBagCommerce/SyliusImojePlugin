@@ -11,10 +11,9 @@ final class OrderPaymentResolver implements OrderPaymentResolverInterface
 {
     public function resolve(OrderInterface $order): PaymentInterface
     {
-        $payment = $order->getLastPayment(PaymentInterface::STATE_NEW);
-
+        $payment = $order->getLastPayment();
         if (null === $payment) {
-            $payment = $order->getLastPayment(PaymentInterface::STATE_CART);
+            $payment = $order->getLastPayment();
         }
 
         if (null === $payment) {

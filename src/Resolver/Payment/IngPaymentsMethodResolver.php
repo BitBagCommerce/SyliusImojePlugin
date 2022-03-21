@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusIngPlugin\Exception\PaymentNotFoundException;
 use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
 
 final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
 {
@@ -17,26 +20,40 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
     private TotalResolverInterface $totalResolver;
 
+    private CartContextInterface $cartContext;
+
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         AvailablePaymentMethodsFilterInterface $paymentMethodsFilter,
-        TotalResolverInterface $totalResolver
+        TotalResolverInterface $totalResolver,
+        CartContextInterface $cartContext
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodsFilter = $paymentMethodsFilter;
         $this->totalResolver = $totalResolver;
+        $this->cartContext = $cartContext;
     }
 
     public function resolve(): array
     {
         $total = $this->totalResolver->resolve();
-        $payment = $this->paymentMethodRepository->findOneForIng();
+        $paymentMethod = $this->paymentMethodRepository->findOneForIng();
+
+        /** @var OrderInterface $cart */
+        $cart = $this->cartContext->getCart();
+        $payment = $cart->getLastPayment();
 
         if (null === $payment) {
+            throw new PaymentNotFoundException('No found payment for order');
+        }
+
+        $currency = $payment->getCurrencyCode();
+
+        if (null === $paymentMethod) {
             throw new IngNotConfiguredException('Payment method is not configured');
         }
 
-        $config = $payment->getGatewayConfig();
+        $config = $paymentMethod->getGatewayConfig();
 
         if (null === $config) {
             throw new IngNotConfiguredException('Payment method is not configured');
@@ -117,6 +134,10 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (self::MIN_TOTAL_100 > $total) {
             unset($finalData['pbl']);
+        }
+
+        if (self::PLN_CURRENCY !== $currency) {
+            return [];
         }
 
         return $finalData;
