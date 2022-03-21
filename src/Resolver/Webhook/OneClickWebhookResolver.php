@@ -75,12 +75,12 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         $orderId = $transactionPayload['orderId'] ?? '';
         $transactionStatus = $transactionPayload['status'] ?? '';
 
-        $data = [$transactionId,$paymentMethod,$orderId,$paymentMethodCode,$transactionStatus];
+        $data = [ $transactionId, $paymentMethod, $orderId, $paymentMethodCode, $transactionStatus ];
 
         foreach ($data as $item)
         {
             if ('' === $item) {
-                throw new IngBadRequestException('No valid transaction data could be found');
+                throw new IngBadRequestException('Missing mandatory transaction data');
             }
         }
 

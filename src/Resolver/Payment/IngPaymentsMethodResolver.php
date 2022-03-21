@@ -136,7 +136,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             unset($finalData['pbl']);
         }
 
-        if ('PLN' !== $currency) {
+        if (self::PLN_CURRENCY !== $currency) {
             return [];
         }
 
