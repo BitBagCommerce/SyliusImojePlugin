@@ -27,7 +27,6 @@ final class OrderPaymentResolverTest extends TestCase
         $this->order
             ->expects(self::once())
             ->method('getLastPayment')
-            ->with(PaymentInterface::STATE_NEW)
             ->willReturn($this->payment);
 
         $resolver = new OrderPaymentResolver();
