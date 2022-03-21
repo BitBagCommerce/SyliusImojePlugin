@@ -7,7 +7,9 @@ namespace BitBag\SyliusIngPlugin\Resolver\Webhook;
 use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
 use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
+use BitBag\SyliusIngPlugin\Factory\Status\StatusResponseModelFactoryInterface;
 use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
+use BitBag\SyliusIngPlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
 use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
 use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
@@ -31,6 +33,10 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 
     private OrderPaymentResolverInterface $orderPaymentResolver;
 
+    private StatusResponseModelFactoryInterface $statusResponseModelFactory;
+
+    private WebhookResponseProcessorInterface $webhookResponseProcessor;
+
     public function __construct(
         RequestStack $requestStack,
         IngTransactionFactoryInterface $ingTransactionFactory,
@@ -38,7 +44,9 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
         DispatcherInterface $dispatcher,
         PaymentMethodResolverInterface $paymentMethodResolver,
-        OrderPaymentResolverInterface $orderPaymentResolver
+        OrderPaymentResolverInterface $orderPaymentResolver,
+        StatusResponseModelFactoryInterface $statusResponseModelFactory,
+        WebhookResponseProcessorInterface $webhookResponseProcessor
     ) {
         $this->requestStack = $requestStack;
         $this->ingTransactionFactory = $ingTransactionFactory;
@@ -47,6 +55,8 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         $this->dispatcher = $dispatcher;
         $this->paymentMethodResolver = $paymentMethodResolver;
         $this->orderPaymentResolver = $orderPaymentResolver;
+        $this->statusResponseModelFactory = $statusResponseModelFactory;
+        $this->webhookResponseProcessor = $webhookResponseProcessor;
     }
 
     public function resolve(): bool
@@ -59,13 +69,19 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         if ('' === $paymentProfile) {
             return false;
         }
-
         $transactionId = $transactionPayload['id'] ?? '';
         $paymentMethod = $transactionPayload['paymentMethod'] ?? '';
         $paymentMethodCode = $transactionPayload['paymentMethodCode'] ?? '';
         $orderId = $transactionPayload['orderId'] ?? '';
+        $transactionStatus = $transactionPayload['status'] ?? '';
 
-        if ('' === $transactionId || '' === $paymentMethod || '' === $orderId || '' === $paymentMethodCode) {
+        if (
+            '' === $transactionId
+            || '' === $paymentMethod
+            || '' === $orderId
+            || '' === $paymentMethodCode
+            || '' === $transactionStatus
+        ) {
             throw new IngBadRequestException('No valid transaction data could be found');
         }
 
@@ -73,6 +89,7 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
             /** @var OrderInterface $order */
             $order = $this->orderRepository->find($orderId);
             $payment = $this->orderPaymentResolver->resolve($order);
+            $paymentId = $payment->getId();
             $gatewayCode = $this->paymentMethodResolver->resolve($payment)->getCode();
             $config = $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
             $transaction = $this->ingTransactionFactory->create(
@@ -84,6 +101,18 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
                 $gatewayCode
             );
             $this->dispatcher->dispatch(new SaveTransaction($transaction));
+
+            if (
+                '' === (string)$transactionId
+                || '' === (string)$paymentId
+                || '' === (string)$orderId
+                || '' === (string)$transactionStatus
+            ) {
+                throw new IngBadRequestException('Missing transaction data');
+            }
+
+            $webhookModel = $this->statusResponseModelFactory->create($transactionId, (string) $paymentId, (string) $orderId, $transactionStatus);
+            $this->webhookResponseProcessor->process($webhookModel, $payment);
         }
 
         return true;

@@ -122,6 +122,8 @@
             <argument id="bitbag.sylius_ing_plugin.bus.dispatcher" type="service"/>
             <argument id="bitbag.sylius_ing_plugin.resolver.payment_method.payment_method_resolver" type="service"/>
             <argument id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory" type="service"/>
+            <argument id="bitbag.sylius_ing_plugin.processor.webhook.status.webhook_response_processor" type="service"/>
         </service>
 
         <service class="BitBag\SyliusIngPlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolver"
