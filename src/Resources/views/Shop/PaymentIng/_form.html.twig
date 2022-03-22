@@ -14,7 +14,7 @@
                         class="online-payment__input"
                     />
                     <label for="choice-{{ choice.label }}">
-                        <img src="https://data.imoje.pl/img/pay/{{ choice.label }}.png" class="paymentMethodImage" aria-label="{{ choice.label }}">
+                        <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
                     </label>
 
                 </div>
@@ -37,7 +37,7 @@
                         class="online-payment__input-pbl-child"
                     />
                     <label for="choice-{{ choice.label }}">
-                        <img src="https://data.imoje.pl/img/pay/{{ choice.label }}.png" class="paymentMethodImage" aria-label="{{ choice.label }}">
+                        <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
                     </label>
 
                 </div>
