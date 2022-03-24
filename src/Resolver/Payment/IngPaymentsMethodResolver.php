@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BitBag\SyliusIngPlugin\Resolver\Payment;
 
 use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Exception\PaymentNotFoundException;
 use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
@@ -41,13 +40,8 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         /** @var OrderInterface $cart */
         $cart = $this->cartContext->getCart();
-        $payment = $cart->getLastPayment();
 
-        if (null === $payment) {
-            throw new PaymentNotFoundException('No found payment for order');
-        }
-
-        $currency = $payment->getCurrencyCode();
+        $currency = $cart->getCurrencyCode();
 
         if (null === $paymentMethod) {
             throw new IngNotConfiguredException('Payment method is not configured');
