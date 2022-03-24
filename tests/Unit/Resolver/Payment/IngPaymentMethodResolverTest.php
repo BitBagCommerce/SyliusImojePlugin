@@ -64,11 +64,6 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $order
             ->expects(self::once())
-            ->method('getLastPayment')
-            ->willReturn($payment);
-
-        $payment
-            ->expects(self::once())
             ->method('getCurrencyCode')
             ->willReturn('PLN');
 
@@ -125,7 +120,6 @@ final class IngPaymentMethodResolverTest extends TestCase
     public function testResolveEmptyPaymentException(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $payment = $this->createMock(PaymentInterface::class);
         $this->expectException(IngNotConfiguredException::class);
 
         $this->cartContext
@@ -134,11 +128,6 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->willReturn($order);
 
         $order
-            ->expects(self::once())
-            ->method('getLastPayment')
-            ->willReturn($payment);
-
-        $payment
             ->expects(self::once())
             ->method('getCurrencyCode')
             ->willReturn('PLN');
@@ -179,12 +168,8 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->method('getCart')
             ->willReturn($order);
 
-        $order
-            ->expects(self::once())
-            ->method('getLastPayment')
-            ->willReturn($payment);
 
-        $payment
+        $order
             ->expects(self::once())
             ->method('getCurrencyCode')
             ->willReturn('PLN');
