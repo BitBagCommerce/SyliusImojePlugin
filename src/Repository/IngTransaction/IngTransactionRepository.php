@@ -22,7 +22,7 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
             ->getResult()
             ;
 
-        if (null === transaction) {
+        if (null === $transaction) {
             throw new NoTransactionException('Could not find transaction');
         }
 
