@@ -19,14 +19,16 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
             ->where('payment.id = :paymentId')
             ->setParameter('paymentId', $paymentId)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
             ;
 
-        if (null === $transaction) {
+        if (null === transaction) {
             throw new NoTransactionException('Could not find transaction');
         }
 
-        return $transaction;
+        $goodTransaction = end($transaction);
+
+        return $goodTransaction;
     }
 
     public function getOneByTransactionId(string $transactionId): IngTransactionInterface
