@@ -26,9 +26,9 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
             throw new NoTransactionException('Could not find transaction');
         }
 
-        $goodTransaction = end($transaction);
+        $resultTransaction = end($transaction);
 
-        return $goodTransaction;
+        return $resultTransaction;
     }
 
     public function getOneByTransactionId(string $transactionId): IngTransactionInterface
