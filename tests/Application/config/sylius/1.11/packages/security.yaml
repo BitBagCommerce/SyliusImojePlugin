@@ -27,6 +27,18 @@ security:
     encoders:
         Sylius\Component\User\Model\UserInterface: argon2i
     firewalls:
+        bitbag_ing_webhook:
+            pattern: ^/payment/ing/webhook
+            anonymous: true
+            stateless: true
+        bitbag_one_click:
+            pattern: ^/payment/oneclick
+            anonymous: true
+            stateless: true
+        bitbag_ing_one_click_redirect:
+            pattern: ^/payment/ing/oneclick/redirect/{status}/{paymentId}
+            anonymous: true
+            stateless: true
         admin:
             switch_user: true
             context: admin
@@ -53,10 +65,6 @@ security:
                 path: sylius_admin_logout
                 target: sylius_admin_login
             anonymous: true
-
-        oauth_token:
-            pattern: "%sylius.security.api_regex%/oauth/v2/token"
-            security: false
 
         new_api_admin_user:
             pattern: "%sylius.security.new_api_route%/admin-user-authentication-token"
@@ -96,13 +104,6 @@ security:
             guard:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
-
-        api:
-            pattern: "%sylius.security.api_regex%/.*"
-            provider: sylius_admin_user_provider
-            fos_oauth: true
-            stateless: true
-            anonymous: true
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
