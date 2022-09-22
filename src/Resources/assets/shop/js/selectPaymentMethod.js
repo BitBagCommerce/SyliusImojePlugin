@@ -36,6 +36,14 @@ export class SelectPaymentMethod {
     _checkIfAnyChecked = checkboxesArray => {
         return checkboxesArray.some(checkbox => checkbox.checked === true);
     }
+    
+    _resetRadioButtons = () => {
+      if (event.target.value === 'pbl') { return; }
+
+      const pblMethodRadioButtons = document.querySelectorAll('input[class="online-payment__input-pbl-child"]:checked');
+
+      pblMethodRadioButtons.forEach(pblMethodRadioButton => { pblMethodRadioButton.checked = false} );
+    }
 
     _connectListeners = () => {
         const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper');
@@ -44,6 +52,7 @@ export class SelectPaymentMethod {
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
         const nextStepButton = document.getElementById('next-step');
         const ingPayment = document.querySelector(this.finalConfig.ingId);
+        const paymentMethodsCheckboxes = document.querySelectorAll('.online-payment__input');
         const notPblOptionCheckboxesMain = [...document.querySelectorAll(
             `${ this.finalConfig.blikId },
             ${ this.finalConfig.ingId },
@@ -106,6 +115,10 @@ export class SelectPaymentMethod {
                 }
             });
         });
+        
+        paymentMethodRadioButtons.forEach(paymentMethodRadioButton => {
+            paymentMethodRadioButton.addEventListener('change', resetRadioButtons);
+        })
     }
 }
 
