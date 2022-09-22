@@ -52,7 +52,7 @@ export class SelectPaymentMethod {
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
         const nextStepButton = document.getElementById('next-step');
         const ingPayment = document.querySelector(this.finalConfig.ingId);
-        const paymentMethodsCheckboxes = document.querySelectorAll('.online-payment__input');
+        const paymentMethodRadioButtons = document.querySelectorAll('.online-payment__input');
         const notPblOptionCheckboxesMain = [...document.querySelectorAll(
             `${ this.finalConfig.blikId },
             ${ this.finalConfig.ingId },
@@ -117,7 +117,7 @@ export class SelectPaymentMethod {
         });
         
         paymentMethodRadioButtons.forEach(paymentMethodRadioButton => {
-            paymentMethodRadioButton.addEventListener('change', resetRadioButtons);
+            paymentMethodRadioButton.addEventListener('change', this._resetRadioButtons);
         })
     }
 }
