@@ -7,7 +7,7 @@
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "sylius/refund-plugin": "^1.0",
-        "sylius/sylius": "~1.10.0 || ~1.11.0",
+        "sylius/sylius": "~1.11.0",
         "twig/extra-bundle": "^3.3"
     },
     "require-dev": {
