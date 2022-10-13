@@ -14,6 +14,8 @@ interface TransactionMethodResolverInterface
 
     public const PAYMENT_METHOD_ING = 'ing';
 
+    public const PAYMENT_METHOD_PAY_LATER = 'imoje_paylater';
+
     public const PAYMENT_METHOD_PBL = 'pbl';
 
     public function resolve(PaymentInterface $payment): string;

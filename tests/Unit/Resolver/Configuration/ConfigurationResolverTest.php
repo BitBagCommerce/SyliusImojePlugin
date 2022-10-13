@@ -52,6 +52,9 @@ final class ConfigurationResolverTest extends TestCase
             'bspb' => '',
             'nest' => '',
             'envelo' => '',
+            'imoje_paylater' => '',
+            'imoje_twisto' => '',
+            'paypo' => '',
         ];
 
         $resolved = $this->resolver->resolve($config);

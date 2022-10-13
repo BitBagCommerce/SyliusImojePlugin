@@ -10,6 +10,8 @@ interface AvailablePaymentMethodsFilterInterface
 
     public const TYPE_PBL = 'pbl';
 
+    public const TYPE_PAY_LATER = 'imoje_paylater';
+
     public function filter(
         string $code,
         string $serviceId,

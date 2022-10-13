@@ -79,6 +79,9 @@ final class ConfigurationType extends AbstractType
             ->add('card', HiddenType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.card',
             ])
+            ->add('imoje_paylater', CheckboxType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.pay_later',
+            ])
             ->add('ing', HiddenType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.ing',
             ])

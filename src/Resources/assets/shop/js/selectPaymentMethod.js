@@ -10,13 +10,16 @@ export class SelectPaymentMethod {
             blikId: '#choice-blik',
             ingId: '#choice-ing',
             cardId: '#choice-card',
+            payLaterId: '#choice-imoje_paylater',
         };
         this.finalConfig = {
             ...this.defaultConfig,
             ...config
         };
         this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child');
+        this.payLaterMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-pay-later');
         this.pblCheckboxesChildren = document.querySelectorAll('.online-payment__input-pbl-child');
+        this.payLaterCheckboxesChildren = document.querySelectorAll('.online-payment__input-pay-later-child');
     }
 
     init() {
@@ -50,13 +53,21 @@ export class SelectPaymentMethod {
         const IngCheckbox = document.querySelector('.ing-payments');
         const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]');
         const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
+        const payLaterOptionCheckbox = document.querySelector(this.finalConfig.payLaterId);
         const nextStepButton = document.getElementById('next-step');
         const ingPayment = document.querySelector(this.finalConfig.ingId);
         const paymentMethodRadioButtons = document.querySelectorAll('.online-payment__input');
         const notPblOptionCheckboxesMain = [...document.querySelectorAll(
             `${ this.finalConfig.blikId },
             ${ this.finalConfig.ingId },
-            ${ this.finalConfig.cardId }`
+            ${ this.finalConfig.cardId },
+            ${ this.finalConfig.payLaterId }`
+        )];
+        const notPayLaterOptionCheckboxesMain = [...document.querySelectorAll(
+            `${ this.finalConfig.blikId },
+            ${ this.finalConfig.ingId },
+            ${ this.finalConfig.cardId },
+            ${ this.finalConfig.pblId }`
         )];
 
         if (!pblOptionCheckbox && notPblOptionCheckboxesMain.length === 0) {
@@ -77,10 +88,23 @@ export class SelectPaymentMethod {
             });
         });
 
+        notPayLaterOptionCheckboxesMain.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                this.payLaterMethodsWrapper.classList.add(this.finalConfig.disabledClass);
+            });
+        });
+
         if (pblOptionCheckbox !== null) {
             pblOptionCheckbox.addEventListener('change', () => {
                 this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
                 this.pblCheckboxesChildren[0].checked = true;
+            });
+        }
+
+        if (payLaterOptionCheckbox !== null) {
+            payLaterOptionCheckbox.addEventListener('change', () => {
+                this.payLaterMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
+                this.payLaterCheckboxesChildren[0].checked = true;
             });
         }
 

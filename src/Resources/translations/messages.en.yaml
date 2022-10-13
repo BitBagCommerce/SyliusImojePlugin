@@ -35,3 +35,4 @@ bitbag_sylius_ing_plugin:
     shop_key: Shop key
     blik_code:
       not_blank: Blik code must be 6 digits long
+    pay_later: Pay later

@@ -89,7 +89,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if ($data['pbl']) {
             foreach ($data as $key => $value) {
-                if (!$value && 'ing' !== $key && 'card' !== $key && 'blik' !== $key) {
+                if (!$value && 'ing' !== $key && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key) {
                     unset($data[$key]);
                 }
             }
@@ -97,16 +97,24 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (!$data['pbl']) {
             foreach ($data as $key => $value) {
-                if (('ing' !== $key && 'card' !== $key && 'blik' !== $key)) {
+                if (('ing' !== $key && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key)) {
                     unset($data[$key]);
                 }
             }
+        }
+
+        if ($data['imoje_paylater']) {
+            $data['imoje_twisto'] = true;
+            $data['paypo'] = true;
+        } else {
+            unset($data['imoje_paylater']);
         }
 
         $paymentMethodConfig = $config->getConfig();
         $serviceId = $paymentMethodConfig['serviceId'] ?? '';
 
         $isPblPayment = \array_key_exists('pbl', $data);
+        $isPayLaterPayment = \array_key_exists('imoje_paylater', $data);
         $data = $this->paymentMethodsFilter->filter($config->getGatewayName(), $serviceId, $data);
         $finalData = [];
 
@@ -116,6 +124,10 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (!$isPblPayment) {
             unset($finalData['pbl']);
+        }
+
+        if (!$isPayLaterPayment) {
+            unset($finalData['imoje_paylater']);
         }
 
         if (self::MIN_TOTAL_5 > $total) {
@@ -130,9 +142,9 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
             unset($finalData['pbl']);
         }
 
-        if (self::PLN_CURRENCY !== $currency) {
-            return [];
-        }
+//        if (self::PLN_CURRENCY !== $currency) {
+//            return [];
+//        }
 
         return $finalData;
     }

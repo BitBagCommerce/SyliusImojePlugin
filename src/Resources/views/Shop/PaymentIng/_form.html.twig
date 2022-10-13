@@ -1,7 +1,7 @@
 <div class="bb-online-payment-wrapper">
     <div class="bb-online-payment-wrapper-main">
         {% for keyChoice, choice in methodIng.vars.choices %}
-            {% if choice.label == 'blik' or choice.label == 'ing' or choice.label == 'card' or choice.label == 'pbl' %}
+            {% if choice.label == 'blik' or choice.label == 'ing' or choice.label == 'card' or choice.label == 'pbl' or choice.label == 'imoje_paylater' %}
                 <div
                     class="bb-online-payment-wrapper-main-item"
                     id="{{ choice.value }}"
@@ -24,7 +24,7 @@
 
     <div class="bb-online-payment-wrapper-child disabled">
         {% for keyChoice, choice in methodIng.vars.choices %}
-            {% if choice.label != "blik" and choice.label != "ing" and choice.label != "card" and choice.label != "pbl" %}
+            {% if choice.label != "blik" and choice.label != "ing" and choice.label != "card" and choice.label != "pbl" and choice.label != 'imoje_paylater' and choice.label != 'imoje_twisto' and choice.label != 'paypo' %}
                 <div
                     class="bb-online-payment-wrapper-child-item"
                     id="{{ choice.value }}"
@@ -35,6 +35,29 @@
                         id="choice-{{ choice.label }}"
                         name="{{ methodIng.vars.full_name }}-pbl-child"
                         class="online-payment__input-pbl-child"
+                    />
+                    <label for="choice-{{ choice.label }}">
+                        <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
+                    </label>
+
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <div class="bb-online-payment-wrapper-pay-later disabled">
+        {% for keyChoice, choice in methodIng.vars.choices %}
+            {% if choice.label == 'imoje_twisto' or choice.label == 'paypo' %}
+                <div
+                        class="bb-online-payment-wrapper-child-item"
+                        id="{{ choice.value }}"
+                >
+                    <input
+                            type="radio"
+                            value="{{ choice.value }}"
+                            id="choice-{{ choice.label }}"
+                            name="{{ methodIng.vars.full_name }}-pay-later-child"
+                            class="online-payment__input-pay-later-child"
                     />
                     <label for="choice-{{ choice.label }}">
                         <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">

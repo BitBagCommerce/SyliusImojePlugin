@@ -42,7 +42,7 @@ final class AvailablePaymentMethodsFilter implements AvailablePaymentMethodsFilt
 
             $paymentMethodType = $availablePaymentMethod->getPaymentMethod();
 
-            if (self::TYPE_CARD === $paymentMethodType || self::TYPE_PBL === $paymentMethodType) {
+            if (self::TYPE_CARD === $paymentMethodType || self::TYPE_PBL === $paymentMethodType || self::TYPE_PAY_LATER == $paymentMethodType) {
                 $result[$paymentMethodType] = $paymentMethodType;
             }
         }

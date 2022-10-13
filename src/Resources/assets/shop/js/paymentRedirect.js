@@ -11,6 +11,7 @@ export class PaymentRedirect {
             blikId: '#choice-blik',
             ingId: '#choice-ing',
             cardId: '#choice-card',
+            payLaterId: '#choice-imoje_paylater',
         };
         this.finalConfig = {
             ...this.defaultConfig,
@@ -30,6 +31,7 @@ export class PaymentRedirect {
     _connectListeners = () => {
         const blikCheckbox = document.querySelector(this.finalConfig.blikId);
         const pblCheckbox = document.querySelector(this.finalConfig.pblId);
+        const payLaterCheckbox = document.querySelector(this.finalConfig.payLaterId);
         const ingCheckbox = document.querySelector(this.finalConfig.ingId);
         const path = document.querySelector('[data-bb-path-inicialize]').dataset.bbPathInicialize;
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
@@ -47,6 +49,15 @@ export class PaymentRedirect {
 
         if (pblCheckbox) {
             pblCheckbox.addEventListener('click', () => {
+                const blikInputWrapper = document.querySelector('.js-blik-input-wrapper');
+                if (blikInputWrapper) {
+                    blikInputWrapper.classList.add('disabled')
+                }
+            });
+        }
+
+        if (payLaterCheckbox) {
+            payLaterCheckbox.addEventListener('click', () => {
                 const blikInputWrapper = document.querySelector('.js-blik-input-wrapper');
                 if (blikInputWrapper) {
                     blikInputWrapper.classList.add('disabled')
@@ -89,8 +100,11 @@ export class PaymentRedirect {
             if (cardCheckbox.checked) {
                 performAction(true);
             } else if (pblCheckbox && pblCheckbox.checked) {
-                    const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value;
-                    window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
+                const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value;
+                window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
+            } else if (payLaterCheckbox && payLaterCheckbox.checked) {
+                const checkedElementValue = document.querySelector('.online-payment__input-pay-later-child:checked').value;
+                window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
             } else if (blikCheckbox && blikCheckbox.checked) {
                 const blikNumber = document.querySelector('.js-blik-input').value;
 
