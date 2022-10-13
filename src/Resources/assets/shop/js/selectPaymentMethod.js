@@ -41,11 +41,15 @@ export class SelectPaymentMethod {
     }
     
     _resetRadioButtons = () => {
-      if (event.target.value === 'pbl') { return; }
-
       const pblMethodRadioButtons = document.querySelectorAll('input[class="online-payment__input-pbl-child"]:checked');
+      const payLaterMethodRadioButtons = document.querySelectorAll('input[class="online-payment__input-pay-later-child"]:checked');
 
-      pblMethodRadioButtons.forEach(pblMethodRadioButton => { pblMethodRadioButton.checked = false} );
+      if (event.target.value !== 'pbl') {
+          pblMethodRadioButtons.forEach(pblMethodRadioButton => { pblMethodRadioButton.checked = false} );
+      }
+      if (event.target.value !== 'imoje_paylater') {
+          payLaterMethodRadioButtons.forEach(payLaterMethodRadioButton => { payLaterMethodRadioButton.checked = false} );
+      }
     }
 
     _connectListeners = () => {
