@@ -18,7 +18,12 @@ export const performAction = async (isAfterPayment = false) => {
             const data = await response.json();
             const script = document.createElement('script');
 
-            script.src = 'https://sandbox.paywall.imoje.pl/js/widget.min.js';
+            if (data.isProd) {
+                script.src = 'https://paywall.imoje.pl/js/widget.min.js';
+            } else {
+                script.src = 'https://sandbox.paywall.imoje.pl/js/widget.min.js';
+            }
+
             script.id = 'imoje-widget__script';
             script.dataset.merchantId = data.merchantId;
             script.dataset.serviceId = data.serviceId;
