@@ -2,8 +2,9 @@
     &-main {
         display: flex;
         justify-content: flex-start;
-        gap: 6rem;
+        gap: 0 6rem;
         align-items: center;
+        flex-wrap: wrap;
 
 
 
@@ -16,6 +17,20 @@
     }
 
     &-child {
+        display: grid;
+        gap: 1rem;
+        flex-direction: column;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-content: space-around;
+        justify-content: space-between;
+        margin-top: 3em;
+
+        &.disabled {
+            display: none;
+        }
+    }
+
+    &-pay-later {
         display: grid;
         gap: 1rem;
         flex-direction: column;

@@ -8,6 +8,7 @@ bitbag_sylius_ing_plugin:
     is_prod: Whether to use the production url
     merchant: Enter merchant ID
     pbl: Transfers online
+    ing: ING
     mtransfer: mTransfer - mBank
     bzwbk: Przelew24 - Santander Bank Polska
     pekao24: Pekao24Przelew - Bank Pekao
@@ -35,3 +36,4 @@ bitbag_sylius_ing_plugin:
     shop_key: Shop key
     blik_code:
       not_blank: Blik code must be 6 digits long
+    pay_later: Pay later

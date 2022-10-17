@@ -22,8 +22,8 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
             'shopKey' => '',
             'blik' => '',
             'card' => '',
-            'ing' => '',
             'pbl' => '',
+            'ing' => '',
             'mtransfer' => '',
             'bzwbk' => '',
             'pekao24' => '',
@@ -44,6 +44,9 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
             'bspb' => '',
             'nest' => '',
             'envelo' => '',
+            'imoje_paylater' => '',
+            'imoje_twisto' => '',
+            'paypo' => '',
         ]);
 
         $resolver->setRequired($resolver->getDefinedOptions());

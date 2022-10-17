@@ -24,8 +24,7 @@ final class ShippingModelFactory implements ShippingModelFactoryInterface
         $city = $shippingAddress->getCity();
         $region = $shippingAddress->getProvinceName() ?? '';
         $postalCode = $shippingAddress->getPostcode();
-        $countryCode = $shippingAddress->getCountryCode();
 
-        return new ShippingModel($firstName, $lastName, $company, $street, $city, $region, $postalCode, $countryCode);
+        return new ShippingModel($firstName, $lastName, $company, $street, $city, $region, $postalCode);
     }
 }

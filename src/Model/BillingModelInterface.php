@@ -19,6 +19,4 @@ interface BillingModelInterface
     public function getRegion(): ?string;
 
     public function getPostalCode(): ?string;
-
-    public function getCountryCodeAlpha2(): ?string;
 }

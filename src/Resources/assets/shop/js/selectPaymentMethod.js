@@ -4,19 +4,16 @@ export class SelectPaymentMethod {
     ) {
         this.config = config;
         this.defaultConfig = {
-            paymentTargetsClass: '.bb-pbl-methods',
             disabledClass: 'disabled',
-            pblId: '#choice-pbl',
-            blikId: '#choice-blik',
-            ingId: '#choice-ing',
-            cardId: '#choice-card',
         };
         this.finalConfig = {
             ...this.defaultConfig,
             ...config
         };
-        this.pblMethodsWrapper = document.querySelector('.bb-online-payment-wrapper-child');
-        this.pblCheckboxesChildren = document.querySelectorAll('.online-payment__input-pbl-child');
+        this.ingPaymentsWrapper = document.querySelector('.bb-online-payment-wrapper');
+        this.additionalPaymentsWrappers = document.querySelectorAll('.bb-online-payment-wrapper-child');
+        this.paymentMethodRadios = document.querySelectorAll('input[name$="][method]"]');
+        this.ingPaymentMethodRadios = document.querySelectorAll('.online-payment__input');
     }
 
     init() {
@@ -25,100 +22,66 @@ export class SelectPaymentMethod {
         }
 
         this._connectListeners();
+
+        if (document.querySelector('.ing-payments:checked')) {
+            this._openPaymentsWrapper();
+        }
     }
 
-    _turnOffNotNeededCheckboxes = checkboxesArray => {
-        checkboxesArray.forEach(checkbox => {
-            checkbox.checked = false;
+    _openPaymentsWrapper = () => {
+        this.ingPaymentsWrapper.classList.remove(this.finalConfig.disabledClass);
+        this.ingPaymentMethodRadios[0].click();
+    }
+
+    _closePaymentsWrapper = () => {
+        this.ingPaymentsWrapper.classList.add(this.finalConfig.disabledClass);
+
+        this.ingPaymentMethodRadios.forEach(paymentMethodRadio => {
+            paymentMethodRadio.checked = false;
         });
+
+        this._closeAdditionalPaymentsWrappers();
     }
 
-    _checkIfAnyChecked = checkboxesArray => {
-        return checkboxesArray.some(checkbox => checkbox.checked === true);
+    _openAdditionalPaymentsWrapper = (name) => {
+        const additionalPaymentsWrapper = document.getElementById(name);
+
+        if (additionalPaymentsWrapper) {
+            additionalPaymentsWrapper.classList.remove(this.finalConfig.disabledClass);
+
+            additionalPaymentsWrapper.querySelector('input').checked = true;
+        }
     }
-    
-    _resetRadioButtons = () => {
-      if (event.target.value === 'pbl') { return; }
 
-      const pblMethodRadioButtons = document.querySelectorAll('input[class="online-payment__input-pbl-child"]:checked');
+    _closeAdditionalPaymentsWrappers = () => {
+        this.additionalPaymentsWrappers.forEach(additionalPaymentsWrapper => {
+            additionalPaymentsWrapper.classList.add(this.finalConfig.disabledClass);
 
-      pblMethodRadioButtons.forEach(pblMethodRadioButton => { pblMethodRadioButton.checked = false} );
+            const additionalPaymentsRadios = additionalPaymentsWrapper.querySelectorAll('.online-payment__input-child');
+
+            additionalPaymentsRadios.forEach(additionalPaymentRadio => {
+                additionalPaymentRadio.checked = false;
+            });
+        });
     }
 
     _connectListeners = () => {
-        const paymentMethodsWrapper = document.querySelector('.bb-online-payment-wrapper');
-        const IngCheckbox = document.querySelector('.ing-payments');
-        const otherThanIngCheckboxes = document.querySelectorAll('[value="cash_on_delivery"], [value="bank_transfer"]');
-        const pblOptionCheckbox = document.querySelector(this.finalConfig.pblId);
-        const nextStepButton = document.getElementById('next-step');
-        const ingPayment = document.querySelector(this.finalConfig.ingId);
-        const paymentMethodRadioButtons = document.querySelectorAll('.online-payment__input');
-        const notPblOptionCheckboxesMain = [...document.querySelectorAll(
-            `${ this.finalConfig.blikId },
-            ${ this.finalConfig.ingId },
-            ${ this.finalConfig.cardId }`
-        )];
-
-        if (!pblOptionCheckbox && notPblOptionCheckboxesMain.length === 0) {
-            const ingGateway = IngCheckbox.closest('.item');
-
-            ingGateway.style.display = 'none';
-            return;
-        }
-
-        IngCheckbox.click();
-        otherThanIngCheckboxes[0].click();
-        IngCheckbox.click();
-        ingPayment.click();
-
-        notPblOptionCheckboxesMain.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                this.pblMethodsWrapper.classList.add(this.finalConfig.disabledClass);
-            });
-        });
-
-        if (pblOptionCheckbox !== null) {
-            pblOptionCheckbox.addEventListener('change', () => {
-                this.pblMethodsWrapper.classList.toggle(this.finalConfig.disabledClass);
-                this.pblCheckboxesChildren[0].checked = true;
-            });
-        }
-
-
-        IngCheckbox.addEventListener('change', () => {
-            paymentMethodsWrapper.classList.toggle('disabled');
-        });
-
-        otherThanIngCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                paymentMethodsWrapper.classList.add('disabled');
-            });
-        });
-
-        IngCheckbox.addEventListener('change', () =>  ingPayment.checked = true );
-
-        nextStepButton.addEventListener('click', () => {
-            if (pblOptionCheckbox !== null) {
-                if (pblOptionCheckbox.checked && IngCheckbox.checked) {
-                    return;
-                }
-            } else if (IngCheckbox.checked && this._checkIfAnyChecked(notPblOptionCheckboxesMain)) {
-                this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
-            }
-
-            otherThanIngCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    this._turnOffNotNeededCheckboxes(notPblOptionCheckboxesMain.concat(pblOptionCheckbox));
-                    this._turnOffNotNeededCheckboxes(this.pblCheckboxesChildren);
-                    this.pblMethodsWrapper.classList.add('disabled');
-                    paymentMethodsWrapper.classList.add('disabled');
+        this.paymentMethodRadios.forEach(paymentMethodRadio => {
+            paymentMethodRadio.addEventListener('change', () => {
+                if (paymentMethodRadio.classList.contains('ing-payments')) {
+                    this._openPaymentsWrapper();
+                } else {
+                    this._closePaymentsWrapper();
                 }
             });
         });
-        
-        paymentMethodRadioButtons.forEach(paymentMethodRadioButton => {
-            paymentMethodRadioButton.addEventListener('change', this._resetRadioButtons);
-        })
+
+        this.ingPaymentMethodRadios.forEach(paymentMethodRadio => {
+            paymentMethodRadio.addEventListener('change', () => {
+                this._closeAdditionalPaymentsWrappers();
+                this._openAdditionalPaymentsWrapper(paymentMethodRadio.dataset.target);
+            });
+        });
     }
 }
 

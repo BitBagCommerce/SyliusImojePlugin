@@ -50,6 +50,7 @@ final class IngPaymentMethodResolverTest extends TestCase
             'pbl' => 'pbl',
             'ing' => 'ing',
             'ipko' => 'ipko',
+            'imoje_paylater' => 'imoje_paylater',
         ];
 
         $this->totalResolver
