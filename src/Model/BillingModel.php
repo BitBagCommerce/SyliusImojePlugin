@@ -20,8 +20,6 @@ final class BillingModel implements BillingModelInterface
 
     private ?string $postalCode;
 
-    private ?string $countryCodeAlpha2;
-
     public function __construct(
         string $firstName,
         string $lastName,
@@ -29,8 +27,7 @@ final class BillingModel implements BillingModelInterface
         ?string $street,
         ?string $city,
         ?string $region,
-        ?string $postalCode,
-        ?string $countryCodeAlpha2
+        ?string $postalCode
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -39,7 +36,6 @@ final class BillingModel implements BillingModelInterface
         $this->city = $city;
         $this->region = $region;
         $this->postalCode = $postalCode;
-        $this->countryCodeAlpha2 = $countryCodeAlpha2;
     }
 
     public function getFirstName(): string
@@ -75,10 +71,5 @@ final class BillingModel implements BillingModelInterface
     public function getPostalCode(): ?string
     {
         return $this->postalCode;
-    }
-
-    public function getCountryCodeAlpha2(): ?string
-    {
-        return $this->countryCodeAlpha2;
     }
 }

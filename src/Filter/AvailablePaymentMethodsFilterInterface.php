@@ -15,6 +15,7 @@ interface AvailablePaymentMethodsFilterInterface
     public function filter(
         string $code,
         string $serviceId,
-        array $paymentMethods
+        array $paymentMethods,
+        string $currency
     ): array;
 }

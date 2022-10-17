@@ -21,8 +21,7 @@ final class BillingModelFactory implements BillingModelFactoryInterface
         $city = $billingAddress->getCity();
         $region = $billingAddress->getProvinceName() ?? '';
         $postalCode = $billingAddress->getPostcode();
-        $countryCode = $billingAddress->getCountryCode();
 
-        return new BillingModel($firstName, $lastName, $company, $street, $city, $region, $postalCode, $countryCode);
+        return new BillingModel($firstName, $lastName, $company, $street, $city, $region, $postalCode);
     }
 }
