@@ -38,6 +38,10 @@
 .paymentMethodImage {
  height: 2em;
  cursor: pointer;
+
+    &.image-card {
+        height: 3em;
+    }
 }
 
 .bb-online-payment-wrapper-child-item {
