@@ -80,6 +80,7 @@ final class OneClickController
             'urlFailure' => $url->getFailureUrl(),
             'urlSuccess' => $url->getSuccessUrl(),
             'signature' => $signature,
+            'isProd' => $config->isProd(),
         ]);
     }
 }
