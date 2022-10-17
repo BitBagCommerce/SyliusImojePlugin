@@ -37,7 +37,11 @@ final class AvailablePaymentMethodsFilter implements AvailablePaymentMethodsFilt
                 \in_array($paymentMethodCode, $paymentMethods, true) &&
                 $availablePaymentMethod->isActive()
             ) {
-                $result[$paymentMethodCode] = $paymentMethodCode;
+                if ('ing' === $paymentMethodCode) {
+                    $result = array_merge([$paymentMethodCode => $paymentMethodCode], $result);
+                } else {
+                    $result[$paymentMethodCode] = $paymentMethodCode;
+                }
             }
 
             $paymentMethodType = $availablePaymentMethod->getPaymentMethod();

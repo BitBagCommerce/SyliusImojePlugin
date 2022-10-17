@@ -89,7 +89,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if ($data['pbl']) {
             foreach ($data as $key => $value) {
-                if (!$value && 'ing' !== $key && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key) {
+                if (!$value && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key) {
                     unset($data[$key]);
                 }
             }
@@ -97,7 +97,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (!$data['pbl']) {
             foreach ($data as $key => $value) {
-                if (('ing' !== $key && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key)) {
+                if (('card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key)) {
                     unset($data[$key]);
                 }
             }
