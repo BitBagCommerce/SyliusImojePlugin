@@ -89,7 +89,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if ($data['pbl']) {
             foreach ($data as $key => $value) {
-                if (!$value && 'ing' !== $key && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key) {
+                if (!$value && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key) {
                     unset($data[$key]);
                 }
             }
@@ -97,7 +97,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (!$data['pbl']) {
             foreach ($data as $key => $value) {
-                if (('ing' !== $key && 'card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key)) {
+                if (('card' !== $key && 'blik' !== $key && 'imoje_paylater' !== $key)) {
                     unset($data[$key]);
                 }
             }
@@ -115,7 +115,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         $isPblPayment = \array_key_exists('pbl', $data);
         $isPayLaterPayment = \array_key_exists('imoje_paylater', $data);
-        $data = $this->paymentMethodsFilter->filter($config->getGatewayName(), $serviceId, $data);
+        $data = $this->paymentMethodsFilter->filter($config->getGatewayName(), $serviceId, $data, $currency);
         $finalData = [];
 
         foreach ($data as $key => $value) {
@@ -140,10 +140,6 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (self::MIN_TOTAL_100 > $total) {
             unset($finalData['pbl']);
-        }
-
-        if (self::PLN_CURRENCY !== $currency) {
-            return [];
         }
 
         return $finalData;

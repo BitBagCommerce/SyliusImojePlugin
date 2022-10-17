@@ -19,7 +19,8 @@ final class AvailablePaymentMethodsFilter implements AvailablePaymentMethodsFilt
     public function filter(
         string $code,
         string $serviceId,
-        array $paymentMethods
+        array $paymentMethods,
+        string $currency
     ): array {
         $paymentMethods = \array_keys($paymentMethods);
 
@@ -35,14 +36,23 @@ final class AvailablePaymentMethodsFilter implements AvailablePaymentMethodsFilt
 
             if (
                 \in_array($paymentMethodCode, $paymentMethods, true) &&
-                $availablePaymentMethod->isActive()
+                $availablePaymentMethod->isActive() &&
+                $currency === $availablePaymentMethod->getCurrency()
             ) {
-                $result[$paymentMethodCode] = $paymentMethodCode;
+                if ('ing' === $paymentMethodCode) {
+                    $result = array_merge([$paymentMethodCode => $paymentMethodCode], $result);
+                } else {
+                    $result[$paymentMethodCode] = $paymentMethodCode;
+                }
             }
 
             $paymentMethodType = $availablePaymentMethod->getPaymentMethod();
 
-            if (self::TYPE_CARD === $paymentMethodType || self::TYPE_PBL === $paymentMethodType || self::TYPE_PAY_LATER == $paymentMethodType) {
+            if ((self::TYPE_CARD === $paymentMethodType ||
+                self::TYPE_PBL === $paymentMethodType ||
+                self::TYPE_PAY_LATER == $paymentMethodType) &&
+                $currency === $availablePaymentMethod->getCurrency()
+            ) {
                 $result[$paymentMethodType] = $paymentMethodType;
             }
         }

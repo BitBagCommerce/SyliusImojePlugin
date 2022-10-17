@@ -100,10 +100,10 @@ export class PaymentRedirect {
             if (cardCheckbox.checked) {
                 performAction(true);
             } else if (pblCheckbox && pblCheckbox.checked) {
-                const checkedElementValue = document.querySelector('.online-payment__input-pbl-child:checked').value;
+                const checkedElementValue = document.querySelector('.online-payment__input-child:checked').value;
                 window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
             } else if (payLaterCheckbox && payLaterCheckbox.checked) {
-                const checkedElementValue = document.querySelector('.online-payment__input-pay-later-child:checked').value;
+                const checkedElementValue = document.querySelector('.online-payment__input-child:checked').value;
                 window.location.pathname = `${path}/${orderId}/${checkedElementValue}`;
             } else if (blikCheckbox && blikCheckbox.checked) {
                 const blikNumber = document.querySelector('.js-blik-input').value;

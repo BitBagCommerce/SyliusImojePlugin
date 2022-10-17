@@ -82,11 +82,12 @@ final class ConfigurationType extends AbstractType
             ->add('imoje_paylater', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.pay_later',
             ])
-            ->add('ing', HiddenType::class, [
-                'label' => 'bitbag_sylius_ing_plugin.ui.ing',
-            ])
             ->add('pbl', CheckboxType::class, [
             'label' => 'bitbag_sylius_ing_plugin.ui.pbl',
+            ])
+            ->add('ing', CheckboxType::class, [
+                'label' => 'bitbag_sylius_ing_plugin.ui.ing',
+                'attr' => ['class' => 'bb-pbl-methods'],
             ])
             ->add('mtransfer', CheckboxType::class, [
                 'label' => 'bitbag_sylius_ing_plugin.ui.mtransfer',
