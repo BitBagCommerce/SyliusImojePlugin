@@ -1,6 +1,8 @@
 {{ form_row(form.notes, sylius_test_form_attribute('extra-notes')|merge({'rows': 3})) }}
 {% if form.blik_code is defined %}
-    <div class="three wide field">
-        {{ form_row(form.blik_code, {'attr': {'maxlength': '6', 'type': 'number', 'pattern': '[0-9]{6}'}}) }}
+    <div class="ui grid">
+        <div class="sixteen wide mobile eight wide tablet three wide computer column">
+            {{ form_row(form.blik_code, {'attr': {'maxlength': '6', 'type': 'number', 'pattern': '[0-9]{6}'}}) }}
+        </div>
     </div>
 {% endif %}

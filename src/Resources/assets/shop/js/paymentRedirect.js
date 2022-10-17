@@ -77,7 +77,7 @@ export class PaymentRedirect {
                 input.innerHTML = `
                         <div class="three wide field removeArrows js-blik-input-wrapper" style="margin-top: 10px">
                                 <label>Blik Code</label>
-                                <input type="number" class='js-blik-input' maxlength="6"/>
+                                <input type="number" class='js-blik-input blik_input' maxlength="6"/>
                         </div>
                 `;
                 form.appendChild(input)
