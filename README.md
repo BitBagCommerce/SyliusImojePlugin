@@ -1,52 +1,45 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <img src="https://demo.sylius.com/assets/shop/img/logo.png" />
-    </a>
-</p>
 
-<h1 align="center">SyliusIngPlugin</h1>
+# ING Payments Plugin for Sylius
+----
 
-<p align="center">Payment gateway for ING</p>
+At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_adyen).
 
-## Documentation
+## Table of Content
 
-For a comprehensive guide on Sylius Plugins development please go to Sylius documentation,
-there you will find the <a href="https://docs.sylius.com/en/latest/plugin-development-guide/index.html">Plugin Development Guide</a>, which is full of examples.
+***
 
-## Quickstart Installation
+* [Overview](#overview)
+* [Support](#we-are-here-to-help)
+* [Installation](#installation)
+  * [Requirements](#requirements)
+  * [Usage](#usage)
+  * [Configuration](#configuration)
+* [About us](#about-us)
+  * [Community](#community)
+* [Additional Sylius resources for developers](#additional-resources-for-developers)
+* [License](#license)
+* [Contact](#contact)
 
-1. Run `composer create-project sylius/plugin-skeleton ProjectName`.
+# Overview
+----
 
-2. From the plugin skeleton root directory, run the following commands:
+![Screenshot showing payment methods show in the shop](doc/select_payment_ing.png)
 
-    ```bash
-    $ (cd tests/Application && yarn install)
-    $ (cd tests/Application && yarn build)
-    $ (cd tests/Application && APP_ENV=test bin/console assets:install public)
-    
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:database:create)
-    $ (cd tests/Application && APP_ENV=test bin/console doctrine:schema:create)
-    ```
-
-To be able to set up a plugin's database, remember to configure your database credentials in `tests/Application/.env` and `tests/Application/.env.test`.
-
-## ING Payments Plugin for Sylius
-At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/).
-
-## Overview
-
-  ![Screenshot showing payment methods show in the shop](doc/select_payment_ing.png)
-
-  ![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
-
-  ![Screenshot showing payment method config in admin](doc/widget_ing.png)
+![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
 
 The integration currently supports the following payment methods:
 
 1. Cards
 2. Blik
-3. ING payment method
-4. Pay by link
+3. Pay by link
+4. iMoje pay later
+
+# We are here to help
+----
+
+This **open-source plugin was developed to help the Sylius community** and make ING payments platform available to any Sylius store. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
+
+[![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_ing)
 
 # Installation
 ----
@@ -55,37 +48,26 @@ The integration currently supports the following payment methods:
 
 We work on stable, supported, and up-to-date versions of packages. We recommend you do the same.
 
-| Package | Version |
-| --- | --- |
-| PHP |  ^7.4 |
-| sylius/refund-plugin |  ^1.0.0 |
-| sylius/sylius |  ^1.9ㅤ or ㅤ^1.10|
+| Package              | Version       |
+|----------------------|---------------|
+| PHP                  | ^7.4  or ^8.0 |
+| sylius/refund-plugin | ^1.0.0        |
+| sylius/sylius        | ~1.11         |
+----
 
-## Usage
+For the full installation guide please go to [installation](doc/installation.md)
+
+### Usage
 
 This plugin allows you to use the payment solution delivered by ING.
 
-### Instalation
-```
-$ composer install
-$ cd tests/Application
-$ yarn install
-$ yarn encore dev
-$ bin/console assets:install -e test
-$ bin/console doctrine:database:create -e test
-$ bin/console doctrine:schema:create -e test
-$ symfony server:start
-$ open http://localhost:8080 // or the port showed in your terminal while runing command with symfony server:start
-```
 
-For the full installation guide please go to [installation](doc/installation.md).
 ### Configuration:
 You need to put the path to wkhtmltopdf in your .env file.
 ```
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
-### Configuration in the admin panel:
 To create an ING-based payment method, go to Payment methods in the Sylius admin panel.
 
 
@@ -123,17 +105,22 @@ And now, you can configure your payment method in the admin panel:
   ![Screenshot showing payment method config in admin](doc/webhook.png)
 * Now you need to add a URL in the admin panel for the production API URL:
 
-```
-https://sandbox.api.imoje.pl/v1/merchant
-```
+  ```
+  https://api.imoje.pl/v1/merchant
+  ```
 * And the sandbox API URL:
-```
-https://api.imoje.pl/v1/merchant
-```
+  ```
+  https://sandbox.api.imoje.pl/v1/merchant
+  ```
 
-* And now, you can choose which payment-by-link you want to use. After that, you need to add a name for your ![img.png](img.png) gateway and click "Create".
+* To end up you can choose which payment-by-link you want to use.
 
-  ![Screenshot showing payment method config in admin](doc/finish.png)
+  ![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
+
+* And now you have to set a proper name for your payment method (keep in mind that ING supports multiple online payment methods), and click "Create".
+
+  ![Screenshot showing payment method config in admin](doc/payment_name.png)
+
 
 # About us
 ---
