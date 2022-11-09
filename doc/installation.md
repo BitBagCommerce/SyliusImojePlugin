@@ -3,7 +3,7 @@
 1. Require it with composer:
 
 ```bash
-composer require bitbag/sylius-ing-plugin
+composer require bitbag/sylius-imoje-plugin
 ```
 2. Add plugin dependencies to your `config/bundles.php` file:
 
@@ -21,7 +21,7 @@ return [
 
 imports:
     ...
-    - { resource: "@BitBagSyliusIngPlugin/Resources/config/config.yaml" }
+    - { resource: "@SyliusIngPlugin/Resources/config.yaml" }
 ```
 
 4. Import the routing in your `config/routes.yaml` file:
@@ -30,7 +30,7 @@ imports:
 # config/routes.yaml
 
 bitbag_sylius_ing_plugin:
-    resource: "@BitBagSyliusIngPlugin/Resources/config/routing.yaml"
+    resource: "@SyliusIngPlugin/Resources/config/routing.yaml"
 ```
 
 5. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`:
@@ -50,8 +50,8 @@ bitbag_sylius_ing_plugin:
 mkdir -p templates/bundles/SyliusAdminBundle/
 mkdir -p templates/bundles/SyliusShopBundle/
 
-cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
-cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
+cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
+cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
 ```
 
 7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (templates etc.).

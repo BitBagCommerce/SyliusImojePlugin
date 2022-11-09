@@ -1,7 +1,7 @@
 {
-    "name": "bitbag/sylius-ing-plugin",
+    "name": "bitbag/sylius-imoje-plugin",
     "type": "sylius-plugin",
-    "description": "Implementation ing api to sylius store",
+    "description": "Implementation imoje api to sylius store",
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",

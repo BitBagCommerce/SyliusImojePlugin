@@ -1,5 +1,5 @@
 
-# ING Payments Plugin for Sylius
+# imoje Payments Plugin for Sylius
 ----
 
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_adyen).
@@ -32,12 +32,12 @@ The integration currently supports the following payment methods:
 1. Cards
 2. Blik
 3. Pay by link
-4. iMoje pay later
+4. imoje pay later
 
 # We are here to help
 ----
 
-This **open-source plugin was developed to help the Sylius community** and make ING payments platform available to any Sylius store. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
+This **open-source plugin was developed to help the Sylius community** and make imoje payments platform available to any Sylius store. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
 
 [![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_ing)
 
@@ -59,7 +59,7 @@ For the full installation guide please go to [installation](doc/installation.md)
 
 ### Usage
 
-This plugin allows you to use the payment solution delivered by ING.
+This plugin allows you to use the payment solution delivered by imoje.
 
 
 ### Configuration:
@@ -68,22 +68,22 @@ You need to put the path to wkhtmltopdf in your .env file.
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
-To create an ING-based payment method, go to Payment methods in the Sylius admin panel.
+To create an imoje-based payment method, go to Payment methods in the Sylius admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
-After that, you need to add an ING payment:
+After that, you need to add an imoje payment:
 
 
   ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
 And now, you can configure your payment method in the admin panel:
-* first you need to add a gateway code, for example "ing_code" and set its position.
+* first you need to add a gateway code, for example "imoje_code" and set its position.
 
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configure the iMoje gateway, log in to ING the admin panel.
+* To configure the imoje gateway, log in to imoje the admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
@@ -117,7 +117,7 @@ And now, you can configure your payment method in the admin panel:
 
   ![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
 
-* And now you have to set a proper name for your payment method (keep in mind that ING supports multiple online payment methods), and click "Create".
+* And now you have to set a proper name for your payment method (keep in mind that imoje supports multiple online payment methods), and click "Create".
 
   ![Screenshot showing payment method config in admin](doc/payment_name.png)
 
