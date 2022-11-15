@@ -8,7 +8,7 @@ use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
 
 interface IngClientConfigurationProviderInterface
 {
-    public const FACTORY_NAME = 'bitbag_ing';
+    public const FACTORY_NAME = 'bitbag_imoje';
 
     public function getPaymentMethodConfiguration(string $code): IngClientConfigurationInterface;
 }

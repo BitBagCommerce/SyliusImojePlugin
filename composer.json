@@ -1,5 +1,5 @@
 {
-    "name": "bitbag/sylius-ing-plugin",
+    "name": "bitbag/sylius-imoje-plugin",
     "type": "sylius-plugin",
     "description": "Implementation ing api to sylius store",
     "license": "MIT",

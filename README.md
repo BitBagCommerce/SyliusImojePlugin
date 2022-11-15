@@ -32,12 +32,12 @@ The integration currently supports the following payment methods:
 1. Cards
 2. Blik
 3. Pay by link
-4. iMoje pay later
+4. imoje pay later
 
 # We are here to help
 ----
 
-This **open-source plugin was developed to help the Sylius community** and make ING payments platform available to any Sylius store. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
+This **open-source plugin was developed to help the Sylius community** and make imoje payments platform available to any Sylius store. If you have any additional questions, would like help with installing or configuring the plugin or need any assistance with your Sylius project - let us know!
 
 [![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_ing)
 
@@ -79,11 +79,11 @@ After that, you need to add an ING payment:
   ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
 
 And now, you can configure your payment method in the admin panel:
-* first you need to add a gateway code, for example "ing_code" and set its position.
+* first you need to add a gateway code, for example "imoje_code" and set its position.
 
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configure the iMoje gateway, log in to ING the admin panel.
+* To configure the imoje gateway, log in to ING the admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
