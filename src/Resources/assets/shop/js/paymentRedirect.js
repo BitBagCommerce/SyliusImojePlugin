@@ -28,7 +28,7 @@ export class PaymentRedirect {
         this._connectListeners();
     }
 
-    _connectListeners = () => {
+    _connectListeners() {
         const blikCheckbox = document.querySelector(this.finalConfig.blikId);
         const pblCheckbox = document.querySelector(this.finalConfig.pblId);
         const payLaterCheckbox = document.querySelector(this.finalConfig.payLaterId);

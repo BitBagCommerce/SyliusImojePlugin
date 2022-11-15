@@ -4,3 +4,14 @@ framework:
     csrf_protection: true
     session:
         handler_id: ~
+
+    assets:
+        packages:
+            shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+            admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+            ing_shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/shop/manifest.json'
+            ing_admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/admin/manifest.json'
