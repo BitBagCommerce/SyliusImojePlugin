@@ -52,8 +52,8 @@ bitbag_sylius_ing_plugin:
 mkdir -p templates/bundles/SyliusAdminBundle/
 mkdir -p templates/bundles/SyliusShopBundle/
 
-cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
-cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
+cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
+cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
 ```
 
 7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (templates etc.).
@@ -124,7 +124,7 @@ By a standard, the `webpack.config.js` file should be available in your reposito
 1. Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your `webpack.config.js` file:
 
 ```javascript
-const [bitbagIngShop, bitbagIngAdmin] = require('./vendor/bitbag/sylius-ing-plugin/webpack.config.js');
+const [bitbagIngShop, bitbagIngAdmin] = require('./vendor/bitbag/sylius-imoje-plugin/webpack.config.js');
 ```
 
 2. As next step, please to add the imported consts into final module exports:
