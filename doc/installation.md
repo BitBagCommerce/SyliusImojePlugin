@@ -43,7 +43,7 @@ bitbag_sylius_ing_plugin:
    parameters:
       sylius_refund.supported_gateways:
          - offline
-         - bitbag_ing
+         - bitbag_imoje
 ``` 
 
 6. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
