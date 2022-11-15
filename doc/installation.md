@@ -80,10 +80,10 @@ bin/console assets:install
 
 **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
-10. Synchronize the database:
+10. Synchronize the database (by a first run please skip the `--force` parameter!):
 
 ```
-bin/console doctrine:schema:update
+bin/console doctrine:schema:update --force --dump-sql
 ```
 
 ### Webpack configuration
