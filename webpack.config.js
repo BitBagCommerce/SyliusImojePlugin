@@ -1,6 +1,6 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
-const pluginName = 'skeleton';
+const pluginName = 'ing';
 
 const getConfig = (pluginName, type) => {
     Encore.reset();

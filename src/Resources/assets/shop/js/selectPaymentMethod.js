@@ -28,12 +28,12 @@ export class SelectPaymentMethod {
         }
     }
 
-    _openPaymentsWrapper = () => {
+    _openPaymentsWrapper() {
         this.ingPaymentsWrapper.classList.remove(this.finalConfig.disabledClass);
         this.ingPaymentMethodRadios[0].click();
     }
 
-    _closePaymentsWrapper = () => {
+    _closePaymentsWrapper() {
         this.ingPaymentsWrapper.classList.add(this.finalConfig.disabledClass);
 
         this.ingPaymentMethodRadios.forEach(paymentMethodRadio => {
@@ -43,7 +43,7 @@ export class SelectPaymentMethod {
         this._closeAdditionalPaymentsWrappers();
     }
 
-    _openAdditionalPaymentsWrapper = (name) => {
+    _openAdditionalPaymentsWrapper(name) {
         const additionalPaymentsWrapper = document.getElementById(name);
 
         if (additionalPaymentsWrapper) {
@@ -53,7 +53,7 @@ export class SelectPaymentMethod {
         }
     }
 
-    _closeAdditionalPaymentsWrappers = () => {
+    _closeAdditionalPaymentsWrappers() {
         this.additionalPaymentsWrappers.forEach(additionalPaymentsWrapper => {
             additionalPaymentsWrapper.classList.add(this.finalConfig.disabledClass);
 
@@ -65,7 +65,7 @@ export class SelectPaymentMethod {
         });
     }
 
-    _connectListeners = () => {
+    _connectListeners() {
         this.paymentMethodRadios.forEach(paymentMethodRadio => {
             paymentMethodRadio.addEventListener('change', () => {
                 if (paymentMethodRadio.classList.contains('ing-payments')) {

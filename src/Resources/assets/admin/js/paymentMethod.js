@@ -26,7 +26,7 @@ export class PaymentMethod {
         this.loadDataInSession();
     }
 
-    togglePayment = () => {
+    togglePayment() {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
 
@@ -37,7 +37,7 @@ export class PaymentMethod {
         });
     }
 
-    togglePaymentOff = () => {
+    togglePaymentOff() {
         this.paymentCheckboxes.forEach(checkbox => {
             checkbox.closest('.required.field').classList.toggle(this.finalConfig.disabledClass);
         });
@@ -45,13 +45,13 @@ export class PaymentMethod {
         this.paymentMethodHandler.checked = false;
     }
 
-    toggleCheckboxes = (checkboxes, bool) => {
+    toggleCheckboxes(checkboxes, bool) {
         checkboxes.forEach(checkbox => {
             checkbox.checked = bool;
         });
     }
 
-    toggleMarginOff = checkboxes => {
+    toggleMarginOff(checkboxes) {
         checkboxes.forEach(checkbox => {
             checkbox.closest('.two.fields').classList.add('bb-pbl-margin-zero');
         });
@@ -66,7 +66,7 @@ export class PaymentMethod {
         }
     }
 
-    storeDataInSession = () => {
+    storeDataInSession() {
         const sessionData = [...this.paymentCheckboxes].reduce((accumulator, checkbox) => ({
             ...accumulator,
             [checkbox.id]: checkbox.checked
@@ -75,7 +75,7 @@ export class PaymentMethod {
         window.sessionStorage.setItem('checkboxesState', JSON.stringify(sessionData));
     }
 
-    loadDataInSession = () => {
+    loadDataInSession() {
         const sessionData = JSON.parse(sessionStorage.getItem('checkboxesState'));
         if (sessionData) {
             this.paymentMethodHandler.checked = true;
@@ -87,7 +87,7 @@ export class PaymentMethod {
         }
     }
 
-    connectListeners = () => {
+    connectListeners() {
         this.paymentMethodHandler.addEventListener('change', e => {
             if (this.paymentMethodHandler.checked) {
                 this.toggleCheckboxes(this.paymentCheckboxes, true);
