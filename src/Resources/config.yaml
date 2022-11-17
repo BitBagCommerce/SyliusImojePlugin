@@ -7,7 +7,7 @@ imports:
 parameters:
   sylius_refund.supported_gateways:
     - offline
-    - bitbag_imoje
+    - BitBag_imoje
 
 knp_snappy:
   pdf:

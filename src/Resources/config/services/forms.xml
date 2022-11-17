@@ -6,7 +6,7 @@
                  id="bitbag_sylius_ing_plugin.form.type.configuration_type"
         >
             <tag name="form.type"/>
-            <tag name="sylius.gateway_configuration_type" type="bitbag_imoje" label="bitbag_sylius_ing_plugin.ui.gateway_name"/>
+            <tag name="sylius.gateway_configuration_type" type="BitBag_imoje" label="bitbag_sylius_ing_plugin.ui.gateway_name"/>
         </service>
 
         <service  class="BitBag\SyliusIngPlugin\Form\Extension\PaymentTypeExtension"

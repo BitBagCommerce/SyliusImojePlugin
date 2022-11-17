@@ -8,7 +8,7 @@ use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 interface PaymentMethodRepositoryInterface
 {
-    public const FACTORY_NAME = 'bitbag_imoje';
+    public const FACTORY_NAME = 'BitBag_imoje';
 
     public function findOneForIngCode(string $code): ?PaymentMethodInterface;
 

@@ -2,7 +2,7 @@ bitbag_sylius_ing_plugin:
   ui:
     token: Token
     redirect: BLIK redirect
-    gateway_name: ING
+    gateway_name: imoje Payment
     prod_url: Enter the production URL
     sandbox_url: Enter the sandbox URL
     is_prod: Whether to use the production url
