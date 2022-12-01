@@ -17,7 +17,7 @@ final class OwnSignatureResolverTest extends TestCase
 {
     private const PRIVATE_KEY = 'ShopKey';
 
-    private const FACTORY_NAME = 'bitbag_imoje';
+    private const FACTORY_NAME = 'BitBag_imoje';
 
     private RequestStack $requestStack;
 
