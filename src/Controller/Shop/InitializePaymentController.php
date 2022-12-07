@@ -101,7 +101,7 @@ final class InitializePaymentController extends AbstractController
 
             return new RedirectResponse($transactionData->getPaymentUrl());
         } catch (\Throwable $e) {
-            $this->addFlash('error', 'You payment was with failure');
+            $this->addFlash('error', $this->get('translator')->trans('bitbag_sylius_ing_plugin.ui.payment_failed'));
             return $this->redirectToRoute('sylius_shop_checkout_select_payment');
         }
 
