@@ -25,7 +25,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 final class InitializePaymentController extends AbstractController
 {
@@ -45,14 +44,12 @@ final class InitializePaymentController extends AbstractController
         DispatcherInterface $dispatcher,
         BlikModelProviderInterface $blikModelProvider,
         TransactionPaymentDataResolverInterface $transactionPaymentDataResolver,
-        FlashBagInterface $bag
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->dispatcher = $dispatcher;
         $this->blikModelProvider = $blikModelProvider;
         $this->transactionPaymentDataResolver = $transactionPaymentDataResolver;
-        $this->bag = $bag;
     }
 
     public function __invoke(
