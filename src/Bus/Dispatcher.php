@@ -11,9 +11,6 @@ final class Dispatcher implements DispatcherInterface
 {
     use HandleTrait;
 
-    /** @var MessageBusInterface */
-    private $messageBus;
-
     public function __construct(
         MessageBusInterface $messageBus
     ) {

@@ -25,6 +25,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Throwable;
 
 final class InitializePaymentController extends AbstractController
 {
@@ -38,18 +40,22 @@ final class InitializePaymentController extends AbstractController
 
     private TransactionPaymentDataResolverInterface $transactionPaymentDataResolver;
 
+    private TranslatorInterface $translator;
+
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         DispatcherInterface $dispatcher,
         BlikModelProviderInterface $blikModelProvider,
         TransactionPaymentDataResolverInterface $transactionPaymentDataResolver,
+        TranslatorInterface $translator
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
         $this->dispatcher = $dispatcher;
         $this->blikModelProvider = $blikModelProvider;
         $this->transactionPaymentDataResolver = $transactionPaymentDataResolver;
+        $this->translator = $translator;
     }
 
     public function __invoke(
@@ -97,8 +103,8 @@ final class InitializePaymentController extends AbstractController
             $this->dispatcher->dispatch(new SaveTransaction($transactionData));
 
             return new RedirectResponse($transactionData->getPaymentUrl());
-        } catch (\Throwable $e) {
-            $this->addFlash('error', $this->get('translator')->trans('bitbag_sylius_ing_plugin.ui.payment_failed'));
+        } catch (Throwable $e) {
+            $this->addFlash('error', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_failed'));
             return $this->redirectToRoute('sylius_shop_checkout_select_payment');
         }
 
