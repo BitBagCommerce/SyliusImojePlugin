@@ -7,11 +7,13 @@ namespace BitBag\SyliusIngPlugin\Controller\Shop\Oneclick;
 use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
 use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
 use BitBag\SyliusIngPlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolverInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
+use function strtoupper;
 
 final class OneClickController
 {
@@ -39,6 +41,7 @@ final class OneClickController
 
     public function __invoke(Request $request, int $orderId): Response
     {
+        /** @var OrderInterface $order */
         $order = $this->orderRepository->find($orderId);
         $address = $order->getBillingAddress();
         $config = $this->gatewayCodeFromOrderResolver->resolve($order);
@@ -49,7 +52,7 @@ final class OneClickController
         Assert::notNull($address);
 
         $url = $this->redirectFactory->createForOneClick($payment);
-        $currencyCode = \strtoupper($order->getCurrencyCode() ?? '');
+        $currencyCode = strtoupper($order->getCurrencyCode() ?? '');
         $data = [
             'merchantId' => $config->getMerchantId(),
             'serviceId' => $config->getServiceId(),

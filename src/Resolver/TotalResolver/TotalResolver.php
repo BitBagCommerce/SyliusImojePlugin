@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusIngPlugin\Resolver\TotalResolver;
 
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -38,6 +39,7 @@ final class TotalResolver implements TotalResolverInterface
             return $cart->getTotal();
         }
         if (null !== $orderId) {
+            /** @var OrderInterface $order */
             $order = $this->orderRepository->find($orderId);
 
             return $order->getTotal();

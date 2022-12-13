@@ -48,11 +48,11 @@ This **open-source plugin was developed to help the Sylius community** and make 
 
 We work on stable, supported, and up-to-date versions of packages. We recommend you do the same.
 
-| Package              | Version       |
-|----------------------|---------------|
-| PHP                  | ^7.4  or ^8.0 |
-| sylius/refund-plugin | ^1.0.0        |
-| sylius/sylius        | ~1.11         |
+| Package              | Version        |
+|----------------------|----------------|
+| PHP                  | ^8.0           |
+| sylius/refund-plugin | ^1.0.0         |
+| sylius/sylius        | ~1.11 or ~1.12 |
 ----
 
 For the full installation guide please go to [installation](doc/installation.md)
