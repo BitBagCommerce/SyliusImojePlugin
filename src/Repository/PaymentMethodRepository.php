@@ -33,12 +33,13 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
 
     public function findOneForIng(): ?PaymentMethodInterface
     {
-        return $this->baseRepository->createQueryBuilder('o')
+        $result = $this->baseRepository->createQueryBuilder('o')
             ->innerJoin('o.gatewayConfig', 'gatewayConfig')
             ->where('gatewayConfig.factoryName = :factoryName')
             ->setParameter('factoryName', self::FACTORY_NAME)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
             ;
+        return  $result[0];
     }
 }
