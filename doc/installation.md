@@ -2,89 +2,97 @@
 
 ### Sylius configuration
 
-1. Require it with composer:
+1. Require our plugin with composer:
 
-```bash
-composer require bitbag/sylius-ing-plugin
-```
-2. Add plugin dependencies to your `config/bundles.php` file:
+    ```bash
+    composer require bitbag/sylius-ing-plugin
+    ```
 
-```php
-return [
-    ...
-    BitBag\SyliusIngPlugin\BitBagSyliusIngPlugin::class => ['all' => true],
-];
-```
+2. The [Sylius Refund Plugin](https://github.com/Sylius/RefundPlugin) is our plugin dependency. Please complete [its installation steps](https://github.com/Sylius/RefundPlugin/blob/1.4/docs/legacy_installation.md) before continuing.
 
-3. Import required config in your `config/packages/_sylius.yaml` file:
+3. Add plugin dependencies to your `config/bundles.php` file:
 
-```yaml
-# config/packages/_sylius.yaml
+    ```php
+    return [
+        ...
+        BitBag\SyliusIngPlugin\BitBagSyliusIngPlugin::class => ['all' => true],
+    ];
+    ```
 
-imports:
-    ...
-    - { resource: "@SyliusIngPlugin/Resources/config.yaml" }
-```
+4. Import required config in your `config/packages/_sylius.yaml` file:
 
-4. Import the routing in your `config/routes.yaml` file:
+    ```yaml
+    # config/packages/_sylius.yaml
 
-```yaml
-# config/routes.yaml
+    imports:
+        ...
+        - { resource: "@SyliusIngPlugin/Resources/config.yaml" }
+    ```
 
-bitbag_sylius_ing_plugin:
-    resource: "@SyliusIngPlugin/Resources/config/routing.yaml"
-```
+5. Import the routing in your `config/routes.yaml` file:
 
-5. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`:
+    ```yaml
+    # config/routes.yaml
 
-```yaml
-# config/packages/_sylius.yaml
+    bitbag_sylius_ing_plugin:
+        resource: "@SyliusIngPlugin/Resources/config/routing.yaml"
+    ```
 
-   parameters:
-      sylius_refund.supported_gateways:
-         - offline
-         - bitbag_imoje
-``` 
+6. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`:
 
-6. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
+    ```yaml
+    # config/packages/_sylius.yaml
 
-```
-mkdir -p templates/bundles/SyliusAdminBundle/
-mkdir -p templates/bundles/SyliusShopBundle/
+       parameters:
+          sylius_refund.supported_gateways:
+              - offline
+              - bitbag_imoje
+    ``` 
 
-cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
-cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
-```
+7. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
 
-7. Complete [refund plug-in](https://github.com/Sylius/RefundPlugin) install steps (templates etc.).
+    ```
+    mkdir -p templates/bundles/SyliusAdminBundle/
+    mkdir -p templates/bundles/SyliusShopBundle/
 
+    cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
+    cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
+    ```
+
+    **Note.** If you have overridden at least one template from the directories above, please adjust your code to include our changes.
 
 8. Add logging to your environment by editing your {dev, prod, staging}/monolog.yaml:
 
-```yaml
-monolog:
-  channels: ['ing']
-  handlers:
-    ing:
-      type: stream
-      path: "%kernel.logs_dir%/%kernel.environment%_ing.log"
-      level: debug
-      channels: [ 'ing' ]
-```
+    ```yaml
+    monolog:
+        channels: ['ing']
+        handlers:
+            ing:
+                type: stream
+                path: "%kernel.logs_dir%/%kernel.environment%_ing.log"
+                level: debug
+                channels: [ 'ing' ]
+    ```
 
-9. Install assets:
+9. Clear the cache:
 
-```
-bin/console assets:install
-```
+    ```bash
+    $ bin/console cache:clear
+    ```
 
-**Note:** If you are running it on production, add the `-e prod` flag to this command.
+10. Install assets:
 
-10. Synchronize the database (by a first run please skip the `--force` parameter!):
+    ```
+    $ bin/console assets:install
+    ```
 
-```
-bin/console doctrine:schema:update --force --dump-sql
-```
+    **Note:** If you are running it on production, add the `-e prod` flag to this command.
+
+11. Synchronize the database:
+
+    ```
+    $ bin/console doctrine:migrations:migrate
+    ```
 
 ### Webpack configuration
 
@@ -92,30 +100,30 @@ bin/console doctrine:schema:update --force --dump-sql
 
 1. Before Webpack installation, please create the `config/packages/webpack_encore.yaml` file with a content of:
 
-```yaml
-webpack_encore:
-    output_path: '%kernel.project_dir%/public/build/default'
-    builds:
-        shop: '%kernel.project_dir%/public/build/shop'
-        admin: '%kernel.project_dir%/public/build/admin'
-        ing_shop: '%kernel.project_dir%/public/build/bitbag/ing/shop'
-        ing_admin: '%kernel.project_dir%/public/build/bitbag/ing/admin'
-```
+    ```yaml
+    webpack_encore:
+        output_path: '%kernel.project_dir%/public/build/default'
+        builds:
+            shop: '%kernel.project_dir%/public/build/shop'
+            admin: '%kernel.project_dir%/public/build/admin'
+            ing_shop: '%kernel.project_dir%/public/build/bitbag/ing/shop'
+            ing_admin: '%kernel.project_dir%/public/build/bitbag/ing/admin'
+    ```
 
 2. To install Webpack in your application, please run the command below:
 
-```bash
-composer require "symfony/webpack-encore-bundle"
-```
+    ```bash
+    $ composer require "symfony/webpack-encore-bundle"
+    ```
 
 3. After installation, please add the line below into `config/bundles.php` file:
 
-```php
-return [
-    ...
-    Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
-];
-```
+    ```php
+    return [
+        ...
+        Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
+    ];
+    ```
 
 #### Configuring Webpack
 
@@ -123,37 +131,37 @@ By a standard, the `webpack.config.js` file should be available in your reposito
 
 1. Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your `webpack.config.js` file:
 
-```javascript
-const [bitbagIngShop, bitbagIngAdmin] = require('./vendor/bitbag/sylius-imoje-plugin/webpack.config.js');
-```
+    ```javascript
+    const [bitbagIngShop, bitbagIngAdmin] = require('./vendor/bitbag/sylius-ing-plugin/webpack.config.js');
+    ```
 
 2. As next step, please to add the imported consts into final module exports:
 
-```javascripts
-module.exports = [shopConfig, adminConfig, bitbagIngShop, bitbagIngAdmin];
-```
+    ```javascripts
+    module.exports = [shopConfig, adminConfig, bitbagIngShop, bitbagIngAdmin];
+    ```
 
 3. Next thing is to add the asset configuration into `config/packages/framework.yaml`:
 
-```yaml
-framework:
-    assets:
-        packages:
-            shop:
-                json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
-            admin:
-                json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
-            ing_shop:
-                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/shop/manifest.json'
-            ing_admin:
-                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/admin/manifest.json'
-```
+    ```yaml
+    framework:
+        assets:
+            packages:
+                shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
+                admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
+                ing_shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/shop/manifest.json'
+                ing_admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/admin/manifest.json'
+    ```
 
 4. Additionally, please add the `"@symfony/webpack-encore": "^1.5.0",` dependency into your `package.json` file.
 
 5. Now you can run the commands:
 
-```bash
-yarn install
-yarn encore dev # or prod, depends on your environment
-```
+    ```bash
+    $ yarn install
+    $ yarn encore dev # or prod, depends on your environment
+    ```
