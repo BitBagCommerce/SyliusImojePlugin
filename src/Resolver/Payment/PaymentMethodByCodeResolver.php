@@ -14,7 +14,7 @@ final class PaymentMethodByCodeResolver implements PaymentMethodByCodeResolverIn
             return $paymentMethodCode;
         }
 
-        if (\in_array($paymentMethodCode, ['imoje_twisto', 'paypo'], true)) {
+        if (\in_array($paymentMethodCode, ['imoje_twisto', 'paypo', 'pragma_go'], true)) {
             return TransactionMethodResolverInterface::PAYMENT_METHOD_PAY_LATER;
         }
 

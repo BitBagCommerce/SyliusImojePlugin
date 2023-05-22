@@ -48,7 +48,7 @@ final class FinalizeOrderHandler implements MessageHandlerInterface
     {
         $token = $order->getTokenValue();
         if ($token && $state === self::CART_STATE) {
-            $this->commandBus->dispatch(new SendOrderConfirmation($token));
+//            $this->commandBus->dispatch(new SendOrderConfirmation($token));
         }
     }
 }

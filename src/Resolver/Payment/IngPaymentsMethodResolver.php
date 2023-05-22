@@ -106,6 +106,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         if ($data['imoje_paylater']) {
             $data['imoje_twisto'] = true;
             $data['paypo'] = true;
+            $data['pragma_go'] = true;
         } else {
             unset($data['imoje_paylater']);
         }
@@ -140,6 +141,10 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
 
         if (self::MIN_TOTAL_100 > $total) {
             unset($finalData['pbl']);
+        }
+
+        if (50000 > $total || 10000000 < $total) {
+            unset($finalData['pragma_go']);
         }
 
         return $finalData;
