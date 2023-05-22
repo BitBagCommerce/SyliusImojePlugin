@@ -142,8 +142,7 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         if (self::MIN_TOTAL_100 > $total) {
             unset($finalData['pbl']);
         }
-
-        if (50000 > $total || 10000000 < $total) {
+        if (50000 > $total || 10000000 < $total || null === $cart->getBillingAddress()?->getCompany()) {
             unset($finalData['pragma_go']);
         }
 
