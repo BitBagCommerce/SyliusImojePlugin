@@ -24,7 +24,7 @@ final class TransactionMethodResolver implements TransactionMethodResolverInterf
             return self::PAYMENT_METHOD_ING;
         }
 
-        if ('imoje_twisto' === $paymentDetails || 'paypo' === $paymentDetails) {
+        if ('imoje_twisto' === $paymentDetails || 'paypo' === $paymentDetails || 'pragma_go' === $paymentDetails) {
             return self::PAYMENT_METHOD_PAY_LATER;
         }
 

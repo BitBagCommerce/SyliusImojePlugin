@@ -25,7 +25,7 @@
 
     <div class="bb-online-payment-wrapper-child disabled" id="wrapper_pbl">
         {% for keyChoice, choice in methodIng.vars.choices %}
-            {% if choice.label != "blik" and choice.label != "card" and choice.label != "pbl" and choice.label != 'imoje_paylater' and choice.label != 'imoje_twisto' and choice.label != 'paypo' %}
+            {% if choice.label != "blik" and choice.label != "card" and choice.label != "pbl" and choice.label != 'imoje_paylater' and choice.label != 'imoje_twisto' and choice.label != 'paypo' and choice.label != 'pragma_go' %}
                 <div
                     class="bb-online-payment-wrapper-child-item"
                     id="{{ choice.value }}"
@@ -48,7 +48,7 @@
 
     <div class="bb-online-payment-wrapper-child disabled" id="wrapper_imoje_paylater">
         {% for keyChoice, choice in methodIng.vars.choices %}
-            {% if choice.label == 'imoje_twisto' or choice.label == 'paypo' %}
+            {% if choice.label == 'imoje_twisto' or choice.label == 'paypo'or choice.label == 'pragma_go' %}
                 <div
                         class="bb-online-payment-wrapper-child-item"
                         id="{{ choice.value }}"
