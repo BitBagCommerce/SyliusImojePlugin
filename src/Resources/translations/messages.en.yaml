@@ -38,4 +38,4 @@ bitbag_sylius_ing_plugin:
       not_blank: Blik code must be 6 digits long
     pay_later: Pay later
     payment_failed: Your payment cannot be processed
-    for_companies: For companies
+    for_companies: Corporate client
