@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Refund;
+namespace BitBag\SyliusImojePlugin\Resolver\Refund;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
 
 interface RefundUrlResolverInterface
 {

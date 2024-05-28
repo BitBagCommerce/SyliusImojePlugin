@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Provider;
+namespace BitBag\SyliusImojePlugin\Provider;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClient;
-use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
-use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
+use BitBag\SyliusImojePlugin\Client\IngApiClient;
+use BitBag\SyliusImojePlugin\Factory\Serializer\SerializerFactoryInterface;
+use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 
 final class IngClientProvider implements IngClientProviderInterface

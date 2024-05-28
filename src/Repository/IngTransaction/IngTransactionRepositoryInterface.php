@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Repository\IngTransaction;
+namespace BitBag\SyliusImojePlugin\Repository\IngTransaction;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransaction;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\IngTransaction;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 interface IngTransactionRepositoryInterface extends RepositoryInterface

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Controller\Shop\Oneclick;
+namespace BitBag\SyliusImojePlugin\Controller\Shop\Oneclick;
 
-use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolverInterface;
+use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

@@ -2,7 +2,7 @@
   "name": "@bitbag/ing-plugin",
   "version": "1.0.0",
   "description": "Sylius Ing Plugin",
-  "repository": "git@github.com:BitBagCommerce/SyliusIngPlugin.git",
+  "repository": "git@github.com:BitBagCommerce/SyliusImojePlugin.git",
   "author": "BitBag <hello@bitbag.io>",
   "license": "MIT",
   "private": false,

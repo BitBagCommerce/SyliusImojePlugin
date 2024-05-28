@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Provider;
+namespace BitBag\SyliusImojePlugin\Provider;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
+use BitBag\SyliusImojePlugin\Client\IngApiClientInterface;
 
 interface IngClientProviderInterface
 {

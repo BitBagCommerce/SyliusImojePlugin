@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Client;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Client;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClient;
-use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
-use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
+use BitBag\SyliusImojePlugin\Client\IngApiClient;
+use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Command\TakeOverPayment;
-use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolver;
+use BitBag\SyliusImojePlugin\Bus\Command\TakeOverPayment;
+use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

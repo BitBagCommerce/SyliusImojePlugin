@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Command;
+namespace BitBag\SyliusImojePlugin\Bus\Command;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
 
 final class SaveTransaction
 {

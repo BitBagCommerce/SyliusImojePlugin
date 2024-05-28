@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\ReadyTransaction;
+namespace BitBag\SyliusImojePlugin\Factory\ReadyTransaction;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModel;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModel;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface ReadyTransactionFactoryInterface

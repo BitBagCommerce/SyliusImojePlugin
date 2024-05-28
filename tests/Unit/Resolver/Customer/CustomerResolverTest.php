@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Customer;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Customer;
 
-use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolver;
-use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Customer\CustomerResolver;
+use BitBag\SyliusImojePlugin\Resolver\Customer\CustomerResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Customer;

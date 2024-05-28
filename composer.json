@@ -59,8 +59,8 @@
     },
     "autoload": {
         "psr-4": {
-            "BitBag\\SyliusIngPlugin\\": "src/",
-            "Tests\\BitBag\\SyliusIngPlugin\\": ["tests/"]
+            "BitBag\\SyliusImojePlugin\\": "src/",
+            "Tests\\BitBag\\SyliusImojePlugin\\": ["tests/"]
         }
     },
     "autoload-dev": {

@@ -5,19 +5,19 @@
 				<div class="ui radio checkbox">
 					{{ form_widget(form, { 'attr': { 'class': 'ing-payments' } }) }}
 				</div>
-			</div>	
+			</div>
 
 			<div class="content">
 				<a class="header">
 					{{ form_label(form) }}
-				</a>	
+				</a>
 
 				{% if method.description is not null %}
 					<div class="description">
 						<p>{{ method.description }}</p>
 					</div>
 				{% endif %}
-				{% include '@SyliusIngPlugin/Shop/PaymentIng/_form.html.twig' with {'gatewayConfig': method.gatewayConfig} %}
+				{% include '@SyliusImojePlugin/Shop/PaymentIng/_form.html.twig' with {'gatewayConfig': method.gatewayConfig} %}
 			</div>
 		</div>
 	{% endif %}

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Webhook;
+namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
 
-use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Factory\Status\StatusResponseModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Status\StatusResponseModelInterface;
+use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class WebhookResolver implements WebhookResolverInterface

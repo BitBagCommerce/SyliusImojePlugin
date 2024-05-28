@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Model;
+namespace BitBag\SyliusImojePlugin\Model;
 
 final class TransactionBlikModel implements TransactionModelInterface
 {

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Query\GetBlikTransactionData;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Exception\InvalidIngResponseException;
-use BitBag\SyliusIngPlugin\Factory\Model\TransactionBlikModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\TransactionData\TransactionDataResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Query\GetBlikTransactionData;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Exception\InvalidIngResponseException;
+use BitBag\SyliusImojePlugin\Factory\Model\TransactionBlikModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Factory\Transaction\IngTransactionFactoryInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetBlikTransactionDataHandler implements MessageHandlerInterface

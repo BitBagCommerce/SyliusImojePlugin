@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Configuration;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Configuration;
 
-use BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolver;
+use BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolver;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 

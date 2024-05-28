@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\EventListener;
+namespace BitBag\SyliusImojePlugin\EventListener;
 
-use BitBag\SyliusIngPlugin\Exception\IngClientExceptionInterface;
+use BitBag\SyliusImojePlugin\Exception\IngClientExceptionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 

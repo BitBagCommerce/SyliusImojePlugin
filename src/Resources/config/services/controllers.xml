@@ -2,7 +2,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusIngPlugin\Controller\Shop\InitializePaymentController"
+        <service class="BitBag\SyliusImojePlugin\Controller\Shop\InitializePaymentController"
                  id="bitbag.sylius_ing_plugin.controller.shop.initialize_payment_controller"
                  public="true"
         >
@@ -18,7 +18,7 @@
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Controller\Shop\RedirectController"
+        <service class="BitBag\SyliusImojePlugin\Controller\Shop\RedirectController"
                  id="bitbag.sylius_ing_plugin.controller.shop.redirect_controller"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
@@ -29,7 +29,7 @@
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Controller\Shop\Webhook\WebhookController"
+        <service class="BitBag\SyliusImojePlugin\Controller\Shop\Webhook\WebhookController"
                  id="bitbag.sylius_ing_plugin.controller.shop.webhook.webhook_controller"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.ing_transaction_payment_resolver"/>
@@ -39,7 +39,7 @@
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Controller\Shop\Oneclick\OneClickController"
+        <service class="BitBag\SyliusImojePlugin\Controller\Shop\Oneclick\OneClickController"
                  id="bitbag.sylius_ing_plugin.controller.shop.oneclick.one_click_controller"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_from_order_resolver"/>
@@ -49,7 +49,7 @@
             <tag name="controller.service_arguments"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Controller\Shop\Oneclick\RedirectOneClickController"
+        <service class="BitBag\SyliusImojePlugin\Controller\Shop\Oneclick\RedirectOneClickController"
                  id="bitbag.sylius_ing_plugin.controller.shop.oneclick.redirect_one_click_controller"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>

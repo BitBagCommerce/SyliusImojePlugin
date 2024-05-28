@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\TotalResolver;
+namespace BitBag\SyliusImojePlugin\Resolver\TotalResolver;
 
 interface TotalResolverInterface
 {

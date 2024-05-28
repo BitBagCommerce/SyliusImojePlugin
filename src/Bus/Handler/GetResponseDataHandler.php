@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Factory\ReadyTransaction\ReadyTransactionFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\Url\UrlResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Query\GetResponseData;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Factory\ReadyTransaction\ReadyTransactionFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolverInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

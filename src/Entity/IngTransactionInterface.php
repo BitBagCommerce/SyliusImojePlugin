@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Entity;
+namespace BitBag\SyliusImojePlugin\Entity;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Processor\Webhook\Status;
+namespace BitBag\SyliusImojePlugin\Processor\Webhook\Status;
 
-use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
-use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Status\StatusResponseModelInterface;
-use BitBag\SyliusIngPlugin\Resolver\Status\StatusResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Command\FinalizeOrder;
+use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
+use BitBag\SyliusImojePlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
+use BitBag\SyliusImojePlugin\Resolver\Status\StatusResolverInterface;
 use Psr\Log\LoggerInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;

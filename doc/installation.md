@@ -17,7 +17,7 @@
     ```php
     return [
         ...
-        BitBag\SyliusIngPlugin\BitBagSyliusIngPlugin::class => ['all' => true],
+        BitBag\SyliusImojePlugin\BitBagSyliusImojePlugin::class => ['all' => true],
     ];
     ```
 
@@ -28,7 +28,7 @@
 
     imports:
         ...
-        - { resource: "@SyliusIngPlugin/Resources/config.yaml" }
+        - { resource: "@SyliusImojePlugin/Resources/config.yaml" }
     ```
 
 5. Import the routing in your `config/routes.yaml` file:
@@ -37,7 +37,7 @@
     # config/routes.yaml
 
     bitbag_sylius_ing_plugin:
-        resource: "@SyliusIngPlugin/Resources/config/routing.yaml"
+        resource: "@SyliusImojePlugin/Resources/config/routing.yaml"
     ```
 
 6. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`:

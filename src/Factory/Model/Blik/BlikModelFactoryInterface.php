@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model\Blik;
+namespace BitBag\SyliusImojePlugin\Factory\Model\Blik;
 
-use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
 
 interface BlikModelFactoryInterface
 {

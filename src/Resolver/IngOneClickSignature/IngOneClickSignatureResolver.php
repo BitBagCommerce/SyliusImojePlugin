@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\IngOneClickSignature;
+namespace BitBag\SyliusImojePlugin\Resolver\IngOneClickSignature;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
 
 final class IngOneClickSignatureResolver implements IngOneClickSignatureResolverInterface
 {

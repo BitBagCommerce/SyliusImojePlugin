@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Configuration;
+namespace BitBag\SyliusImojePlugin\Configuration;
 
 final class IngClientConfiguration implements IngClientConfigurationInterface
 {

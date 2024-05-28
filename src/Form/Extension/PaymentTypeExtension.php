@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Form\Extension;
+namespace BitBag\SyliusImojePlugin\Form\Extension;
 
-use BitBag\SyliusIngPlugin\Form\Type\PaymentIngType;
+use BitBag\SyliusImojePlugin\Form\Type\PaymentIngType;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;

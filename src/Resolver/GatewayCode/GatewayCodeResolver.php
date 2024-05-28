@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
 
-use BitBag\SyliusIngPlugin\Exception\NoIngGatewayPaymentException;
+use BitBag\SyliusImojePlugin\Exception\NoIngGatewayPaymentException;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

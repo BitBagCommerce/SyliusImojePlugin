@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Serializer;
+namespace BitBag\SyliusImojePlugin\Factory\Serializer;
 
 use Symfony\Component\Serializer\Serializer;
 

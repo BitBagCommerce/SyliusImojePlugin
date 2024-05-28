@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Controller\Shop\Webhook;
+namespace BitBag\SyliusImojePlugin\Controller\Shop\Webhook;
 
-use BitBag\SyliusIngPlugin\Model\Status\StatusResponseModelInterface;
-use BitBag\SyliusIngPlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
-use BitBag\SyliusIngPlugin\Resolver\Payment\IngTransactionPaymentResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\Webhook\oneClickWebhookResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\Webhook\WebhookResolverInterface;
+use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
+use BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\IngTransactionPaymentResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Webhook\oneClickWebhookResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Webhook\WebhookResolverInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

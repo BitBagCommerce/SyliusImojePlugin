@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Repository\IngTransaction;
+namespace BitBag\SyliusImojePlugin\Repository\IngTransaction;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransaction;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Exception\MissingIngTransactionException;
-use BitBag\SyliusIngPlugin\Exception\NoTransactionException;
+use BitBag\SyliusImojePlugin\Entity\IngTransaction;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Exception\MissingIngTransactionException;
+use BitBag\SyliusImojePlugin\Exception\NoTransactionException;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 final class IngTransactionRepository extends EntityRepository implements IngTransactionRepositoryInterface

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Model\Blik;
+namespace BitBag\SyliusImojePlugin\Model\Blik;
 
 final class BlikModel implements BlikModelInterface
 {

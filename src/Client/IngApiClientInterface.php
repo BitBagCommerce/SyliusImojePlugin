@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Client;
+namespace BitBag\SyliusImojePlugin\Client;
 
-use BitBag\SyliusIngPlugin\Model\PaymentMethod\ServiceModelInterface;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModelInterface;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use Psr\Http\Message\ResponseInterface;
 
 interface IngApiClientInterface

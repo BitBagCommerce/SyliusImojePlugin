@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Webhook;
+namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
 
 interface oneClickWebhookResolverInterface
 {

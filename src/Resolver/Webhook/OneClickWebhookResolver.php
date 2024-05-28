@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Webhook;
+namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
 
-use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
-use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Factory\Status\StatusResponseModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
-use BitBag\SyliusIngPlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
+use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
+use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Factory\Transaction\IngTransactionFactoryInterface;
+use BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;

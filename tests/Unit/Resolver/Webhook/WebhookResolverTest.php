@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Unit\Resolver\Webhook;
 
-use BitBag\SyliusIngPlugin\Factory\Status\StatusResponseModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Status\StatusResponseModel;
-use BitBag\SyliusIngPlugin\Resolver\Webhook\WebhookResolver;
-use BitBag\SyliusIngPlugin\Resolver\Webhook\WebhookResolverInterface;
+use BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModel;
+use BitBag\SyliusImojePlugin\Resolver\Webhook\WebhookResolver;
+use BitBag\SyliusImojePlugin\Resolver\Webhook\WebhookResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

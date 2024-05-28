@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\TransactionData;
+namespace BitBag\SyliusImojePlugin\Resolver\TransactionData;
 
 use Psr\Http\Message\ResponseInterface;
 

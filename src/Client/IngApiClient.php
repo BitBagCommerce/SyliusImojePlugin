@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Client;
+namespace BitBag\SyliusImojePlugin\Client;
 
-use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
-use BitBag\SyliusIngPlugin\Model\PaymentMethod\ServiceModel;
-use BitBag\SyliusIngPlugin\Model\PaymentMethod\ServiceModelInterface;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
-use BitBag\SyliusIngPlugin\Provider\RequestParams\RequestParamsProviderInterface;
+use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModel;
+use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModelInterface;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;

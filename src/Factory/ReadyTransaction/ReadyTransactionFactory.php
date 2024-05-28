@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\ReadyTransaction;
+namespace BitBag\SyliusImojePlugin\Factory\ReadyTransaction;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Exception\InvalidIngResponseException;
-use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModel;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Exception\InvalidIngResponseException;
+use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModel;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class ReadyTransactionFactory implements ReadyTransactionFactoryInterface

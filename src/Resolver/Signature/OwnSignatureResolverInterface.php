@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Signature;
+namespace BitBag\SyliusImojePlugin\Resolver\Signature;
 
 interface OwnSignatureResolverInterface
 {

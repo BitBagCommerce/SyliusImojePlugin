@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Exception;
+namespace BitBag\SyliusImojePlugin\Exception;
 
 final class NoTransactionException extends \Exception
 {

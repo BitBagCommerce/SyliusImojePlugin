@@ -1,7 +1,7 @@
 imports:
   - { resource: config/*.yml }
   - { resource: config/services/*.xml }
-  - { resource: "@SyliusIngPlugin/Resources/config/sylius/resources.yaml" }
+  - { resource: "@SyliusImojePlugin/Resources/config/sylius/resources.yaml" }
   - { resource: "@SyliusRefundPlugin/Resources/config/app/config.yml" }
 
 parameters:

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\PaymentMethod;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\PaymentMethod;
 
-use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolver;
-use BitBag\SyliusIngPlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolver;
+use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethod;

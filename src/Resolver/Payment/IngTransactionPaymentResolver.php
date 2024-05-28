@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Payment;
+namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
-use BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
+use BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 final class IngTransactionPaymentResolver implements IngTransactionPaymentResolverInterface

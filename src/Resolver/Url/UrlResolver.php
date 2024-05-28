@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Url;
+namespace BitBag\SyliusImojePlugin\Resolver\Url;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Client\IngApiClientInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
 
 final class UrlResolver implements UrlResolverInterface
 {

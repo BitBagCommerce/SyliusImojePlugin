@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Payment;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Payment;
 
-use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
-use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\Payment\IngPaymentsMethodResolver;
-use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
+use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Filter\AvailablePaymentMethodsFilterInterface;
+use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\IngPaymentsMethodResolver;
+use BitBag\SyliusImojePlugin\Resolver\TotalResolver\TotalResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\OrderInterface;

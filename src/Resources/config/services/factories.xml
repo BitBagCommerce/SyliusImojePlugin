@@ -2,12 +2,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Serializer\SerializerFactory"
                  id="bitbag.sylius_ing_plugin.factory.serializer.serializer_factory"
         >
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Model\TransactionModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.transaction_model_factory"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.model.customer_model_factory"/>
@@ -16,7 +16,7 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.request.redirect_factory"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Model\TransactionBlikModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Model\TransactionBlikModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.transaction_blik_model_factory"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.model.customer_model_factory"/>
@@ -25,60 +25,60 @@
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.request.redirect_factory"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Payment\PaymentDataModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.payment.payment_method_and_code_model_factory"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.transaction_method.transaction_method_resolver"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Request\RedirectFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Request\RedirectFactory"
                  id="bitbag.sylius_ing_plugin.factory.request.redirect_factory"
         >
             <argument type="service" id="router"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Model\BillingModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Model\BillingModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.billing_model_factory"
         >
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Model\ShippingModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Model\ShippingModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.shipping_model_factory"
         >
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Model\CustomerModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Model\CustomerModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.customer_model_factory"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.resolver.customer.customer_resolver"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Transaction\IngTransactionFactory"
                  id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory"
                  decorates="bitbag_sylius_ing_plugin.factory.ing_transaction"
         >
             <argument type="service" id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory.inner"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Model\Blik\BlikModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Model\Blik\BlikModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.model.blik.blik_model_factory"
         >
         </service>
-        <service class="BitBag\SyliusIngPlugin\Factory\ReadyTransaction\ReadyTransactionFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\ReadyTransaction\ReadyTransactionFactory"
                  id="bitbag.sylius_ing_plugin.factory.ready_transaction.ready_transaction_factory"
         >
         </service>
-        <service class="BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Bus\PaymentFinalizationCommandFactory"
                  id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"
         >
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Status\StatusResponseModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"
         >
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Factory\Refund\RefundModelFactory"
+        <service class="BitBag\SyliusImojePlugin\Factory\Refund\RefundModelFactory"
                  id="bitbag.sylius_ing_plugin.factory.status.refund_model_factory"
         />
 

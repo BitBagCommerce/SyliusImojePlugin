@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Calculator;
+namespace BitBag\SyliusImojePlugin\Calculator;
 
-use BitBag\SyliusIngPlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
 use Psr\Log\LoggerInterface;
 
 final class SignatureCalculator implements SignatureCalculatorInterface

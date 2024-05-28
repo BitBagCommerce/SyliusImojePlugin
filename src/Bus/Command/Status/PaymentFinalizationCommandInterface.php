@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Command\Status;
+namespace BitBag\SyliusImojePlugin\Bus\Command\Status;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 

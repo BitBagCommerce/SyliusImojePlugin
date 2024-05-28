@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Payment;
+namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
-use BitBag\SyliusIngPlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
 
 final class PaymentMethodByCodeResolver implements PaymentMethodByCodeResolverInterface
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Refund;
+namespace BitBag\SyliusImojePlugin\Resolver\Refund;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
 
 final class RefundUrlResolver implements RefundUrlResolverInterface
 {

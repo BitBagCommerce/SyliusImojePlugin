@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Signature;
+namespace BitBag\SyliusImojePlugin\Resolver\Signature;
 
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class OwnSignatureResolver implements OwnSignatureResolverInterface

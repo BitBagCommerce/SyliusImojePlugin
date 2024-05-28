@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Refund;
+namespace BitBag\SyliusImojePlugin\Refund;
 
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\Refund\RefundUrlResolverInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Refund\RefundUrlResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

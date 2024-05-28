@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Signature;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Signature;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\Signature\OwnSignatureResolver;
-use BitBag\SyliusIngPlugin\Resolver\Signature\OwnSignatureResolverInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Signature\OwnSignatureResolver;
+use BitBag\SyliusImojePlugin\Resolver\Signature\OwnSignatureResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

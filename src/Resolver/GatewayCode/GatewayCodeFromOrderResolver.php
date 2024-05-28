@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class GatewayCodeFromOrderResolver implements GatewayCodeFromOrderResolverInterface

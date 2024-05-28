@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\TransactionModel;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\TransactionModel;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class TransactionModelFactory implements TransactionModelFactoryInterface

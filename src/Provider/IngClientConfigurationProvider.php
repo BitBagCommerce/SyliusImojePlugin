@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Provider;
+namespace BitBag\SyliusImojePlugin\Provider;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfiguration;
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\Configuration\ConfigurationResolverInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfiguration;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolverInterface;
 use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 

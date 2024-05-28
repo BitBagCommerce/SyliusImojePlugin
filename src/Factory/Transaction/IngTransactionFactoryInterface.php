@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Transaction;
+namespace BitBag\SyliusImojePlugin\Factory\Transaction;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 interface IngTransactionFactoryInterface

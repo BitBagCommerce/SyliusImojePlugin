@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Payment;
+namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
-use BitBag\SyliusIngPlugin\Exception\IngNotConfiguredException;
-use BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilterInterface;
-use BitBag\SyliusIngPlugin\Repository\PaymentMethodRepositoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\TotalResolver\TotalResolverInterface;
+use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Filter\AvailablePaymentMethodsFilterInterface;
+use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\TotalResolver\TotalResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Url;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Url;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\Url\UrlResolver;
-use BitBag\SyliusIngPlugin\Resolver\Url\UrlResolverInterface;
+use BitBag\SyliusImojePlugin\Client\IngApiClientInterface;
+use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolver;
+use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 final class UrlResolverTest extends TestCase

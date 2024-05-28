@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Command\SaveTransaction;
+use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 

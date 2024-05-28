@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin;
+namespace BitBag\SyliusImojePlugin;
 
-use BitBag\SyliusIngPlugin\DependencyInjection\CompilerPass\MessageBusPolyfillPass;
+use BitBag\SyliusImojePlugin\DependencyInjection\CompilerPass\MessageBusPolyfillPass;
 use Sylius\Bundle\CoreBundle\Application\SyliusPluginTrait;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class SyliusIngPlugin extends Bundle
+final class BitBagSyliusImojePlugin extends Bundle
 {
     use SyliusPluginTrait;
 

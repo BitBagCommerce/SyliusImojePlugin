@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Provider\RequestParams;
+namespace BitBag\SyliusImojePlugin\Provider\RequestParams;
 
-use BitBag\SyliusIngPlugin\Factory\Refund\RefundModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Factory\Serializer\SerializerFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Factory\Refund\RefundModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Factory\Serializer\SerializerFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 
 final class RequestParamsProvider implements RequestParamsProviderInterface
 {
