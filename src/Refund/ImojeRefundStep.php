@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Refund;
 
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\Refund\RefundUrlResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -14,24 +14,24 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\RefundPlugin\Event\UnitsRefunded;
 use Sylius\RefundPlugin\ProcessManager\UnitsRefundedProcessStepInterface;
 
-final class IngRefundStep implements UnitsRefundedProcessStepInterface
+final class ImojeRefundStep implements UnitsRefundedProcessStepInterface
 {
-    private IngClientProviderInterface $ingClientProvider;
+    private ImojeClientProviderInterface $ingClientProvider;
 
     private OrderRepositoryInterface $orderRepository;
 
     private GatewayFactoryNameResolverInterface $gatewayFactoryNameResolver;
 
-    private IngClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider;
 
     private RefundUrlResolverInterface $refundUrlResolver;
 
     public function __construct(
-        IngClientProviderInterface $ingClientProvider,
-        OrderRepositoryInterface $orderRepository,
-        GatewayFactoryNameResolverInterface $gatewayFactoryNameResolver,
-        IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
-        RefundUrlResolverInterface $refundUrlResolver
+        ImojeClientProviderInterface              $ingClientProvider,
+        OrderRepositoryInterface                  $orderRepository,
+        GatewayFactoryNameResolverInterface       $gatewayFactoryNameResolver,
+        ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider,
+        RefundUrlResolverInterface                $refundUrlResolver
     ) {
         $this->ingClientProvider = $ingClientProvider;
         $this->orderRepository = $orderRepository;
@@ -49,7 +49,7 @@ final class IngRefundStep implements UnitsRefundedProcessStepInterface
         $gatewayCode = $payment->getMethod()->getCode();
         $gatewayFactory = $this->gatewayFactoryNameResolver->resolve($gatewayCode);
 
-        if (IngClientConfigurationProviderInterface::FACTORY_NAME !== $gatewayFactory) {
+        if (ImojeClientConfigurationProviderInterface::FACTORY_NAME !== $gatewayFactory) {
             return;
         }
         $config = $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);

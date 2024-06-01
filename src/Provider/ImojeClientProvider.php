@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Provider;
 
-use BitBag\SyliusImojePlugin\Client\IngApiClient;
+use BitBag\SyliusImojePlugin\Client\ImojeApiClient;
 use BitBag\SyliusImojePlugin\Factory\Serializer\SerializerFactoryInterface;
 use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
 
-final class IngClientProvider implements IngClientProviderInterface
+final class ImojeClientProvider implements ImojeClientProviderInterface
 {
-    private IngClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider;
 
     private Client $httpClient;
 
@@ -20,10 +20,10 @@ final class IngClientProvider implements IngClientProviderInterface
     private SerializerFactoryInterface $serializerFactory;
 
     public function __construct(
-        IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
-        Client $httpClient,
-        RequestParamsProviderInterface $requestParamsProvider,
-        SerializerFactoryInterface $serializerFactory
+        ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider,
+        Client                                    $httpClient,
+        RequestParamsProviderInterface            $requestParamsProvider,
+        SerializerFactoryInterface                $serializerFactory
     ) {
         $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
         $this->httpClient = $httpClient;
@@ -31,7 +31,7 @@ final class IngClientProvider implements IngClientProviderInterface
         $this->serializerFactory = $serializerFactory;
     }
 
-    public function getClient(string $code): IngApiClient
+    public function getClient(string $code): ImojeApiClient
     {
         $configuration = $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($code);
         $token = $configuration->getToken();
@@ -40,6 +40,6 @@ final class IngClientProvider implements IngClientProviderInterface
 
         $completeUrl = \sprintf('%s/%s/', $url, $merchantId);
 
-        return new IngApiClient($this->httpClient, $this->requestParamsProvider, $this->serializerFactory->createSerializerWithNormalizer(), $token, $completeUrl);
+        return new ImojeApiClient($this->httpClient, $this->requestParamsProvider, $this->serializerFactory->createSerializerWithNormalizer(), $token, $completeUrl);
     }
 }

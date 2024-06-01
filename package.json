@@ -1,7 +1,7 @@
 {
-  "name": "@bitbag/ing-plugin",
+  "name": "@bitbag/imoje-plugin",
   "version": "1.0.0",
-  "description": "Sylius Ing Plugin",
+  "description": "Sylius Imoje Plugin",
   "repository": "git@github.com:BitBagCommerce/SyliusImojePlugin.git",
   "author": "BitBag <hello@bitbag.io>",
   "license": "MIT",

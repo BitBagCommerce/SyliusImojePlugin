@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Form\Type;
 
-use BitBag\SyliusImojePlugin\Resolver\Payment\IngPaymentsMethodResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\ImojePaymentsMethodResolverInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class PaymentIngType extends AbstractType
 {
-    private IngPaymentsMethodResolverInterface $methodResolver;
+    private ImojePaymentsMethodResolverInterface $methodResolver;
 
     public function __construct(
-        IngPaymentsMethodResolverInterface $methodResolver
+        ImojePaymentsMethodResolverInterface $methodResolver
     ) {
         $this->methodResolver = $methodResolver;
     }

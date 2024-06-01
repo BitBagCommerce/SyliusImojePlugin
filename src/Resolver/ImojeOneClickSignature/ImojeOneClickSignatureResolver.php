@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\IngOneClickSignature;
+namespace BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature;
 
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
 
-final class IngOneClickSignatureResolver implements IngOneClickSignatureResolverInterface
+final class ImojeOneClickSignatureResolver implements ImojeOneClickSignatureResolverInterface
 {
-    public function resolve(array $orderData, IngClientConfigurationInterface $config): string
+    public function resolve(array $orderData, ImojeClientConfigurationInterface $config): string
     {
         $data = $this->prepareData($orderData);
 

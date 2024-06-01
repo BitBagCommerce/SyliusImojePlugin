@@ -1,7 +1,7 @@
 imports:
   - { resource: config/*.yml }
   - { resource: config/services/*.xml }
-  - { resource: "@SyliusImojePlugin/Resources/config/sylius/resources.yaml" }
+  - { resource: "@BitBagSyliusImojePlugin/Resources/config/sylius/resources.yaml" }
   - { resource: "@SyliusRefundPlugin/Resources/config/app/config.yml" }
 
 parameters:
@@ -11,5 +11,5 @@ parameters:
 
 knp_snappy:
   pdf:
-    enabled:    true
+    enabled: true
 

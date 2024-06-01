@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
-interface IngPaymentsMethodResolverInterface
+interface ImojePaymentsMethodResolverInterface
 {
     public const MIN_TOTAL_5 = 5;
 

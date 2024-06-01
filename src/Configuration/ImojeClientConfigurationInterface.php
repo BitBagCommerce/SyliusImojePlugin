@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Configuration;
 
-interface IngClientConfigurationInterface
+interface ImojeClientConfigurationInterface
 {
     public function getToken(): string;
 

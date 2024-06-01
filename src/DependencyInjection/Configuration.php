@@ -14,7 +14,7 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('bitbag_ing');
+        $treeBuilder = new TreeBuilder('bitbag_imoje');
 
         return $treeBuilder;
     }

@@ -46,7 +46,7 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                         'mapped' => false,
                         'constraints' => [
                             new NotBlank([
-                                'message' => 'bitbag_sylius_ing_plugin.blik_code.not_blank',
+                                'message' => 'bitbag_sylius_imoje_plugin.blik_code.not_blank',
                                 'groups' => ['sylius'],
                             ]),
                             new Length([

@@ -1,17 +1,17 @@
 monolog:
-    channels: ['ing']
+    channels: ['imoje']
 
     handlers:
         main:
-            type: fingers_crossed
+            type: fimojeers_crossed
             action_level: error
             handler: nested
         nested:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-        ing:
+        imoje:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%_ing.log"
+            path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
             level: error
-            channels: [ 'ing' ]
+            channels: [ 'imoje' ]

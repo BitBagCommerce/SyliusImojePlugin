@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Url;
 
-use BitBag\SyliusImojePlugin\Client\IngApiClientInterface;
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Client\ImojeApiClientInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolver;
 use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolverInterface;
 use PHPUnit\Framework\TestCase;
@@ -31,19 +31,19 @@ final class UrlResolverTest extends TestCase
 
     public const COMPLETE_PROD_URL = 'http://prod/MerchantId/transaction/TR-12345';
 
-    private IngTransactionInterface $ingTransaction;
+    private ImojeTransactionInterface $ingTransaction;
 
-    private IngClientConfigurationProviderInterface $ingClientConfiguration;
+    private ImojeClientConfigurationProviderInterface $ingClientConfiguration;
 
-    private IngClientProviderInterface $ingClientProvide;
+    private ImojeClientProviderInterface $ingClientProvide;
 
     private UrlResolverInterface $urlResolver;
 
     protected function setUp(): void
     {
-        $this->ingTransaction = $this->createMock(IngTransactionInterface::class);
-        $this->ingClientConfiguration = $this->createMock(IngClientConfigurationProviderInterface::class);
-        $this->ingClientProvide = $this->createMock(IngClientProviderInterface::class);
+        $this->ingTransaction = $this->createMock(ImojeTransactionInterface::class);
+        $this->ingClientConfiguration = $this->createMock(ImojeClientConfigurationProviderInterface::class);
+        $this->ingClientProvide = $this->createMock(ImojeClientProviderInterface::class);
         $this->urlResolver = new UrlResolver();
     }
 
@@ -52,8 +52,8 @@ final class UrlResolverTest extends TestCase
      */
     public function testResolveUrl(bool $isProd,string $url,string $result): void
     {
-        $configuration = $this->createMock(IngClientConfigurationInterface::class);
-        $client = $this->createMock(IngApiClientInterface::class);
+        $configuration = $this->createMock(ImojeClientConfigurationInterface::class);
+        $client = $this->createMock(ImojeApiClientInterface::class);
 
         $this->ingTransaction
             ->method('getGatewayCode')

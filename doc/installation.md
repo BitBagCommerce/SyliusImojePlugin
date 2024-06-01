@@ -5,7 +5,7 @@
 1. Require our plugin with composer:
 
     ```bash
-    composer require bitbag/sylius-ing-plugin
+    composer require bitbag/sylius-imoje-plugin
     ```
     
     **Note.** If you receive an error related to `Twig\Extra\Intl\IntlExtension` class, please go to `config/packages/twig.yaml` file and remove the mentioned service definition. In some cases, multiple dependencies redefine the service, so it results the error message. After removing it, please run the composer command second time, to finish the step.
@@ -28,7 +28,7 @@
 
     imports:
         ...
-        - { resource: "@SyliusImojePlugin/Resources/config.yaml" }
+        - { resource: "@BitBagSyliusImojePlugin/Resources/config.yaml" }
     ```
 
 5. Import the routing in your `config/routes.yaml` file:
@@ -36,11 +36,11 @@
     ```yaml
     # config/routes.yaml
 
-    bitbag_sylius_ing_plugin:
-        resource: "@SyliusImojePlugin/Resources/config/routing.yaml"
+    bitbag_sylius_imoje_plugin:
+        resource: "@BitBagSyliusImojePlugin/Resources/config/routing.yaml"
     ```
 
-6. Add ING as a supported refund gateway in `config/packages/_sylius.yaml`:
+6. Add Imoje as a supported refund gateway in `config/packages/_sylius.yaml`:
 
     ```yaml
     # config/packages/_sylius.yaml
@@ -57,8 +57,8 @@
     mkdir -p templates/bundles/SyliusAdminBundle/
     mkdir -p templates/bundles/SyliusShopBundle/
 
-    cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
-    cp -R vendor/bitbag/sylius-ing-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
+    cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
+    cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
     ```
 
     **Note.** If you have overridden at least one template from the directories above, please adjust your code to include our changes.
@@ -67,13 +67,13 @@
 
     ```yaml
     monolog:
-        channels: ['ing']
+        channels: ['imoje']
         handlers:
-            ing:
+            imoje:
                 type: stream
-                path: "%kernel.logs_dir%/%kernel.environment%_ing.log"
+                path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
                 level: debug
-                channels: [ 'ing' ]
+                channels: [ 'imoje' ]
     ```
 
 9. Clear the cache:
@@ -108,8 +108,8 @@
         builds:
             shop: '%kernel.project_dir%/public/build/shop'
             admin: '%kernel.project_dir%/public/build/admin'
-            ing_shop: '%kernel.project_dir%/public/build/bitbag/ing/shop'
-            ing_admin: '%kernel.project_dir%/public/build/bitbag/ing/admin'
+            imoje_shop: '%kernel.project_dir%/public/build/bitbag/imoje/shop'
+            imoje_admin: '%kernel.project_dir%/public/build/bitbag/imoje/admin'
     ```
 
 2. To install Webpack in your application, please run the command below:
@@ -134,13 +134,13 @@ By a standard, the `webpack.config.js` file should be available in your reposito
 1. Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your `webpack.config.js` file:
 
     ```javascript
-    const [bitbagIngShop, bitbagIngAdmin] = require('./vendor/bitbag/sylius-ing-plugin/webpack.config.js');
+    const [bitbagImojeShop, bitbagImojeAdmin] = require('./vendor/bitbag/sylius-imoje-plugin/webpack.config.js');
     ```
 
-2. As next step, please to add the imported consts into final module exports:
+2. As next step, please add the imported consts into final module exports:
 
     ```javascripts
-    module.exports = [shopConfig, adminConfig, bitbagIngShop, bitbagIngAdmin];
+    module.exports = [shopConfig, adminConfig, bitbagImojeShop, bitbagImojeAdmin];
     ```
 
 3. Next thing is to add the asset configuration into `config/packages/framework.yaml`:
@@ -153,10 +153,10 @@ By a standard, the `webpack.config.js` file should be available in your reposito
                     json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
                 admin:
                     json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
-                ing_shop:
-                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/shop/manifest.json'
-                ing_admin:
-                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing/admin/manifest.json'
+                imoje_shop:
+                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/shop/manifest.json'
+                imoje_admin:
+                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/admin/manifest.json'
     ```
 
 4. Additionally, please add the `"@symfony/webpack-encore": "^1.5.0",` dependency into your `package.json` file.

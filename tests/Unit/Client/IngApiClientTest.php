@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusImojePlugin\Unit\Client;
 
-use BitBag\SyliusImojePlugin\Client\IngApiClient;
-use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Client\ImojeApiClient;
+use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
 use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
 use GuzzleHttp\Client;
@@ -22,7 +22,7 @@ final class IngApiClientTest extends TestCase
 
     private Serializer $serializer;
 
-    private IngApiClient $ingApiClient;
+    private ImojeApiClient $ingApiClient;
 
     public const TOKEN = 'token';
 
@@ -34,7 +34,7 @@ final class IngApiClientTest extends TestCase
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
         $this->requestParamsProvider = $this->createMock(RequestParamsProviderInterface::class);
         $this->serializer = $this->createMock(Serializer::class);
-        $this->ingApiClient = new IngApiClient(
+        $this->ingApiClient = new ImojeApiClient(
             $this->httpClient,
             $this->requestParamsProvider,
             $this->serializer,
@@ -94,7 +94,7 @@ final class IngApiClientTest extends TestCase
             ->with('url/transaction', $parameters)
             ->will($this->throwException($exception));
 
-        $this->expectException(IngBadRequestException::class);
+        $this->expectException(ImojeBadRequestException::class);
 
         $this->ingApiClient->createTransaction($transactionModel);
     }

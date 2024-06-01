@@ -6,11 +6,11 @@ namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
 
 use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
-use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
 use BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactoryInterface;
-use BitBag\SyliusImojePlugin\Factory\Transaction\IngTransactionFactoryInterface;
+use BitBag\SyliusImojePlugin\Factory\Transaction\ImojeTransactionFactoryInterface;
 use BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -21,11 +21,11 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 {
     private RequestStack $requestStack;
 
-    private IngTransactionFactoryInterface $ingTransactionFactory;
+    private ImojeTransactionFactoryInterface $ingTransactionFactory;
 
     private OrderRepositoryInterface $orderRepository;
 
-    private IngClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider;
 
     private DispatcherInterface $dispatcher;
 
@@ -38,15 +38,15 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
     private WebhookResponseProcessorInterface $webhookResponseProcessor;
 
     public function __construct(
-        RequestStack $requestStack,
-        IngTransactionFactoryInterface $ingTransactionFactory,
-        OrderRepositoryInterface $orderRepository,
-        IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
-        DispatcherInterface $dispatcher,
-        PaymentMethodResolverInterface $paymentMethodResolver,
-        OrderPaymentResolverInterface $orderPaymentResolver,
-        StatusResponseModelFactoryInterface $statusResponseModelFactory,
-        WebhookResponseProcessorInterface $webhookResponseProcessor
+        RequestStack                              $requestStack,
+        ImojeTransactionFactoryInterface          $ingTransactionFactory,
+        OrderRepositoryInterface                  $orderRepository,
+        ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider,
+        DispatcherInterface                       $dispatcher,
+        PaymentMethodResolverInterface            $paymentMethodResolver,
+        OrderPaymentResolverInterface             $orderPaymentResolver,
+        StatusResponseModelFactoryInterface       $statusResponseModelFactory,
+        WebhookResponseProcessorInterface         $webhookResponseProcessor
     ) {
         $this->requestStack = $requestStack;
         $this->ingTransactionFactory = $ingTransactionFactory;
@@ -79,7 +79,7 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 
         foreach ($data as $item) {
             if ('' === $item) {
-                throw new IngBadRequestException('Missing mandatory transaction data');
+                throw new ImojeBadRequestException('Missing mandatory transaction data');
             }
         }
 

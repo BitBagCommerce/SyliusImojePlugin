@@ -6,7 +6,7 @@ namespace BitBag\SyliusImojePlugin\Controller\Shop\Oneclick;
 
 use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature\ImojeOneClickSignatureResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,17 +21,17 @@ final class OneClickController
 
     private GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver;
 
-    private IngOneClickSignatureResolverInterface $signatureResolver;
+    private ImojeOneClickSignatureResolverInterface $signatureResolver;
 
     private RedirectFactoryInterface $redirectFactory;
 
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
-        GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver,
-        IngOneClickSignatureResolverInterface $signatureResolver,
-        RedirectFactoryInterface $redirectFactory,
-        OrderRepositoryInterface $orderRepository
+        GatewayCodeFromOrderResolverInterface   $gatewayCodeFromOrderResolver,
+        ImojeOneClickSignatureResolverInterface $signatureResolver,
+        RedirectFactoryInterface                $redirectFactory,
+        OrderRepositoryInterface                $orderRepository
     ) {
         $this->gatewayCodeFromOrderResolver = $gatewayCodeFromOrderResolver;
         $this->signatureResolver = $signatureResolver;

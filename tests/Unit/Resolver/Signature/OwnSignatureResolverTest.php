@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Signature;
 
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\Signature\OwnSignatureResolver;
 use BitBag\SyliusImojePlugin\Resolver\Signature\OwnSignatureResolverInterface;
@@ -23,7 +23,7 @@ final class OwnSignatureResolverTest extends TestCase
 
     private GatewayCodeResolverInterface $gatewayCodeResolver;
 
-    private IngClientConfigurationProviderInterface $configurationProvider;
+    private ImojeClientConfigurationProviderInterface $configurationProvider;
 
     private OwnSignatureResolverInterface $ownSignatureResolver;
 
@@ -31,7 +31,7 @@ final class OwnSignatureResolverTest extends TestCase
     {
         $this->requestStack = $this->createMock(RequestStack::class);
         $this->gatewayCodeResolver = $this->createMock(GatewayCodeResolverInterface::class);
-        $this->configurationProvider = $this->createMock(IngClientConfigurationProviderInterface::class);
+        $this->configurationProvider = $this->createMock(ImojeClientConfigurationProviderInterface::class);
         $this->ownSignatureResolver = new OwnSignatureResolver(
             $this->requestStack,
             $this->gatewayCodeResolver,
@@ -42,7 +42,7 @@ final class OwnSignatureResolverTest extends TestCase
     public function testResolveSignature(): void
     {
         $requestMock = $this->createMock(Request::class);
-        $config = $this->createMock(IngClientConfigurationInterface::class);
+        $config = $this->createMock(ImojeClientConfigurationInterface::class);
 
         $this->requestStack
             ->method('getCurrentRequest')

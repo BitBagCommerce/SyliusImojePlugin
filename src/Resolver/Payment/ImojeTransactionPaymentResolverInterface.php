@@ -6,7 +6,7 @@ namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
-interface IngTransactionPaymentResolverInterface
+interface ImojeTransactionPaymentResolverInterface
 {
     public function resolve(string $transactionId): PaymentInterface;
 }

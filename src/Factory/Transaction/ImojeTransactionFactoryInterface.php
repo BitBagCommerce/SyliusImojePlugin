@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Factory\Transaction;
 
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-interface IngTransactionFactoryInterface
+interface ImojeTransactionFactoryInterface
 {
     public function create(
         PaymentInterface $payment,
@@ -16,5 +16,5 @@ interface IngTransactionFactoryInterface
         string $serviceId,
         string $orderId,
         string $gatewayCode
-    ): IngTransactionInterface;
+    ): ImojeTransactionInterface;
 }

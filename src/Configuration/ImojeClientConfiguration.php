@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Configuration;
 
-final class IngClientConfiguration implements IngClientConfigurationInterface
+final class ImojeClientConfiguration implements ImojeClientConfigurationInterface
 {
     private string $token;
 

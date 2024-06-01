@@ -6,7 +6,7 @@ namespace BitBag\SyliusImojePlugin\Entity;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
-interface IngTransactionInterface
+interface ImojeTransactionInterface
 {
     public function getId(): int;
 

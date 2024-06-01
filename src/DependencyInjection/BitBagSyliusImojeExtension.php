@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
-final class BitBagSyliusIngExtension extends Extension
+final class BitBagSyliusImojeExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -19,7 +19,7 @@ final class BitBagSyliusIngExtension extends Extension
         $loader->load('services.xml');
 
         if (!$container->has('sylius.command_bus')) {
-            $container->setAlias('bitbag.sylius_ing_plugin.command_bus', 'sylius_default.bus');
+            $container->setAlias('bitbag.sylius_imoje_plugin.command_bus', 'sylius_default.bus');
         }
     }
 

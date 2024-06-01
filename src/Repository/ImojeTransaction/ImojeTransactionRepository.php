@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Repository\IngTransaction;
+namespace BitBag\SyliusImojePlugin\Repository\ImojeTransaction;
 
-use BitBag\SyliusImojePlugin\Entity\IngTransaction;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusImojePlugin\Exception\MissingIngTransactionException;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransaction;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Exception\MissingImojeTransactionException;
 use BitBag\SyliusImojePlugin\Exception\NoTransactionException;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-final class IngTransactionRepository extends EntityRepository implements IngTransactionRepositoryInterface
+final class ImojeTransactionRepository extends EntityRepository implements ImojeTransactionRepositoryInterface
 {
-    public function getByPaymentId(int $paymentId): IngTransaction
+    public function getByPaymentId(int $paymentId): ImojeTransaction
     {
         $transaction = $this->createQueryBuilder('o')
             ->innerJoin('o.payment', 'payment')
@@ -31,14 +31,14 @@ final class IngTransactionRepository extends EntityRepository implements IngTran
         return $resultTransaction;
     }
 
-    public function getOneByTransactionId(string $transactionId): IngTransactionInterface
+    public function getOneByTransactionId(string $transactionId): ImojeTransactionInterface
     {
         $transaction = $this->findOneBy([
             'transactionId' => $transactionId,
         ]);
 
         if (null === $transaction) {
-            throw new MissingIngTransactionException($transactionId);
+            throw new MissingImojeTransactionException($transactionId);
         }
 
         return $transaction;

@@ -9,8 +9,8 @@ use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
 use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
 use BitBag\SyliusImojePlugin\Bus\Query\GetBlikTransactionData;
 use BitBag\SyliusImojePlugin\Bus\Query\GetTransactionData;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Exception\ImojeNotConfiguredException;
 use BitBag\SyliusImojePlugin\Factory\Payment\PaymentDataModelFactoryInterface;
 use BitBag\SyliusImojePlugin\Model\Payment\PaymentDataModelInterface;
 use BitBag\SyliusImojePlugin\Provider\BlikModel\BlikModelProviderInterface;
@@ -104,7 +104,7 @@ final class InitializePaymentController extends AbstractController
 
             return new RedirectResponse($transactionData->getPaymentUrl());
         } catch (Throwable $e) {
-            $this->addFlash('error', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_failed'));
+            $this->addFlash('error', $this->translator->trans('bitbag_sylius_imoje_plugin.ui.payment_failed'));
             return $this->redirectToRoute('sylius_shop_checkout_select_payment');
         }
 
@@ -115,7 +115,7 @@ final class InitializePaymentController extends AbstractController
         try {
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
-            throw new IngNotConfiguredException('Payment method not found');
+            throw new ImojeNotConfiguredException('Payment method not found');
         }
 
         return $payment;
@@ -125,7 +125,7 @@ final class InitializePaymentController extends AbstractController
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData
-    ): IngTransactionInterface {
+    ): ImojeTransactionInterface {
         return $this->dispatcher->dispatch(
             new GetTransactionData(
                 $order,
@@ -141,7 +141,7 @@ final class InitializePaymentController extends AbstractController
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData,
         ?string $blikCode
-    ): IngTransactionInterface {
+    ): ImojeTransactionInterface {
         $blikModel = $this->blikModelProvider->provideDataToBlikModel($blikCode);
 
         return $this->dispatcher->dispatch(

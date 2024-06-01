@@ -1,7 +1,7 @@
 sylius_resource:
   resources:
-    bitbag_sylius_ing_plugin.ing_transaction:
+    bitbag_sylius_imoje_plugin.imoje_transaction:
       classes:
-        model: BitBag\SyliusImojePlugin\Entity\IngTransaction
-        repository: BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepository
-        interface: BitBag\SyliusImojePlugin\Entity\IngTransactionInterface
+        model: BitBag\SyliusImojePlugin\Entity\ImojeTransaction
+        repository: BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepository
+        interface: BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface

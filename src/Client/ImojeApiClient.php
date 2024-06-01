@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Client;
 
-use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
 use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModel;
 use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModelInterface;
 use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
@@ -14,7 +14,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Serializer\Serializer;
 
-final class IngApiClient implements IngApiClientInterface
+final class ImojeApiClient implements ImojeApiClientInterface
 {
     private Client $httpClient;
 
@@ -50,7 +50,7 @@ final class IngApiClient implements IngApiClientInterface
         try {
             $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
-            throw new IngBadRequestException($e->getMessage());
+            throw new ImojeBadRequestException($e->getMessage());
         }
 
         return $response;
@@ -64,7 +64,7 @@ final class IngApiClient implements IngApiClientInterface
         try {
             $response = $this->httpClient->get($url, $parameters);
         } catch (GuzzleException $e) {
-            throw new IngBadRequestException($e->getMessage());
+            throw new ImojeBadRequestException($e->getMessage());
         }
 
         $json = \json_decode($response->getBody()->getContents(), true);
@@ -81,7 +81,7 @@ final class IngApiClient implements IngApiClientInterface
         try {
             $response = $this->httpClient->get($url, $parameters);
         } catch (GuzzleException $e) {
-            throw new IngBadRequestException($e->getMessage());
+            throw new ImojeBadRequestException($e->getMessage());
         }
 
         return $response;
@@ -97,7 +97,7 @@ final class IngApiClient implements IngApiClientInterface
         try {
             $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
-            throw new IngBadRequestException($e->getMessage());
+            throw new ImojeBadRequestException($e->getMessage());
         }
 
         return $response;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
 
-use BitBag\SyliusImojePlugin\Exception\IngBadRequestException;
+use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
 use BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactoryInterface;
 use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -30,7 +30,7 @@ final class WebhookResolver implements WebhookResolverInterface
         $payment = $content['payment'];
 
         if (null === $transaction || null === $payment) {
-            throw new IngBadRequestException('Missing transaction data');
+            throw new ImojeBadRequestException('Missing transaction data');
         }
 
         $transactionId = $transaction['id'] ?? '';
@@ -39,7 +39,7 @@ final class WebhookResolver implements WebhookResolverInterface
         $transactionStatus = $transaction['status'] ?? '';
 
         if ('' === $transactionId || '' === $paymentId || '' === $orderId || '' === $transactionStatus) {
-            throw new IngBadRequestException('Missing transaction data');
+            throw new ImojeBadRequestException('Missing transaction data');
         }
 
         return $this->statusResponseModelFactory->create($transactionId, $paymentId, $orderId, $transactionStatus);

@@ -5,33 +5,33 @@ declare(strict_types=1);
 namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
 use BitBag\SyliusImojePlugin\Bus\Query\GetBlikTransactionData;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 use BitBag\SyliusImojePlugin\Exception\InvalidIngResponseException;
 use BitBag\SyliusImojePlugin\Factory\Model\TransactionBlikModelFactoryInterface;
-use BitBag\SyliusImojePlugin\Factory\Transaction\IngTransactionFactoryInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Factory\Transaction\ImojeTransactionFactoryInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetBlikTransactionDataHandler implements MessageHandlerInterface
 {
-    private IngClientConfigurationProviderInterface $configurationProvider;
+    private ImojeClientConfigurationProviderInterface $configurationProvider;
 
     private TransactionBlikModelFactoryInterface $transactionBlikModelFactory;
 
-    private IngClientProviderInterface $ingClientProvider;
+    private ImojeClientProviderInterface $ingClientProvider;
 
-    private IngTransactionFactoryInterface $ingTransactionFactory;
+    private ImojeTransactionFactoryInterface $ingTransactionFactory;
 
     private TransactionDataResolverInterface $transactionDataResolver;
 
     public function __construct(
-        IngClientConfigurationProviderInterface $configurationProvider,
-        TransactionBlikModelFactoryInterface $transactionBlikModelFactory,
-        IngClientProviderInterface $ingClientProvider,
-        IngTransactionFactoryInterface $ingTransactionFactory,
-        TransactionDataResolverInterface $transactionDataResolver
+        ImojeClientConfigurationProviderInterface $configurationProvider,
+        TransactionBlikModelFactoryInterface      $transactionBlikModelFactory,
+        ImojeClientProviderInterface              $ingClientProvider,
+        ImojeTransactionFactoryInterface          $ingTransactionFactory,
+        TransactionDataResolverInterface          $transactionDataResolver
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionBlikModelFactory = $transactionBlikModelFactory;
@@ -40,7 +40,7 @@ final class GetBlikTransactionDataHandler implements MessageHandlerInterface
         $this->transactionDataResolver = $transactionDataResolver;
     }
 
-    public function __invoke(GetBlikTransactionData $query): IngTransactionInterface
+    public function __invoke(GetBlikTransactionData $query): ImojeTransactionInterface
     {
         $code = $query->getCode();
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);

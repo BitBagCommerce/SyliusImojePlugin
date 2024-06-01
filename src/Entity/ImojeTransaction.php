@@ -9,7 +9,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-class IngTransaction implements IngTransactionInterface, ResourceInterface, TimestampableInterface
+class ImojeTransaction implements ImojeTransactionInterface, ResourceInterface, TimestampableInterface
 {
     use TimestampableTrait;
 

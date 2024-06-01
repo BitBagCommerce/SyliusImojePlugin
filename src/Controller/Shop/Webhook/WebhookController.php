@@ -6,7 +6,7 @@ namespace BitBag\SyliusImojePlugin\Controller\Shop\Webhook;
 
 use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
 use BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\IngTransactionPaymentResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\ImojeTransactionPaymentResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\Webhook\oneClickWebhookResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\Webhook\WebhookResolverInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,7 +17,7 @@ final class WebhookController
 {
     public const SIGNATURE_HEADER_NAME = 'X-Imoje-Signature';
 
-    private IngTransactionPaymentResolverInterface $ingTransactionPaymentResolver;
+    private ImojeTransactionPaymentResolverInterface $ingTransactionPaymentResolver;
 
     private WebhookResolverInterface $webhookResolver;
 
@@ -26,10 +26,10 @@ final class WebhookController
     private oneClickWebhookResolverInterface $oneClickWebhookResolver;
 
     public function __construct(
-        IngTransactionPaymentResolverInterface $ingTransactionPaymentResolver,
-        WebhookResolverInterface $webhookResolver,
-        WebhookResponseProcessorInterface $webhookResponseProcessor,
-        oneClickWebhookResolverInterface $oneClickWebhookResolver
+        ImojeTransactionPaymentResolverInterface $ingTransactionPaymentResolver,
+        WebhookResolverInterface                 $webhookResolver,
+        WebhookResponseProcessorInterface        $webhookResponseProcessor,
+        oneClickWebhookResolverInterface         $oneClickWebhookResolver
     ) {
         $this->ingTransactionPaymentResolver = $ingTransactionPaymentResolver;
         $this->webhookResolver = $webhookResolver;

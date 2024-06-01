@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Payment;
 
-use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Exception\ImojeNotConfiguredException;
 use BitBag\SyliusImojePlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\IngPaymentsMethodResolver;
+use BitBag\SyliusImojePlugin\Resolver\Payment\ImojePaymentsMethodResolver;
 use BitBag\SyliusImojePlugin\Resolver\TotalResolver\TotalResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
@@ -108,7 +108,7 @@ final class IngPaymentMethodResolverTest extends TestCase
             'ipko' => 'ipko',
         ];
 
-        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
+        $ingPaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
@@ -121,7 +121,7 @@ final class IngPaymentMethodResolverTest extends TestCase
     public function testResolveEmptyPaymentException(): void
     {
         $order = $this->createMock(OrderInterface::class);
-        $this->expectException(IngNotConfiguredException::class);
+        $this->expectException(ImojeNotConfiguredException::class);
 
         $this->cartContext
             ->expects(self::once())
@@ -144,7 +144,7 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->willReturn(null);
 
 
-        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
+        $ingPaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
@@ -154,7 +154,7 @@ final class IngPaymentMethodResolverTest extends TestCase
     }
     public function testResolveEmptyConfigException(): void
     {
-        $this->expectException(IngNotConfiguredException::class);
+        $this->expectException(ImojeNotConfiguredException::class);
 
         $order = $this->createMock(OrderInterface::class);
         $payment = $this->createMock(PaymentInterface::class);
@@ -188,7 +188,7 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->method('getGatewayConfig')
             ->willReturn(null);
 
-        $ingPaymentsMethodResolver = new IngPaymentsMethodResolver(
+        $ingPaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,

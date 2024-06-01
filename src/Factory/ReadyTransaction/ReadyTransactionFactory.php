@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Factory\ReadyTransaction;
 
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 use BitBag\SyliusImojePlugin\Exception\InvalidIngResponseException;
 use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModel;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -12,9 +12,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class ReadyTransactionFactory implements ReadyTransactionFactoryInterface
 {
     public function createReadyTransaction(
-        string $contents,
-        IngTransactionInterface $ingTransaction,
-        OrderInterface $order
+        string                    $contents,
+        ImojeTransactionInterface $ingTransaction,
+        OrderInterface            $order
     ): ReadyTransactionModel {
         /** @var array $transactionData */
         $transactionData = json_decode($contents, true);

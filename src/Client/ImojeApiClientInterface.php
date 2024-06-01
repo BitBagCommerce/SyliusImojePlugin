@@ -8,7 +8,7 @@ use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModelInterface;
 use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use Psr\Http\Message\ResponseInterface;
 
-interface IngApiClientInterface
+interface ImojeApiClientInterface
 {
     public const TRANSACTION_ENDPOINT = 'transaction';
 

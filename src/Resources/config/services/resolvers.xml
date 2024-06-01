@@ -3,143 +3,143 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.configuration.configuration_resolver"
+                 id="bitbag.sylius_imoje_plugin.resolver.configuration.configuration_resolver"
         >
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Resolver\Order\OrderResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"
+                 id="bitbag.sylius_imoje_plugin.resolver.order.order_resolver"
         >
             <argument type="service" id="sylius.context.cart"/>
             <argument type="service" id="sylius.repository.order"/>
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"
+                 id="bitbag.sylius_imoje_plugin.resolver.payment.order_payment_resolver"
         >
         </service>
 
-        <service  class="BitBag\SyliusImojePlugin\Resolver\Payment\IngPaymentsMethodResolver" id="bitbag_sylius_ing_plugin.resolver.payment.payment_methods">
-            <argument type="service" id="bitbag.sylius_ing_plugin.repository.payment_method_repository"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.filter.available_payment_methods_filter"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.total_resolver.total_resolver"/>
+        <service class="BitBag\SyliusImojePlugin\Resolver\Payment\ImojePaymentsMethodResolver" id="bitbag_sylius_imoje_plugin.resolver.payment.payment_methods">
+            <argument type="service" id="bitbag.sylius_imoje_plugin.repository.payment_method_repository"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.filter.available_payment_methods_filter"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.total_resolver.total_resolver"/>
             <argument type="service" id="sylius.context.cart"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\TransactionMethod\TransactionMethodResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.transaction_method.transaction_method_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.transaction_method.transaction_method_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.payment_method.payment_method_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.payment_method.payment_method_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.transaction_data.transaction_data_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.transaction_data.transaction_data_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Customer\CustomerResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.customer.customer_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.customer.customer_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Status\StatusResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.status.status_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Url\UrlResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.url.url_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.url.url_resolver"
         >
         </service>
 
-        <service  class="BitBag\SyliusImojePlugin\Resolver\Payment\IngTransactionPaymentResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.payment.ing_transaction_payment_resolver"
+        <service  class="BitBag\SyliusImojePlugin\Resolver\Payment\ImojeTransactionPaymentResolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.payment.imoje_transaction_payment_resolver"
         >
-            <argument type="service" id="BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepository"/>
+            <argument type="service" id="BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepository"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Signature\SignatureResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.signature.signature_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.signature.signature_resolver"
         >
             <argument type="service" id="request_stack"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.gateway_code.gateway_code_resolver"
         >
             <argument id="sylius.repository.gateway_config" type="service"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Signature\OwnSignatureResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.signature.own_signature_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.signature.own_signature_resolver"
         >
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_resolver"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.gateway_code.gateway_code_resolver"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.gateway_code.gateway_code_from_order_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.gateway_code.gateway_code_from_order_resolver"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.payment.order_payment_resolver"/>
         </service>
 
-        <service  class="BitBag\SyliusImojePlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.ing_one_click_signature.ing_one_click_signature_resolver"
+        <service  class="BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature\ImojeOneClickSignatureResolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.ing_one_click_signature.ing_one_click_signature_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Payment\PaymentMethodByCodeResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.payment.payment_method_by_code_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.payment.payment_method_by_code_resolver"
         >
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Payment\TransactionPaymentDataResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.payment.transaction_payment_data_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.payment.transaction_payment_data_resolver"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.factory.payment.payment_method_and_code_model_factory"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.payment_method_by_code_resolver"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.payment.payment_method_and_code_model_factory"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.payment.payment_method_by_code_resolver"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\Webhook\WebhookResolver"
-                  id="bitbag.sylius_ing_plugin.resolver.webhook.webhook_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.webhook.webhook_resolver"
         >
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.status.status_response_model_factory"/>
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Resolver\Webhook\OneClickWebhookResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.webhook.one_click_webhook_resolver"
+                 id="bitbag.sylius_imoje_plugin.resolver.webhook.one_click_webhook_resolver"
         >
             <argument id="request_stack" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.factory.transaction.ing_transaction_factory" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.factory.transaction.imoje_transaction_factory" type="service"/>
             <argument id="sylius.repository.order" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.bus.dispatcher" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.resolver.payment_method.payment_method_resolver" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.factory.status.status_response_model_factory" type="service"/>
-            <argument id="bitbag.sylius_ing_plugin.processor.webhook.status.webhook_response_processor" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.bus.dispatcher" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.resolver.payment_method.payment_method_resolver" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.resolver.payment.order_payment_resolver" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.factory.status.status_response_model_factory" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.processor.webhook.status.webhook_response_processor" type="service"/>
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Resolver\GatewayFactoryName\GatewayFactoryNameResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver"
+                 id="bitbag.sylius_imoje_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver"
         >
                 <argument type="service" id="sylius.repository.gateway_config"/>
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Resolver\Refund\RefundUrlResolver"
-                 id="bitbag.sylius_ing_plugin.resolver.refund.refund_url_resolver"
+                 id="bitbag.sylius_imoje_plugin.resolver.refund.refund_url_resolver"
         >
-            <argument id="BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepository" type="service"/>
+            <argument id="BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepository" type="service"/>
         </service>
 
-        <service class="BitBag\SyliusImojePlugin\Resolver\TotalResolver\TotalResolver" id="bitbag.sylius_ing_plugin.resolver.total_resolver.total_resolver">
+        <service class="BitBag\SyliusImojePlugin\Resolver\TotalResolver\TotalResolver" id="bitbag.sylius_imoje_plugin.resolver.total_resolver.total_resolver">
             <argument id="sylius.context.cart" type="service"/>
             <argument id="request_stack" type="service"/>
             <argument id="sylius.repository.order" type="service"/>

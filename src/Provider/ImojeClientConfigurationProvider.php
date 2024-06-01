@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Provider;
 
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfiguration;
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfiguration;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Exception\ImojeNotConfiguredException;
 use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolverInterface;
 use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-final class IngClientConfigurationProvider implements IngClientConfigurationProviderInterface
+final class ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInterface
 {
     private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
@@ -26,12 +26,12 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
         $this->configurationResolver = $configurationResolver;
     }
 
-    public function getPaymentMethodConfiguration(string $code): IngClientConfigurationInterface
+    public function getPaymentMethodConfiguration(string $code): ImojeClientConfigurationInterface
     {
         $paymentMethod = $this->paymentMethodRepository->findOneForIngCode($code);
 
         if (null === $paymentMethod) {
-            throw new IngNotConfiguredException(
+            throw new ImojeNotConfiguredException(
                 \sprintf('Payment method with code %s is not configured', $code)
             );
         }
@@ -39,7 +39,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
         $config = $this->getGatewayConfig($paymentMethod)->getConfig();
         $resolved = $this->configurationResolver->resolve($config);
 
-        return new IngClientConfiguration(
+        return new ImojeClientConfiguration(
             $resolved['token'],
             $resolved['merchantId'],
             $resolved['sandboxUrl'],
@@ -55,7 +55,7 @@ final class IngClientConfigurationProvider implements IngClientConfigurationProv
         $gatewayConfig = $paymentMethod->getGatewayConfig();
 
         if (null === $gatewayConfig) {
-            throw new IngNotConfiguredException((string) $paymentMethod->getCode());
+            throw new ImojeNotConfiguredException((string) $paymentMethod->getCode());
         }
 
         return $gatewayConfig;

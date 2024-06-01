@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Factory\Transaction;
 
-use BitBag\SyliusImojePlugin\Entity\IngTransaction;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransaction;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-final class IngTransactionFactory implements IngTransactionFactoryInterface
+final class ImojeTransactionFactory implements ImojeTransactionFactoryInterface
 {
     public function create(
         PaymentInterface $payment,
@@ -17,7 +17,7 @@ final class IngTransactionFactory implements IngTransactionFactoryInterface
         string $serviceId,
         string $orderId,
         string $gatewayCode
-    ): IngTransactionInterface {
-        return new IngTransaction($transactionId, $payment, $paymentUrl, $serviceId, $orderId, $gatewayCode);
+    ): ImojeTransactionInterface {
+        return new ImojeTransaction($transactionId, $payment, $paymentUrl, $serviceId, $orderId, $gatewayCode);
     }
 }

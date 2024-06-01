@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
-use BitBag\SyliusImojePlugin\Exception\IngNotConfiguredException;
+use BitBag\SyliusImojePlugin\Exception\ImojeNotConfiguredException;
 use BitBag\SyliusImojePlugin\Filter\AvailablePaymentMethodsFilterInterface;
 use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\TotalResolver\TotalResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 
-final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterface
+final class ImojePaymentsMethodResolver implements ImojePaymentsMethodResolverInterface
 {
     private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
@@ -44,13 +44,13 @@ final class IngPaymentsMethodResolver implements IngPaymentsMethodResolverInterf
         $currency = $cart->getCurrencyCode();
 
         if (null === $paymentMethod) {
-            throw new IngNotConfiguredException('Payment method is not configured');
+            throw new ImojeNotConfiguredException('Payment method is not configured');
         }
 
         $config = $paymentMethod->getGatewayConfig();
 
         if (null === $config) {
-            throw new IngNotConfiguredException('Payment method is not configured');
+            throw new ImojeNotConfiguredException('Payment method is not configured');
         }
 
         $data = $config->getConfig();

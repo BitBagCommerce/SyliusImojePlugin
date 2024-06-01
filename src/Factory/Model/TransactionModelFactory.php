@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
 use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
 use BitBag\SyliusImojePlugin\Model\TransactionModel;
 use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
@@ -33,12 +33,12 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
     }
 
     public function create(
-        OrderInterface $order,
-        IngClientConfigurationInterface $ingClientConfiguration,
-        string $type,
-        string $paymentMethod,
-        string $paymentMethodCode,
-        string $serviceId
+        OrderInterface                    $order,
+        ImojeClientConfigurationInterface $ingClientConfiguration,
+        string                            $type,
+        string                            $paymentMethod,
+        string                            $paymentMethodCode,
+        string                            $serviceId
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create($order->getLastPayment());
         $amount = $order->getTotal();

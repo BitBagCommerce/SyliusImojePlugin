@@ -37,7 +37,7 @@ final class FailedStatusUrlGenerator implements StatusBasedUrlGeneratorInterface
         $session = $request->getSession();
         $session
             ->getFlashBag()
-            ->add('error', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_failure'));
+            ->add('error', $this->translator->trans('bitbag_sylius_imoje_plugin.ui.payment_failure'));
 
         return $this->urlGenerator->generate(
             self::SYLIUS_SHOP_ORDER_SHOW,

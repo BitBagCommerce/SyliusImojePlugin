@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Resolver\Payment;
 
-use BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
+use BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepositoryInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
-final class IngTransactionPaymentResolver implements IngTransactionPaymentResolverInterface
+final class ImojeTransactionPaymentResolver implements ImojeTransactionPaymentResolverInterface
 {
-    private IngTransactionRepositoryInterface $transactionRepository;
+    private ImojeTransactionRepositoryInterface $transactionRepository;
 
     public function __construct(
-        IngTransactionRepositoryInterface $transactionRepository
+        ImojeTransactionRepositoryInterface $transactionRepository
     ) {
         $this->transactionRepository = $transactionRepository;
     }

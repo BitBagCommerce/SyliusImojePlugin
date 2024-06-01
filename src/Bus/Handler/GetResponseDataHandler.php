@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
 use BitBag\SyliusImojePlugin\Bus\Query\GetResponseData;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 use BitBag\SyliusImojePlugin\Factory\ReadyTransaction\ReadyTransactionFactoryInterface;
 use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusImojePlugin\Repository\IngTransaction\IngTransactionRepositoryInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
+use BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepositoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolverInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetResponseDataHandler implements MessageHandlerInterface
 {
-    private IngTransactionRepositoryInterface $ingTransactionRepository;
+    private ImojeTransactionRepositoryInterface $ingTransactionRepository;
 
-    private IngClientProviderInterface $ingClientProvider;
+    private ImojeClientProviderInterface $ingClientProvider;
 
-    private IngClientConfigurationProviderInterface $configurationProvider;
+    private ImojeClientConfigurationProviderInterface $configurationProvider;
 
     private ReadyTransactionFactoryInterface $readyTransactionFactory;
 
@@ -30,12 +30,12 @@ final class GetResponseDataHandler implements MessageHandlerInterface
     private UrlResolverInterface $urlResolver;
 
     public function __construct(
-        IngTransactionRepositoryInterface $ingTransactionRepository,
-        IngClientProviderInterface $ingClientProvider,
-        IngClientConfigurationProviderInterface $configurationProvider,
-        ReadyTransactionFactoryInterface $readyTransactionFactory,
-        OrderRepository $orderRepository,
-        UrlResolverInterface $urlResolver
+        ImojeTransactionRepositoryInterface       $ingTransactionRepository,
+        ImojeClientProviderInterface              $ingClientProvider,
+        ImojeClientConfigurationProviderInterface $configurationProvider,
+        ReadyTransactionFactoryInterface          $readyTransactionFactory,
+        OrderRepository                           $orderRepository,
+        UrlResolverInterface                      $urlResolver
     ) {
         $this->ingTransactionRepository = $ingTransactionRepository;
         $this->ingClientProvider = $ingClientProvider;
@@ -47,7 +47,7 @@ final class GetResponseDataHandler implements MessageHandlerInterface
 
     public function __invoke(GetResponseData $query): ReadyTransactionModelInterface
     {
-        /** @var IngTransactionInterface|null $ingTransaction */
+        /** @var ImojeTransactionInterface|null $ingTransaction */
         $ingTransaction = $this->ingTransactionRepository->getByPaymentId($query->getPaymentId());
         $client = $this->ingClientProvider->getClient($ingTransaction->getGatewayCode());
 

@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace BitBag\SyliusImojePlugin\Resolver\Url;
 
-use BitBag\SyliusImojePlugin\Client\IngApiClientInterface;
-use BitBag\SyliusImojePlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Client\ImojeApiClientInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 
 final class UrlResolver implements UrlResolverInterface
 {
     public function resolve(
-        IngTransactionInterface $ingTransaction,
-        IngClientConfigurationProviderInterface $ingClientConfiguration,
-        IngClientProviderInterface $ingClientProvider
+        ImojeTransactionInterface                 $ingTransaction,
+        ImojeClientConfigurationProviderInterface $ingClientConfiguration,
+        ImojeClientProviderInterface $ingClientProvider
     ): string {
         $code = $ingTransaction->getGatewayCode();
         $config = $ingClientConfiguration->getPaymentMethodConfiguration($code);
@@ -25,9 +25,9 @@ final class UrlResolver implements UrlResolverInterface
     }
 
     private function createUrl(
-        IngClientConfigurationInterface $config,
-        IngTransactionInterface $ingTransaction,
-        IngApiClientInterface $client
+        ImojeClientConfigurationInterface $config,
+        ImojeTransactionInterface         $ingTransaction,
+        ImojeApiClientInterface           $client
     ): string {
         if ($config->isProd()) {
             return \sprintf(
