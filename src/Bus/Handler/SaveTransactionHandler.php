@@ -19,7 +19,7 @@ final class SaveTransactionHandler implements MessageHandlerInterface
 
     public function __invoke(SaveTransaction $command): void
     {
-        $transaction = $command->getIngTransaction();
+        $transaction = $command->getimojeTransaction();
         $this->entityManager->persist($transaction);
         $this->entityManager->flush();
     }

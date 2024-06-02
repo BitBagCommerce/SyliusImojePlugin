@@ -17,7 +17,7 @@ final class WebhookController
 {
     public const SIGNATURE_HEADER_NAME = 'X-Imoje-Signature';
 
-    private ImojeTransactionPaymentResolverInterface $ingTransactionPaymentResolver;
+    private ImojeTransactionPaymentResolverInterface $imojeTransactionPaymentResolver;
 
     private WebhookResolverInterface $webhookResolver;
 
@@ -26,12 +26,12 @@ final class WebhookController
     private oneClickWebhookResolverInterface $oneClickWebhookResolver;
 
     public function __construct(
-        ImojeTransactionPaymentResolverInterface $ingTransactionPaymentResolver,
+        ImojeTransactionPaymentResolverInterface $imojeTransactionPaymentResolver,
         WebhookResolverInterface                 $webhookResolver,
         WebhookResponseProcessorInterface        $webhookResponseProcessor,
         oneClickWebhookResolverInterface         $oneClickWebhookResolver
     ) {
-        $this->ingTransactionPaymentResolver = $ingTransactionPaymentResolver;
+        $this->imojeTransactionPaymentResolver = $imojeTransactionPaymentResolver;
         $this->webhookResolver = $webhookResolver;
         $this->webhookResponseProcessor = $webhookResponseProcessor;
         $this->oneClickWebhookResolver = $oneClickWebhookResolver;
@@ -48,7 +48,7 @@ final class WebhookController
         }
         /** @var StatusResponseModelInterface $webhookModel */
         $webhookModel = $this->webhookResolver->resolve();
-        $payment = $this->ingTransactionPaymentResolver->resolve($webhookModel->getTransactionId());
+        $payment = $this->imojeTransactionPaymentResolver->resolve($webhookModel->getTransactionId());
 
         $this->webhookResponseProcessor->process($webhookModel, $payment);
 

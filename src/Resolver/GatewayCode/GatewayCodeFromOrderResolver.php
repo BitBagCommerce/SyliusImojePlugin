@@ -11,15 +11,15 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 final class GatewayCodeFromOrderResolver implements GatewayCodeFromOrderResolverInterface
 {
-    private ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider;
 
     private OrderPaymentResolverInterface $orderPaymentResolver;
 
     public function __construct(
-        ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider,
+        ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
         OrderPaymentResolverInterface             $orderPaymentResolver
     ) {
-        $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
+        $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
         $this->orderPaymentResolver = $orderPaymentResolver;
     }
 
@@ -28,6 +28,6 @@ final class GatewayCodeFromOrderResolver implements GatewayCodeFromOrderResolver
         $payment = $this->orderPaymentResolver->resolve($order);
         $gatewayCode = $payment->getMethod()->getCode();
 
-        return $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
+        return $this->imojeClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
     }
 }

@@ -6,9 +6,9 @@ export const performAction = async (isAfterPayment = false) => {
 
     const isIng = isAfterPayment
         ? ''
-        : document.querySelector('[data-bb-is-ing-method]').dataset.bbIsIngMethod;
+        : document.querySelector('[data-bb-is-imoje-method]').dataset.bbIsIngMethod;
 
-    if ('card' === paymentMethod && 'ingPaymentMethods' === isIng || isAfterPayment) {
+    if ('card' === paymentMethod && 'imojePaymentMethods' === isIng || isAfterPayment) {
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
 
         const url = `/payment/oneclick/${orderId}`;

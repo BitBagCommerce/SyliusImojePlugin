@@ -10,11 +10,11 @@ use BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionReposit
 
 final class RefundUrlResolver implements RefundUrlResolverInterface
 {
-    private ImojeTransactionRepositoryInterface $ingTransactionRepository;
+    private ImojeTransactionRepositoryInterface $imojeTransactionRepository;
 
-    public function __construct(ImojeTransactionRepositoryInterface $ingTransactionRepository)
+    public function __construct(ImojeTransactionRepositoryInterface $imojeTransactionRepository)
     {
-        $this->ingTransactionRepository = $ingTransactionRepository;
+        $this->imojeTransactionRepository = $imojeTransactionRepository;
     }
 
     public function resolve(ImojeClientConfigurationInterface $config, int $paymentId): string
@@ -22,9 +22,9 @@ final class RefundUrlResolver implements RefundUrlResolverInterface
         $baseUrl = $config->isProd() ? $config->getProdUrl() : $config->getSandboxUrl();
         $merchantId = $config->getMerchantId();
 
-        /** @var ImojeTransactionInterface $ingTransaction */
-        $ingTransaction = $this->ingTransactionRepository->getByPaymentId($paymentId);
-        $transactionId = $ingTransaction->getTransactionId();
+        /** @var ImojeTransactionInterface $imojeTransaction */
+        $imojeTransaction = $this->imojeTransactionRepository->getByPaymentId($paymentId);
+        $transactionId = $imojeTransaction->getTransactionId();
         $url = \sprintf('%s/%s/transaction/%s/refund', $baseUrl, $merchantId, $transactionId);
 
         return $url;

@@ -55,11 +55,11 @@ final class OwnSignatureResolverTest extends TestCase
         $this->gatewayCodeResolver
             ->method('resolve')
             ->with(self::FACTORY_NAME)
-            ->willReturn('ing_code');
+            ->willReturn('imoje_code');
 
         $this->configurationProvider
             ->method('getPaymentMethodConfiguration')
-            ->with('ing_code')
+            ->with('imoje_code')
             ->willReturn($config);
 
         $config

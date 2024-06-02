@@ -14,7 +14,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Serializer;
 
-final class IngApiClientTest extends TestCase
+final class ImojeApiClientTest extends TestCase
 {
     private Client $httpClient;
 
@@ -22,7 +22,7 @@ final class IngApiClientTest extends TestCase
 
     private Serializer $serializer;
 
-    private ImojeApiClient $ingApiClient;
+    private ImojeApiClient $imojeApiClient;
 
     public const TOKEN = 'token';
 
@@ -34,7 +34,7 @@ final class IngApiClientTest extends TestCase
         $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
         $this->requestParamsProvider = $this->createMock(RequestParamsProviderInterface::class);
         $this->serializer = $this->createMock(Serializer::class);
-        $this->ingApiClient = new ImojeApiClient(
+        $this->imojeApiClient = new ImojeApiClient(
             $this->httpClient,
             $this->requestParamsProvider,
             $this->serializer,
@@ -66,7 +66,7 @@ final class IngApiClientTest extends TestCase
             ->with('url/transaction', $parameters)
             ->willReturn(new Response());
 
-        $result = $this->ingApiClient->createTransaction($transactionModel);
+        $result = $this->imojeApiClient->createTransaction($transactionModel);
 
         self::assertEquals($result->getStatusCode(), 200);
     }
@@ -96,6 +96,6 @@ final class IngApiClientTest extends TestCase
 
         $this->expectException(ImojeBadRequestException::class);
 
-        $this->ingApiClient->createTransaction($transactionModel);
+        $this->imojeApiClient->createTransaction($transactionModel);
     }
 }

@@ -11,17 +11,17 @@ final class ReadyTransactionModel implements ReadyTransactionModelInterface
 {
     private string $status;
 
-    private ImojeTransactionInterface $ingTransaction;
+    private ImojeTransactionInterface $imojeTransaction;
 
     private OrderInterface $order;
 
     public function __construct(
         string                    $status,
-        ImojeTransactionInterface $ingTransaction,
+        ImojeTransactionInterface $imojeTransaction,
         OrderInterface            $order
     ) {
         $this->status = $status;
-        $this->ingTransaction = $ingTransaction;
+        $this->imojeTransaction = $imojeTransaction;
         $this->order = $order;
     }
 
@@ -30,9 +30,9 @@ final class ReadyTransactionModel implements ReadyTransactionModelInterface
         return $this->status;
     }
 
-    public function getIngTransaction(): ImojeTransactionInterface
+    public function getimojeTransaction(): ImojeTransactionInterface
     {
-        return $this->ingTransaction;
+        return $this->imojeTransaction;
     }
 
     public function getOrder(): OrderInterface

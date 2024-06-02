@@ -17,9 +17,9 @@ use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetResponseDataHandler implements MessageHandlerInterface
 {
-    private ImojeTransactionRepositoryInterface $ingTransactionRepository;
+    private ImojeTransactionRepositoryInterface $imojeTransactionRepository;
 
-    private ImojeClientProviderInterface $ingClientProvider;
+    private ImojeClientProviderInterface $imojeClientProvider;
 
     private ImojeClientConfigurationProviderInterface $configurationProvider;
 
@@ -30,15 +30,15 @@ final class GetResponseDataHandler implements MessageHandlerInterface
     private UrlResolverInterface $urlResolver;
 
     public function __construct(
-        ImojeTransactionRepositoryInterface       $ingTransactionRepository,
-        ImojeClientProviderInterface              $ingClientProvider,
+        ImojeTransactionRepositoryInterface       $imojeTransactionRepository,
+        ImojeClientProviderInterface              $imojeClientProvider,
         ImojeClientConfigurationProviderInterface $configurationProvider,
         ReadyTransactionFactoryInterface          $readyTransactionFactory,
         OrderRepository                           $orderRepository,
         UrlResolverInterface                      $urlResolver
     ) {
-        $this->ingTransactionRepository = $ingTransactionRepository;
-        $this->ingClientProvider = $ingClientProvider;
+        $this->imojeTransactionRepository = $imojeTransactionRepository;
+        $this->imojeClientProvider = $imojeClientProvider;
         $this->configurationProvider = $configurationProvider;
         $this->readyTransactionFactory = $readyTransactionFactory;
         $this->orderRepository = $orderRepository;
@@ -47,19 +47,19 @@ final class GetResponseDataHandler implements MessageHandlerInterface
 
     public function __invoke(GetResponseData $query): ReadyTransactionModelInterface
     {
-        /** @var ImojeTransactionInterface|null $ingTransaction */
-        $ingTransaction = $this->ingTransactionRepository->getByPaymentId($query->getPaymentId());
-        $client = $this->ingClientProvider->getClient($ingTransaction->getGatewayCode());
+        /** @var ImojeTransactionInterface|null $imojeTransaction */
+        $imojeTransaction = $this->imojeTransactionRepository->getByPaymentId($query->getPaymentId());
+        $client = $this->imojeClientProvider->getClient($imojeTransaction->getGatewayCode());
 
-        $url = $this->urlResolver->resolve($ingTransaction, $this->configurationProvider, $this->ingClientProvider);
+        $url = $this->urlResolver->resolve($imojeTransaction, $this->configurationProvider, $this->imojeClientProvider);
 
         $response = $client->getTransactionData($url);
 
-        $order = $this->orderRepository->find($ingTransaction->getOrderId());
+        $order = $this->orderRepository->find($imojeTransaction->getOrderId());
 
         return $this->readyTransactionFactory->createReadyTransaction(
             $response->getBody()->getContents(),
-            $ingTransaction,
+            $imojeTransaction,
             $order
         );
     }

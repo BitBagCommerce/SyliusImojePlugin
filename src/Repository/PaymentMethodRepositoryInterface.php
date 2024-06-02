@@ -10,7 +10,7 @@ interface PaymentMethodRepositoryInterface
 {
     public const FACTORY_NAME = 'BitBag_imoje';
 
-    public function findOneForIngCode(string $code): ?PaymentMethodInterface;
+    public function findOneForImojeCode(string $code): ?PaymentMethodInterface;
 
-    public function findOneForIng(): ?PaymentMethodInterface;
+    public function findOneForImoje(): ?PaymentMethodInterface;
 }

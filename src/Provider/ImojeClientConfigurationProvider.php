@@ -28,7 +28,7 @@ final class ImojeClientConfigurationProvider implements ImojeClientConfiguration
 
     public function getPaymentMethodConfiguration(string $code): ImojeClientConfigurationInterface
     {
-        $paymentMethod = $this->paymentMethodRepository->findOneForIngCode($code);
+        $paymentMethod = $this->paymentMethodRepository->findOneForImojeCode($code);
 
         if (null === $paymentMethod) {
             throw new ImojeNotConfiguredException(

@@ -35,7 +35,7 @@ final class TransactionBlikModelFactory implements TransactionBlikModelFactoryIn
 
     public function create(
         OrderInterface                    $order,
-        ImojeClientConfigurationInterface $ingClientConfiguration,
+        ImojeClientConfigurationInterface $imojeClientConfiguration,
         string                            $type,
         string                            $paymentMethod,
         string                            $paymentMethodCode,

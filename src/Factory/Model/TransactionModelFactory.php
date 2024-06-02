@@ -34,7 +34,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
 
     public function create(
         OrderInterface                    $order,
-        ImojeClientConfigurationInterface $ingClientConfiguration,
+        ImojeClientConfigurationInterface $imojeClientConfiguration,
         string                            $type,
         string                            $paymentMethod,
         string                            $paymentMethodCode,

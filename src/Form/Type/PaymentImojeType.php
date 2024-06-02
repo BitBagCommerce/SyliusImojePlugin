@@ -9,7 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class PaymentIngType extends AbstractType
+final class PaymentImojeType extends AbstractType
 {
     private ImojePaymentsMethodResolverInterface $methodResolver;
 
@@ -24,7 +24,7 @@ final class PaymentIngType extends AbstractType
         $data = $this->methodResolver->resolve();
 
         $builder
-            ->add('ingPaymentMethods', ChoiceType::class, [
+            ->add('imojePaymentMethods', ChoiceType::class, [
                 'label' => false,
                 'choices' => $data,
             ]);

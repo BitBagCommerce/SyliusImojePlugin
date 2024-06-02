@@ -36,7 +36,7 @@ final class ImojePaymentsMethodResolver implements ImojePaymentsMethodResolverIn
     public function resolve(): array
     {
         $total = $this->totalResolver->resolve();
-        $paymentMethod = $this->paymentMethodRepository->findOneForIng();
+        $paymentMethod = $this->paymentMethodRepository->findOneForImoje();
 
         /** @var OrderInterface $cart */
         $cart = $this->cartContext->getCart();

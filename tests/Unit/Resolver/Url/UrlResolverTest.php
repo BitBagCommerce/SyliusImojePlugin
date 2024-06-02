@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 final class UrlResolverTest extends TestCase
 {
-    public const GATEWAY_CODE = 'ing_code';
+    public const GATEWAY_CODE = 'imoje_code';
 
     public const SANDBOX_URL = 'http://sandbox';
 
@@ -31,19 +31,19 @@ final class UrlResolverTest extends TestCase
 
     public const COMPLETE_PROD_URL = 'http://prod/MerchantId/transaction/TR-12345';
 
-    private ImojeTransactionInterface $ingTransaction;
+    private ImojeTransactionInterface $imojeTransaction;
 
-    private ImojeClientConfigurationProviderInterface $ingClientConfiguration;
+    private ImojeClientConfigurationProviderInterface $imojeClientConfiguration;
 
-    private ImojeClientProviderInterface $ingClientProvide;
+    private ImojeClientProviderInterface $imojeClientProvider;
 
     private UrlResolverInterface $urlResolver;
 
     protected function setUp(): void
     {
-        $this->ingTransaction = $this->createMock(ImojeTransactionInterface::class);
-        $this->ingClientConfiguration = $this->createMock(ImojeClientConfigurationProviderInterface::class);
-        $this->ingClientProvide = $this->createMock(ImojeClientProviderInterface::class);
+        $this->imojeTransaction = $this->createMock(ImojeTransactionInterface::class);
+        $this->imojeClientConfiguration = $this->createMock(ImojeClientConfigurationProviderInterface::class);
+        $this->imojeClientProvider = $this->createMock(ImojeClientProviderInterface::class);
         $this->urlResolver = new UrlResolver();
     }
 
@@ -55,16 +55,16 @@ final class UrlResolverTest extends TestCase
         $configuration = $this->createMock(ImojeClientConfigurationInterface::class);
         $client = $this->createMock(ImojeApiClientInterface::class);
 
-        $this->ingTransaction
+        $this->imojeTransaction
             ->method('getGatewayCode')
             ->willReturn(self::GATEWAY_CODE);
 
-        $this->ingClientConfiguration
+        $this->imojeClientConfiguration
             ->method('getPaymentMethodConfiguration')
             ->with(self::GATEWAY_CODE)
             ->willReturn($configuration);
 
-        $this->ingClientProvide
+        $this->imojeClientProvider
             ->method('getClient')
             ->with(self::GATEWAY_CODE)
             ->willReturn($client);
@@ -85,13 +85,13 @@ final class UrlResolverTest extends TestCase
             ->method('getMerchantId')
             ->willReturn(self::MERCHANT_ID);
 
-        $this->ingTransaction
+        $this->imojeTransaction
             ->method('getTransactionId')
             ->willReturn(self::TRANSACTION_ID);
 
         self::assertEquals(
             $result,
-            $this->urlResolver->resolve($this->ingTransaction,$this->ingClientConfiguration,$this->ingClientProvide)
+            $this->urlResolver->resolve($this->imojeTransaction,$this->imojeClientConfiguration,$this->imojeClientProvider)
         );
     }
 

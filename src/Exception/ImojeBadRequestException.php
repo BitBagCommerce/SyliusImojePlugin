@@ -6,7 +6,7 @@ namespace BitBag\SyliusImojePlugin\Exception;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class ImojeBadRequestException extends BadRequestHttpException implements IngClientExceptionInterface
+final class ImojeBadRequestException extends BadRequestHttpException implements ImojeClientExceptionInterface
 {
     public function __construct(string $message)
     {

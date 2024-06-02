@@ -13,20 +13,20 @@ use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 final class UrlResolver implements UrlResolverInterface
 {
     public function resolve(
-        ImojeTransactionInterface                 $ingTransaction,
-        ImojeClientConfigurationProviderInterface $ingClientConfiguration,
-        ImojeClientProviderInterface $ingClientProvider
+        ImojeTransactionInterface                 $imojeTransaction,
+        ImojeClientConfigurationProviderInterface $imojeClientConfiguration,
+        ImojeClientProviderInterface $imojeClientProvider
     ): string {
-        $code = $ingTransaction->getGatewayCode();
-        $config = $ingClientConfiguration->getPaymentMethodConfiguration($code);
-        $client = $ingClientProvider->getClient($code);
+        $code = $imojeTransaction->getGatewayCode();
+        $config = $imojeClientConfiguration->getPaymentMethodConfiguration($code);
+        $client = $imojeClientProvider->getClient($code);
 
-        return $this->createUrl($config, $ingTransaction, $client);
+        return $this->createUrl($config, $imojeTransaction, $client);
     }
 
     private function createUrl(
         ImojeClientConfigurationInterface $config,
-        ImojeTransactionInterface         $ingTransaction,
+        ImojeTransactionInterface         $imojeTransaction,
         ImojeApiClientInterface           $client
     ): string {
         if ($config->isProd()) {
@@ -35,7 +35,7 @@ final class UrlResolver implements UrlResolverInterface
                 $config->getProdUrl(),
                 $config->getMerchantId(),
                 $client::TRANSACTION_ENDPOINT,
-                $ingTransaction->getTransactionId()
+                $imojeTransaction->getTransactionId()
             );
         }
 
@@ -44,7 +44,7 @@ final class UrlResolver implements UrlResolverInterface
             $config->getSandboxUrl(),
             $config->getMerchantId(),
             $client::TRANSACTION_ENDPOINT,
-            $ingTransaction->getTransactionId()
+            $imojeTransaction->getTransactionId()
         );
     }
 }

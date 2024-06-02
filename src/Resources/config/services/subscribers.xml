@@ -13,7 +13,7 @@
         </service>
 
         <service
-                class="ImojeRefundStep"
+                class="BitBag\SyliusImojePlugin\Refund\ImojeRefundStep"
                 id="bitbag.sylius_imoje_plugin.refund.ing_refund_step"
         >
             <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider" />

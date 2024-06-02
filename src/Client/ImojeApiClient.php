@@ -50,6 +50,7 @@ final class ImojeApiClient implements ImojeApiClientInterface
         try {
             $response = $this->httpClient->post($url, $parameters);
         } catch (GuzzleException $e) {
+            dd($e);
             throw new ImojeBadRequestException($e->getMessage());
         }
 

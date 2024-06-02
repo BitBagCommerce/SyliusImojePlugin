@@ -17,9 +17,9 @@ use Sylius\Component\Core\Model\PaymentMethod;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 
-final class IngPaymentMethodResolverTest extends TestCase
+final class ImojePaymentMethodResolverTest extends TestCase
 {
-    private const ING_CODE = 'ing_code';
+    private const IMOJE_CODE = 'imoje_code';
 
     private const SERVICE_ID = '123';
 
@@ -78,7 +78,7 @@ final class IngPaymentMethodResolverTest extends TestCase
             ]);
 
         $paymentMethod = new PaymentMethod();
-        $paymentMethod->setCode(self::ING_CODE);
+        $paymentMethod->setCode(self::IMOJE_CODE);
 
         $gatewayConfig = $this->createMock(GatewayConfigInterface::class);
         $gatewayConfig
@@ -91,7 +91,7 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $this->paymentMethodRepository
             ->expects(self::once())
-            ->method('findOneForIng')
+            ->method('findOneForImoje')
             ->willReturn($paymentMethod);
 
         $paymentMethodMock
@@ -108,14 +108,14 @@ final class IngPaymentMethodResolverTest extends TestCase
             'ipko' => 'ipko',
         ];
 
-        $ingPaymentsMethodResolver = new ImojePaymentsMethodResolver(
+        $imojePaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
             $this->cartContext
         );
 
-        self::assertEqualsCanonicalizing($finalConfig, $ingPaymentsMethodResolver->resolve());
+        self::assertEqualsCanonicalizing($finalConfig, $imojePaymentsMethodResolver->resolve());
     }
 
     public function testResolveEmptyPaymentException(): void
@@ -140,17 +140,17 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $this->paymentMethodRepository
             ->expects(self::once())
-            ->method('findOneForIng')
+            ->method('findOneForImoje')
             ->willReturn(null);
 
 
-        $ingPaymentsMethodResolver = new ImojePaymentsMethodResolver(
+        $imojePaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
             $this->cartContext
         );
-        $ingPaymentsMethodResolver->resolve();
+        $imojePaymentsMethodResolver->resolve();
     }
     public function testResolveEmptyConfigException(): void
     {
@@ -180,7 +180,7 @@ final class IngPaymentMethodResolverTest extends TestCase
 
         $this->paymentMethodRepository
             ->expects(self::once())
-            ->method('findOneForIng')
+            ->method('findOneForImoje')
             ->willReturn($paymentMethod);
 
 
@@ -188,12 +188,12 @@ final class IngPaymentMethodResolverTest extends TestCase
             ->method('getGatewayConfig')
             ->willReturn(null);
 
-        $ingPaymentsMethodResolver = new ImojePaymentsMethodResolver(
+        $imojePaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
             $this->cartContext
         );
-        $ingPaymentsMethodResolver->resolve();
+        $imojePaymentsMethodResolver->resolve();
     }
 }

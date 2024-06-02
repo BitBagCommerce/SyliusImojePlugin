@@ -11,8 +11,8 @@ use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 interface UrlResolverInterface
 {
     public function resolve(
-        ImojeTransactionInterface                 $ingTransaction,
-        ImojeClientConfigurationProviderInterface $ingClientConfiguration,
-        ImojeClientProviderInterface $ingClientProvider
+        ImojeTransactionInterface                 $imojeTransaction,
+        ImojeClientConfigurationProviderInterface $imojeClientConfiguration,
+        ImojeClientProviderInterface $imojeClientProvider
     ): string;
 }

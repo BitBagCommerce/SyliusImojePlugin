@@ -21,11 +21,11 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 {
     private RequestStack $requestStack;
 
-    private ImojeTransactionFactoryInterface $ingTransactionFactory;
+    private ImojeTransactionFactoryInterface $imojeTransactionFactory;
 
     private OrderRepositoryInterface $orderRepository;
 
-    private ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider;
 
     private DispatcherInterface $dispatcher;
 
@@ -39,9 +39,9 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 
     public function __construct(
         RequestStack                              $requestStack,
-        ImojeTransactionFactoryInterface          $ingTransactionFactory,
+        ImojeTransactionFactoryInterface          $imojeTransactionFactory,
         OrderRepositoryInterface                  $orderRepository,
-        ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider,
+        ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
         DispatcherInterface                       $dispatcher,
         PaymentMethodResolverInterface            $paymentMethodResolver,
         OrderPaymentResolverInterface             $orderPaymentResolver,
@@ -49,9 +49,9 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         WebhookResponseProcessorInterface         $webhookResponseProcessor
     ) {
         $this->requestStack = $requestStack;
-        $this->ingTransactionFactory = $ingTransactionFactory;
+        $this->imojeTransactionFactory = $imojeTransactionFactory;
         $this->orderRepository = $orderRepository;
-        $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
+        $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
         $this->dispatcher = $dispatcher;
         $this->paymentMethodResolver = $paymentMethodResolver;
         $this->orderPaymentResolver = $orderPaymentResolver;
@@ -89,8 +89,8 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
             $payment = $this->orderPaymentResolver->resolve($order);
             $paymentId = $payment->getId();
             $gatewayCode = $this->paymentMethodResolver->resolve($payment)->getCode();
-            $config = $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
-            $transaction = $this->ingTransactionFactory->create(
+            $config = $this->imojeClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
+            $transaction = $this->imojeTransactionFactory->create(
                 $payment,
                 $transactionId,
                 null,

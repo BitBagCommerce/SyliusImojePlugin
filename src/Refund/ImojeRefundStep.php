@@ -16,27 +16,27 @@ use Sylius\RefundPlugin\ProcessManager\UnitsRefundedProcessStepInterface;
 
 final class ImojeRefundStep implements UnitsRefundedProcessStepInterface
 {
-    private ImojeClientProviderInterface $ingClientProvider;
+    private ImojeClientProviderInterface $imojeClientProvider;
 
     private OrderRepositoryInterface $orderRepository;
 
     private GatewayFactoryNameResolverInterface $gatewayFactoryNameResolver;
 
-    private ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider;
 
     private RefundUrlResolverInterface $refundUrlResolver;
 
     public function __construct(
-        ImojeClientProviderInterface              $ingClientProvider,
+        ImojeClientProviderInterface              $imojeClientProvider,
         OrderRepositoryInterface                  $orderRepository,
         GatewayFactoryNameResolverInterface       $gatewayFactoryNameResolver,
-        ImojeClientConfigurationProviderInterface $ingClientConfigurationProvider,
+        ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
         RefundUrlResolverInterface                $refundUrlResolver
     ) {
-        $this->ingClientProvider = $ingClientProvider;
+        $this->imojeClientProvider = $imojeClientProvider;
         $this->orderRepository = $orderRepository;
         $this->gatewayFactoryNameResolver = $gatewayFactoryNameResolver;
-        $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
+        $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
         $this->refundUrlResolver = $refundUrlResolver;
     }
 
@@ -52,9 +52,9 @@ final class ImojeRefundStep implements UnitsRefundedProcessStepInterface
         if (ImojeClientConfigurationProviderInterface::FACTORY_NAME !== $gatewayFactory) {
             return;
         }
-        $config = $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
+        $config = $this->imojeClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
         $url = $this->refundUrlResolver->resolve($config, $payment->getId());
-        $client = $this->ingClientProvider->getClient($gatewayCode);
+        $client = $this->imojeClientProvider->getClient($gatewayCode);
 
         $client->refundTransaction($url, $config->getServiceId(), $unitsRefunded->amount());
     }

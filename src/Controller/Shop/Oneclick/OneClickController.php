@@ -17,7 +17,7 @@ use function strtoupper;
 
 final class OneClickController
 {
-    public const ING_KEY_DETAIL = 'ingPaymentMethods';
+    public const IMOJE_KEY_DETAIL = 'imojePaymentMethods';
 
     private GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver;
 

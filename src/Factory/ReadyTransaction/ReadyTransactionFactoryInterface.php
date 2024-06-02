@@ -12,7 +12,7 @@ interface ReadyTransactionFactoryInterface
 {
     public function createReadyTransaction(
         string                    $contents,
-        ImojeTransactionInterface $ingTransaction,
+        ImojeTransactionInterface $imojeTransaction,
         OrderInterface            $order
     ): ReadyTransactionModel;
 }

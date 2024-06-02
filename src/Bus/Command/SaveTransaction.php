@@ -8,15 +8,15 @@ use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 
 final class SaveTransaction
 {
-    private ImojeTransactionInterface $ingTransaction;
+    private ImojeTransactionInterface $imojeTransaction;
 
-    public function __construct(ImojeTransactionInterface $ingTransaction)
+    public function __construct(ImojeTransactionInterface $imojeTransaction)
     {
-        $this->ingTransaction = $ingTransaction;
+        $this->imojeTransaction = $imojeTransaction;
     }
 
-    public function getIngTransaction(): ImojeTransactionInterface
+    public function getimojeTransaction(): ImojeTransactionInterface
     {
-        return $this->ingTransaction;
+        return $this->imojeTransaction;
     }
 }

@@ -6,6 +6,6 @@ namespace BitBag\SyliusImojePlugin\Exception;
 
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
-interface IngClientExceptionInterface extends HttpExceptionInterface
+interface ImojeClientExceptionInterface extends HttpExceptionInterface
 {
 }

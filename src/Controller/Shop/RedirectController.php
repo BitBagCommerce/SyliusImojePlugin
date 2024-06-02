@@ -45,7 +45,7 @@ final class RedirectController
         /** @var ReadyTransactionModelInterface $readyTransaction */
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
 
-        $payment = $readyTransaction->getIngTransaction()->getPayment();
+        $payment = $readyTransaction->getimojeTransaction()->getPayment();
 
         $order = $readyTransaction->getOrder();
 

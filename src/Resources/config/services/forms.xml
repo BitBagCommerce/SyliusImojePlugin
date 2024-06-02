@@ -15,7 +15,7 @@
             <tag name="form.type_extension" extended_type="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType"/>
         </service>
 
-        <service  class="BitBag\SyliusImojePlugin\Form\Type\PaymentIngType"
+        <service  class="BitBag\SyliusImojePlugin\Form\Type\PaymentImojeType"
                   id="bitbag_sylius_imoje_plugin.form.type.ing_payment"
         >
             <argument type="service" id="bitbag_sylius_imoje_plugin.resolver.payment.payment_methods"/>

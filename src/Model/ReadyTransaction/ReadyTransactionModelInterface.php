@@ -11,7 +11,7 @@ interface ReadyTransactionModelInterface
 {
     public function getStatus(): string;
 
-    public function getIngTransaction(): ImojeTransactionInterface;
+    public function getimojeTransaction(): ImojeTransactionInterface;
 
     public function getOrder(): OrderInterface;
 }
