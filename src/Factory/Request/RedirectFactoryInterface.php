@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Request;
+namespace BitBag\SyliusImojePlugin\Factory\Request;
 
-use BitBag\SyliusIngPlugin\Model\RedirectModelInterface;
+use BitBag\SyliusImojePlugin\Model\RedirectModelInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 interface RedirectFactoryInterface

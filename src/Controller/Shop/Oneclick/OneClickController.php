@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Controller\Shop\Oneclick;
+namespace BitBag\SyliusImojePlugin\Controller\Shop\Oneclick;
 
-use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\IngOneClickSignature\IngOneClickSignatureResolverInterface;
+use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature\ImojeOneClickSignatureResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,21 +17,21 @@ use function strtoupper;
 
 final class OneClickController
 {
-    public const ING_KEY_DETAIL = 'ingPaymentMethods';
+    public const IMOJE_KEY_DETAIL = 'imojePaymentMethods';
 
     private GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver;
 
-    private IngOneClickSignatureResolverInterface $signatureResolver;
+    private ImojeOneClickSignatureResolverInterface $signatureResolver;
 
     private RedirectFactoryInterface $redirectFactory;
 
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
-        GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver,
-        IngOneClickSignatureResolverInterface $signatureResolver,
-        RedirectFactoryInterface $redirectFactory,
-        OrderRepositoryInterface $orderRepository
+        GatewayCodeFromOrderResolverInterface   $gatewayCodeFromOrderResolver,
+        ImojeOneClickSignatureResolverInterface $signatureResolver,
+        RedirectFactoryInterface                $redirectFactory,
+        OrderRepositoryInterface                $orderRepository
     ) {
         $this->gatewayCodeFromOrderResolver = $gatewayCodeFromOrderResolver;
         $this->signatureResolver = $signatureResolver;

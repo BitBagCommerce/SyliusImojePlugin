@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Generator\Url\Status;
+namespace BitBag\SyliusImojePlugin\Generator\Url\Status;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,7 +37,7 @@ final class FailedStatusUrlGenerator implements StatusBasedUrlGeneratorInterface
         $session = $request->getSession();
         $session
             ->getFlashBag()
-            ->add('error', $this->translator->trans('bitbag_sylius_ing_plugin.ui.payment_failure'));
+            ->add('error', $this->translator->trans('bitbag_sylius_imoje_plugin.ui.payment_failure'));
 
         return $this->urlGenerator->generate(
             self::SYLIUS_SHOP_ORDER_SHOW,

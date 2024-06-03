@@ -2,25 +2,25 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag.sylius_ing_plugin.event_subscriber.authorization_subscriber"
-                 class="BitBag\SyliusIngPlugin\EventSubscriber\AuthorizationSubscriber"
+        <service id="bitbag.sylius_imoje_plugin.event_subscriber.authorization_subscriber"
+                 class="BitBag\SyliusImojePlugin\EventSubscriber\AuthorizationSubscriber"
                  public="true"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.signature.signature_resolver" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.signature.own_signature_resolver" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.calculator.signature_calculator" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.signature.signature_resolver" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.signature.own_signature_resolver" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.calculator.signature_calculator" />
             <tag name="kernel.event_subscriber" />
         </service>
 
         <service
-                class="BitBag\SyliusIngPlugin\Refund\IngRefundStep"
-                id="bitbag.sylius_ing_plugin.refund.ing_refund_step"
+                class="BitBag\SyliusImojePlugin\Refund\ImojeRefundStep"
+                id="bitbag.sylius_imoje_plugin.refund.ing_refund_step"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_provider" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider" />
             <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_configuration_provider" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.refund.refund_url_resolver" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.refund.refund_url_resolver" />
             <tag name="sylius_refund.units_refunded.process_step"/>
         </service>
     </services>

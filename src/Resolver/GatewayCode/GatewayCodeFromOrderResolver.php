@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class GatewayCodeFromOrderResolver implements GatewayCodeFromOrderResolverInterface
 {
-    private IngClientConfigurationProviderInterface $ingClientConfigurationProvider;
+    private ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider;
 
     private OrderPaymentResolverInterface $orderPaymentResolver;
 
     public function __construct(
-        IngClientConfigurationProviderInterface $ingClientConfigurationProvider,
-        OrderPaymentResolverInterface $orderPaymentResolver
+        ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
+        OrderPaymentResolverInterface             $orderPaymentResolver
     ) {
-        $this->ingClientConfigurationProvider = $ingClientConfigurationProvider;
+        $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
         $this->orderPaymentResolver = $orderPaymentResolver;
     }
 
-    public function resolve(OrderInterface $order): IngClientConfigurationInterface
+    public function resolve(OrderInterface $order): ImojeClientConfigurationInterface
     {
         $payment = $this->orderPaymentResolver->resolve($order);
         $gatewayCode = $payment->getMethod()->getCode();
 
-        return $this->ingClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
+        return $this->imojeClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
     }
 }

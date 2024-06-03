@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Query;
+namespace BitBag\SyliusImojePlugin\Bus\Query;
 
-use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class GetBlikTransactionData

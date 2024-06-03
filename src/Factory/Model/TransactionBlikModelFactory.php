@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Factory\Request\RedirectFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
-use BitBag\SyliusIngPlugin\Model\TransactionBlikModel;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusImojePlugin\Model\TransactionBlikModel;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class TransactionBlikModelFactory implements TransactionBlikModelFactoryInterface
@@ -34,13 +34,13 @@ final class TransactionBlikModelFactory implements TransactionBlikModelFactoryIn
     }
 
     public function create(
-        OrderInterface $order,
-        IngClientConfigurationInterface $ingClientConfiguration,
-        string $type,
-        string $paymentMethod,
-        string $paymentMethodCode,
-        string $serviceId,
-        BlikModelInterface $blikModel
+        OrderInterface                    $order,
+        ImojeClientConfigurationInterface $imojeClientConfiguration,
+        string                            $type,
+        string                            $paymentMethod,
+        string                            $paymentMethodCode,
+        string                            $serviceId,
+        BlikModelInterface                $blikModel
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create($order->getLastPayment());
         $amount = $order->getTotal();

@@ -1,0 +1,24 @@
+{% for key, methodImoje in imoje_payment_options %}
+    {% if key == 'imojePaymentMethods' and methodImoje.vars.choices|length > 0 %}
+		<div class="item">
+			<div class="field">
+				<div class="ui radio checkbox">
+					{{ form_widget(form, { 'attr': { 'class': 'ing-payments' } }) }}
+				</div>
+			</div>
+
+			<div class="content">
+				<a class="header">
+					{{ form_label(form) }}
+				</a>
+
+				{% if method.description is not null %}
+					<div class="description">
+						<p>{{ method.description }}</p>
+					</div>
+				{% endif %}
+				{% include '@BitBagSyliusImojePlugin/Shop/PaymentIng/_form.html.twig' with {'gatewayConfig': method.gatewayConfig} %}
+			</div>
+		</div>
+	{% endif %}
+{% endfor %}

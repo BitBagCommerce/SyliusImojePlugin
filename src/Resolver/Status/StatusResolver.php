@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Status;
+namespace BitBag\SyliusImojePlugin\Resolver\Status;
 
-use BitBag\SyliusIngPlugin\Exception\NoCorrectStatusException;
+use BitBag\SyliusImojePlugin\Exception\NoCorrectStatusException;
 
 final class StatusResolver implements StatusResolverInterface
 {

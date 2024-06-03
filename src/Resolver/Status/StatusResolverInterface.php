@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Status;
+namespace BitBag\SyliusImojePlugin\Resolver\Status;
 
 interface StatusResolverInterface
 {

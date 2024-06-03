@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Provider\BlikModel;
+namespace BitBag\SyliusImojePlugin\Provider\BlikModel;
 
-use BitBag\SyliusIngPlugin\Exception\BlikNoDataException;
-use BitBag\SyliusIngPlugin\Factory\Model\Blik\BlikModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusImojePlugin\Exception\BlikNoDataException;
+use BitBag\SyliusImojePlugin\Factory\Model\Blik\BlikModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class BlikModelProvider implements BlikModelProviderInterface

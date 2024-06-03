@@ -2,12 +2,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="bitbag_sylius_ing_plugin.client.ing_api_client"
-                 class="BitBag\SyliusIngPlugin\Client\IngApiClient"
+        <service id="bitbag_sylius_imoje_plugin.client.ing_api_client"
+                 class="BitBag\SyliusImojePlugin\Client\ImojeApiClient"
                  public="true"
         >
             <argument type="service" id="sylius.http_client" />
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.request_params.request_params_provider" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.request_params.request_params_provider" />
         </service>
     </services>
 </container>

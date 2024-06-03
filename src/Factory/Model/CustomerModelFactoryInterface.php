@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusIngPlugin\Model\CustomerModelInterface;
+use BitBag\SyliusImojePlugin\Model\CustomerModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface CustomerModelFactoryInterface

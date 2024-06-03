@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusIngPlugin\Model\CustomerModel;
-use BitBag\SyliusIngPlugin\Model\CustomerModelInterface;
-use BitBag\SyliusIngPlugin\Resolver\Customer\CustomerResolverInterface;
+use BitBag\SyliusImojePlugin\Model\CustomerModel;
+use BitBag\SyliusImojePlugin\Model\CustomerModelInterface;
+use BitBag\SyliusImojePlugin\Resolver\Customer\CustomerResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 

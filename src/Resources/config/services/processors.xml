@@ -2,47 +2,47 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusIngPlugin\Generator\Url\Status\SuccessfulStatusUrlGenerator"
-                 id="bitbag.sylius_Ing_plugin.generator.url.status.successful_status_url_generator"
+        <service class="BitBag\SyliusImojePlugin\Generator\Url\Status\SuccessfulStatusUrlGenerator"
+                 id="bitbag.sylius_imoje_plugin.generator.url.status.successful_status_url_generator"
         >
             <argument type="service" id="router"/>
 
-            <tag name="bitbag.sylius_Ing_plugin.url_generator.status"/>
+            <tag name="bitbag.sylius_imoje_plugin.url_generator.status"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Generator\Url\Status\CanceledStatusUrlGenerator"
-                 id="bitbag.sylius_Ing_plugin.generator.url.status.canceled_status_url_generator"
+        <service class="BitBag\SyliusImojePlugin\Generator\Url\Status\CanceledStatusUrlGenerator"
+                 id="bitbag.sylius_imoje_plugin.generator.url.status.canceled_status_url_generator"
         >
             <argument type="service" id="translator"/>
             <argument type="service" id="router"/>
 
-            <tag name="bitbag.sylius_Ing_plugin.url_generator.status"/>
+            <tag name="bitbag.sylius_imoje_plugin.url_generator.status"/>
         </service>
 
 
-        <service class="BitBag\SyliusIngPlugin\Generator\Url\Status\FailedStatusUrlGenerator"
-                 id="bitbag.sylius_Ing_plugin.generator.url.status.failed_status_url_generator"
+        <service class="BitBag\SyliusImojePlugin\Generator\Url\Status\FailedStatusUrlGenerator"
+                 id="bitbag.sylius_imoje_plugin.generator.url.status.failed_status_url_generator"
         >
             <argument type="service" id="translator"/>
             <argument type="service" id="router"/>
 
-            <tag name="bitbag.sylius_Ing_plugin.url_generator.status"/>
+            <tag name="bitbag.sylius_imoje_plugin.url_generator.status"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGenerator"
-                 id="bitbag.sylius_Ing_plugin.generator.url.status.aggregate_status_based_url_generator"
+        <service class="BitBag\SyliusImojePlugin\Generator\Url\Status\AggregateStatusBasedUrlGenerator"
+                 id="bitbag.sylius_imoje_plugin.generator.url.status.aggregate_status_based_url_generator"
         >
-            <argument type="tagged_iterator" tag="bitbag.sylius_Ing_plugin.url_generator.status"/>
+            <argument type="tagged_iterator" tag="bitbag.sylius_imoje_plugin.url_generator.status"/>
             <argument type="service" id="router"/>
         </service>
 
-        <service class="BitBag\SyliusIngPlugin\Processor\Webhook\Status\WebhookResponseProcessor"
-                 id="bitbag.sylius_ing_plugin.processor.webhook.status.webhook_response_processor"
+        <service class="BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessor"
+                 id="bitbag.sylius_imoje_plugin.processor.webhook.status.webhook_response_processor"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.factory.bus.payment_finalization_command_factory"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.bus.dispatcher"/>
-            <argument type="service" id="monolog.logger.ing"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.status.status_resolver"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.bus.payment_finalization_command_factory"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.bus.dispatcher"/>
+            <argument type="service" id="monolog.logger.imoje"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.status.status_resolver"/>
         </service>
     </services>
 </container>

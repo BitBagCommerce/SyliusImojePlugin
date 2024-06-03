@@ -3,5 +3,5 @@ webpack_encore:
     builds:
         shop: '%kernel.project_dir%/public/build/shop'
         admin: '%kernel.project_dir%/public/build/admin'
-        ing_shop: '%kernel.project_dir%/public/build/bitbag/ing/shop'
-        ing_admin: '%kernel.project_dir%/public/build/bitbag/ing/admin'
+        imoje_shop: '%kernel.project_dir%/public/build/bitbag/imoje/shop'
+        imoje_admin: '%kernel.project_dir%/public/build/bitbag/imoje/admin'

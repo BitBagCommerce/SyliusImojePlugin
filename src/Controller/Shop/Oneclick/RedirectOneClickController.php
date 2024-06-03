@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Controller\Shop\Oneclick;
+namespace BitBag\SyliusImojePlugin\Controller\Shop\Oneclick;
 
-use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
-use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
-use BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
-use BitBag\SyliusIngPlugin\Resolver\Status\StatusResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Command\FinalizeOrder;
+use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
+use BitBag\SyliusImojePlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
+use BitBag\SyliusImojePlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
+use BitBag\SyliusImojePlugin\Resolver\Status\StatusResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;

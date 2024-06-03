@@ -1,4 +1,4 @@
 suites:
     main:
-        namespace: BitBag\SyliusIngPlugin
-        psr4_prefix: BitBag\SyliusIngPlugin
+        namespace: BitBag\SyliusImojePlugin
+        psr4_prefix: BitBag\SyliusImojePlugin

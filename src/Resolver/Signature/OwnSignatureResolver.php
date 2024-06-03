@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Signature;
+namespace BitBag\SyliusImojePlugin\Resolver\Signature;
 
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeResolverInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class OwnSignatureResolver implements OwnSignatureResolverInterface
@@ -14,12 +14,12 @@ final class OwnSignatureResolver implements OwnSignatureResolverInterface
 
     private GatewayCodeResolverInterface $gatewayCodeResolver;
 
-    private IngClientConfigurationProviderInterface $configurationProvider;
+    private ImojeClientConfigurationProviderInterface $configurationProvider;
 
     public function __construct(
         RequestStack $requestStack,
         GatewayCodeResolverInterface $gatewayCodeResolver,
-        IngClientConfigurationProviderInterface $configurationProvider
+        ImojeClientConfigurationProviderInterface $configurationProvider
     ) {
         $this->requestStack = $requestStack;
         $this->gatewayCodeResolver = $gatewayCodeResolver;
@@ -30,7 +30,7 @@ final class OwnSignatureResolver implements OwnSignatureResolverInterface
     {
         $request = $this->requestStack->getCurrentRequest();
         $body = $request->getContent();
-        $code = $this->gatewayCodeResolver->resolve(IngClientConfigurationProviderInterface::FACTORY_NAME);
+        $code = $this->gatewayCodeResolver->resolve(ImojeClientConfigurationProviderInterface::FACTORY_NAME);
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
 
         return \sprintf('%s%s', $body, $config->getShopKey());

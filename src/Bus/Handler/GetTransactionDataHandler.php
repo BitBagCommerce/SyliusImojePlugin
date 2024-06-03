@@ -2,45 +2,45 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Query\GetTransactionData;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Exception\InvalidIngResponseException;
-use BitBag\SyliusIngPlugin\Factory\Model\TransactionModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Factory\Transaction\IngTransactionFactoryInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\TransactionData\TransactionDataResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Query\GetTransactionData;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Exception\InvalidImojeResponseException;
+use BitBag\SyliusImojePlugin\Factory\Model\TransactionModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Factory\Transaction\ImojeTransactionFactoryInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class GetTransactionDataHandler implements MessageHandlerInterface
 {
-    private IngClientConfigurationProviderInterface $configurationProvider;
+    private ImojeClientConfigurationProviderInterface $configurationProvider;
 
     private TransactionModelFactoryInterface $transactionModelFactory;
 
-    private IngClientProviderInterface $ingClientProvider;
+    private ImojeClientProviderInterface $imojeClientProvider;
 
-    private IngTransactionFactoryInterface $ingTransactionFactory;
+    private ImojeTransactionFactoryInterface $imojeTransactionFactory;
 
     private TransactionDataResolverInterface $transactionDataResolver;
 
     public function __construct(
-        IngClientConfigurationProviderInterface $configurationProvider,
-        TransactionModelFactoryInterface $transactionModelFactory,
-        IngClientProviderInterface $ingClientProvider,
-        IngTransactionFactoryInterface $ingTransactionFactory,
-        TransactionDataResolverInterface $transactionDataResolver
+        ImojeClientConfigurationProviderInterface $configurationProvider,
+        TransactionModelFactoryInterface          $transactionModelFactory,
+        ImojeClientProviderInterface              $imojeClientProvider,
+        ImojeTransactionFactoryInterface          $imojeTransactionFactory,
+        TransactionDataResolverInterface          $transactionDataResolver
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
-        $this->ingClientProvider = $ingClientProvider;
-        $this->ingTransactionFactory = $ingTransactionFactory;
+        $this->imojeClientProvider = $imojeClientProvider;
+        $this->imojeTransactionFactory = $imojeTransactionFactory;
         $this->transactionDataResolver = $transactionDataResolver;
     }
 
-    public function __invoke(GetTransactionData $query): IngTransactionInterface
+    public function __invoke(GetTransactionData $query): ImojeTransactionInterface
     {
         $code = $query->getCode();
         $config = $this->configurationProvider->getPaymentMethodConfiguration($code);
@@ -54,7 +54,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $config->getServiceId()
         );
 
-        $response = $this->ingClientProvider
+        $response = $this->imojeClientProvider
             ->getClient($code)
             ->createTransaction($transactionModel)
         ;
@@ -67,10 +67,10 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         $orderId = $data['orderId'];
 
         if (!$paymentUrl || !$transactionId || !$serviceId || !$orderId) {
-            throw new InvalidIngResponseException('No configured transaction');
+            throw new InvalidImojeResponseException('No configured transaction');
         }
 
-        return $this->ingTransactionFactory->create(
+        return $this->imojeTransactionFactory->create(
             $query->getOrder()->getLastPayment(),
             $transactionId,
             $paymentUrl,

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Calculator;
+namespace BitBag\SyliusImojePlugin\Calculator;
 
 interface SignatureCalculatorInterface
 {

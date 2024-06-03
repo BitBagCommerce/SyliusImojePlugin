@@ -1,4 +1,4 @@
-bitbag_sylius_ing_plugin:
+bitbag_sylius_imoje_plugin:
   ui:
     token: Token
     redirect: BLIK redirect

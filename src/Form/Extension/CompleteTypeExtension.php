@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Form\Extension;
+namespace BitBag\SyliusImojePlugin\Form\Extension;
 
-use BitBag\SyliusIngPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
-use BitBag\SyliusIngPlugin\Resolver\Order\OrderResolverInterface;
-use BitBag\SyliusIngPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusImojePlugin\Factory\Payment\PaymentDataModelFactoryInterface;
+use BitBag\SyliusImojePlugin\Resolver\Order\OrderResolverInterface;
+use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -46,7 +46,7 @@ final class CompleteTypeExtension extends AbstractTypeExtension
                         'mapped' => false,
                         'constraints' => [
                             new NotBlank([
-                                'message' => 'bitbag_sylius_ing_plugin.blik_code.not_blank',
+                                'message' => 'bitbag_sylius_imoje_plugin.blik_code.not_blank',
                                 'groups' => ['sylius'],
                             ]),
                             new Length([

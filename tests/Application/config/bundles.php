@@ -45,7 +45,7 @@ return [
     Sylius\Bundle\ThemeBundle\SyliusThemeBundle::class => ['all' => true],
     Sylius\Bundle\AdminBundle\SyliusAdminBundle::class => ['all' => true],
     Sylius\Bundle\ShopBundle\SyliusShopBundle::class => ['all' => true],
-    BitBag\SyliusIngPlugin\SyliusIngPlugin::class => ['all' => true],
+    BitBag\SyliusImojePlugin\BitBagSyliusImojePlugin::class => ['all' => true],
     Sylius\RefundPlugin\SyliusRefundPlugin::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true, 'test_cached' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true, 'test_cached' => true],

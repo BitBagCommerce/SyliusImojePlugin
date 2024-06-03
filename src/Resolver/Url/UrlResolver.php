@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Url;
+namespace BitBag\SyliusImojePlugin\Resolver\Url;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
+use BitBag\SyliusImojePlugin\Client\ImojeApiClientInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 
 final class UrlResolver implements UrlResolverInterface
 {
     public function resolve(
-        IngTransactionInterface $ingTransaction,
-        IngClientConfigurationProviderInterface $ingClientConfiguration,
-        IngClientProviderInterface $ingClientProvider
+        ImojeTransactionInterface                 $imojeTransaction,
+        ImojeClientConfigurationProviderInterface $imojeClientConfiguration,
+        ImojeClientProviderInterface $imojeClientProvider
     ): string {
-        $code = $ingTransaction->getGatewayCode();
-        $config = $ingClientConfiguration->getPaymentMethodConfiguration($code);
-        $client = $ingClientProvider->getClient($code);
+        $code = $imojeTransaction->getGatewayCode();
+        $config = $imojeClientConfiguration->getPaymentMethodConfiguration($code);
+        $client = $imojeClientProvider->getClient($code);
 
-        return $this->createUrl($config, $ingTransaction, $client);
+        return $this->createUrl($config, $imojeTransaction, $client);
     }
 
     private function createUrl(
-        IngClientConfigurationInterface $config,
-        IngTransactionInterface $ingTransaction,
-        IngApiClientInterface $client
+        ImojeClientConfigurationInterface $config,
+        ImojeTransactionInterface         $imojeTransaction,
+        ImojeApiClientInterface           $client
     ): string {
         if ($config->isProd()) {
             return \sprintf(
@@ -35,7 +35,7 @@ final class UrlResolver implements UrlResolverInterface
                 $config->getProdUrl(),
                 $config->getMerchantId(),
                 $client::TRANSACTION_ENDPOINT,
-                $ingTransaction->getTransactionId()
+                $imojeTransaction->getTransactionId()
             );
         }
 
@@ -44,7 +44,7 @@ final class UrlResolver implements UrlResolverInterface
             $config->getSandboxUrl(),
             $config->getMerchantId(),
             $client::TRANSACTION_ENDPOINT,
-            $ingTransaction->getTransactionId()
+            $imojeTransaction->getTransactionId()
         );
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Query;
+namespace BitBag\SyliusImojePlugin\Bus\Query;
 
 use Sylius\Component\Core\Model\OrderInterface;
 

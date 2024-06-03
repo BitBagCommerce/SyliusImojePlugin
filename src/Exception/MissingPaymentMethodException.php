@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Exception;
+namespace BitBag\SyliusImojePlugin\Exception;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Configuration;
+namespace BitBag\SyliusImojePlugin\Resolver\Configuration;
 
 interface ConfigurationResolverInterface
 {

@@ -2,31 +2,31 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusIngPlugin\Form\Type\ConfigurationType"
-                 id="bitbag_sylius_ing_plugin.form.type.configuration_type"
+        <service class="BitBag\SyliusImojePlugin\Form\Type\ConfigurationType"
+                 id="bitbag_sylius_imoje_plugin.form.type.configuration_type"
         >
             <tag name="form.type"/>
-            <tag name="sylius.gateway_configuration_type" type="BitBag_imoje" label="bitbag_sylius_ing_plugin.ui.gateway_name"/>
+            <tag name="sylius.gateway_configuration_type" type="BitBag_imoje" label="bitbag_sylius_imoje_plugin.ui.gateway_name"/>
         </service>
 
-        <service  class="BitBag\SyliusIngPlugin\Form\Extension\PaymentTypeExtension"
-                  id="bitbag_sylius_ing_plugin.form.extension.payment_type"
+        <service  class="BitBag\SyliusImojePlugin\Form\Extension\PaymentTypeExtension"
+                  id="bitbag_sylius_imoje_plugin.form.extension.payment_type"
         >
             <tag name="form.type_extension" extended_type="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType"/>
         </service>
 
-        <service  class="BitBag\SyliusIngPlugin\Form\Type\PaymentIngType"
-                  id="bitbag_sylius_ing_plugin.form.type.ing_payment"
+        <service  class="BitBag\SyliusImojePlugin\Form\Type\PaymentImojeType"
+                  id="bitbag_sylius_imoje_plugin.form.type.ing_payment"
         >
-            <argument type="service" id="bitbag_sylius_ing_plugin.resolver.payment.payment_methods"/>
+            <argument type="service" id="bitbag_sylius_imoje_plugin.resolver.payment.payment_methods"/>
             <tag name="form.type"/>
         </service>
 
-        <service  class="BitBag\SyliusIngPlugin\Form\Extension\CompleteTypeExtension"
-                  id="bitbag.sylius_ing_plugin.form.extension.complete_type_extension"
+        <service  class="BitBag\SyliusImojePlugin\Form\Extension\CompleteTypeExtension"
+                  id="bitbag.sylius_imoje_plugin.form.extension.complete_type_extension"
         >
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.order.order_resolver"/>
-            <argument type="service" id="bitbag.sylius_ing_plugin.resolver.payment.order_payment_resolver"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.order.order_resolver"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.payment.order_payment_resolver"/>
             <tag name="form.type_extension" extended_type="Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType"/>
         </service>
     </services>

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusIngPlugin\Model\BillingModel;
-use BitBag\SyliusIngPlugin\Model\BillingModelInterface;
+use BitBag\SyliusImojePlugin\Model\BillingModel;
+use BitBag\SyliusImojePlugin\Model\BillingModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class BillingModelFactory implements BillingModelFactoryInterface

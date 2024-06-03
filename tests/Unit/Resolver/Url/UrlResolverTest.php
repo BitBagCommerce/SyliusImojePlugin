@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusIngPlugin\Unit\Resolver\Url;
+namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Url;
 
-use BitBag\SyliusIngPlugin\Client\IngApiClientInterface;
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientConfigurationProviderInterface;
-use BitBag\SyliusIngPlugin\Provider\IngClientProviderInterface;
-use BitBag\SyliusIngPlugin\Resolver\Url\UrlResolver;
-use BitBag\SyliusIngPlugin\Resolver\Url\UrlResolverInterface;
+use BitBag\SyliusImojePlugin\Client\ImojeApiClientInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
+use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
+use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolver;
+use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 final class UrlResolverTest extends TestCase
 {
-    public const GATEWAY_CODE = 'ing_code';
+    public const GATEWAY_CODE = 'imoje_code';
 
     public const SANDBOX_URL = 'http://sandbox';
 
@@ -31,19 +31,19 @@ final class UrlResolverTest extends TestCase
 
     public const COMPLETE_PROD_URL = 'http://prod/MerchantId/transaction/TR-12345';
 
-    private IngTransactionInterface $ingTransaction;
+    private ImojeTransactionInterface $imojeTransaction;
 
-    private IngClientConfigurationProviderInterface $ingClientConfiguration;
+    private ImojeClientConfigurationProviderInterface $imojeClientConfiguration;
 
-    private IngClientProviderInterface $ingClientProvide;
+    private ImojeClientProviderInterface $imojeClientProvider;
 
     private UrlResolverInterface $urlResolver;
 
     protected function setUp(): void
     {
-        $this->ingTransaction = $this->createMock(IngTransactionInterface::class);
-        $this->ingClientConfiguration = $this->createMock(IngClientConfigurationProviderInterface::class);
-        $this->ingClientProvide = $this->createMock(IngClientProviderInterface::class);
+        $this->imojeTransaction = $this->createMock(ImojeTransactionInterface::class);
+        $this->imojeClientConfiguration = $this->createMock(ImojeClientConfigurationProviderInterface::class);
+        $this->imojeClientProvider = $this->createMock(ImojeClientProviderInterface::class);
         $this->urlResolver = new UrlResolver();
     }
 
@@ -52,19 +52,19 @@ final class UrlResolverTest extends TestCase
      */
     public function testResolveUrl(bool $isProd,string $url,string $result): void
     {
-        $configuration = $this->createMock(IngClientConfigurationInterface::class);
-        $client = $this->createMock(IngApiClientInterface::class);
+        $configuration = $this->createMock(ImojeClientConfigurationInterface::class);
+        $client = $this->createMock(ImojeApiClientInterface::class);
 
-        $this->ingTransaction
+        $this->imojeTransaction
             ->method('getGatewayCode')
             ->willReturn(self::GATEWAY_CODE);
 
-        $this->ingClientConfiguration
+        $this->imojeClientConfiguration
             ->method('getPaymentMethodConfiguration')
             ->with(self::GATEWAY_CODE)
             ->willReturn($configuration);
 
-        $this->ingClientProvide
+        $this->imojeClientProvider
             ->method('getClient')
             ->with(self::GATEWAY_CODE)
             ->willReturn($client);
@@ -85,13 +85,13 @@ final class UrlResolverTest extends TestCase
             ->method('getMerchantId')
             ->willReturn(self::MERCHANT_ID);
 
-        $this->ingTransaction
+        $this->imojeTransaction
             ->method('getTransactionId')
             ->willReturn(self::TRANSACTION_ID);
 
         self::assertEquals(
             $result,
-            $this->urlResolver->resolve($this->ingTransaction,$this->ingClientConfiguration,$this->ingClientProvide)
+            $this->urlResolver->resolve($this->imojeTransaction,$this->imojeClientConfiguration,$this->imojeClientProvider)
         );
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\PaymentMethod;
+namespace BitBag\SyliusImojePlugin\Resolver\PaymentMethod;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;

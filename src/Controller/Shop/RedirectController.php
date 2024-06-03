@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Controller\Shop;
+namespace BitBag\SyliusImojePlugin\Controller\Shop;
 
-use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
-use BitBag\SyliusIngPlugin\Bus\DispatcherInterface;
-use BitBag\SyliusIngPlugin\Bus\Query\GetResponseData;
-use BitBag\SyliusIngPlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
-use BitBag\SyliusIngPlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
-use BitBag\SyliusIngPlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
-use BitBag\SyliusIngPlugin\Resolver\Status\StatusResolverInterface;
+use BitBag\SyliusImojePlugin\Bus\Command\FinalizeOrder;
+use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
+use BitBag\SyliusImojePlugin\Bus\Query\GetResponseData;
+use BitBag\SyliusImojePlugin\Factory\Bus\PaymentFinalizationCommandFactoryInterface;
+use BitBag\SyliusImojePlugin\Generator\Url\Status\AggregateStatusBasedUrlGeneratorInterface;
+use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModelInterface;
+use BitBag\SyliusImojePlugin\Resolver\Status\StatusResolverInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +45,7 @@ final class RedirectController
         /** @var ReadyTransactionModelInterface $readyTransaction */
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
 
-        $payment = $readyTransaction->getIngTransaction()->getPayment();
+        $payment = $readyTransaction->getimojeTransaction()->getPayment();
 
         $order = $readyTransaction->getOrder();
 

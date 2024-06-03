@@ -2,10 +2,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusIngPlugin\Calculator\SignatureCalculator"
-                 id="bitbag.sylius_ing_plugin.calculator.signature_calculator"
+        <service class="BitBag\SyliusImojePlugin\Calculator\SignatureCalculator"
+                 id="bitbag.sylius_imoje_plugin.calculator.signature_calculator"
         >
-            <argument type="service" id="monolog.logger.ing"/>
+            <argument type="service" id="monolog.logger.imoje"/>
         </service>
     </services>
 </container>

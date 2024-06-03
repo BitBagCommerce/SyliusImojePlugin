@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Command\Status\PaymentFinalizationCommandInterface;
+use BitBag\SyliusImojePlugin\Bus\Command\Status\PaymentFinalizationCommandInterface;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

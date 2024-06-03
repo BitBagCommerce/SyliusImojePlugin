@@ -1,4 +1,4 @@
-bitbag_ing_plugin_shop_routing:
-    resource: "@SyliusIngPlugin/Resources/config/routing/shop_routing.yaml"
+bitbag_imoje_plugin_shop_routing:
+    resource: "@BitBagSyliusImojePlugin/Resources/config/routing/shop_routing.yaml"
 sylius_refund:
     resource: "@SyliusRefundPlugin/Resources/config/routing.yml"

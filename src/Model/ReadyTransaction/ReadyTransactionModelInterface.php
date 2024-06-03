@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Model\ReadyTransaction;
+namespace BitBag\SyliusImojePlugin\Model\ReadyTransaction;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface ReadyTransactionModelInterface
 {
     public function getStatus(): string;
 
-    public function getIngTransaction(): IngTransactionInterface;
+    public function getimojeTransaction(): ImojeTransactionInterface;
 
     public function getOrder(): OrderInterface;
 }

@@ -2,9 +2,9 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service class="BitBag\SyliusIngPlugin\Filter\AvailablePaymentMethodsFilter"
-                 id="bitbag.sylius_ing_plugin.filter.available_payment_methods_filter">
-            <argument type="service" id="bitbag.sylius_ing_plugin.provider.ing_client_provider"/>
+        <service class="BitBag\SyliusImojePlugin\Filter\AvailablePaymentMethodsFilter"
+                 id="bitbag.sylius_imoje_plugin.filter.available_payment_methods_filter">
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider"/>
         </service>
     </services>
 </container>

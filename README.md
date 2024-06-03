@@ -1,5 +1,5 @@
 
-# ING Payments Plugin for Sylius
+# Imoje Payments Plugin for Sylius
 ----
 
 At BitBag we do believe in open source. However, we are able to do it just because of our awesome clients, who are kind enough to share some parts of our work with the community. Therefore, if you feel like there is a possibility for us working together, feel free to reach us out. You will find out more about our professional services, technologies and contact details at [https://bitbag.io/](https://bitbag.io/?utm_source=github&utm_medium=referral&utm_campaign=plugins_adyen).
@@ -23,9 +23,9 @@ At BitBag we do believe in open source. However, we are able to do it just becau
 # Overview
 ----
 
-![Screenshot showing payment methods show in the shop](doc/select_payment_ing.png)
+![Screenshot showing payment methods show in the shop](doc/select_payment_imoje.png)
 
-![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
+![Screenshot showing payment method config in admin](doc/admin_page_imoje.png)
 
 The integration currently supports the following payment methods:
 
@@ -59,7 +59,7 @@ For the full installation guide please go to [installation](doc/installation.md)
 
 ### Usage
 
-This plugin allows you to use the payment solution delivered by ING.
+This plugin allows you to use the payment solution delivered by Imoje.
 
 
 ### Configuration:
@@ -68,22 +68,22 @@ You need to put the path to wkhtmltopdf in your .env file.
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
-To create an ING-based payment method, go to Payment methods in the Sylius admin panel.
+To create an Imoje-based payment method, go to Payment methods in the Sylius admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
-After that, you need to add an ING payment:
+After that, you need to add an Imoje payment:
 
 
-  ![Screenshot showing payment method config in admin](doc/create_ing_method.png)
+  ![Screenshot showing payment method config in admin](doc/create_imoje_method.png)
 
 And now, you can configure your payment method in the admin panel:
 * first you need to add a gateway code, for example "imoje_code" and set its position.
 
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configure the imoje gateway, log in to ING the admin panel.
+* To configure the imoje gateway, log in to Imoje admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/main_imoje.png)
@@ -100,7 +100,7 @@ And now, you can configure your payment method in the admin panel:
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
 
   ![Screenshot showing payment method config in admin](doc/token.png)
-* Also, you need to configure the path to your webhooks, just type in your shop URL followed by /payment/ing/webhook.
+* Also, you need to configure the path to your webhooks, just type in your shop URL followed by /payment/imoje/webhook.
 
   ![Screenshot showing payment method config in admin](doc/webhook.png)
 * Now you need to add a URL in the admin panel for the production API URL:
@@ -115,9 +115,9 @@ And now, you can configure your payment method in the admin panel:
 
 * To end up you can choose which payment-by-link you want to use.
 
-  ![Screenshot showing payment method config in admin](doc/admin_page_ing.png)
+  ![Screenshot showing payment method config in admin](doc/admin_page_imoje.png)
 
-* And now you have to set a proper name for your payment method (keep in mind that ING supports multiple online payment methods), and click "Create".
+* And now you have to set a proper name for your payment method (keep in mind that Imoje supports multiple online payment methods), and click "Create".
 
   ![Screenshot showing payment method config in admin](doc/payment_name.png)
 

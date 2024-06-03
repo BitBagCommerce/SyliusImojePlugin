@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Form\Extension;
+namespace BitBag\SyliusImojePlugin\Form\Extension;
 
-use BitBag\SyliusIngPlugin\Form\Type\PaymentIngType;
+use BitBag\SyliusImojePlugin\Form\Type\PaymentImojeType;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,7 +15,7 @@ final class PaymentTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('details', PaymentIngType::class, [
+            ->add('details', PaymentImojeType::class, [
                 'validation_groups' => ['sylius'],
                 'constraints' => [
                     new Valid(),

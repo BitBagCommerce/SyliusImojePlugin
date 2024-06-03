@@ -1,6 +1,6 @@
 <div class="bb-online-payment-wrapper disabled">
     <div class="bb-online-payment-wrapper-main">
-        {% for keyChoice, choice in methodIng.vars.choices %}
+        {% for keyChoice, choice in methodImoje.vars.choices %}
             {% if choice.label == 'blik' or choice.label == 'card' or choice.label == 'pbl' or choice.label == 'imoje_paylater' %}
                 <div
                     class="bb-online-payment-wrapper-main-item"
@@ -10,12 +10,12 @@
                         type="radio"
                         value="{{ choice.value }}"
                         id="choice-{{ choice.label }}"
-                        name="{{ methodIng.vars.full_name }}-main"
+                        name="{{ methodImoje.vars.full_name }}-main"
                         class="online-payment__input"
                         data-target="wrapper_{{ choice.label }}"
                     />
                     <label for="choice-{{ choice.label }}">
-                        <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage image-{{ choice.label }}" aria-label="{{ choice.label }}">
+                        <img src="{{ asset('bundles/BitBagSyliusImojePlugin/images/'~choice.label~'.png') }}" class="paymentMethodImage image-{{ choice.label }}" aria-label="{{ choice.label }}">
                     </label>
 
                 </div>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="bb-online-payment-wrapper-child disabled" id="wrapper_pbl">
-        {% for keyChoice, choice in methodIng.vars.choices %}
+        {% for keyChoice, choice in methodImoje.vars.choices %}
             {% if choice.label != "blik" and choice.label != "card" and choice.label != "pbl" and choice.label != 'imoje_paylater' and choice.label != 'imoje_twisto' and choice.label != 'paypo' and choice.label != 'pragma_go' %}
                 <div
                     class="bb-online-payment-wrapper-child-item"
@@ -34,11 +34,11 @@
                         type="radio"
                         value="{{ choice.value }}"
                         id="choice-{{ choice.label }}"
-                        name="{{ methodIng.vars.full_name }}-pbl-child"
+                        name="{{ methodImoje.vars.full_name }}-pbl-child"
                         class="online-payment__input-child"
                     />
                     <label for="choice-{{ choice.label }}">
-                        <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
+                        <img src="{{ asset('bundles/BitBagSyliusImojePlugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
                     </label>
 
                 </div>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="bb-online-payment-wrapper-child disabled" id="wrapper_imoje_paylater">
-        {% for keyChoice, choice in methodIng.vars.choices %}
+        {% for keyChoice, choice in methodImoje.vars.choices %}
             {% if choice.label == 'imoje_twisto' or choice.label == 'paypo'or choice.label == 'pragma_go' %}
                 <div
                         class="bb-online-payment-wrapper-child-item"
@@ -57,13 +57,13 @@
                             type="radio"
                             value="{{ choice.value }}"
                             id="choice-{{ choice.label }}"
-                            name="{{ methodIng.vars.full_name }}-pay-later-child"
+                            name="{{ methodImoje.vars.full_name }}-pay-later-child"
                             class="online-payment__input-child"
                     />
                     <label for="choice-{{ choice.label }}">
-                        <img src="{{ asset('bundles/syliusingplugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
+                        <img src="{{ asset('bundles/BitBagSyliusImojePlugin/images/'~choice.label~'.png') }}" class="paymentMethodImage" aria-label="{{ choice.label }}">
                         {% if choice.label == 'pragma_go'%}
-                            <p style="color: rgb(91,91,94)">{{'bitbag_sylius_ing_plugin.ui.for_companies'|trans}}</p>
+                            <p style="color: rgb(91,91,94)">{{'bitbag_sylius_imoje_plugin.ui.for_companies'|trans}}</p>
                         {% endif %}
                     </label>
 

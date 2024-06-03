@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Command;
+namespace BitBag\SyliusImojePlugin\Bus\Command;
 
-use BitBag\SyliusIngPlugin\Entity\IngTransactionInterface;
+use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
 
 final class SaveTransaction
 {
-    private IngTransactionInterface $ingTransaction;
+    private ImojeTransactionInterface $imojeTransaction;
 
-    public function __construct(IngTransactionInterface $ingTransaction)
+    public function __construct(ImojeTransactionInterface $imojeTransaction)
     {
-        $this->ingTransaction = $ingTransaction;
+        $this->imojeTransaction = $imojeTransaction;
     }
 
-    public function getIngTransaction(): IngTransactionInterface
+    public function getimojeTransaction(): ImojeTransactionInterface
     {
-        return $this->ingTransaction;
+        return $this->imojeTransaction;
     }
 }

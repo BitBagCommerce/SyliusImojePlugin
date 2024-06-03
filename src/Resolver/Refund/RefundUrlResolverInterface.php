@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\Refund;
+namespace BitBag\SyliusImojePlugin\Resolver\Refund;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
 
 interface RefundUrlResolverInterface
 {
-    public function resolve(IngClientConfigurationInterface $config, int $paymentId): string;
+    public function resolve(ImojeClientConfigurationInterface $config, int $paymentId): string;
 }

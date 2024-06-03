@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Factory\Model;
+namespace BitBag\SyliusImojePlugin\Factory\Model;
 
-use BitBag\SyliusIngPlugin\Configuration\IngClientConfigurationInterface;
-use BitBag\SyliusIngPlugin\Model\Blik\BlikModelInterface;
-use BitBag\SyliusIngPlugin\Model\TransactionModelInterface;
+use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface TransactionBlikModelFactoryInterface
@@ -14,12 +14,12 @@ interface TransactionBlikModelFactoryInterface
     public const SALE_TYPE = 'sale';
 
     public function create(
-        OrderInterface $order,
-        IngClientConfigurationInterface $ingClientConfiguration,
-        string $type,
-        string $paymentMethod,
-        string $paymentMethodCode,
-        string $serviceId,
-        BlikModelInterface $blikModel
+        OrderInterface                    $order,
+        ImojeClientConfigurationInterface $imojeClientConfiguration,
+        string                            $type,
+        string                            $paymentMethod,
+        string                            $paymentMethodCode,
+        string                            $serviceId,
+        BlikModelInterface                $blikModel
     ): TransactionModelInterface;
 }

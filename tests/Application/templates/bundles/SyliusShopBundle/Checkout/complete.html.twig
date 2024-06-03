@@ -19,7 +19,7 @@
         <input type="hidden" name="_method" value="PUT"/>
         <input type="hidden" data-bb-order-id="{{ order.id }}"/>
         <input type="hidden" data-bb-is-payment-method="{{ order.payments.last.details | join('|') }}"/>
-        <input type="hidden" data-bb-is-ing-method="{{ order.payments.last.details | keys | join('|') }}"/>
+        <input type="hidden" data-bb-is-imoje-method="{{ order.payments.last.details | keys | join('|') }}"/>
 
         {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
         <div class="ui hidden divider"></div>
@@ -32,20 +32,20 @@
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
-    {% elseif order.payments.last.details | join('|') != "" and order.payments.last.details | keys | join('|') == 'ingPaymentMethods' %}
+    {% elseif order.payments.last.details | join('|') != "" and order.payments.last.details | keys | join('|') == 'imojePaymentMethods' %}
     <div class="ui padded segment">
             {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
 
             {{ sylius_template_event('sylius.shop.checkout.complete.after_content_header', {'order': order}) }}
 
             {% include '@SyliusShop/_flashes.html.twig' %}
-            {{ form_start(form, {'action': path('bitbag_ing_initialize_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+            {{ form_start(form, {'action': path('bitbag_imoje_initialize_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
 
             <input type="hidden" name="_method" value="PUT"/>
             <input type="hidden" data-bb-order-id="{{ order.id }}"/>
             <input type="hidden" data-bb-is-payment-method="{{ order.payments.last.details | join('|') }}"/>
-            <input type="hidden" data-bb-is-ing-method="{{ order.payments.last.details | keys | join('|') }}"/>
+            <input type="hidden" data-bb-is-imoje-method="{{ order.payments.last.details | keys | join('|') }}"/>
 
             {{ sylius_template_event('sylius.shop.checkout.complete.summary', _context) }}
             <div class="ui hidden divider"></div>

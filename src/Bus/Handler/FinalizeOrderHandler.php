@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Bus\Handler;
+namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
-use BitBag\SyliusIngPlugin\Bus\Command\FinalizeOrder;
+use BitBag\SyliusImojePlugin\Bus\Command\FinalizeOrder;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Component\Core\Model\OrderInterface;

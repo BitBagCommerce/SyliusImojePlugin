@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Resolver\GatewayFactoryName;
+namespace BitBag\SyliusImojePlugin\Resolver\GatewayFactoryName;
 
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusIngPlugin\Filter;
+namespace BitBag\SyliusImojePlugin\Filter;
 
 interface AvailablePaymentMethodsFilterInterface
 {
