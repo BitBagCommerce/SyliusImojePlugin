@@ -27,9 +27,9 @@
         <service class="BitBag\SyliusImojePlugin\Bus\Handler\GetTransactionDataHandler"
                  id="bitbag.sylius_imoje_plugin.bus.handler.get_transaction_data_handler"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.model.transaction_model_factory"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.transaction.imoje_transaction_factory"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.transaction_data.transaction_data_resolver"/>
 
@@ -39,9 +39,9 @@
         <service class="BitBag\SyliusImojePlugin\Bus\Handler\GetBlikTransactionDataHandler"
                  id="bitbag.sylius_imoje_plugin.bus.handler.get_blik_transaction_data_handler"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.model.transaction_blik_model_factory"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.transaction.imoje_transaction_factory"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.transaction_data.transaction_data_resolver"/>
 
@@ -69,8 +69,8 @@
                  id="bitbag.sylius_imoje_plugin.bus.handler.get_response_data_handler"
         >
             <argument type="service" id="BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepository"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.ready_transaction.ready_transaction_factory"/>
             <argument type="service" id="sylius.repository.order"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.url.url_resolver"/>

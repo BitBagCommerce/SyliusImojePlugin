@@ -79,18 +79,18 @@
         >
             <argument type="service" id="request_stack"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.gateway_code.gateway_code_resolver"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolver"
                   id="bitbag.sylius_imoje_plugin.resolver.gateway_code.gateway_code_from_order_resolver"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.payment.order_payment_resolver"/>
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature\ImojeOneClickSignatureResolver"
-                  id="bitbag.sylius_imoje_plugin.resolver.ing_one_click_signature.ing_one_click_signature_resolver"
+                  id="bitbag.sylius_imoje_plugin.resolver.imoje_one_click_signature.imoje_one_click_signature_resolver"
         >
         </service>
 
@@ -119,7 +119,7 @@
             <argument id="request_stack" type="service"/>
             <argument id="bitbag.sylius_imoje_plugin.factory.transaction.imoje_transaction_factory" type="service"/>
             <argument id="sylius.repository.order" type="service"/>
-            <argument id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider" type="service"/>
+            <argument id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider" type="service"/>
             <argument id="bitbag.sylius_imoje_plugin.bus.dispatcher" type="service"/>
             <argument id="bitbag.sylius_imoje_plugin.resolver.payment_method.payment_method_resolver" type="service"/>
             <argument id="bitbag.sylius_imoje_plugin.resolver.payment.order_payment_resolver" type="service"/>
