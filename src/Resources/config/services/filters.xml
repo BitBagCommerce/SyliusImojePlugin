@@ -4,7 +4,7 @@
     <services>
         <service class="BitBag\SyliusImojePlugin\Filter\AvailablePaymentMethodsFilter"
                  id="bitbag.sylius_imoje_plugin.filter.available_payment_methods_filter">
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider"/>
         </service>
     </services>
 </container>

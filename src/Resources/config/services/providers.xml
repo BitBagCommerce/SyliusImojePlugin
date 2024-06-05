@@ -3,16 +3,16 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service class="BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProvider"
-                 id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"
+                 id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"
         >
             <argument type="service" id="bitbag.sylius_imoje_plugin.repository.payment_method_repository"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.configuration.configuration_resolver"/>
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Provider\ImojeClientProvider"
-                 id="bitbag.sylius_imoje_plugin.provider.ing_client_provider"
+                 id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
             <argument type="service" id="sylius.http_client"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.provider.request_params.request_params_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.serializer.serializer_factory"/>

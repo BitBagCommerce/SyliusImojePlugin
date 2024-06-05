@@ -6,7 +6,7 @@
         <i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}
     </button>
 {% elseif order.payments.last.details | join('|') == "card" and order.payments.last.details | keys | join('|') == "imojePaymentMethods" %}
-    <button type="button" class="ui huge primary fluid icon labeled button js-widget-ing-action">
+    <button type="button" class="ui huge primary fluid icon labeled button js-widget-imoje-action">
         <i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}
     </button>
 {% else %}

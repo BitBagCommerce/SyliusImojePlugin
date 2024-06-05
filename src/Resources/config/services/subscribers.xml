@@ -14,12 +14,12 @@
 
         <service
                 class="BitBag\SyliusImojePlugin\Refund\ImojeRefundStep"
-                id="bitbag.sylius_imoje_plugin.refund.ing_refund_step"
+                id="bitbag.sylius_imoje_plugin.refund.imoje_refund_step"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_provider" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.gateway_factory_name.gateway_factory_name_resolver" />
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.ing_client_configuration_provider" />
+            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider" />
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.refund.refund_url_resolver" />
             <tag name="sylius_refund.units_refunded.process_step"/>
         </service>

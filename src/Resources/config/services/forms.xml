@@ -16,7 +16,7 @@
         </service>
 
         <service  class="BitBag\SyliusImojePlugin\Form\Type\PaymentImojeType"
-                  id="bitbag_sylius_imoje_plugin.form.type.ing_payment"
+                  id="bitbag_sylius_imoje_plugin.form.type.imoje_payment"
         >
             <argument type="service" id="bitbag_sylius_imoje_plugin.resolver.payment.payment_methods"/>
             <tag name="form.type"/>

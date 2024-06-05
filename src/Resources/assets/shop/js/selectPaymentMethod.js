@@ -23,7 +23,7 @@ export class SelectPaymentMethod {
 
         this._connectListeners();
 
-        if (document.querySelector('.ing-payments:checked')) {
+        if (document.querySelector('.imoje-payments:checked')) {
             this._openPaymentsWrapper();
         }
     }
@@ -68,7 +68,7 @@ export class SelectPaymentMethod {
     _connectListeners() {
         this.paymentMethodRadios.forEach(paymentMethodRadio => {
             paymentMethodRadio.addEventListener('change', () => {
-                if (paymentMethodRadio.classList.contains('ing-payments')) {
+                if (paymentMethodRadio.classList.contains('imoje-payments')) {
                     this._openPaymentsWrapper();
                 } else {
                     this._closePaymentsWrapper();

@@ -4,11 +4,11 @@ export const performAction = async (isAfterPayment = false) => {
         ? ''
         : document.querySelector('[data-bb-is-payment-method]').dataset.bbIsPaymentMethod;
 
-    const isIng = isAfterPayment
+    const isImoje = isAfterPayment
         ? ''
-        : document.querySelector('[data-bb-is-imoje-method]').dataset.bbIsIngMethod;
+        : document.querySelector('[data-bb-is-imoje-method]').dataset.bbIsImojeMethod;
 
-    if ('card' === paymentMethod && 'imojePaymentMethods' === isIng || isAfterPayment) {
+    if ('card' === paymentMethod && 'imojePaymentMethods' === isImoje || isAfterPayment) {
         const orderId = document.querySelector('[data-bb-order-id]').dataset.bbOrderId;
 
         const url = `/payment/oneclick/${orderId}`;
@@ -44,10 +44,10 @@ export const performAction = async (isAfterPayment = false) => {
     }
 }
 
-const widgetIng = document.querySelector('.js-widget-ing-action');
+const widgetImoje = document.querySelector('.js-widget-imoje-action');
 const turnOnListener = () => {
-    if (widgetIng) {
-        widgetIng.addEventListener('click', e => {
+    if (widgetImoje) {
+        widgetImoje.addEventListener('click', e => {
             e.preventDefault();
             performAction();
         });

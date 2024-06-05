@@ -1,4 +1,4 @@
-import { performAction } from '../../sdk_ing/entry';
+import { performAction } from '../../sdk_imoje/entry';
 
 export class PaymentRedirect {
     constructor(
