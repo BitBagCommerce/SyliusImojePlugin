@@ -5,12 +5,12 @@
 1. Require our plugin with composer:
 
     ```bash
-    composer require bitbag/sylius-imoje-plugin
+    composer require bitbag/sylius-imoje-plugin --no-scripts
     ```
     
     **Note.** If you receive an error related to `Twig\Extra\Intl\IntlExtension` class, please go to `config/packages/twig.yaml` file and remove the mentioned service definition. In some cases, multiple dependencies redefine the service, so it results the error message. After removing it, please run the composer command second time, to finish the step.
 
-2. The [Sylius Refund Plugin](https://github.com/Sylius/RefundPlugin) is our plugin dependency. Please complete [its installation steps](https://github.com/Sylius/RefundPlugin/blob/1.4/docs/legacy_installation.md) before continuing.
+2. The [Sylius Refund Plugin](https://github.com/Sylius/RefundPlugin) is our plugin dependency. Please complete [its installation steps](https://github.com/Sylius/RefundPlugin?tab=readme-ov-file#installation) before continuing.
 
 3. Add plugin dependencies to your `config/bundles.php` file:
 
