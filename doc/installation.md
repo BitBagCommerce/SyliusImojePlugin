@@ -4,7 +4,9 @@
 
 1. The [Sylius Refund Plugin](https://github.com/Sylius/RefundPlugin) is our plugin dependency. Please complete [its installation steps](https://github.com/Sylius/RefundPlugin?tab=readme-ov-file#installation) before continuing.
 
-2. Require our plugin with composer:
+    **Note.** After installation of the Refund plugin, please remove Refund configuration from your project. Imoje plugin already has this configuration and doubling it will cause and error. 
+
+3. Require our plugin with composer:
 
     ```bash
     composer require bitbag/sylius-imoje-plugin --no-scripts
@@ -12,7 +14,7 @@
     
     **Note.** If you receive an error related to `Twig\Extra\Intl\IntlExtension` class, please go to `config/packages/twig.yaml` file and remove the mentioned service definition. In some cases, multiple dependencies redefine the service, so it results the error message. After removing it, please run the composer command second time, to finish the step.
 
-3. Add plugin dependencies to your `config/bundles.php` file:
+4. Add plugin dependencies to your `config/bundles.php` file:
 
     ```php
     return [
@@ -21,7 +23,7 @@
     ];
     ```
 
-4. Import required config in your `config/packages/_sylius.yaml` file:
+5. Import required config in your `config/packages/_sylius.yaml` file:
 
     ```yaml
     # config/packages/_sylius.yaml
@@ -31,7 +33,7 @@
         - { resource: "@BitBagSyliusImojePlugin/Resources/config.yaml" }
     ```
 
-5. Import the routing in your `config/routes.yaml` file:
+6. Import the routing in your `config/routes.yaml` file:
 
     ```yaml
     # config/routes.yaml
@@ -40,7 +42,7 @@
         resource: "@BitBagSyliusImojePlugin/Resources/config/routing.yaml"
     ```
 
-6. Add Imoje as a supported refund gateway in `config/packages/_sylius.yaml`:
+7. Add Imoje as a supported refund gateway in `config/packages/_sylius.yaml`:
 
     ```yaml
     # config/packages/_sylius.yaml
@@ -51,7 +53,7 @@
               - bitbag_imoje
     ``` 
 
-7. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
+8. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
 
     ```
     mkdir -p templates/bundles/SyliusAdminBundle/
@@ -63,7 +65,7 @@
 
     **Note.** If you have overridden at least one template from the directories above, please adjust your code to include our changes.
 
-8. Add logging to your environment by editing your {dev, prod, staging}/monolog.yaml:
+9. Add logging to your environment by editing your {dev, prod, staging}/monolog.yaml:
 
     ```yaml
     monolog:
@@ -76,13 +78,13 @@
                 channels: [ 'imoje' ]
     ```
 
-9. Clear the cache:
+10. Clear the cache:
 
     ```bash
     $ bin/console cache:clear
     ```
 
-10. Install assets:
+11. Install assets:
 
     ```
     $ bin/console assets:install
@@ -90,7 +92,7 @@
 
     **Note:** If you are running it on production, add the `-e prod` flag to this command.
 
-11. Synchronize the database:
+12. Synchronize the database:
 
     ```
     $ bin/console doctrine:migrations:migrate
