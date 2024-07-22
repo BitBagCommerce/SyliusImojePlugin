@@ -12,7 +12,8 @@ use BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolverInterfa
 use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-final class ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInterface
+final class
+ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInterface
 {
     private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
