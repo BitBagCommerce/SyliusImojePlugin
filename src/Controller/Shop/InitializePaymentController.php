@@ -17,6 +17,7 @@ use BitBag\SyliusImojePlugin\Provider\BlikModel\BlikModelProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\Order\OrderResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\Payment\TransactionPaymentDataResolverInterface;
+use Psr\Log\LoggerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -42,13 +43,16 @@ final class InitializePaymentController extends AbstractController
 
     private TranslatorInterface $translator;
 
+    private LoggerInterface $logger;
+
     public function __construct(
         OrderResolverInterface $orderResolver,
         OrderPaymentResolverInterface $paymentResolver,
         DispatcherInterface $dispatcher,
         BlikModelProviderInterface $blikModelProvider,
         TransactionPaymentDataResolverInterface $transactionPaymentDataResolver,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        LoggerInterface $logger
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
@@ -56,6 +60,7 @@ final class InitializePaymentController extends AbstractController
         $this->blikModelProvider = $blikModelProvider;
         $this->transactionPaymentDataResolver = $transactionPaymentDataResolver;
         $this->translator = $translator;
+        $this->logger = $logger;
     }
 
     public function __invoke(
@@ -104,6 +109,7 @@ final class InitializePaymentController extends AbstractController
 
             return new RedirectResponse($transactionData->getPaymentUrl());
         } catch (Throwable $e) {
+            $this->logger->error($e->getMessage());
             $this->addFlash('error', $this->translator->trans('bitbag_sylius_imoje_plugin.ui.payment_failed'));
             return $this->redirectToRoute('sylius_shop_checkout_select_payment');
         }
@@ -115,6 +121,7 @@ final class InitializePaymentController extends AbstractController
         try {
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
+            $this->logger->error($e->getMessage());
             throw new ImojeNotConfiguredException('Payment method not found');
         }
 

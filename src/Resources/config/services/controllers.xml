@@ -12,6 +12,7 @@
             <argument type="service" id="bitbag.sylius_imoje_plugin.provider.blik_model.blik_model_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.payment.transaction_payment_data_resolver"/>
             <argument type="service" id="translator"/>
+            <argument type="service" id="logger"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
