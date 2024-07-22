@@ -9,7 +9,7 @@ final class MissingImojeTransactionException extends \InvalidArgumentException
     public function __construct(string $transactionId)
     {
         parent::__construct(
-            \sprintf('No Imoje transaction with id %s found.', $transactionId)
+            \sprintf('No Imoje transaction with id %s found.', $transactionId),
         );
     }
 }

@@ -27,7 +27,7 @@ final class WebhookResponseProcessor implements WebhookResponseProcessorInterfac
         PaymentFinalizationCommandFactoryInterface $commandFactory,
         DispatcherInterface $dispatcher,
         LoggerInterface $logger,
-        StatusResolverInterface $statusResolver
+        StatusResolverInterface $statusResolver,
     ) {
         $this->commandFactory = $commandFactory;
         $this->dispatcher = $dispatcher;
@@ -45,7 +45,7 @@ final class WebhookResponseProcessor implements WebhookResponseProcessorInterfac
         }
 
         $this->logger->debug(
-            \sprintf('Dispatching payment finalization command for status: %s', $response->getStatus())
+            \sprintf('Dispatching payment finalization command for status: %s', $response->getStatus()),
         );
 
         $this->finalizeOrderIfNotAlreadyComplete($payment);
@@ -60,7 +60,7 @@ final class WebhookResponseProcessor implements WebhookResponseProcessorInterfac
         $this->logger->error(\sprintf(
             'Got failure for transaction [%s]. Payment status code: [%s]',
             $transactionId,
-            $statusCode
+            $statusCode,
         ));
     }
 

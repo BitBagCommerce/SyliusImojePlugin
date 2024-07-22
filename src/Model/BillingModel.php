@@ -27,7 +27,7 @@ final class BillingModel implements BillingModelInterface
         ?string $street,
         ?string $city,
         ?string $region,
-        ?string $postalCode
+        ?string $postalCode,
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;

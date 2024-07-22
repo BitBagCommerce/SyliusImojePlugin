@@ -9,9 +9,9 @@ use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModel;
 use BitBag\SyliusImojePlugin\Model\PaymentMethod\ServiceModelInterface;
 use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Symfony\Component\Serializer\Serializer;
@@ -39,7 +39,7 @@ final class ImojeApiClient implements ImojeApiClientInterface
         string $token,
         string $url,
         RequestFactoryInterface $requestFactory,
-        StreamFactoryInterface $streamFactory
+        StreamFactoryInterface $streamFactory,
     ) {
         $this->httpClient = $httpClient;
         $this->requestParamsProvider = $requestParamsProvider;
@@ -51,10 +51,11 @@ final class ImojeApiClient implements ImojeApiClientInterface
     }
 
     public function createTransaction(
-        TransactionModelInterface $transactionModel
+        TransactionModelInterface $transactionModel,
     ): ResponseInterface {
         $url = $this->url . self::TRANSACTION_ENDPOINT;
         $parameters = $this->requestParamsProvider->buildRequestParams($transactionModel, $this->token);
+
         try {
             $request = $this->requestFactory
                 ->createRequest('POST', $url)
@@ -64,7 +65,6 @@ final class ImojeApiClient implements ImojeApiClientInterface
                 ->withBody($this->streamFactory->createStream($parameters['body']));
 
             $response = $this->httpClient->sendRequest($request);
-
         } catch (ClientExceptionInterface $e) {
             throw new ImojeBadRequestException($e->getMessage());
         }
@@ -112,9 +112,10 @@ final class ImojeApiClient implements ImojeApiClientInterface
     public function refundTransaction(
         string $url,
         string $serviceId,
-        int $amount
+        int $amount,
     ): ResponseInterface {
         $parameters = $this->requestParamsProvider->buildRequestRefundParams($this->token, $serviceId, $amount);
+
         try {
             $request = $this->requestFactory
                 ->createRequest('POST', $url)

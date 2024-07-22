@@ -24,7 +24,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
         CustomerModelFactoryInterface $customerFactory,
         BillingModelFactoryInterface $billingFactory,
         ShippingModelFactoryInterface $shippingFactory,
-        RedirectFactoryInterface $redirectModelFactory
+        RedirectFactoryInterface $redirectModelFactory,
     ) {
         $this->customerFactory = $customerFactory;
         $this->billingFactory = $billingFactory;
@@ -33,12 +33,12 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
     }
 
     public function create(
-        OrderInterface                    $order,
+        OrderInterface $order,
         ImojeClientConfigurationInterface $imojeClientConfiguration,
-        string                            $type,
-        string                            $paymentMethod,
-        string                            $paymentMethodCode,
-        string                            $serviceId
+        string $type,
+        string $paymentMethod,
+        string $paymentMethodCode,
+        string $serviceId,
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create($order->getLastPayment());
         $amount = $order->getTotal();
@@ -64,7 +64,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
             $failureReturnUrl,
             $customer,
             $billing,
-            $shipping
+            $shipping,
         );
     }
 }

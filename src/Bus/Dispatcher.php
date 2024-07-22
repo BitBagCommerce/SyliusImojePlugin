@@ -12,7 +12,7 @@ final class Dispatcher implements DispatcherInterface
     use HandleTrait;
 
     public function __construct(
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ) {
         $this->messageBus = $messageBus;
     }

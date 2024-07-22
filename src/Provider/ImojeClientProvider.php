@@ -22,6 +22,7 @@ final class ImojeClientProvider implements ImojeClientProviderInterface
     private SerializerFactoryInterface $serializerFactory;
 
     private RequestFactoryInterface $requestFactoryInterface;
+
     private StreamFactoryInterface $streamFactoryInterface;
 
     public function __construct(
@@ -30,7 +31,7 @@ final class ImojeClientProvider implements ImojeClientProviderInterface
         RequestParamsProviderInterface $requestParamsProvider,
         SerializerFactoryInterface $serializerFactory,
         RequestFactoryInterface $requestFactoryInterface,
-        StreamFactoryInterface $streamFactoryInterface
+        StreamFactoryInterface $streamFactoryInterface,
     ) {
         $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
         $this->httpClient = $httpClient;

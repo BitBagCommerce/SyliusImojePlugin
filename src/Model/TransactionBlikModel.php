@@ -51,7 +51,7 @@ final class TransactionBlikModel implements TransactionModelInterface
         ?string $blikCode,
         CustomerModelInterface $customer,
         ?BillingModelInterface $billing,
-        ?ShippingModelInterface $shipping
+        ?ShippingModelInterface $shipping,
     ) {
         $this->type = $type;
         $this->serviceId = $serviceId;

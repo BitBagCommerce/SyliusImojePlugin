@@ -12,8 +12,7 @@ use BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolverInterfa
 use Payum\Core\Model\GatewayConfigInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
-final class
-ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInterface
+final class ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInterface
 {
     private PaymentMethodRepositoryInterface $paymentMethodRepository;
 
@@ -21,7 +20,7 @@ ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInte
 
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ConfigurationResolverInterface $configurationResolver
+        ConfigurationResolverInterface $configurationResolver,
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->configurationResolver = $configurationResolver;
@@ -33,7 +32,7 @@ ImojeClientConfigurationProvider implements ImojeClientConfigurationProviderInte
 
         if (null === $paymentMethod) {
             throw new ImojeNotConfiguredException(
-                \sprintf('Payment method with code %s is not configured', $code)
+                \sprintf('Payment method with code %s is not configured', $code),
             );
         }
 

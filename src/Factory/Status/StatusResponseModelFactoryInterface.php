@@ -12,6 +12,6 @@ interface StatusResponseModelFactoryInterface
         string $transactionId,
         string $paymentId,
         string $orderId,
-        string $status
+        string $status,
     ): StatusResponseModelInterface;
 }

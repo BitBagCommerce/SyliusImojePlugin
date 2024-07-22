@@ -27,7 +27,7 @@ final class ShippingModel implements ShippingModelInterface
         ?string $street,
         ?string $city,
         ?string $region,
-        ?string $postalCode
+        ?string $postalCode,
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;

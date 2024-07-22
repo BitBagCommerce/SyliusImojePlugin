@@ -33,7 +33,7 @@ final class RedirectOneClickController
         PaymentFinalizationCommandFactoryInterface $commandFactory,
         AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator,
         PaymentRepositoryInterface $paymentRepository,
-        StatusResolverInterface $statusResolver
+        StatusResolverInterface $statusResolver,
     ) {
         $this->dispatcher = $dispatcher;
         $this->commandFactory = $commandFactory;
@@ -45,7 +45,7 @@ final class RedirectOneClickController
     public function __invoke(
         Request $request,
         string $status,
-        int $paymentId
+        int $paymentId,
     ): Response {
         /** @var PaymentInterface|null $payment */
         $payment = $this->paymentRepository->find($paymentId);
@@ -55,7 +55,7 @@ final class RedirectOneClickController
         $resolvedStatus = $this->statusResolver->resolve($status);
         $this->dispatcher->dispatch(new FinalizeOrder($order));
         $this->dispatcher->dispatch(
-            $this->commandFactory->createNew($resolvedStatus, $payment)
+            $this->commandFactory->createNew($resolvedStatus, $payment),
         );
 
         $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $resolvedStatus);

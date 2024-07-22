@@ -15,7 +15,7 @@ final class RefundModel implements RefundModelInterface
     public function __construct(
         string $type,
         string $serviceId,
-        int $amount
+        int $amount,
     ) {
         $this->type = $type;
         $this->serviceId = $serviceId;

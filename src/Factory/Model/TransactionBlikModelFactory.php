@@ -25,7 +25,7 @@ final class TransactionBlikModelFactory implements TransactionBlikModelFactoryIn
         CustomerModelFactoryInterface $customerFactory,
         BillingModelFactoryInterface $billingFactory,
         ShippingModelFactoryInterface $shippingFactory,
-        RedirectFactoryInterface $redirectModelFactory
+        RedirectFactoryInterface $redirectModelFactory,
     ) {
         $this->customerFactory = $customerFactory;
         $this->billingFactory = $billingFactory;
@@ -34,13 +34,13 @@ final class TransactionBlikModelFactory implements TransactionBlikModelFactoryIn
     }
 
     public function create(
-        OrderInterface                    $order,
+        OrderInterface $order,
         ImojeClientConfigurationInterface $imojeClientConfiguration,
-        string                            $type,
-        string                            $paymentMethod,
-        string                            $paymentMethodCode,
-        string                            $serviceId,
-        BlikModelInterface                $blikModel
+        string $type,
+        string $paymentMethod,
+        string $paymentMethodCode,
+        string $serviceId,
+        BlikModelInterface $blikModel,
     ): TransactionModelInterface {
         $redirectModel = $this->redirectModelFactory->create($order->getLastPayment());
         $amount = $order->getTotal();
@@ -70,7 +70,7 @@ final class TransactionBlikModelFactory implements TransactionBlikModelFactoryIn
             $blikCode,
             $customer,
             $billing,
-            $shipping
+            $shipping,
         );
     }
 }

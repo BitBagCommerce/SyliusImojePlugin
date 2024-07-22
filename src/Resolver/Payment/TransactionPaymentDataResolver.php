@@ -17,7 +17,7 @@ final class TransactionPaymentDataResolver implements TransactionPaymentDataReso
 
     public function __construct(
         PaymentDataModelFactoryInterface $paymentDataModelFactory,
-        PaymentMethodByCodeResolver $paymentMethodByCodeResolver
+        PaymentMethodByCodeResolver $paymentMethodByCodeResolver,
     ) {
         $this->paymentDataModelFactory = $paymentDataModelFactory;
         $this->paymentMethodByCodeResolver = $paymentMethodByCodeResolver;
@@ -26,7 +26,7 @@ final class TransactionPaymentDataResolver implements TransactionPaymentDataReso
     public function resolve(
         ?string $paymentMethodCode,
         PaymentInterface $payment,
-        ?string $blikCode
+        ?string $blikCode,
     ): PaymentDataModelInterface {
         if (null === $blikCode) {
             $isBlik = 'blik' === implode($payment->getDetails());

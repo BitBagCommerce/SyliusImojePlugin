@@ -27,8 +27,8 @@ final class SerializerFactory implements SerializerFactoryInterface
                 null,
                 new PropertyInfoExtractor(
                     [],
-                    [new PhpDocExtractor(), new ReflectionExtractor()]
-                )
+                    [new PhpDocExtractor(), new ReflectionExtractor()],
+                ),
             ),
         ];
 

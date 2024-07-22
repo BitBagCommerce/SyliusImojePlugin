@@ -16,7 +16,7 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
 
     public function __construct(
         SerializerFactoryInterface $serializerFactory,
-        RefundModelFactoryInterface $refundModelFactory
+        RefundModelFactoryInterface $refundModelFactory,
     ) {
         $this->serializerFactory = $serializerFactory;
         $this->refundModelFactory = $refundModelFactory;
@@ -39,7 +39,7 @@ final class RequestParamsProvider implements RequestParamsProviderInterface
     public function buildRequestRefundParams(
         string $token,
         string $serviceId,
-        int $amount
+        int $amount,
     ): array {
         $serializer = $this->serializerFactory->createSerializerWithNormalizer();
         $request = $this->addAuthorizationHeaders($token);

@@ -12,9 +12,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class ReadyTransactionFactory implements ReadyTransactionFactoryInterface
 {
     public function createReadyTransaction(
-        string                    $contents,
+        string $contents,
         ImojeTransactionInterface $imojeTransaction,
-        OrderInterface            $order
+        OrderInterface $order,
     ): ReadyTransactionModel {
         /** @var array $transactionData */
         $transactionData = json_decode($contents, true);

@@ -19,7 +19,7 @@ final class OwnSignatureResolver implements OwnSignatureResolverInterface
     public function __construct(
         RequestStack $requestStack,
         GatewayCodeResolverInterface $gatewayCodeResolver,
-        ImojeClientConfigurationProviderInterface $configurationProvider
+        ImojeClientConfigurationProviderInterface $configurationProvider,
     ) {
         $this->requestStack = $requestStack;
         $this->gatewayCodeResolver = $gatewayCodeResolver;

@@ -12,6 +12,6 @@ interface TransactionPaymentDataResolverInterface
     public function resolve(
         ?string $paymentMethodCode,
         PaymentInterface $payment,
-        ?string $blikCode
+        ?string $blikCode,
     ): PaymentDataModelInterface;
 }

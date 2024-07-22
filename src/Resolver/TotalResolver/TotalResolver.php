@@ -20,7 +20,7 @@ final class TotalResolver implements TotalResolverInterface
     public function __construct(
         CartContextInterface $cartContext,
         RequestStack $requestStack,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ) {
         $this->cartContext = $cartContext;
         $this->requestStack = $requestStack;

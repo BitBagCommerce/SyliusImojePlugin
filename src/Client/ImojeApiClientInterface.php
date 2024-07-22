@@ -13,7 +13,7 @@ interface ImojeApiClientInterface
     public const TRANSACTION_ENDPOINT = 'transaction';
 
     public function createTransaction(
-        TransactionModelInterface $transactionModel
+        TransactionModelInterface $transactionModel,
     ): ResponseInterface;
 
     public function getTransactionData(string $url): ResponseInterface;
@@ -23,6 +23,6 @@ interface ImojeApiClientInterface
     public function refundTransaction(
         string $url,
         string $serviceId,
-        int $amount
+        int $amount,
     ): ResponseInterface;
 }
