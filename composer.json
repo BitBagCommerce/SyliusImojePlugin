@@ -4,7 +4,7 @@
     "description": "Implementation imoje api to sylius store",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-json": "*",
         "sylius/refund-plugin": "^1.0",
         "sylius/sylius": "^1.12 || ^1.13",
