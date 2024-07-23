@@ -8,11 +8,7 @@ use BitBag\SyliusImojePlugin\Client\ImojeApiClient;
 use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
 use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
 use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterface;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -51,7 +47,7 @@ final class ImojeApiClientTest extends TestCase
             self::TOKEN,
             self::URL,
             $this->requestFactory,
-            $this->streamFactory
+            $this->streamFactory,
         );
     }
 
@@ -65,7 +61,7 @@ final class ImojeApiClientTest extends TestCase
         $parameters['body'] = 'model';
 
         $parameters['headers'] = [
-            'Accept'=> 'application/json',
+            'Accept' => 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer token',
         ];
@@ -87,7 +83,7 @@ final class ImojeApiClientTest extends TestCase
             ->withConsecutive(
                 ['Accept', 'application/json'],
                 ['Content-Type', 'application/json'],
-                ['Authorization', 'Bearer token']
+                ['Authorization', 'Bearer token'],
             )
             ->willReturnSelf();
 
@@ -119,7 +115,6 @@ final class ImojeApiClientTest extends TestCase
         self::assertEquals(200, $result->getStatusCode());
     }
 
-
     public function testCreateTransactionWithException(): void
     {
         $transactionModel = $this->createMock(TransactionModelInterface::class);
@@ -129,12 +124,11 @@ final class ImojeApiClientTest extends TestCase
 
         $parameters = [
             'body' => 'model',
-            'headers' =>[
+            'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer token',
-            ]
-
+            ],
         ];
 
         $this->requestParamsProvider
@@ -153,7 +147,7 @@ final class ImojeApiClientTest extends TestCase
             ->withConsecutive(
                 ['Accept', 'application/json'],
                 ['Content-Type', 'application/json'],
-                ['Authorization', 'Bearer token']
+                ['Authorization', 'Bearer token'],
             )
             ->willReturnSelf();
 

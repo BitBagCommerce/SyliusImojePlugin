@@ -50,7 +50,7 @@ final class UrlResolverTest extends TestCase
     /**
      * @dataProvider dataToUrlProvider
      */
-    public function testResolveUrl(bool $isProd,string $url,string $result): void
+    public function testResolveUrl(bool $isProd, string $url, string $result): void
     {
         $configuration = $this->createMock(ImojeClientConfigurationInterface::class);
         $client = $this->createMock(ImojeApiClientInterface::class);
@@ -91,7 +91,7 @@ final class UrlResolverTest extends TestCase
 
         self::assertEquals(
             $result,
-            $this->urlResolver->resolve($this->imojeTransaction,$this->imojeClientConfiguration,$this->imojeClientProvider)
+            $this->urlResolver->resolve($this->imojeTransaction, $this->imojeClientConfiguration, $this->imojeClientProvider),
         );
     }
 

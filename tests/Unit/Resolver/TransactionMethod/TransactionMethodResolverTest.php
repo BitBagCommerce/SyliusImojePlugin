@@ -38,8 +38,8 @@ final class TransactionMethodResolverTest extends TestCase
         return [
             [['status' => 'blik'], 'blik'],
             [['status' => 'card'], 'card'],
-            [['status'=> 'ing'], 'ing'],
-            [['status'=> 'pbl'], 'pbl'],
+            [['status' => 'ing'], 'ing'],
+            [['status' => 'pbl'], 'pbl'],
         ];
     }
 }

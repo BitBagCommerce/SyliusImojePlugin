@@ -31,7 +31,7 @@ final class OrderResolverTest extends TestCase
 
         $this->resolver = new OrderResolver(
             $this->context,
-            $this->repository
+            $this->repository,
         );
     }
 

@@ -74,7 +74,7 @@ final class ImojePaymentMethodResolverTest extends TestCase
             ->willReturn([
                 'pbl' => 'pbl',
                 'ing' => 'ing',
-                'ipko' => 'ipko'
+                'ipko' => 'ipko',
             ]);
 
         $paymentMethod = new PaymentMethod();
@@ -112,7 +112,7 @@ final class ImojePaymentMethodResolverTest extends TestCase
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
-            $this->cartContext
+            $this->cartContext,
         );
 
         self::assertEqualsCanonicalizing($finalConfig, $imojePaymentsMethodResolver->resolve());
@@ -143,15 +143,15 @@ final class ImojePaymentMethodResolverTest extends TestCase
             ->method('findOneForImoje')
             ->willReturn(null);
 
-
         $imojePaymentsMethodResolver = new ImojePaymentsMethodResolver(
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
-            $this->cartContext
+            $this->cartContext,
         );
         $imojePaymentsMethodResolver->resolve();
     }
+
     public function testResolveEmptyConfigException(): void
     {
         $this->expectException(ImojeNotConfiguredException::class);
@@ -169,7 +169,6 @@ final class ImojePaymentMethodResolverTest extends TestCase
             ->method('getCart')
             ->willReturn($order);
 
-
         $order
             ->expects(self::once())
             ->method('getCurrencyCode')
@@ -183,7 +182,6 @@ final class ImojePaymentMethodResolverTest extends TestCase
             ->method('findOneForImoje')
             ->willReturn($paymentMethod);
 
-
         $paymentMethodMock
             ->method('getGatewayConfig')
             ->willReturn(null);
@@ -192,7 +190,7 @@ final class ImojePaymentMethodResolverTest extends TestCase
             $this->paymentMethodRepository,
             $this->paymentMethodsFilter,
             $this->totalResolver,
-            $this->cartContext
+            $this->cartContext,
         );
         $imojePaymentsMethodResolver->resolve();
     }

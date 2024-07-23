@@ -29,7 +29,7 @@ final class WebhookResolverTest extends TestCase
 
     public function testResolveStatus(): void
     {
-        $statusModel = new StatusResponseModel('9d5287d4','191dbb245c5f','145','settled');
+        $statusModel = new StatusResponseModel('9d5287d4', '191dbb245c5f', '145', 'settled');
         $requestMock = $this->createMock(Request::class);
 
         $content =
@@ -46,7 +46,7 @@ final class WebhookResolverTest extends TestCase
 
         $this->statusResponseModelFactory
             ->method('create')
-            ->with('9d5287d4','191dbb245c5f','145','settled')
+            ->with('9d5287d4', '191dbb245c5f', '145', 'settled')
             ->willReturn($statusModel);
 
         $result = $this->webhookResolver->resolve();
