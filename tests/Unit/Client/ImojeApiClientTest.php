@@ -12,11 +12,19 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\StreamInterface;
 use Symfony\Component\Serializer\Serializer;
 
 final class ImojeApiClientTest extends TestCase
 {
-    private Client $httpClient;
+    private ClientInterface $httpClient;
 
     private RequestParamsProviderInterface $requestParamsProvider;
 
@@ -31,26 +39,33 @@ final class ImojeApiClientTest extends TestCase
     protected function setUp(): void
     {
         // I'm using a mockBuilder because these methods are added via annotations
-        $this->httpClient = $this->getMockBuilder(Client::class)->addMethods(['post'])->getMock();
+        $this->httpClient = $this->getMockBuilder(ClientInterface::class)->getMock();
         $this->requestParamsProvider = $this->createMock(RequestParamsProviderInterface::class);
         $this->serializer = $this->createMock(Serializer::class);
+        $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $this->streamFactory = $this->createMock(StreamFactoryInterface::class);
         $this->imojeApiClient = new ImojeApiClient(
             $this->httpClient,
             $this->requestParamsProvider,
             $this->serializer,
             self::TOKEN,
-            self::URL
+            self::URL,
+            $this->requestFactory,
+            $this->streamFactory
         );
     }
 
     public function testCreateTransaction(): void
     {
         $transactionModel = $this->createMock(TransactionModelInterface::class);
+        $request = $this->createMock(RequestInterface::class);
+        $stream = $this->createMock(StreamInterface::class);
+        $response = $this->createMock(ResponseInterface::class);
 
         $parameters['body'] = 'model';
 
         $parameters['headers'] = [
-            'Accept' => 'application/json',
+            'Accept'=> 'application/json',
             'Content-Type' => 'application/json',
             'Authorization' => 'Bearer token',
         ];
@@ -60,39 +75,105 @@ final class ImojeApiClientTest extends TestCase
             ->method('buildRequestParams')
             ->willReturn($parameters);
 
+        $this->streamFactory
+            ->expects(self::once())
+            ->method('createStream')
+            ->with($parameters['body'])
+            ->willReturn($stream);
+
+        $request
+            ->expects(self::exactly(3))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Accept', 'application/json'],
+                ['Content-Type', 'application/json'],
+                ['Authorization', 'Bearer token']
+            )
+            ->willReturnSelf();
+
+        $request
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($stream)
+            ->willReturnSelf();
+
+        $this->requestFactory
+            ->expects(self::once())
+            ->method('createRequest')
+            ->with('POST', 'url/transaction')
+            ->willReturn($request);
+
+        $response
+            ->expects($this->once())
+            ->method('getStatusCode')
+            ->willReturn(200);
+
         $this->httpClient
             ->expects($this->once())
-            ->method('post')
-            ->with('url/transaction', $parameters)
-            ->willReturn(new Response());
+            ->method('sendRequest')
+            ->with($request)
+            ->willReturn($response);
 
         $result = $this->imojeApiClient->createTransaction($transactionModel);
 
-        self::assertEquals($result->getStatusCode(), 200);
+        self::assertEquals(200, $result->getStatusCode());
     }
+
 
     public function testCreateTransactionWithException(): void
     {
         $transactionModel = $this->createMock(TransactionModelInterface::class);
-        $exception = $this->createMock(GuzzleException::class);
+        $exception = $this->createMock(ClientExceptionInterface::class);
+        $request = $this->createMock(RequestInterface::class);
+        $stream = $this->createMock(StreamInterface::class);
 
-        $parameters['body'] = 'model';
-        $parameters['headers'] = [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer token',
+        $parameters = [
+            'body' => 'model',
+            'headers' =>[
+                'Accept' => 'application/json',
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer token',
+            ]
+
         ];
 
         $this->requestParamsProvider
             ->expects($this->once())
             ->method('buildRequestParams')
             ->willReturn($parameters);
+        $this->streamFactory
+            ->expects(self::once())
+            ->method('createStream')
+            ->with($parameters['body'])
+            ->willReturn($stream);
+
+        $request
+            ->expects(self::exactly(3))
+            ->method('withHeader')
+            ->withConsecutive(
+                ['Accept', 'application/json'],
+                ['Content-Type', 'application/json'],
+                ['Authorization', 'Bearer token']
+            )
+            ->willReturnSelf();
+
+        $request
+            ->expects(self::once())
+            ->method('withBody')
+            ->with($stream)
+            ->willReturnSelf();
+
+        $this->requestFactory
+            ->expects(self::once())
+            ->method('createRequest')
+            ->with('POST', 'url/transaction')
+            ->willReturn($request);
 
         $this->httpClient
             ->expects($this->once())
-            ->method('post')
-            ->with('url/transaction', $parameters)
-            ->will($this->throwException($exception));
+            ->method('sendRequest')
+            ->with($request)
+            ->willThrowException($exception);
 
         $this->expectException(ImojeBadRequestException::class);
 
