@@ -12,6 +12,7 @@ use BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProviderInterfa
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Symfony\Component\Serializer\Serializer;
@@ -57,13 +58,10 @@ final class ImojeApiClient implements ImojeApiClientInterface
         $parameters = $this->requestParamsProvider->buildRequestParams($transactionModel, $this->token);
 
         try {
-            $request = $this->requestFactory
+            $httpRequest = $this->requestFactory
                 ->createRequest('POST', $url)
-                ->withHeader('Accept', 'application/json')
-                ->withHeader('Content-Type', 'application/json')
-                ->withHeader('Authorization', \sprintf('Bearer %s', $this->token))
                 ->withBody($this->streamFactory->createStream($parameters['body']));
-
+            $request = $this->setRequestHeaders($httpRequest);
             $response = $this->httpClient->sendRequest($request);
         } catch (ClientExceptionInterface $e) {
             throw new ImojeBadRequestException($e->getMessage());
@@ -77,10 +75,8 @@ final class ImojeApiClient implements ImojeApiClientInterface
         $url = $this->url . 'service/' . $serviceId;
 
         try {
-            $request = $this->requestFactory->createRequest('GET', $url)
-                ->withHeader('Accept', 'application/json')
-                ->withHeader('Content-Type', 'application/json')
-                ->withHeader('Authorization', \sprintf('Bearer %s', $this->token));
+            $httpRequest = $this->requestFactory->createRequest('GET', $url);
+            $request = $this->setRequestHeaders($httpRequest);
             $response = $this->httpClient->sendRequest($request);
         } catch (ClientExceptionInterface $e) {
             throw new ImojeBadRequestException($e->getMessage());
@@ -96,11 +92,8 @@ final class ImojeApiClient implements ImojeApiClientInterface
     public function getTransactionData(string $url): ResponseInterface
     {
         try {
-            $request = $this->requestFactory->createRequest('GET', $url)
-                ->withHeader('Accept', 'application/json')
-                ->withHeader('Content-Type', 'application/json')
-                ->withHeader('Authorization', \sprintf('Bearer %s', $this->token));
-
+            $httpRequest = $this->requestFactory->createRequest('GET', $url);
+            $request = $this->setRequestHeaders($httpRequest);
             $response = $this->httpClient->sendRequest($request);
         } catch (ClientExceptionInterface $e) {
             throw new ImojeBadRequestException($e->getMessage());
@@ -117,18 +110,23 @@ final class ImojeApiClient implements ImojeApiClientInterface
         $parameters = $this->requestParamsProvider->buildRequestRefundParams($this->token, $serviceId, $amount);
 
         try {
-            $request = $this->requestFactory
+            $httpRequest = $this->requestFactory
                 ->createRequest('POST', $url)
-                ->withHeader('Accept', 'application/json')
-                ->withHeader('Content-Type', 'application/json')
-                ->withHeader('Authorization', \sprintf('Bearer %s', $this->token))
                 ->withBody($this->streamFactory->createStream($parameters['body']));
-
+            $request = $this->setRequestHeaders($httpRequest);
             $response = $this->httpClient->sendRequest($request);
         } catch (ClientExceptionInterface $e) {
             throw new ImojeBadRequestException($e->getMessage());
         }
 
         return $response;
+    }
+
+    private function setRequestHeaders(RequestInterface $request): RequestInterface
+    {
+        return $request
+            ->withHeader('Accept', 'application/json')
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Authorization', \sprintf('Bearer %s', $this->token));
     }
 }
