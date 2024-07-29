@@ -52,7 +52,7 @@ final class InitializePaymentController extends AbstractController
         BlikModelProviderInterface $blikModelProvider,
         TransactionPaymentDataResolverInterface $transactionPaymentDataResolver,
         TranslatorInterface $translator,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
@@ -123,6 +123,7 @@ final class InitializePaymentController extends AbstractController
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
             $this->logger->error($e->getMessage());
+
             throw new ImojeNotConfiguredException('Payment method not found');
         }
 
