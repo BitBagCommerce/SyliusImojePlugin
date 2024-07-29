@@ -16,6 +16,6 @@ interface AvailablePaymentMethodsFilterInterface
         string $code,
         string $serviceId,
         array $paymentMethods,
-        string $currency
+        string $currency,
     ): array;
 }

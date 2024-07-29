@@ -24,7 +24,7 @@ final class GetBlikTransactionData
         string $code,
         string $paymentMethod,
         string $paymentMethodCode,
-        BlikModelInterface $blikModel
+        BlikModelInterface $blikModel,
     ) {
         $this->order = $order;
         $this->code = $code;

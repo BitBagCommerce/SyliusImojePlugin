@@ -20,7 +20,7 @@ final class ImojeClientConfigurationProvider implements ImojeClientConfiguration
 
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
-        ConfigurationResolverInterface $configurationResolver
+        ConfigurationResolverInterface $configurationResolver,
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->configurationResolver = $configurationResolver;
@@ -32,7 +32,7 @@ final class ImojeClientConfigurationProvider implements ImojeClientConfiguration
 
         if (null === $paymentMethod) {
             throw new ImojeNotConfiguredException(
-                \sprintf('Payment method with code %s is not configured', $code)
+                \sprintf('Payment method with code %s is not configured', $code),
             );
         }
 

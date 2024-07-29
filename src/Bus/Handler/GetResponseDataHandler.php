@@ -30,12 +30,12 @@ final class GetResponseDataHandler implements MessageHandlerInterface
     private UrlResolverInterface $urlResolver;
 
     public function __construct(
-        ImojeTransactionRepositoryInterface       $imojeTransactionRepository,
-        ImojeClientProviderInterface              $imojeClientProvider,
+        ImojeTransactionRepositoryInterface $imojeTransactionRepository,
+        ImojeClientProviderInterface $imojeClientProvider,
         ImojeClientConfigurationProviderInterface $configurationProvider,
-        ReadyTransactionFactoryInterface          $readyTransactionFactory,
-        OrderRepository                           $orderRepository,
-        UrlResolverInterface                      $urlResolver
+        ReadyTransactionFactoryInterface $readyTransactionFactory,
+        OrderRepository $orderRepository,
+        UrlResolverInterface $urlResolver,
     ) {
         $this->imojeTransactionRepository = $imojeTransactionRepository;
         $this->imojeClientProvider = $imojeClientProvider;
@@ -60,7 +60,7 @@ final class GetResponseDataHandler implements MessageHandlerInterface
         return $this->readyTransactionFactory->createReadyTransaction(
             $response->getBody()->getContents(),
             $imojeTransaction,
-            $order
+            $order,
         );
     }
 }

@@ -28,10 +28,10 @@ final class GetBlikTransactionDataHandler implements MessageHandlerInterface
 
     public function __construct(
         ImojeClientConfigurationProviderInterface $configurationProvider,
-        TransactionBlikModelFactoryInterface      $transactionBlikModelFactory,
-        ImojeClientProviderInterface              $imojeClientProvider,
-        ImojeTransactionFactoryInterface          $imojeTransactionFactory,
-        TransactionDataResolverInterface          $transactionDataResolver
+        TransactionBlikModelFactoryInterface $transactionBlikModelFactory,
+        ImojeClientProviderInterface $imojeClientProvider,
+        ImojeTransactionFactoryInterface $imojeTransactionFactory,
+        TransactionDataResolverInterface $transactionDataResolver,
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionBlikModelFactory = $transactionBlikModelFactory;
@@ -52,7 +52,7 @@ final class GetBlikTransactionDataHandler implements MessageHandlerInterface
             $query->getPaymentMethod(),
             $query->getPaymentMethodCode(),
             $config->getServiceId(),
-            $query->getBlikModel()
+            $query->getBlikModel(),
         );
 
         $response = $this->imojeClientProvider
@@ -77,7 +77,7 @@ final class GetBlikTransactionDataHandler implements MessageHandlerInterface
             $paymentUrl,
             $serviceId,
             $orderId,
-            $query->getCode()
+            $query->getCode(),
         );
     }
 }

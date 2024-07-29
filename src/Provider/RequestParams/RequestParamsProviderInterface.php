@@ -15,6 +15,6 @@ interface RequestParamsProviderInterface
     public function buildRequestRefundParams(
         string $token,
         string $serviceId,
-        int $amount
+        int $amount,
     ): array;
 }

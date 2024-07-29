@@ -38,15 +38,15 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
     private WebhookResponseProcessorInterface $webhookResponseProcessor;
 
     public function __construct(
-        RequestStack                              $requestStack,
-        ImojeTransactionFactoryInterface          $imojeTransactionFactory,
-        OrderRepositoryInterface                  $orderRepository,
+        RequestStack $requestStack,
+        ImojeTransactionFactoryInterface $imojeTransactionFactory,
+        OrderRepositoryInterface $orderRepository,
         ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
-        DispatcherInterface                       $dispatcher,
-        PaymentMethodResolverInterface            $paymentMethodResolver,
-        OrderPaymentResolverInterface             $orderPaymentResolver,
-        StatusResponseModelFactoryInterface       $statusResponseModelFactory,
-        WebhookResponseProcessorInterface         $webhookResponseProcessor
+        DispatcherInterface $dispatcher,
+        PaymentMethodResolverInterface $paymentMethodResolver,
+        OrderPaymentResolverInterface $orderPaymentResolver,
+        StatusResponseModelFactoryInterface $statusResponseModelFactory,
+        WebhookResponseProcessorInterface $webhookResponseProcessor,
     ) {
         $this->requestStack = $requestStack;
         $this->imojeTransactionFactory = $imojeTransactionFactory;
@@ -96,7 +96,7 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
                 null,
                 $config->getServiceId(),
                 $orderId,
-                $gatewayCode
+                $gatewayCode,
             );
 
             $this->dispatcher->dispatch(new SaveTransaction($transaction));

@@ -45,7 +45,7 @@ final class TransactionModel implements TransactionModelInterface
         string $failureReturnUrl,
         CustomerModelInterface $customer,
         ?BillingModelInterface $billing,
-        ?ShippingModelInterface $shipping
+        ?ShippingModelInterface $shipping,
     ) {
         $this->type = $type;
         $this->serviceId = $serviceId;

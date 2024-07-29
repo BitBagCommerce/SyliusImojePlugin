@@ -28,10 +28,10 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
 
     public function __construct(
         ImojeClientConfigurationProviderInterface $configurationProvider,
-        TransactionModelFactoryInterface          $transactionModelFactory,
-        ImojeClientProviderInterface              $imojeClientProvider,
-        ImojeTransactionFactoryInterface          $imojeTransactionFactory,
-        TransactionDataResolverInterface          $transactionDataResolver
+        TransactionModelFactoryInterface $transactionModelFactory,
+        ImojeClientProviderInterface $imojeClientProvider,
+        ImojeTransactionFactoryInterface $imojeTransactionFactory,
+        TransactionDataResolverInterface $transactionDataResolver,
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
@@ -51,7 +51,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $this->transactionModelFactory::SALE_TYPE,
             $query->getPaymentMethod(),
             $query->getPaymentMethodCode(),
-            $config->getServiceId()
+            $config->getServiceId(),
         );
 
         $response = $this->imojeClientProvider
@@ -76,7 +76,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $paymentUrl,
             $serviceId,
             $orderId,
-            $query->getCode()
+            $query->getCode(),
         );
     }
 }

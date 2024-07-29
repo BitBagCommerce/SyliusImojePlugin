@@ -18,7 +18,7 @@ final class StatusResponseModel implements StatusResponseModelInterface
         string $transactionId,
         string $paymentId,
         string $orderId,
-        string $status
+        string $status,
     ) {
         $this->transactionId = $transactionId;
         $this->paymentId = $paymentId;

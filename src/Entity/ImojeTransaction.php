@@ -33,7 +33,7 @@ class ImojeTransaction implements ImojeTransactionInterface, ResourceInterface, 
         ?string $paymentUrl,
         string $serviceId,
         string $orderId,
-        string $gatewayCode
+        string $gatewayCode,
     ) {
         $this->transactionId = $transactionId;
         $this->payment = $payment;

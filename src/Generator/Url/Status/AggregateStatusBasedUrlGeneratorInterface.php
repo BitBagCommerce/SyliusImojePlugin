@@ -12,6 +12,6 @@ interface AggregateStatusBasedUrlGeneratorInterface
     public function generate(
         OrderInterface $order,
         Request $request,
-        string $status
+        string $status,
     ): string;
 }

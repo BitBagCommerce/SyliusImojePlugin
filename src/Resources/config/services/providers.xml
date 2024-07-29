@@ -2,6 +2,9 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.http_client" class="Symfony\Component\HttpClient\Psr18Client" />
+        <service id="sylius.request_factory" class="Symfony\Component\HttpClient\Psr18Client" />
+        <service id="sylius.stream_factory" class="Symfony\Component\HttpClient\Psr18Client"/>
         <service class="BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProvider"
                  id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"
         >
@@ -16,6 +19,8 @@
             <argument type="service" id="sylius.http_client"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.provider.request_params.request_params_provider"/>
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.serializer.serializer_factory"/>
+            <argument type="service" id="sylius.request_factory"/>
+            <argument type="service" id="sylius.stream_factory"/>
         </service>
 
         <service class="BitBag\SyliusImojePlugin\Provider\BlikModel\BlikModelProvider"

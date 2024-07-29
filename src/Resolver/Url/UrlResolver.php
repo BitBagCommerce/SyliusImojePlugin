@@ -13,9 +13,9 @@ use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 final class UrlResolver implements UrlResolverInterface
 {
     public function resolve(
-        ImojeTransactionInterface                 $imojeTransaction,
+        ImojeTransactionInterface $imojeTransaction,
         ImojeClientConfigurationProviderInterface $imojeClientConfiguration,
-        ImojeClientProviderInterface $imojeClientProvider
+        ImojeClientProviderInterface $imojeClientProvider,
     ): string {
         $code = $imojeTransaction->getGatewayCode();
         $config = $imojeClientConfiguration->getPaymentMethodConfiguration($code);
@@ -26,8 +26,8 @@ final class UrlResolver implements UrlResolverInterface
 
     private function createUrl(
         ImojeClientConfigurationInterface $config,
-        ImojeTransactionInterface         $imojeTransaction,
-        ImojeApiClientInterface           $client
+        ImojeTransactionInterface $imojeTransaction,
+        ImojeApiClientInterface $client,
     ): string {
         if ($config->isProd()) {
             return \sprintf(
@@ -35,7 +35,7 @@ final class UrlResolver implements UrlResolverInterface
                 $config->getProdUrl(),
                 $config->getMerchantId(),
                 $client::TRANSACTION_ENDPOINT,
-                $imojeTransaction->getTransactionId()
+                $imojeTransaction->getTransactionId(),
             );
         }
 
@@ -44,7 +44,7 @@ final class UrlResolver implements UrlResolverInterface
             $config->getSandboxUrl(),
             $config->getMerchantId(),
             $client::TRANSACTION_ENDPOINT,
-            $imojeTransaction->getTransactionId()
+            $imojeTransaction->getTransactionId(),
         );
     }
 }

@@ -27,11 +27,11 @@ final class ImojeRefundStep implements UnitsRefundedProcessStepInterface
     private RefundUrlResolverInterface $refundUrlResolver;
 
     public function __construct(
-        ImojeClientProviderInterface              $imojeClientProvider,
-        OrderRepositoryInterface                  $orderRepository,
-        GatewayFactoryNameResolverInterface       $gatewayFactoryNameResolver,
+        ImojeClientProviderInterface $imojeClientProvider,
+        OrderRepositoryInterface $orderRepository,
+        GatewayFactoryNameResolverInterface $gatewayFactoryNameResolver,
         ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
-        RefundUrlResolverInterface                $refundUrlResolver
+        RefundUrlResolverInterface $refundUrlResolver,
     ) {
         $this->imojeClientProvider = $imojeClientProvider;
         $this->orderRepository = $orderRepository;

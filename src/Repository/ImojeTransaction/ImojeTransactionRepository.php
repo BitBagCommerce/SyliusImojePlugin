@@ -20,7 +20,7 @@ final class ImojeTransactionRepository extends EntityRepository implements Imoje
             ->setParameter('paymentId', $paymentId)
             ->getQuery()
             ->getResult()
-            ;
+        ;
 
         if (null === $transaction) {
             throw new NoTransactionException('Could not find transaction');

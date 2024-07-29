@@ -6,7 +6,6 @@ namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\TransactionData;
 
 use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolver;
 use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolverInterface;
-use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -35,9 +34,8 @@ final class TransactionDataResolverTest extends TestCase
             self::TRANSACTION_ID,
             self::SERVICE_ID,
             self::ORDER_ID,
-            self::TRANSACTION_URL
+            self::TRANSACTION_URL,
         );
-
 
         $response = $this->createMock(ResponseInterface::class);
         $stream = $this->createMock(StreamInterface::class);

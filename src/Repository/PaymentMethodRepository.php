@@ -28,7 +28,7 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
             ->setParameter('code', $code)
             ->getQuery()
             ->getOneOrNullResult()
-            ;
+        ;
     }
 
     public function findOneForImoje(): ?PaymentMethodInterface
@@ -39,7 +39,8 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
             ->setParameter('factoryName', self::FACTORY_NAME)
             ->getQuery()
             ->getResult()
-            ;
+        ;
+
         return  $result[0];
     }
 }

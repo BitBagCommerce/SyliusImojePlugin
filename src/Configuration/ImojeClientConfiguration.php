@@ -27,7 +27,7 @@ final class ImojeClientConfiguration implements ImojeClientConfigurationInterfac
         string $prodUrl,
         bool $isProd,
         string $serviceId,
-        string $shopKey
+        string $shopKey,
     ) {
         $this->token = $token;
         $this->merchantId = $merchantId;

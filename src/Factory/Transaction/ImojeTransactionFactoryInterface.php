@@ -15,6 +15,6 @@ interface ImojeTransactionFactoryInterface
         ?string $paymentUrl,
         string $serviceId,
         string $orderId,
-        string $gatewayCode
+        string $gatewayCode,
     ): ImojeTransactionInterface;
 }

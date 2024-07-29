@@ -27,7 +27,7 @@ final class BitBagSyliusImojePlugin extends Bundle
         $container->addCompilerPass(
             new MessageBusPolyfillPass(),
             PassConfig::TYPE_BEFORE_OPTIMIZATION,
-            1
+            1,
         );
     }
 }

@@ -29,7 +29,7 @@ final class PaymentFinalizationCommandFactory implements PaymentFinalizationComm
 
         if (null === $class) {
             throw new \InvalidArgumentException(
-                \sprintf('Payment finalization command for status %s not found.', $status)
+                \sprintf('Payment finalization command for status %s not found.', $status),
             );
         }
 

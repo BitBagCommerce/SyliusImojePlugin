@@ -26,7 +26,7 @@ final class FinalizeOrderHandler implements MessageHandlerInterface
     public function __construct(
         FactoryInterface $stateMachineFactory,
         RepositoryInterface $orderRepository,
-        MessageBusInterface $commandBus
+        MessageBusInterface $commandBus,
     ) {
         $this->stateMachineFactory = $stateMachineFactory;
         $this->orderRepository = $orderRepository;

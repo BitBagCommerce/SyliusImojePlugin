@@ -22,7 +22,7 @@ final class CanceledStatusUrlGenerator implements StatusBasedUrlGeneratorInterfa
 
     public function __construct(
         TranslatorInterface $translator,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
     ) {
         $this->translator = $translator;
         $this->urlGenerator = $urlGenerator;
@@ -43,7 +43,7 @@ final class CanceledStatusUrlGenerator implements StatusBasedUrlGeneratorInterfa
 
         return $this->urlGenerator->generate(
             self::SYLIUS_SHOP_ORDER_SHOW,
-            ['tokenValue' => $order->getTokenValue()]
+            ['tokenValue' => $order->getTokenValue()],
         );
     }
 }

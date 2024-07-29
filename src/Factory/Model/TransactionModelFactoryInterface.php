@@ -17,11 +17,11 @@ interface TransactionModelFactoryInterface
     public const SALE_TYPE = 'sale';
 
     public function create(
-        OrderInterface                    $order,
+        OrderInterface $order,
         ImojeClientConfigurationInterface $imojeClientConfiguration,
-        string                            $type,
-        string                            $paymentMethod,
-        string                            $paymentMethodCode,
-        string                            $serviceId
+        string $type,
+        string $paymentMethod,
+        string $paymentMethodCode,
+        string $serviceId,
     ): TransactionModelInterface;
 }

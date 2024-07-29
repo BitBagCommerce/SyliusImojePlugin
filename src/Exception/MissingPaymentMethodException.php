@@ -11,7 +11,7 @@ final class MissingPaymentMethodException extends \InvalidArgumentException
     public function __construct(PaymentInterface $payment)
     {
         parent::__construct(
-            \sprintf('Payment %s does not contain a valid payment method.', $payment->getId())
+            \sprintf('Payment %s does not contain a valid payment method.', $payment->getId()),
         );
     }
 }

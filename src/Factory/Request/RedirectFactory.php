@@ -48,7 +48,7 @@ final class RedirectFactory implements RedirectFactoryInterface
                 'status' => $slug,
                 'paymentId' => $id,
             ],
-            Router::ABSOLUTE_URL
+            Router::ABSOLUTE_URL,
         );
     }
 
@@ -60,7 +60,7 @@ final class RedirectFactory implements RedirectFactoryInterface
                 'status' => $slug,
                 'paymentId' => $id,
             ],
-            Router::ABSOLUTE_URL
+            Router::ABSOLUTE_URL,
         );
     }
 }

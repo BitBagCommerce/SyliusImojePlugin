@@ -12,7 +12,7 @@ final class ImojeTransactionPaymentResolver implements ImojeTransactionPaymentRe
     private ImojeTransactionRepositoryInterface $transactionRepository;
 
     public function __construct(
-        ImojeTransactionRepositoryInterface $transactionRepository
+        ImojeTransactionRepositoryInterface $transactionRepository,
     ) {
         $this->transactionRepository = $transactionRepository;
     }

@@ -11,6 +11,6 @@ interface RefundModelFactoryInterface
     public function create(
         string $type,
         string $serviceId,
-        int $amount
+        int $amount,
     ): RefundModelInterface;
 }

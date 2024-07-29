@@ -14,12 +14,12 @@ interface TransactionBlikModelFactoryInterface
     public const SALE_TYPE = 'sale';
 
     public function create(
-        OrderInterface                    $order,
+        OrderInterface $order,
         ImojeClientConfigurationInterface $imojeClientConfiguration,
-        string                            $type,
-        string                            $paymentMethod,
-        string                            $paymentMethodCode,
-        string                            $serviceId,
-        BlikModelInterface                $blikModel
+        string $type,
+        string $paymentMethod,
+        string $paymentMethodCode,
+        string $serviceId,
+        BlikModelInterface $blikModel,
     ): TransactionModelInterface;
 }

@@ -16,7 +16,7 @@ final class ImojeTransactionFactory implements ImojeTransactionFactoryInterface
         ?string $paymentUrl,
         string $serviceId,
         string $orderId,
-        string $gatewayCode
+        string $gatewayCode,
     ): ImojeTransactionInterface {
         return new ImojeTransaction($transactionId, $payment, $paymentUrl, $serviceId, $orderId, $gatewayCode);
     }

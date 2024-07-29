@@ -35,7 +35,7 @@ final class OwnSignatureResolverTest extends TestCase
         $this->ownSignatureResolver = new OwnSignatureResolver(
             $this->requestStack,
             $this->gatewayCodeResolver,
-            $this->configurationProvider
+            $this->configurationProvider,
         );
     }
 

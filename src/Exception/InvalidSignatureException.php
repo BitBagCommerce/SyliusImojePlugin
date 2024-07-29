@@ -10,7 +10,7 @@ final class InvalidSignatureException extends \InvalidArgumentException implemen
     {
         parent::__construct(\sprintf(
             'Invalid signature: %s',
-            $signature
+            $signature,
         ));
     }
 }

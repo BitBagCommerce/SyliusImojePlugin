@@ -18,7 +18,7 @@ final class OrderResolver implements OrderResolverInterface
 
     public function __construct(
         CartContextInterface $cartContext,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ) {
         $this->cartContext = $cartContext;
         $this->orderRepository = $orderRepository;

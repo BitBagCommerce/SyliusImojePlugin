@@ -25,7 +25,7 @@ final class ImojePaymentsMethodResolver implements ImojePaymentsMethodResolverIn
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         AvailablePaymentMethodsFilterInterface $paymentMethodsFilter,
         TotalResolverInterface $totalResolver,
-        CartContextInterface $cartContext
+        CartContextInterface $cartContext,
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodsFilter = $paymentMethodsFilter;

@@ -24,7 +24,7 @@ final class CompleteTypeExtension extends AbstractTypeExtension
 
     public function __construct(
         OrderResolverInterface $orderResolver,
-        OrderPaymentResolverInterface $paymentResolver
+        OrderPaymentResolverInterface $paymentResolver,
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;

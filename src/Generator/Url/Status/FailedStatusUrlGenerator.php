@@ -41,7 +41,7 @@ final class FailedStatusUrlGenerator implements StatusBasedUrlGeneratorInterface
 
         return $this->urlGenerator->generate(
             self::SYLIUS_SHOP_ORDER_SHOW,
-            ['tokenValue' => $order->getTokenValue()]
+            ['tokenValue' => $order->getTokenValue()],
         );
     }
 }

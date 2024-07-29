@@ -12,7 +12,7 @@ final class RefundModelFactory implements RefundModelFactoryInterface
     public function create(
         string $type,
         string $serviceId,
-        int $amount
+        int $amount,
     ): RefundModelInterface {
         return new RefundModel($type, $serviceId, $amount);
     }
