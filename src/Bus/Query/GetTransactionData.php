@@ -20,7 +20,7 @@ final class GetTransactionData
         OrderInterface $order,
         string $code,
         string $paymentMethod,
-        string $paymentMethodCode
+        string $paymentMethodCode,
     ) {
         $this->order = $order;
         $this->code = $code;

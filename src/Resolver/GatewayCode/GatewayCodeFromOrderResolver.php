@@ -17,7 +17,7 @@ final class GatewayCodeFromOrderResolver implements GatewayCodeFromOrderResolver
 
     public function __construct(
         ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
-        OrderPaymentResolverInterface             $orderPaymentResolver
+        OrderPaymentResolverInterface $orderPaymentResolver,
     ) {
         $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
         $this->orderPaymentResolver = $orderPaymentResolver;

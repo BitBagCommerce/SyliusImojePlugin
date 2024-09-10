@@ -33,7 +33,7 @@ final class SuccessfulStatusUrlGenerator implements StatusBasedUrlGeneratorInter
 
         return $this->urlGenerator->generate(
             self::SYLIUS_SHOP_ORDER_THANK_YOU,
-            ['tokenValue' => $order->getTokenValue()]
+            ['tokenValue' => $order->getTokenValue()],
         );
     }
 }

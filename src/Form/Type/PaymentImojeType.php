@@ -14,7 +14,7 @@ final class PaymentImojeType extends AbstractType
     private ImojePaymentsMethodResolverInterface $methodResolver;
 
     public function __construct(
-        ImojePaymentsMethodResolverInterface $methodResolver
+        ImojePaymentsMethodResolverInterface $methodResolver,
     ) {
         $this->methodResolver = $methodResolver;
     }

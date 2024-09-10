@@ -13,7 +13,7 @@ final class StatusResponseModelFactory implements StatusResponseModelFactoryInte
         string $transactionId,
         string $paymentId,
         string $orderId,
-        string $status
+        string $status,
     ): StatusResponseModelInterface {
         return new StatusResponseModel($transactionId, $paymentId, $orderId, $status);
     }

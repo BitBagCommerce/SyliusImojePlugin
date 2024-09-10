@@ -27,7 +27,7 @@ final class CustomerModel implements CustomerModelInterface
         ?string $company,
         ?string $phone,
         string $email,
-        ?string $locale
+        ?string $locale,
     ) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;

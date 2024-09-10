@@ -21,7 +21,7 @@ final class TakeOverPaymentHandler implements MessageHandlerInterface
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodResolver $paymentMethodResolver,
-        RepositoryInterface $paymentRepository
+        RepositoryInterface $paymentRepository,
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodResolver = $paymentMethodResolver;

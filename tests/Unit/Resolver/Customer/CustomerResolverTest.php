@@ -9,7 +9,6 @@ use BitBag\SyliusImojePlugin\Resolver\Customer\CustomerResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class CustomerResolverTest extends TestCase

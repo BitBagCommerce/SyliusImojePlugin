@@ -52,7 +52,7 @@ final class InitializePaymentController extends AbstractController
         BlikModelProviderInterface $blikModelProvider,
         TransactionPaymentDataResolverInterface $transactionPaymentDataResolver,
         TranslatorInterface $translator,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         $this->orderResolver = $orderResolver;
         $this->paymentResolver = $paymentResolver;
@@ -67,7 +67,7 @@ final class InitializePaymentController extends AbstractController
         Request $request,
         ?string $orderId,
         ?string $paymentMethodCode,
-        ?string $blikCode
+        ?string $blikCode,
     ): Response {
         $order = $this->orderResolver->resolve($orderId);
         $this->dispatcher->dispatch(new AssignTokenValue($order, $request));
@@ -101,6 +101,7 @@ final class InitializePaymentController extends AbstractController
 
         $transactionPaymentData = $this->transactionPaymentDataResolver->resolve($paymentMethodCode, $payment, $blikCode);
         $isBlik = 'blik' === $transactionPaymentData->getPaymentMethod();
+
         try {
             $transactionData = $isBlik ? $this->getTransactionDataForBlik($order, $payment, $transactionPaymentData, $blikCode)
                 : $this->getTransactionData($order, $payment, $transactionPaymentData);
@@ -111,9 +112,9 @@ final class InitializePaymentController extends AbstractController
         } catch (Throwable $e) {
             $this->logger->error($e->getMessage());
             $this->addFlash('error', $this->translator->trans('bitbag_sylius_imoje_plugin.ui.payment_failed'));
+
             return $this->redirectToRoute('sylius_shop_checkout_select_payment');
         }
-
     }
 
     private function getPaymentFromOrder(OrderInterface $order): PaymentInterface
@@ -122,6 +123,7 @@ final class InitializePaymentController extends AbstractController
             $payment = $this->paymentResolver->resolve($order);
         } catch (\InvalidArgumentException $e) {
             $this->logger->error($e->getMessage());
+
             throw new ImojeNotConfiguredException('Payment method not found');
         }
 
@@ -131,7 +133,7 @@ final class InitializePaymentController extends AbstractController
     private function getTransactionData(
         OrderInterface $order,
         PaymentInterface $payment,
-        PaymentDataModelInterface $transactionPaymentData
+        PaymentDataModelInterface $transactionPaymentData,
     ): ImojeTransactionInterface {
         return $this->dispatcher->dispatch(
             new GetTransactionData(
@@ -139,7 +141,7 @@ final class InitializePaymentController extends AbstractController
                 $payment->getMethod()->getCode(),
                 $transactionPaymentData->getPaymentMethod(),
                 $transactionPaymentData->getPaymentMethodCode(),
-            )
+            ),
         );
     }
 
@@ -147,7 +149,7 @@ final class InitializePaymentController extends AbstractController
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData,
-        ?string $blikCode
+        ?string $blikCode,
     ): ImojeTransactionInterface {
         $blikModel = $this->blikModelProvider->provideDataToBlikModel($blikCode);
 
@@ -157,8 +159,8 @@ final class InitializePaymentController extends AbstractController
                 $payment->getMethod()->getCode(),
                 $transactionPaymentData->getPaymentMethod(),
                 $transactionPaymentData->getPaymentMethodCode(),
-                $blikModel
-            )
+                $blikModel,
+            ),
         );
     }
 }

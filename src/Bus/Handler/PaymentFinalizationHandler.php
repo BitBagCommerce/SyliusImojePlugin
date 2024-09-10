@@ -18,7 +18,7 @@ final class PaymentFinalizationHandler implements MessageHandlerInterface
 
     public function __construct(
         FactoryInterface $stateMachineFactory,
-        RepositoryInterface $paymentRepository
+        RepositoryInterface $paymentRepository,
     ) {
         $this->stateMachineFactory = $stateMachineFactory;
         $this->paymentRepository = $paymentRepository;

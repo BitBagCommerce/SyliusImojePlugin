@@ -18,7 +18,7 @@ final class AggregateStatusBasedUrlGenerator implements AggregateStatusBasedUrlG
 
     public function __construct(
         iterable $processors,
-        UrlGeneratorInterface $urlGenerator
+        UrlGeneratorInterface $urlGenerator,
     ) {
         $this->generators = $processors;
         $this->urlGenerator = $urlGenerator;
@@ -27,7 +27,7 @@ final class AggregateStatusBasedUrlGenerator implements AggregateStatusBasedUrlG
     public function generate(
         OrderInterface $order,
         Request $request,
-        string $status
+        string $status,
     ): string {
         /** @var StatusBasedUrlGeneratorInterface $generator */
         foreach ($this->generators as $generator) {

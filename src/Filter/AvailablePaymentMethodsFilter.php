@@ -20,7 +20,7 @@ final class AvailablePaymentMethodsFilter implements AvailablePaymentMethodsFilt
         string $code,
         string $serviceId,
         array $paymentMethods,
-        string $currency
+        string $currency,
     ): array {
         $paymentMethods = \array_keys($paymentMethods);
 

@@ -7,13 +7,13 @@ namespace BitBag\SyliusImojePlugin\Controller\Shop\Oneclick;
 use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
 use BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature\ImojeOneClickSignatureResolverInterface;
+use function strtoupper;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
-use function strtoupper;
 
 final class OneClickController
 {
@@ -28,10 +28,10 @@ final class OneClickController
     private OrderRepositoryInterface $orderRepository;
 
     public function __construct(
-        GatewayCodeFromOrderResolverInterface   $gatewayCodeFromOrderResolver,
+        GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver,
         ImojeOneClickSignatureResolverInterface $signatureResolver,
-        RedirectFactoryInterface                $redirectFactory,
-        OrderRepositoryInterface                $orderRepository
+        RedirectFactoryInterface $redirectFactory,
+        OrderRepositoryInterface $orderRepository,
     ) {
         $this->gatewayCodeFromOrderResolver = $gatewayCodeFromOrderResolver;
         $this->signatureResolver = $signatureResolver;

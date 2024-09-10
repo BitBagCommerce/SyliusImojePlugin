@@ -22,7 +22,7 @@ final class SignatureResolver implements SignatureResolverInterface
 
         if (!\preg_match(self::SIGNATURE_REGEX, $headerSignature, $matches)) {
             throw new InvalidSignatureException(
-                \sprintf('Invalid signature: [%s]', $headerSignature)
+                \sprintf('Invalid signature: [%s]', $headerSignature),
             );
         }
 
@@ -31,7 +31,7 @@ final class SignatureResolver implements SignatureResolverInterface
 
         if (self::SIGNATURE_ALG !== $alg) {
             throw new InvalidSignatureException(
-                \sprintf('Invalid hash algorithm: [%s]', $headerSignature)
+                \sprintf('Invalid hash algorithm: [%s]', $headerSignature),
             );
         }
 

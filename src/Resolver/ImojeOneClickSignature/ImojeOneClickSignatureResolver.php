@@ -19,7 +19,7 @@ final class ImojeOneClickSignatureResolver implements ImojeOneClickSignatureReso
 
     private function prepareData(
         array $data,
-        string $prefix = ''
+        string $prefix = '',
     ): string {
         \ksort($data);
         $hashData = [];

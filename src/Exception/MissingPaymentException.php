@@ -9,7 +9,7 @@ final class MissingPaymentException extends \InvalidArgumentException implements
     public function __construct(string $transactionId)
     {
         parent::__construct(
-            \sprintf('Transaction %s has no payment associated with it.', $transactionId)
+            \sprintf('Transaction %s has no payment associated with it.', $transactionId),
         );
     }
 }

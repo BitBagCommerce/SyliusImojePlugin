@@ -23,7 +23,7 @@ final class AuthorizationSubscriber implements EventSubscriberInterface
     public function __construct(
         SignatureResolverInterface $signatureResolver,
         OwnSignatureResolverInterface $ownSignatureResolver,
-        SignatureCalculatorInterface $signatureCalculator
+        SignatureCalculatorInterface $signatureCalculator,
     ) {
         $this->signatureResolver = $signatureResolver;
         $this->ownSignatureResolver = $ownSignatureResolver;

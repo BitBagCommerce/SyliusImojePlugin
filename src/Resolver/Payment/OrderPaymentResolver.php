@@ -18,7 +18,7 @@ final class OrderPaymentResolver implements OrderPaymentResolverInterface
 
         if (null === $payment) {
             throw new \InvalidArgumentException(
-                \sprintf('Order #%d has no payable transaction associated with it.', (int) $order->getId())
+                \sprintf('Order #%d has no payable transaction associated with it.', (int) $order->getId()),
             );
         }
 

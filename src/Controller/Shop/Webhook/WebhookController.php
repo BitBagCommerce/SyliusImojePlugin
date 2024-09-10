@@ -27,9 +27,9 @@ final class WebhookController
 
     public function __construct(
         ImojeTransactionPaymentResolverInterface $imojeTransactionPaymentResolver,
-        WebhookResolverInterface                 $webhookResolver,
-        WebhookResponseProcessorInterface        $webhookResponseProcessor,
-        oneClickWebhookResolverInterface         $oneClickWebhookResolver
+        WebhookResolverInterface $webhookResolver,
+        WebhookResponseProcessorInterface $webhookResponseProcessor,
+        oneClickWebhookResolverInterface $oneClickWebhookResolver,
     ) {
         $this->imojeTransactionPaymentResolver = $imojeTransactionPaymentResolver;
         $this->webhookResolver = $webhookResolver;

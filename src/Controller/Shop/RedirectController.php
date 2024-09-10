@@ -29,7 +29,7 @@ final class RedirectController
         DispatcherInterface $dispatcher,
         PaymentFinalizationCommandFactoryInterface $commandFactory,
         AggregateStatusBasedUrlGeneratorInterface $aggregateStatusBasedUrlGenerator,
-        StatusResolverInterface $statusResolver
+        StatusResolverInterface $statusResolver,
     ) {
         $this->dispatcher = $dispatcher;
         $this->commandFactory = $commandFactory;
@@ -40,7 +40,7 @@ final class RedirectController
     public function __invoke(
         Request $request,
         string $status,
-        int $paymentId
+        int $paymentId,
     ): Response {
         /** @var ReadyTransactionModelInterface $readyTransaction */
         $readyTransaction = $this->dispatcher->dispatch(new GetResponseData($paymentId));
@@ -54,7 +54,7 @@ final class RedirectController
         $paymentStatus = $this->statusResolver->resolve($readyTransaction->getStatus());
 
         $this->dispatcher->dispatch(
-            $this->commandFactory->createNew($paymentStatus, $payment)
+            $this->commandFactory->createNew($paymentStatus, $payment),
         );
 
         $url = $this->aggregateStatusBasedUrlGenerator->generate($order, $request, $paymentStatus);
