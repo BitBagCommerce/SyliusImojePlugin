@@ -1,171 +1,212 @@
-## Installation
+# Installation
 
-### Sylius configuration
+## Overview:
+GENERAL
+- [Requirements](#requirements)
+- [Dependencies](#dependencies)
+- [Composer](#composer)
+- [Basic configuration](#basic-configuration)
+---
+FRONTEND
+- [Templates](#templates)
+- [Webpack](#webpack)
+---
+ADDITIONAL
+- [Known Issues](#known-issues)
+---
 
-1. The [Sylius Refund Plugin](https://github.com/Sylius/RefundPlugin) is our plugin dependency. Please complete [its installation steps](https://github.com/Sylius/RefundPlugin?tab=readme-ov-file#installation) before continuing.
+## Requirements:
+We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
 
-    **Note.** After installation of the Refund plugin, please remove Refund configuration from your project. Imoje plugin already has this configuration and doubling it will cause and error. 
+| Package              | Version            |
+|----------------------|--------------------|
+| PHP                  | ^8.0               |
+| sylius/refund-plugin | ^1.0.0             |
+| sylius/sylius        | ~1.12.x or ~1.13.x |
 
-3. Require our plugin with composer:
+## Dependencies
+### Refund Plugin
+The [Sylius Refund Plugin](https://github.com/Sylius/RefundPlugin) is our plugin dependency.
+Please complete [its installation steps](https://github.com/Sylius/RefundPlugin?tab=readme-ov-file#installation) before continuing.
 
-    ```bash
-    composer require bitbag/sylius-imoje-plugin --no-scripts
-    ```
-    
-    **Note.** If you receive an error related to `Twig\Extra\Intl\IntlExtension` class, please go to `config/packages/twig.yaml` file and remove the mentioned service definition. In some cases, multiple dependencies redefine the service, so it results the error message. After removing it, please run the composer command second time, to finish the step.
+### IMPORTANT
+> **Note:** After installation of the `RefundPlugin`, please remove Refund configuration from your project.
+Imoje plugin already has this configuration and doubling it will cause and error.
 
-4. Add plugin dependencies to your `config/bundles.php` file:
+### To remove `RefundPlugin` configuration:
+Remove `config/packages/sylius_refund.yaml` file if exists.
 
-    ```php
-    return [
-        ...
-        BitBag\SyliusImojePlugin\BitBagSyliusImojePlugin::class => ['all' => true],
-    ];
-    ```
+## Composer:
+```bash
+composer require bitbag/sylius-imoje-plugin --no-scripts
+```
 
-5. Import required config in your `config/packages/_sylius.yaml` file:
+## Basic configuration:
+Add plugin dependencies to your `config/bundles.php` file:
 
-    ```yaml
-    # config/packages/_sylius.yaml
+```php
+# config/bundles.php
 
-    imports:
-        ...
-        - { resource: "@BitBagSyliusImojePlugin/Resources/config.yaml" }
-    ```
+return [
+    ...
+    BitBag\SyliusImojePlugin\BitBagSyliusImojePlugin::class => ['all' => true],
+];
+```
 
-6. Import the routing in your `config/routes.yaml` file:
+Import required config in your `config/packages/_sylius.yaml` file:
 
-    ```yaml
-    # config/routes.yaml
+```yaml
+# config/packages/_sylius.yaml
 
-    bitbag_sylius_imoje_plugin:
-        resource: "@BitBagSyliusImojePlugin/Resources/config/routing.yaml"
-    ```
+imports:
+    ...
+    - { resource: "@BitBagSyliusImojePlugin/Resources/config.yaml" }
+```
 
-7. Add Imoje as a supported refund gateway in `config/packages/_sylius.yaml`:
+Add `imoje` as a supported refund gateway in `config/packages/_sylius.yaml`:
+```yaml
+# config/packages/_sylius.yaml
 
-    ```yaml
-    # config/packages/_sylius.yaml
+   parameters:
+      sylius_refund.supported_gateways:
+          - offline
+          - bitbag_imoje
+```
 
-       parameters:
-          sylius_refund.supported_gateways:
-              - offline
-              - bitbag_imoje
-    ``` 
+Add routing to your `config/routes.yaml` file:
+```yaml
+# config/routes.yaml
 
-8. Copy Sylius templates overridden by the plug-in to your templates directory (`templates/bundles/`):
+bitbag_sylius_imoje_plugin:
+    resource: "@BitBagSyliusImojePlugin/Resources/config/routing.yaml"
+```
 
-    ```
-    mkdir -p templates/bundles/SyliusAdminBundle/
-    mkdir -p templates/bundles/SyliusShopBundle/
+Add logging to your environment by editing your `{dev, prod, staging}/monolog.yaml`:
+```yaml
+monolog:
+    channels: ['imoje']
+    handlers:
+        imoje:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
+            level: debug
+            channels: [ 'imoje' ]
+```
 
-    cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/* templates/bundles/SyliusAdminBundle/
-    cp -R vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/* templates/bundles/SyliusShopBundle/
-    ```
+### Clear application cache by using command:
+```bash
+bin/console cache:clear
+```
 
-    **Note.** If you have overridden at least one template from the directories above, please adjust your code to include our changes.
+### IMPORTANT
+> **Note**: If you receive an error related to `Twig\Extra\Intl\IntlExtension` class,
+please go to `config/packages/twig.yaml` file and remove the mentioned service definition.
+In some cases, multiple dependencies redefine the service, so it results the error message.
+After removing it, please run the composer command second time, to finish the step.
 
-9. Add logging to your environment by editing your {dev, prod, staging}/monolog.yaml:
+### Update your database
+First, please run legacy-versioned migrations by using command:
+```bash
+bin/console doctrine:migrations:migrate
+```
 
-    ```yaml
-    monolog:
-        channels: ['imoje']
-        handlers:
-            imoje:
-                type: stream
-                path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
-                level: debug
-                channels: [ 'imoje' ]
-    ```
+After migration, please create a new diff migration and update database:
+```bash
+bin/console doctrine:migrations:diff
+bin/console doctrine:migrations:migrate
+```
+**Note:** If you are running it on production, add the `-e prod` flag to this command.
 
-10. Clear the cache:
+## Templates
+Copy required templates into correct directories in your project.
 
-    ```bash
-    $ bin/console cache:clear
-    ```
+**AdminBundle** (`templates/bundles/SyliusAdminBundle`):
+```
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Order/Show/_payment.html.twig
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Order/Show/_payments.html.twig
+```
 
-11. Install assets:
+**ShopBundle** (`templates/bundles/SyliusShopBundle`):
+```
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/Complete/_form.html.twig
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/Complete/_navigation.html.twig
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/complete.html.twig
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/SelectPayment/_choiceImoje.html.twig
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/SelectPayment/_payment.html.twig
+vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Order/show.html.twig
+```
 
-    ```
-    $ bin/console assets:install
-    ```
+### Install assets by running:
+```bash
+bin/console assets:install
+```
 
-    **Note:** If you are running it on production, add the `-e prod` flag to this command.
+## Webpack
+### Webpack.config.js
 
-12. Synchronize the database:
+Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your webpack.config.js file:
+```js
+const [bitbagImojeShop, bitbagImojeAdmin] = require('./vendor/bitbag/sylius-imoje-plugin/webpack.config.js');
+```
+As next step, please add the imported consts into final module exports:
+```js
+module.exports = [..., bitbagImojeShop, bitbagImojeAdmin];
+```
 
-    ```
-    $ bin/console doctrine:migrations:migrate
-    ```
+### Assets
+Add the asset configuration into `config/packages/assets.yaml`:
+```yaml
+framework:
+    assets:
+        packages:
+            # ...
+            imoje_shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/shop/manifest.json'
+            imoje_admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/admin/manifest.json'
+```
 
-### Webpack configuration
+### Webpack Encore
+Add the webpack configuration into `config/packages/webpack_encore.yaml`:
 
-#### Installing Webpack package
+```yaml
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build/default'
+    builds:
+        # ...
+        imoje_shop: '%kernel.project_dir%/public/build/bitbag/imoje/shop'
+        imoje_admin: '%kernel.project_dir%/public/build/bitbag/imoje/admin'
+```
 
-1. Before Webpack installation, please create the `config/packages/webpack_encore.yaml` file with a content of:
+### Encore functions
+Add encore functions to your templates:
 
-    ```yaml
-    webpack_encore:
-        output_path: '%kernel.project_dir%/public/build/default'
-        builds:
-            shop: '%kernel.project_dir%/public/build/shop'
-            admin: '%kernel.project_dir%/public/build/admin'
-            imoje_shop: '%kernel.project_dir%/public/build/bitbag/imoje/shop'
-            imoje_admin: '%kernel.project_dir%/public/build/bitbag/imoje/admin'
-    ```
+SyliusAdminBundle:
+```php
+{# @SyliusAdminBundle/_scripts.html.twig #}
+{{ encore_entry_script_tags('bitbag-imoje-admin', null, 'imoje_admin') }}
 
-2. To install Webpack in your application, please run the command below:
+{# @SyliusAdminBundle/_styles.html.twig #}
+{{ encore_entry_link_tags('bitbag-imoje-admin', null, 'imoje_admin') }}
+```
+SyliusShopBundle:
+```php
+{# @SyliusShopBundle/_scripts.html.twig #}
+{{ encore_entry_script_tags('bitbag-imoje-shop', null, 'imoje_shop') }}
 
-    ```bash
-    $ composer require "symfony/webpack-encore-bundle"
-    ```
+{# @SyliusShopBundle/_styles.html.twig #}
+{{ encore_entry_link_tags('bitbag-imoje-shop', null, 'imoje_shop') }}
+```
 
-3. After installation, please add the line below into `config/bundles.php` file:
+### Run commands
+```bash
+yarn install
+yarn encore dev # or prod, depends on your environment
+```
 
-    ```php
-    return [
-        ...
-        Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
-    ];
-    ```
-
-#### Configuring Webpack
-
-By a standard, the `webpack.config.js` file should be available in your repository. If not, please use [the Sylius-Standard one](https://github.com/Sylius/Sylius-Standard/blob/1.11/webpack.config.js).
-
-1. Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your `webpack.config.js` file:
-
-    ```javascript
-    const [bitbagImojeShop, bitbagImojeAdmin] = require('./vendor/bitbag/sylius-imoje-plugin/webpack.config.js');
-    ```
-
-2. As next step, please add the imported consts into final module exports:
-
-    ```javascripts
-    module.exports = [shopConfig, adminConfig, bitbagImojeShop, bitbagImojeAdmin];
-    ```
-
-3. Next thing is to add the asset configuration into `config/packages/framework.yaml`:
-
-    ```yaml
-    framework:
-        assets:
-            packages:
-                shop:
-                    json_manifest_path: '%kernel.project_dir%/public/build/shop/manifest.json'
-                admin:
-                    json_manifest_path: '%kernel.project_dir%/public/build/admin/manifest.json'
-                imoje_shop:
-                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/shop/manifest.json'
-                imoje_admin:
-                    json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/admin/manifest.json'
-    ```
-
-4. Additionally, please add the `"@symfony/webpack-encore": "^1.5.0",` dependency into your `package.json` file.
-
-5. Now you can run the commands:
-
-    ```bash
-    $ yarn install
-    $ yarn encore dev # or prod, depends on your environment
-    ```
+## Known issues
+### Translations not displaying correctly
+For incorrectly displayed translations, execute the command:
+```bash
+bin/console cache:clear
+```

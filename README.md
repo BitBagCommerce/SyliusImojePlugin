@@ -12,8 +12,8 @@ At BitBag we do believe in open source. However, we are able to do it just becau
 * [Support](#we-are-here-to-help)
 * [Installation](#installation)
   * [Requirements](#requirements)
-  * [Usage](#usage)
-  * [Configuration](#configuration)
+* [Usage](#usage)
+* [Configuration](#configuration)
 * [About us](#about-us)
   * [Community](#community)
 * [Additional Sylius resources for developers](#additional-resources-for-developers)
@@ -41,21 +41,24 @@ This **open-source plugin was developed to help the Sylius community** and make 
 
 [![](https://bitbag.io/wp-content/uploads/2020/10/button-contact.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_ing)
 
-# Installation
-----
+## Installation
 
+---
 ### Requirements
 
-We work on stable, supported, and up-to-date versions of packages. We recommend you do the same.
+We work on stable, supported and up-to-date versions of packages. We recommend you to do the same.
 
-| Package              | Version        |
-|----------------------|----------------|
-| PHP                  | ^8.0           |
-| sylius/refund-plugin | ^1.0.0         |
-| sylius/sylius        | ~1.11 or ~1.12 |
+| Package              | Version            |
+|----------------------|--------------------|
+| PHP                  | ^8.0               |
+| sylius/refund-plugin | ^1.0.0             |
+| sylius/sylius        | ~1.12.x or ~1.13.x |
+
 ----
 
-For the full installation guide please go to [installation](doc/installation.md)
+### Full installation guide
+- [See the full installation guide](doc/installation.md)
+
 
 ### Usage
 
