@@ -81,7 +81,7 @@ We work on stable, supported, and up-to-date versions of packages. We recommend 
 |----------------------|----------------|
 | PHP                  | ^8.0           |
 | sylius/refund-plugin | ^1.0.0         |
-| sylius/sylius        | ~1.11 or ~1.12 |
+| sylius/sylius        | ~1.12 or ~1.13 |
 
 
 ## Configuration:
