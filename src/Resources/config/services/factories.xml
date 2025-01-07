@@ -55,7 +55,6 @@
 
         <service class="BitBag\SyliusImojePlugin\Factory\Transaction\ImojeTransactionFactory"
                  id="bitbag.sylius_imoje_plugin.factory.transaction.imoje_transaction_factory"
-                 decorates="bitbag_sylius_imoje_plugin.factory.imoje_transaction"
         >
             <argument type="service" id="bitbag.sylius_imoje_plugin.factory.transaction.imoje_transaction_factory.inner"/>
         </service>

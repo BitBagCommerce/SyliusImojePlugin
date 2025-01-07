@@ -13,20 +13,16 @@ use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 use BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepositoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\Url\UrlResolverInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class GetResponseDataHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class GetResponseDataHandler
 {
     private ImojeTransactionRepositoryInterface $imojeTransactionRepository;
-
     private ImojeClientProviderInterface $imojeClientProvider;
-
     private ImojeClientConfigurationProviderInterface $configurationProvider;
-
     private ReadyTransactionFactoryInterface $readyTransactionFactory;
-
     private OrderRepository $orderRepository;
-
     private UrlResolverInterface $urlResolver;
 
     public function __construct(
@@ -35,7 +31,7 @@ final class GetResponseDataHandler implements MessageHandlerInterface
         ImojeClientConfigurationProviderInterface $configurationProvider,
         ReadyTransactionFactoryInterface $readyTransactionFactory,
         OrderRepository $orderRepository,
-        UrlResolverInterface $urlResolver,
+        UrlResolverInterface $urlResolver
     ) {
         $this->imojeTransactionRepository = $imojeTransactionRepository;
         $this->imojeClientProvider = $imojeClientProvider;
@@ -47,20 +43,37 @@ final class GetResponseDataHandler implements MessageHandlerInterface
 
     public function __invoke(GetResponseData $query): ReadyTransactionModelInterface
     {
-        /** @var ImojeTransactionInterface|null $imojeTransaction */
         $imojeTransaction = $this->imojeTransactionRepository->getByPaymentId($query->getPaymentId());
+
+        if (!$imojeTransaction instanceof ImojeTransactionInterface) {
+            throw new \InvalidArgumentException(sprintf(
+                'Transaction with payment ID "%s" not found.',
+                $query->getPaymentId()
+            ));
+        }
+
         $client = $this->imojeClientProvider->getClient($imojeTransaction->getGatewayCode());
 
-        $url = $this->urlResolver->resolve($imojeTransaction, $this->configurationProvider, $this->imojeClientProvider);
+        $url = $this->urlResolver->resolve(
+            $imojeTransaction,
+            $this->configurationProvider,
+            $this->imojeClientProvider
+        );
 
         $response = $client->getTransactionData($url);
 
         $order = $this->orderRepository->find($imojeTransaction->getOrderId());
+        if (!$order) {
+            throw new \InvalidArgumentException(sprintf(
+                'Order with ID "%s" not found.',
+                $imojeTransaction->getOrderId()
+            ));
+        }
 
         return $this->readyTransactionFactory->createReadyTransaction(
             $response->getBody()->getContents(),
             $imojeTransaction,
-            $order,
+            $order
         );
     }
 }

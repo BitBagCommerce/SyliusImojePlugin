@@ -12,18 +12,15 @@ use BitBag\SyliusImojePlugin\Factory\Transaction\ImojeTransactionFactoryInterfac
 use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
 use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
 use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolverInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class GetTransactionDataHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class GetTransactionDataHandler
 {
     private ImojeClientConfigurationProviderInterface $configurationProvider;
-
     private TransactionModelFactoryInterface $transactionModelFactory;
-
     private ImojeClientProviderInterface $imojeClientProvider;
-
     private ImojeTransactionFactoryInterface $imojeTransactionFactory;
-
     private TransactionDataResolverInterface $transactionDataResolver;
 
     public function __construct(
@@ -31,7 +28,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         TransactionModelFactoryInterface $transactionModelFactory,
         ImojeClientProviderInterface $imojeClientProvider,
         ImojeTransactionFactoryInterface $imojeTransactionFactory,
-        TransactionDataResolverInterface $transactionDataResolver,
+        TransactionDataResolverInterface $transactionDataResolver
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->transactionModelFactory = $transactionModelFactory;
@@ -48,23 +45,22 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
         $transactionModel = $this->transactionModelFactory->create(
             $query->getOrder(),
             $config,
-            $this->transactionModelFactory::SALE_TYPE,
+            TransactionModelFactoryInterface::SALE_TYPE,
             $query->getPaymentMethod(),
             $query->getPaymentMethodCode(),
-            $config->getServiceId(),
+            $config->getServiceId()
         );
 
         $response = $this->imojeClientProvider
             ->getClient($code)
-            ->createTransaction($transactionModel)
-        ;
+            ->createTransaction($transactionModel);
 
         $data = $this->transactionDataResolver->resolve($response);
 
-        $paymentUrl = $data['paymentUrl'];
-        $transactionId = $data['transactionId'];
-        $serviceId = $data['serviceId'];
-        $orderId = $data['orderId'];
+        $paymentUrl = $data['paymentUrl'] ?? null;
+        $transactionId = $data['transactionId'] ?? null;
+        $serviceId = $data['serviceId'] ?? null;
+        $orderId = $data['orderId'] ?? null;
 
         if (!$paymentUrl || !$transactionId || !$serviceId || !$orderId) {
             throw new InvalidImojeResponseException('No configured transaction');
@@ -76,7 +72,7 @@ final class GetTransactionDataHandler implements MessageHandlerInterface
             $paymentUrl,
             $serviceId,
             $orderId,
-            $query->getCode(),
+            $query->getCode()
         );
     }
 }

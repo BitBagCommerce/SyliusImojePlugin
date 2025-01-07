@@ -5,21 +5,27 @@ declare(strict_types=1);
 namespace BitBag\SyliusImojePlugin\Bus\Handler;
 
 use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class SaveTransactionHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class SaveTransactionHandler
 {
-    private EntityManager $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
     public function __invoke(SaveTransaction $command): void
     {
-        $transaction = $command->getimojeTransaction();
+        $transaction = $command->getImojeTransaction();
+
+        if (!$transaction) {
+            throw new \InvalidArgumentException('Transaction cannot be null.');
+        }
+
         $this->entityManager->persist($transaction);
         $this->entityManager->flush();
     }

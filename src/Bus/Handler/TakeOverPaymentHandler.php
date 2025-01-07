@@ -8,20 +8,19 @@ use BitBag\SyliusImojePlugin\Bus\Command\TakeOverPayment;
 use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
 use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class TakeOverPaymentHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class TakeOverPaymentHandler
 {
     private PaymentMethodRepositoryInterface $paymentMethodRepository;
-
     private PaymentMethodResolver $paymentMethodResolver;
-
     private RepositoryInterface $paymentRepository;
 
     public function __construct(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodResolver $paymentMethodResolver,
-        RepositoryInterface $paymentRepository,
+        RepositoryInterface $paymentRepository
     ) {
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodResolver = $paymentMethodResolver;
@@ -38,8 +37,12 @@ final class TakeOverPaymentHandler implements MessageHandlerInterface
         }
 
         $paymentMethod = $this->paymentMethodRepository->findOneForImojeCode($command->getPaymentCode());
-        $payment->setMethod($paymentMethod);
 
+        if (!$paymentMethod) {
+            throw new \InvalidArgumentException(sprintf('Payment method with code "%s" not found.', $command->getPaymentCode()));
+        }
+
+        $payment->setMethod($paymentMethod);
         $this->paymentRepository->add($payment);
     }
 }

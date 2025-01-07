@@ -10,23 +10,22 @@ use Sylius\Bundle\ApiBundle\Command\Checkout\SendOrderConfirmation;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class FinalizeOrderHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class FinalizeOrderHandler
 {
     private const CART_STATE = 'cart';
 
     private FactoryInterface $stateMachineFactory;
-
     private RepositoryInterface $orderRepository;
-
     private MessageBusInterface $commandBus;
 
     public function __construct(
         FactoryInterface $stateMachineFactory,
         RepositoryInterface $orderRepository,
-        MessageBusInterface $commandBus,
+        MessageBusInterface $commandBus
     ) {
         $this->stateMachineFactory = $stateMachineFactory;
         $this->orderRepository = $orderRepository;

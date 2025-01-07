@@ -8,17 +8,17 @@ use BitBag\SyliusImojePlugin\Bus\Command\Status\PaymentFinalizationCommandInterf
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
-final class PaymentFinalizationHandler implements MessageHandlerInterface
+#[AsMessageHandler]
+final class PaymentFinalizationHandler
 {
     private FactoryInterface $stateMachineFactory;
-
     private RepositoryInterface $paymentRepository;
 
     public function __construct(
         FactoryInterface $stateMachineFactory,
-        RepositoryInterface $paymentRepository,
+        RepositoryInterface $paymentRepository
     ) {
         $this->stateMachineFactory = $stateMachineFactory;
         $this->paymentRepository = $paymentRepository;
@@ -28,7 +28,19 @@ final class PaymentFinalizationHandler implements MessageHandlerInterface
     {
         $payment = $command->getPayment();
 
+        if (!$payment) {
+            throw new \InvalidArgumentException('Payment cannot be null.');
+        }
+
         $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
+
+        if (!$stateMachine->can($command->getPaymentTransitionName())) {
+            throw new \LogicException(sprintf(
+                'Transition "%s" cannot be applied to the payment in its current state.',
+                $command->getPaymentTransitionName()
+            ));
+        }
+
         $stateMachine->apply($command->getPaymentTransitionName(), true);
 
         $this->paymentRepository->add($payment);
