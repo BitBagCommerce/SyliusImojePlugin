@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Webhook;
 
-use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\Status\StatusResponseModelInterface;
 
 interface WebhookResolverInterface
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Bus;
+namespace BitBag\SyliusIngPayPlugin\Bus;
 
 interface DispatcherInterface
 {

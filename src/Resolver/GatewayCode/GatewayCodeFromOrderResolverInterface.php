@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusIngPayPlugin\Resolver\GatewayCode;
 
-use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
+use BitBag\SyliusIngPayPlugin\Configuration\IngPayClientConfigurationInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface GatewayCodeFromOrderResolverInterface
 {
-    public function resolve(OrderInterface $order): ImojeClientConfigurationInterface;
+    public function resolve(OrderInterface $order): IngPayClientConfigurationInterface;
 }

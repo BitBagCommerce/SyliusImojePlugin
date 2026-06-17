@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\TransactionMethod;
+namespace BitBag\SyliusIngPayPlugin\Resolver\TransactionMethod;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
@@ -24,7 +24,7 @@ final class TransactionMethodResolver implements TransactionMethodResolverInterf
             return self::PAYMENT_METHOD_ING;
         }
 
-        if ('imoje_twisto' === $paymentDetails || 'paypo' === $paymentDetails || 'pragma_go' === $paymentDetails) {
+        if ('ing_pay_twisto' === $paymentDetails || 'paypo' === $paymentDetails || 'pragma_go' === $paymentDetails) {
             return self::PAYMENT_METHOD_PAY_LATER;
         }
 

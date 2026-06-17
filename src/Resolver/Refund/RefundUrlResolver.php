@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Refund;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Refund;
 
-use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
-use BitBag\SyliusImojePlugin\Repository\ImojeTransaction\ImojeTransactionRepositoryInterface;
+use BitBag\SyliusIngPayPlugin\Configuration\IngPayClientConfigurationInterface;
+use BitBag\SyliusIngPayPlugin\Entity\IngPayTransactionInterface;
+use BitBag\SyliusIngPayPlugin\Repository\IngPayTransaction\IngPayTransactionRepositoryInterface;
 
 final class RefundUrlResolver implements RefundUrlResolverInterface
 {
-    private ImojeTransactionRepositoryInterface $imojeTransactionRepository;
+    private IngPayTransactionRepositoryInterface $ingPayTransactionRepository;
 
-    public function __construct(ImojeTransactionRepositoryInterface $imojeTransactionRepository)
+    public function __construct(IngPayTransactionRepositoryInterface $ingPayTransactionRepository)
     {
-        $this->imojeTransactionRepository = $imojeTransactionRepository;
+        $this->ingPayTransactionRepository = $ingPayTransactionRepository;
     }
 
-    public function resolve(ImojeClientConfigurationInterface $config, int $paymentId): string
+    public function resolve(IngPayClientConfigurationInterface $config, int $paymentId): string
     {
         $baseUrl = $config->isProd() ? $config->getProdUrl() : $config->getSandboxUrl();
         $merchantId = $config->getMerchantId();
 
-        /** @var ImojeTransactionInterface $imojeTransaction */
-        $imojeTransaction = $this->imojeTransactionRepository->getByPaymentId($paymentId);
-        $transactionId = $imojeTransaction->getTransactionId();
+        /** @var IngPayTransactionInterface $ingPayTransaction */
+        $ingPayTransaction = $this->ingPayTransactionRepository->getByPaymentId($paymentId);
+        $transactionId = $ingPayTransaction->getTransactionId();
         $url = \sprintf('%s/%s/transaction/%s/refund', $baseUrl, $merchantId, $transactionId);
 
         return $url;

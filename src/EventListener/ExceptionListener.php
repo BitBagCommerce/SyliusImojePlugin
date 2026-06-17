@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\EventListener;
+namespace BitBag\SyliusIngPayPlugin\EventListener;
 
-use BitBag\SyliusImojePlugin\Exception\ImojeClientExceptionInterface;
+use BitBag\SyliusIngPayPlugin\Exception\IngPayClientExceptionInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
@@ -21,12 +21,12 @@ final class ExceptionListener
     {
         $exception = $event->getThrowable();
 
-        if ($exception instanceof ImojeClientExceptionInterface) {
+        if ($exception instanceof IngPayClientExceptionInterface) {
             $this->handleLoggableException($exception);
         }
     }
 
-    private function handleLoggableException(ImojeClientExceptionInterface $exception): void
+    private function handleLoggableException(IngPayClientExceptionInterface $exception): void
     {
         $this->logger->error($exception->getMessage());
     }

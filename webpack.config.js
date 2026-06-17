@@ -1,6 +1,6 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
-const pluginName = 'imoje';
+const pluginName = 'ing-pay';
 
 const getConfig = (pluginName, type) => {
     Encore.reset();

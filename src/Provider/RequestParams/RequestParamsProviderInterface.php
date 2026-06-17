@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Provider\RequestParams;
+namespace BitBag\SyliusIngPayPlugin\Provider\RequestParams;
 
-use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\TransactionModelInterface;
 
 interface RequestParamsProviderInterface
 {

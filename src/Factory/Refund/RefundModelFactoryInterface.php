@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Refund;
+namespace BitBag\SyliusIngPayPlugin\Factory\Refund;
 
-use BitBag\SyliusImojePlugin\Model\Refund\RefundModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\Refund\RefundModelInterface;
 
 interface RefundModelFactoryInterface
 {

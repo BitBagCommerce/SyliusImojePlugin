@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Model\Refund;
+namespace BitBag\SyliusIngPayPlugin\Model\Refund;
 
 final class RefundModel implements RefundModelInterface
 {

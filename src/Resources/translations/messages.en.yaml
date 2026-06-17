@@ -1,8 +1,8 @@
-bitbag_sylius_imoje_plugin:
+bitbag_sylius_ing_pay_plugin:
   ui:
     token: Token
     redirect: BLIK redirect
-    gateway_name: imoje Payment
+    gateway_name: ING Pay Payment
     prod_url: Enter the production URL
     sandbox_url: Enter the sandbox URL
     is_prod: Whether to use the production url

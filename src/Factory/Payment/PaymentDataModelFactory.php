@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Payment;
+namespace BitBag\SyliusIngPayPlugin\Factory\Payment;
 
-use BitBag\SyliusImojePlugin\Model\Payment\PaymentDataModel;
-use BitBag\SyliusImojePlugin\Model\Payment\PaymentDataModelInterface;
-use BitBag\SyliusImojePlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
+use BitBag\SyliusIngPayPlugin\Model\Payment\PaymentDataModel;
+use BitBag\SyliusIngPayPlugin\Model\Payment\PaymentDataModelInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 final class PaymentDataModelFactory implements PaymentDataModelFactoryInterface

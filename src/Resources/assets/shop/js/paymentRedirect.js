@@ -1,4 +1,4 @@
-import { performAction } from '../../sdk_imoje/entry';
+import { performAction } from '../../sdk_ing_pay/entry';
 
 export class PaymentRedirect {
     constructor(
@@ -11,7 +11,7 @@ export class PaymentRedirect {
             blikId: '#choice-blik',
             ingId: '#choice-ing',
             cardId: '#choice-card',
-            payLaterId: '#choice-imoje_paylater',
+            payLaterId: '#choice-ing_pay_paylater',
         };
         this.finalConfig = {
             ...this.defaultConfig,

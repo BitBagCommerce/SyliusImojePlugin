@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusIngPayPlugin\Resolver\GatewayCode;
 
 interface GatewayCodeResolverInterface
 {

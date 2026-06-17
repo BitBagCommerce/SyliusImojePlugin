@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Payment;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Payment;
 
-use BitBag\SyliusImojePlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\TransactionMethod\TransactionMethodResolverInterface;
 
 final class PaymentMethodByCodeResolver implements PaymentMethodByCodeResolverInterface
 {
@@ -14,7 +14,7 @@ final class PaymentMethodByCodeResolver implements PaymentMethodByCodeResolverIn
             return $paymentMethodCode;
         }
 
-        if (\in_array($paymentMethodCode, ['imoje_twisto', 'paypo', 'pragma_go'], true)) {
+        if (\in_array($paymentMethodCode, ['ing_pay_twisto', 'paypo', 'pragma_go'], true)) {
             return TransactionMethodResolverInterface::PAYMENT_METHOD_PAY_LATER;
         }
 

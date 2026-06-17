@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Request;
+namespace BitBag\SyliusIngPayPlugin\Factory\Request;
 
-use BitBag\SyliusImojePlugin\Factory\Model\TransactionModelFactoryInterface;
-use BitBag\SyliusImojePlugin\Model\RedirectModel;
-use BitBag\SyliusImojePlugin\Model\RedirectModelInterface;
+use BitBag\SyliusIngPayPlugin\Factory\Model\TransactionModelFactoryInterface;
+use BitBag\SyliusIngPayPlugin\Model\RedirectModel;
+use BitBag\SyliusIngPayPlugin\Model\RedirectModelInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

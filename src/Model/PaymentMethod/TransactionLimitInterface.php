@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Model\PaymentMethod;
+namespace BitBag\SyliusIngPayPlugin\Model\PaymentMethod;
 
 interface TransactionLimitInterface
 {

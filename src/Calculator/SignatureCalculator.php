@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Calculator;
+namespace BitBag\SyliusIngPayPlugin\Calculator;
 
-use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
+use BitBag\SyliusIngPayPlugin\Exception\IngPayBadRequestException;
 use Psr\Log\LoggerInterface;
 
 final class SignatureCalculator implements SignatureCalculatorInterface
@@ -19,11 +19,11 @@ final class SignatureCalculator implements SignatureCalculatorInterface
     public function calculate(string $incomingSignature, string $ownSignature): void
     {
         if (hash_equals($ownSignature, $incomingSignature)) {
-            $this->logger->debug('Authorized request from imoje');
+            $this->logger->debug('Authorized request from ING Pay');
         } else {
             $this->logger->error('Unauthorized request');
 
-            throw new ImojeBadRequestException('Bad request from imoje');
+            throw new IngPayBadRequestException('Bad request from ING Pay');
         }
     }
 }

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Webhook;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Webhook;
 
-use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
-use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
-use BitBag\SyliusImojePlugin\Exception\ImojeBadRequestException;
-use BitBag\SyliusImojePlugin\Factory\Status\StatusResponseModelFactoryInterface;
-use BitBag\SyliusImojePlugin\Factory\Transaction\ImojeTransactionFactoryInterface;
-use BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
-use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
+use BitBag\SyliusIngPayPlugin\Bus\Command\SaveTransaction;
+use BitBag\SyliusIngPayPlugin\Bus\DispatcherInterface;
+use BitBag\SyliusIngPayPlugin\Exception\IngPayBadRequestException;
+use BitBag\SyliusIngPayPlugin\Factory\Status\StatusResponseModelFactoryInterface;
+use BitBag\SyliusIngPayPlugin\Factory\Transaction\IngPayTransactionFactoryInterface;
+use BitBag\SyliusIngPayPlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
+use BitBag\SyliusIngPayPlugin\Provider\IngPayClientConfigurationProviderInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\PaymentMethod\PaymentMethodResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -21,11 +21,11 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 {
     private RequestStack $requestStack;
 
-    private ImojeTransactionFactoryInterface $imojeTransactionFactory;
+    private IngPayTransactionFactoryInterface $ingPayTransactionFactory;
 
     private OrderRepositoryInterface $orderRepository;
 
-    private ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider;
+    private IngPayClientConfigurationProviderInterface $ingPayClientConfigurationProvider;
 
     private DispatcherInterface $dispatcher;
 
@@ -39,9 +39,9 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 
     public function __construct(
         RequestStack $requestStack,
-        ImojeTransactionFactoryInterface $imojeTransactionFactory,
+        IngPayTransactionFactoryInterface $ingPayTransactionFactory,
         OrderRepositoryInterface $orderRepository,
-        ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
+        IngPayClientConfigurationProviderInterface $ingPayClientConfigurationProvider,
         DispatcherInterface $dispatcher,
         PaymentMethodResolverInterface $paymentMethodResolver,
         OrderPaymentResolverInterface $orderPaymentResolver,
@@ -49,9 +49,9 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
         WebhookResponseProcessorInterface $webhookResponseProcessor,
     ) {
         $this->requestStack = $requestStack;
-        $this->imojeTransactionFactory = $imojeTransactionFactory;
+        $this->ingPayTransactionFactory = $ingPayTransactionFactory;
         $this->orderRepository = $orderRepository;
-        $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
+        $this->ingPayClientConfigurationProvider = $ingPayClientConfigurationProvider;
         $this->dispatcher = $dispatcher;
         $this->paymentMethodResolver = $paymentMethodResolver;
         $this->orderPaymentResolver = $orderPaymentResolver;
@@ -79,7 +79,7 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
 
         foreach ($data as $item) {
             if ('' === $item) {
-                throw new ImojeBadRequestException('Missing mandatory transaction data');
+                throw new IngPayBadRequestException('Missing mandatory transaction data');
             }
         }
 
@@ -89,8 +89,8 @@ final class OneClickWebhookResolver implements oneClickWebhookResolverInterface
             $payment = $this->orderPaymentResolver->resolve($order);
             $paymentId = $payment->getId();
             $gatewayCode = $this->paymentMethodResolver->resolve($payment)->getCode();
-            $config = $this->imojeClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
-            $transaction = $this->imojeTransactionFactory->create(
+            $config = $this->ingPayClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
+            $transaction = $this->ingPayTransactionFactory->create(
                 $payment,
                 $transactionId,
                 null,

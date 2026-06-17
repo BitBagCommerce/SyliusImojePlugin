@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Url;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Url;
 
-use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
-use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
+use BitBag\SyliusIngPayPlugin\Entity\IngPayTransactionInterface;
+use BitBag\SyliusIngPayPlugin\Provider\IngPayClientConfigurationProviderInterface;
+use BitBag\SyliusIngPayPlugin\Provider\IngPayClientProviderInterface;
 
 interface UrlResolverInterface
 {
     public function resolve(
-        ImojeTransactionInterface $imojeTransaction,
-        ImojeClientConfigurationProviderInterface $imojeClientConfiguration,
-        ImojeClientProviderInterface $imojeClientProvider,
+        IngPayTransactionInterface $ingPayTransaction,
+        IngPayClientConfigurationProviderInterface $ingPayClientConfiguration,
+        IngPayClientProviderInterface $ingPayClientProvider,
     ): string;
 }

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Model;
+namespace BitBag\SyliusIngPayPlugin\Factory\Model;
 
-use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
-use BitBag\SyliusImojePlugin\Model\TransactionModel;
-use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
+use BitBag\SyliusIngPayPlugin\Configuration\IngPayClientConfigurationInterface;
+use BitBag\SyliusIngPayPlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusIngPayPlugin\Model\TransactionModel;
+use BitBag\SyliusIngPayPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class TransactionModelFactory implements TransactionModelFactoryInterface
@@ -34,7 +34,7 @@ final class TransactionModelFactory implements TransactionModelFactoryInterface
 
     public function create(
         OrderInterface $order,
-        ImojeClientConfigurationInterface $imojeClientConfiguration,
+        IngPayClientConfigurationInterface $ingPayClientConfiguration,
         string $type,
         string $paymentMethod,
         string $paymentMethodCode,

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Order;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Order;
 
-use BitBag\SyliusImojePlugin\Exception\MissingOrderException;
+use BitBag\SyliusIngPayPlugin\Exception\MissingOrderException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Context\CartContextInterface;

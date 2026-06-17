@@ -1,5 +1,5 @@
 monolog:
-    channels: ['imoje']
+    channels: ['ing_pay']
 
     handlers:
         main:
@@ -9,8 +9,8 @@ monolog:
         firephp:
             type: firephp
             level: info
-        imoje:
+        ing_pay:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
+            path: "%kernel.logs_dir%/%kernel.environment%_ing_pay.log"
             level: debug
-            channels: [ 'imoje' ]
+            channels: [ 'ing_pay' ]

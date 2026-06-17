@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Filter;
+namespace BitBag\SyliusIngPayPlugin\Filter;
 
 interface AvailablePaymentMethodsFilterInterface
 {
@@ -10,7 +10,7 @@ interface AvailablePaymentMethodsFilterInterface
 
     public const TYPE_PBL = 'pbl';
 
-    public const TYPE_PAY_LATER = 'imoje_paylater';
+    public const TYPE_PAY_LATER = 'ing_pay_paylater';
 
     public function filter(
         string $code,

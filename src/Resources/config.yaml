@@ -1,13 +1,13 @@
 imports:
   - { resource: config/*.yml }
   - { resource: config/services/*.xml }
-  - { resource: "@BitBagSyliusImojePlugin/Resources/config/sylius/resources.yaml" }
+  - { resource: "@BitBagSyliusIngPayPlugin/Resources/config/sylius/resources.yaml" }
   - { resource: "@SyliusRefundPlugin/Resources/config/app/config.yml" }
 
 parameters:
   sylius_refund.supported_gateways:
     - offline
-    - BitBag_imoje
+    - BitBag_ing_pay
 
 knp_snappy:
   pdf:

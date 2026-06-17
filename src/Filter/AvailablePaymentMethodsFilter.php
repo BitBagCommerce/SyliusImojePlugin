@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Filter;
+namespace BitBag\SyliusIngPayPlugin\Filter;
 
-use BitBag\SyliusImojePlugin\Model\PaymentMethod\PaymentMethodModelInterface;
-use BitBag\SyliusImojePlugin\Provider\ImojeClientProviderInterface;
+use BitBag\SyliusIngPayPlugin\Model\PaymentMethod\PaymentMethodModelInterface;
+use BitBag\SyliusIngPayPlugin\Provider\IngPayClientProviderInterface;
 
 final class AvailablePaymentMethodsFilter implements AvailablePaymentMethodsFilterInterface
 {
-    private ImojeClientProviderInterface $clientProvider;
+    private IngPayClientProviderInterface $clientProvider;
 
-    public function __construct(ImojeClientProviderInterface $clientProvider)
+    public function __construct(IngPayClientProviderInterface $clientProvider)
     {
         $this->clientProvider = $clientProvider;
     }

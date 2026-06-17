@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Signature;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Signature;
 
 interface SignatureResolverInterface
 {
@@ -10,7 +10,7 @@ interface SignatureResolverInterface
 
     public const SIGNATURE_ALG = 'sha256';
 
-    public const SIGNATURE_HEADER = 'X-Imoje-Signature';
+    public const SIGNATURE_HEADER = 'X-IngPay-Signature';
 
     public function resolve(): string;
 }

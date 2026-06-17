@@ -31,14 +31,14 @@ Please complete [its installation steps](https://github.com/Sylius/RefundPlugin?
 
 ### IMPORTANT
 > **Note:** After installation of the `RefundPlugin`, please remove Refund configuration from your project.
-Imoje plugin already has this configuration and doubling it will cause and error.
+ING Pay plugin already has this configuration and doubling it will cause and error.
 
 ### To remove `RefundPlugin` configuration:
 Remove `config/packages/sylius_refund.yaml` file if exists.
 
 ## Composer:
 ```bash
-composer require bitbag/sylius-imoje-plugin --no-scripts
+composer require bitbag/sylius-ing-pay-plugin --no-scripts
 ```
 
 ## Basic configuration:
@@ -49,7 +49,7 @@ Add plugin dependencies to your `config/bundles.php` file:
 
 return [
     ...
-    BitBag\SyliusImojePlugin\BitBagSyliusImojePlugin::class => ['all' => true],
+    BitBag\SyliusIngPayPlugin\BitBagSyliusIngPayPlugin::class => ['all' => true],
 ];
 ```
 
@@ -60,37 +60,37 @@ Import required config in your `config/packages/_sylius.yaml` file:
 
 imports:
     ...
-    - { resource: "@BitBagSyliusImojePlugin/Resources/config.yaml" }
+    - { resource: "@BitBagSyliusIngPayPlugin/Resources/config.yaml" }
 ```
 
-Add `imoje` as a supported refund gateway in `config/packages/_sylius.yaml`:
+Add `ing_pay` as a supported refund gateway in `config/packages/_sylius.yaml`:
 ```yaml
 # config/packages/_sylius.yaml
 
    parameters:
       sylius_refund.supported_gateways:
           - offline
-          - bitbag_imoje
+          - bitbag_ing_pay
 ```
 
 Add routing to your `config/routes.yaml` file:
 ```yaml
 # config/routes.yaml
 
-bitbag_sylius_imoje_plugin:
-    resource: "@BitBagSyliusImojePlugin/Resources/config/routing.yaml"
+bitbag_sylius_ing_pay_plugin:
+    resource: "@BitBagSyliusIngPayPlugin/Resources/config/routing.yaml"
 ```
 
 Add logging to your environment by editing your `{dev, prod, staging}/monolog.yaml`:
 ```yaml
 monolog:
-    channels: ['imoje']
+    channels: ['ing_pay']
     handlers:
-        imoje:
+        ing_pay:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
+            path: "%kernel.logs_dir%/%kernel.environment%_ing_pay.log"
             level: debug
-            channels: [ 'imoje' ]
+            channels: [ 'ing_pay' ]
 ```
 
 ### Clear application cache by using command:
@@ -122,18 +122,18 @@ Copy required templates into correct directories in your project.
 
 **AdminBundle** (`templates/bundles/SyliusAdminBundle`):
 ```
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Order/Show/_payment.html.twig
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Order/Show/_payments.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Order/Show/_payment.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusAdminBundle/Order/Show/_payments.html.twig
 ```
 
 **ShopBundle** (`templates/bundles/SyliusShopBundle`):
 ```
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/Complete/_form.html.twig
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/Complete/_navigation.html.twig
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/complete.html.twig
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/SelectPayment/_choiceImoje.html.twig
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/SelectPayment/_payment.html.twig
-vendor/bitbag/sylius-imoje-plugin/tests/Application/templates/bundles/SyliusShopBundle/Order/show.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/Complete/_form.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/Complete/_navigation.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/complete.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/SelectPayment/_choiceIngPay.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusShopBundle/Checkout/SelectPayment/_payment.html.twig
+vendor/bitbag/sylius-ing-pay-plugin/tests/Application/templates/bundles/SyliusShopBundle/Order/show.html.twig
 ```
 
 ### Install assets by running:
@@ -146,11 +146,11 @@ bin/console assets:install
 
 Please setup your `webpack.config.js` file to require the plugin's webpack configuration. To do so, please put the line below somewhere on top of your webpack.config.js file:
 ```js
-const [bitbagImojeShop, bitbagImojeAdmin] = require('./vendor/bitbag/sylius-imoje-plugin/webpack.config.js');
+const [bitbagIngPayShop, bitbagIngPayAdmin] = require('./vendor/bitbag/sylius-ing-pay-plugin/webpack.config.js');
 ```
 As next step, please add the imported consts into final module exports:
 ```js
-module.exports = [..., bitbagImojeShop, bitbagImojeAdmin];
+module.exports = [..., bitbagIngPayShop, bitbagIngPayAdmin];
 ```
 
 ### Assets
@@ -160,10 +160,10 @@ framework:
     assets:
         packages:
             # ...
-            imoje_shop:
-                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/shop/manifest.json'
-            imoje_admin:
-                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/imoje/admin/manifest.json'
+            ing_pay_shop:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing-pay/shop/manifest.json'
+            ing_pay_admin:
+                json_manifest_path: '%kernel.project_dir%/public/build/bitbag/ing-pay/admin/manifest.json'
 ```
 
 ### Webpack Encore
@@ -174,8 +174,8 @@ webpack_encore:
     output_path: '%kernel.project_dir%/public/build/default'
     builds:
         # ...
-        imoje_shop: '%kernel.project_dir%/public/build/bitbag/imoje/shop'
-        imoje_admin: '%kernel.project_dir%/public/build/bitbag/imoje/admin'
+        ing_pay_shop: '%kernel.project_dir%/public/build/bitbag/ing-pay/shop'
+        ing_pay_admin: '%kernel.project_dir%/public/build/bitbag/ing-pay/admin'
 ```
 
 ### Encore functions
@@ -184,18 +184,18 @@ Add encore functions to your templates:
 SyliusAdminBundle:
 ```php
 {# @SyliusAdminBundle/_scripts.html.twig #}
-{{ encore_entry_script_tags('bitbag-imoje-admin', null, 'imoje_admin') }}
+{{ encore_entry_script_tags('bitbag-ing-pay-admin', null, 'ing_pay_admin') }}
 
 {# @SyliusAdminBundle/_styles.html.twig #}
-{{ encore_entry_link_tags('bitbag-imoje-admin', null, 'imoje_admin') }}
+{{ encore_entry_link_tags('bitbag-ing-pay-admin', null, 'ing_pay_admin') }}
 ```
 SyliusShopBundle:
 ```php
 {# @SyliusShopBundle/_scripts.html.twig #}
-{{ encore_entry_script_tags('bitbag-imoje-shop', null, 'imoje_shop') }}
+{{ encore_entry_script_tags('bitbag-ing-pay-shop', null, 'ing_pay_shop') }}
 
 {# @SyliusShopBundle/_styles.html.twig #}
-{{ encore_entry_link_tags('bitbag-imoje-shop', null, 'imoje_shop') }}
+{{ encore_entry_link_tags('bitbag-ing-pay-shop', null, 'ing_pay_shop') }}
 ```
 
 ### Run commands

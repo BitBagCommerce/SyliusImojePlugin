@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Controller\Shop;
+namespace BitBag\SyliusIngPayPlugin\Controller\Shop;
 
-use BitBag\SyliusImojePlugin\Bus\Command\AssignTokenValue;
-use BitBag\SyliusImojePlugin\Bus\Command\SaveTransaction;
-use BitBag\SyliusImojePlugin\Bus\DispatcherInterface;
-use BitBag\SyliusImojePlugin\Bus\Query\GetBlikTransactionData;
-use BitBag\SyliusImojePlugin\Bus\Query\GetTransactionData;
-use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
-use BitBag\SyliusImojePlugin\Exception\ImojeNotConfiguredException;
-use BitBag\SyliusImojePlugin\Factory\Payment\PaymentDataModelFactoryInterface;
-use BitBag\SyliusImojePlugin\Model\Payment\PaymentDataModelInterface;
-use BitBag\SyliusImojePlugin\Provider\BlikModel\BlikModelProviderInterface;
-use BitBag\SyliusImojePlugin\Resolver\Order\OrderResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\TransactionPaymentDataResolverInterface;
+use BitBag\SyliusIngPayPlugin\Bus\Command\AssignTokenValue;
+use BitBag\SyliusIngPayPlugin\Bus\Command\SaveTransaction;
+use BitBag\SyliusIngPayPlugin\Bus\DispatcherInterface;
+use BitBag\SyliusIngPayPlugin\Bus\Query\GetBlikTransactionData;
+use BitBag\SyliusIngPayPlugin\Bus\Query\GetTransactionData;
+use BitBag\SyliusIngPayPlugin\Entity\IngPayTransactionInterface;
+use BitBag\SyliusIngPayPlugin\Exception\IngPayNotConfiguredException;
+use BitBag\SyliusIngPayPlugin\Factory\Payment\PaymentDataModelFactoryInterface;
+use BitBag\SyliusIngPayPlugin\Model\Payment\PaymentDataModelInterface;
+use BitBag\SyliusIngPayPlugin\Provider\BlikModel\BlikModelProviderInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Order\OrderResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Payment\TransactionPaymentDataResolverInterface;
 use Psr\Log\LoggerInterface;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType;
@@ -111,7 +111,7 @@ final class InitializePaymentController extends AbstractController
             return new RedirectResponse($transactionData->getPaymentUrl());
         } catch (Throwable $e) {
             $this->logger->error($e->getMessage());
-            $this->addFlash('error', $this->translator->trans('bitbag_sylius_imoje_plugin.ui.payment_failed'));
+            $this->addFlash('error', $this->translator->trans('bitbag_sylius_ing_pay_plugin.ui.payment_failed'));
 
             return $this->redirectToRoute('sylius_shop_checkout_select_payment');
         }
@@ -124,7 +124,7 @@ final class InitializePaymentController extends AbstractController
         } catch (\InvalidArgumentException $e) {
             $this->logger->error($e->getMessage());
 
-            throw new ImojeNotConfiguredException('Payment method not found');
+            throw new IngPayNotConfiguredException('Payment method not found');
         }
 
         return $payment;
@@ -134,7 +134,7 @@ final class InitializePaymentController extends AbstractController
         OrderInterface $order,
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData,
-    ): ImojeTransactionInterface {
+    ): IngPayTransactionInterface {
         return $this->dispatcher->dispatch(
             new GetTransactionData(
                 $order,
@@ -150,7 +150,7 @@ final class InitializePaymentController extends AbstractController
         PaymentInterface $payment,
         PaymentDataModelInterface $transactionPaymentData,
         ?string $blikCode,
-    ): ImojeTransactionInterface {
+    ): IngPayTransactionInterface {
         $blikModel = $this->blikModelProvider->provideDataToBlikModel($blikCode);
 
         return $this->dispatcher->dispatch(

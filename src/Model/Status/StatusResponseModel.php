@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Model\Status;
+namespace BitBag\SyliusIngPayPlugin\Model\Status;
 
 final class StatusResponseModel implements StatusResponseModelInterface
 {
