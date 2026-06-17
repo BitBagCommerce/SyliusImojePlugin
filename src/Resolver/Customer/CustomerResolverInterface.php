@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Customer;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Customer;
 
 use Sylius\Component\Core\Model\OrderInterface;
 

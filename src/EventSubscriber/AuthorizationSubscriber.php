@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\EventSubscriber;
+namespace BitBag\SyliusIngPayPlugin\EventSubscriber;
 
-use BitBag\SyliusImojePlugin\Calculator\SignatureCalculatorInterface;
-use BitBag\SyliusImojePlugin\Controller\Shop\Webhook\WebhookController;
-use BitBag\SyliusImojePlugin\Resolver\Signature\OwnSignatureResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\Signature\SignatureResolverInterface;
+use BitBag\SyliusIngPayPlugin\Calculator\SignatureCalculatorInterface;
+use BitBag\SyliusIngPayPlugin\Controller\Shop\Webhook\WebhookController;
+use BitBag\SyliusIngPayPlugin\Resolver\Signature\OwnSignatureResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Signature\SignatureResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;

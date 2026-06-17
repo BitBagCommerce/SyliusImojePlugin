@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Bus;
+namespace BitBag\SyliusIngPayPlugin\Factory\Bus;
 
-use BitBag\SyliusImojePlugin\Bus\Command\Status\MarkAsCanceled;
-use BitBag\SyliusImojePlugin\Bus\Command\Status\MarkAsFailed;
-use BitBag\SyliusImojePlugin\Bus\Command\Status\MarkAsProcessed;
-use BitBag\SyliusImojePlugin\Bus\Command\Status\MarkAsSettled;
-use BitBag\SyliusImojePlugin\Bus\Command\Status\MarkAsSuccessful;
-use BitBag\SyliusImojePlugin\Bus\Command\Status\PaymentFinalizationCommandInterface;
+use BitBag\SyliusIngPayPlugin\Bus\Command\Status\MarkAsCanceled;
+use BitBag\SyliusIngPayPlugin\Bus\Command\Status\MarkAsFailed;
+use BitBag\SyliusIngPayPlugin\Bus\Command\Status\MarkAsProcessed;
+use BitBag\SyliusIngPayPlugin\Bus\Command\Status\MarkAsSettled;
+use BitBag\SyliusIngPayPlugin\Bus\Command\Status\MarkAsSuccessful;
+use BitBag\SyliusIngPayPlugin\Bus\Command\Status\PaymentFinalizationCommandInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 final class PaymentFinalizationCommandFactory implements PaymentFinalizationCommandFactoryInterface

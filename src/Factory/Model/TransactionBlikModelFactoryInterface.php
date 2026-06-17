@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Model;
+namespace BitBag\SyliusIngPayPlugin\Factory\Model;
 
-use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
-use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
+use BitBag\SyliusIngPayPlugin\Configuration\IngPayClientConfigurationInterface;
+use BitBag\SyliusIngPayPlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface TransactionBlikModelFactoryInterface
@@ -15,7 +15,7 @@ interface TransactionBlikModelFactoryInterface
 
     public function create(
         OrderInterface $order,
-        ImojeClientConfigurationInterface $imojeClientConfiguration,
+        IngPayClientConfigurationInterface $ingPayClientConfiguration,
         string $type,
         string $paymentMethod,
         string $paymentMethodCode,

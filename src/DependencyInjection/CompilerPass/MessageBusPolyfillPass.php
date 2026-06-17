@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\DependencyInjection\CompilerPass;
+namespace BitBag\SyliusIngPayPlugin\DependencyInjection\CompilerPass;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,7 +14,7 @@ class MessageBusPolyfillPass implements CompilerPassInterface
         'sylius.event_bus' => 'sylius_event.bus',
     ];
 
-    public const COMMAND_BUS_TAG = 'bitbag.sylius_imoje_plugin.command_bus';
+    public const COMMAND_BUS_TAG = 'bitbag.sylius_ing_pay_plugin.command_bus';
 
     private function setupDefaultCommandBus(array $buses, ContainerBuilder $container): void
     {

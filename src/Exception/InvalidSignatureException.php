@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Exception;
+namespace BitBag\SyliusIngPayPlugin\Exception;
 
 final class InvalidSignatureException extends \InvalidArgumentException implements LoggableExceptionInterface
 {

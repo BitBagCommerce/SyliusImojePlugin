@@ -1,5 +1,5 @@
 
-# Imoje Payments Plugin for Sylius
+# ING Pay Payments Plugin for Sylius
 ----
 
 We want to impact many unique eCommerce projects and build our brand recognition worldwide, so we are heavily involved in creating open-source solutions, especially for Sylius. We have already created over 35 extensions, which have been downloaded almost 2 million times.
@@ -35,7 +35,7 @@ We have a 70-person team of experts: business analysts and eCommerce consultants
 * +35 plugins created for Sylius
   
 ----
- [![](https://bitbag.io/wp-content/uploads/2024/09/badges-sylius.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_imoje)
+ [![](https://bitbag.io/wp-content/uploads/2024/09/badges-sylius.png)](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_ing_pay)
 
 ----
 
@@ -55,23 +55,23 @@ We have a 70-person team of experts: business analysts and eCommerce consultants
 
 # Overview
 ----
-Strengthen your eCommerce with our imoje integration with Sylius. Imoje is a Polish payment gateway supported by ING Bank Śląski. The provider offers all the most popular payment methods such as BLIK, e-transfers, card payments, ApplePay and Google Pay, deferred payments "imoje pay later," as well as Partial and full refunds and payments in foreign currencies.
+Strengthen your eCommerce with our ING Pay integration with Sylius. ING Pay is a Polish payment gateway supported by ING Bank Śląski. The provider offers all the most popular payment methods such as BLIK, e-transfers, card payments, ApplePay and Google Pay, deferred payments "ING Pay pay later," as well as Partial and full refunds and payments in foreign currencies.
 
-![Screenshot showing payment methods show in the shop](doc/select_payment_imoje.png)
+![Screenshot showing payment methods show in the shop](doc/select_payment_ing_pay.png)
 
-![Screenshot showing payment method config in admin](doc/admin_page_imoje.png)
+![Screenshot showing payment method config in admin](doc/admin_page_ing_pay.png)
 
 The integration currently supports the following payment methods:
 
 1. Cards
 2. Blik
 3. Pay by link
-4. imoje pay later
+4. ING Pay pay later
 
 
 # Installation
 ----
-The installation process for the Imoje Payments Plugin can be found [here](https://github.com/BitBagCommerce/SyliusImojePlugin/blob/master/doc/installation.md).
+The installation process for the ING Pay Payments Plugin can be found [here](https://github.com/BitBagCommerce/SyliusIngPayPlugin/blob/master/doc/installation.md).
 
 ## Requirements
 ----
@@ -92,25 +92,25 @@ You need to put the path to wkhtmltopdf in your .env file.
 WKHTMLTOPDF_PATH=/usr/local/bin/wkhtmltopdf
 ```
 
-To create an Imoje-based payment method, go to Payment methods in the Sylius admin panel.
+To create an ING Pay-based payment method, go to Payment methods in the Sylius admin panel.
 
 
   ![Screenshot showing payment method config in admin](doc/payment_methods_config.png)
 
-After that, you need to add an Imoje payment:
+After that, you need to add an ING Pay payment:
 
 
-  ![Screenshot showing payment method config in admin](doc/create_imoje_method.png)
+  ![Screenshot showing payment method config in admin](doc/create_ing_pay_method.png)
 
 And now, you can configure your payment method in the admin panel:
-* first you need to add a gateway code, for example "imoje_code" and set its position.
+* first you need to add a gateway code, for example "ing_pay_code" and set its position.
 
 
   ![Screenshot showing payment method config in admin](doc/details.png)
-* To configure the imoje gateway, log in to Imoje admin panel.
+* To configure the ING Pay gateway, log in to ING Pay admin panel.
 
 
-  ![Screenshot showing payment method config in admin](doc/main_imoje.png)
+  ![Screenshot showing payment method config in admin](doc/main_ing_pay.png)
 * From "Settings" -> "Data for integration" you can acquire all the needed keys:
 
 * merchantId,
@@ -124,7 +124,7 @@ And now, you can configure your payment method in the admin panel:
   ![Screenshot showing payment method config in admin](doc/api_keys.png)
 
   ![Screenshot showing payment method config in admin](doc/token.png)
-* Also, you need to configure the path to your webhooks, just type in your shop URL followed by /payment/imoje/webhook.
+* Also, you need to configure the path to your webhooks, just type in your shop URL followed by /payment/ing-pay/webhook.
 
   ![Screenshot showing payment method config in admin](doc/webhook.png)
 * Now you need to add a URL in the admin panel for the production API URL:
@@ -139,16 +139,16 @@ And now, you can configure your payment method in the admin panel:
 
 * To end up you can choose which payment-by-link you want to use.
 
-  ![Screenshot showing payment method config in admin](doc/admin_page_imoje.png)
+  ![Screenshot showing payment method config in admin](doc/admin_page_ing_pay.png)
 
-* And now you have to set a proper name for your payment method (keep in mind that Imoje supports multiple online payment methods), and click "Create".
+* And now you have to set a proper name for your payment method (keep in mind that ING Pay supports multiple online payment methods), and click "Create".
 
   ![Screenshot showing payment method config in admin](doc/payment_name.png)
 
 
 ## Usage
 ----
-This plugin allows you to use the payment solution delivered by Imoje.
+This plugin allows you to use the payment solution delivered by ING Pay.
 
 If you need some help with Sylius development, don't be hesitated to contact us directly. You can fill the form on [this site](https://bitbag.io/contact-us/?utm_source=github&utm_medium=referral&utm_campaign=plugins_mollie) or send us an e-mail to hello@bitbag.io!
 
@@ -167,7 +167,7 @@ To learn more about our contribution workflow and more, we encourage you to use 
 * [Sylius Documentation](https://docs.sylius.com/en/latest/)
 * [Sylius Contribution Guide](https://docs.sylius.com/en/latest/contributing/)
 * [Sylius Online Course](https://sylius.com/online-course/)
-* [Case study Imoje](https://bitbag.io/case-studies/imoje)
+* [Case study ING Pay](https://bitbag.io/case-studies/imoje)
 
 # License
 ---

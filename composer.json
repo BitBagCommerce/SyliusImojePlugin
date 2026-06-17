@@ -1,7 +1,7 @@
 {
-    "name": "bitbag/sylius-imoje-plugin",
+    "name": "bitbag/sylius-ing-pay-plugin",
     "type": "sylius-plugin",
-    "description": "Implementation imoje api to sylius store",
+    "description": "Implementation ING Pay api to sylius store",
     "license": "MIT",
     "require": {
         "php": "^8.0",
@@ -65,8 +65,8 @@
     },
     "autoload": {
         "psr-4": {
-            "BitBag\\SyliusImojePlugin\\": "src/",
-            "Tests\\BitBag\\SyliusImojePlugin\\": ["tests/"]
+            "BitBag\\SyliusIngPayPlugin\\": "src/",
+            "Tests\\BitBag\\SyliusIngPayPlugin\\": ["tests/"]
         }
     },
     "autoload-dev": {

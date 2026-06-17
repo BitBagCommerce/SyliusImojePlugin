@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\ReadyTransaction;
+namespace BitBag\SyliusIngPayPlugin\Factory\ReadyTransaction;
 
-use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
-use BitBag\SyliusImojePlugin\Exception\InvalidImojeResponseException;
-use BitBag\SyliusImojePlugin\Model\ReadyTransaction\ReadyTransactionModel;
+use BitBag\SyliusIngPayPlugin\Entity\IngPayTransactionInterface;
+use BitBag\SyliusIngPayPlugin\Exception\InvalidIngPayResponseException;
+use BitBag\SyliusIngPayPlugin\Model\ReadyTransaction\ReadyTransactionModel;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class ReadyTransactionFactory implements ReadyTransactionFactoryInterface
 {
     public function createReadyTransaction(
         string $contents,
-        ImojeTransactionInterface $imojeTransaction,
+        IngPayTransactionInterface $ingPayTransaction,
         OrderInterface $order,
     ): ReadyTransactionModel {
         /** @var array $transactionData */
         $transactionData = json_decode($contents, true);
 
         if (null === $transactionData['transaction'] || null === $transactionData['transaction']['status']) {
-            throw new InvalidImojeResponseException('Invalid data from response');
+            throw new InvalidIngPayResponseException('Invalid data from response');
         }
 
         $status = $transactionData['transaction']['status'];
 
-        return new ReadyTransactionModel($status, $imojeTransaction, $order);
+        return new ReadyTransactionModel($status, $ingPayTransaction, $order);
     }
 }

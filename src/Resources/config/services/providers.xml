@@ -5,36 +5,36 @@
         <service id="sylius.http_client" class="Symfony\Component\HttpClient\Psr18Client" />
         <service id="sylius.request_factory" class="Symfony\Component\HttpClient\Psr18Client" />
         <service id="sylius.stream_factory" class="Symfony\Component\HttpClient\Psr18Client"/>
-        <service class="BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProvider"
-                 id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"
+        <service class="BitBag\SyliusIngPayPlugin\Provider\IngPayClientConfigurationProvider"
+                 id="bitbag.sylius_ing_pay_plugin.provider.ing_pay_client_configuration_provider"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.repository.payment_method_repository"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.resolver.configuration.configuration_resolver"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.repository.payment_method_repository"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.resolver.configuration.configuration_resolver"/>
         </service>
 
-        <service class="BitBag\SyliusImojePlugin\Provider\ImojeClientProvider"
-                 id="bitbag.sylius_imoje_plugin.provider.imoje_client_provider"
+        <service class="BitBag\SyliusIngPayPlugin\Provider\IngPayClientProvider"
+                 id="bitbag.sylius_ing_pay_plugin.provider.ing_pay_client_provider"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.imoje_client_configuration_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.provider.ing_pay_client_configuration_provider"/>
             <argument type="service" id="sylius.http_client"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.provider.request_params.request_params_provider"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.serializer.serializer_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.provider.request_params.request_params_provider"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.factory.serializer.serializer_factory"/>
             <argument type="service" id="sylius.request_factory"/>
             <argument type="service" id="sylius.stream_factory"/>
         </service>
 
-        <service class="BitBag\SyliusImojePlugin\Provider\BlikModel\BlikModelProvider"
-                 id="bitbag.sylius_imoje_plugin.provider.blik_model.blik_model_provider"
+        <service class="BitBag\SyliusIngPayPlugin\Provider\BlikModel\BlikModelProvider"
+                 id="bitbag.sylius_ing_pay_plugin.provider.blik_model.blik_model_provider"
         >
             <argument type="service" id="request_stack"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.model.blik.blik_model_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.factory.model.blik.blik_model_factory"/>
         </service>
 
-        <service class="BitBag\SyliusImojePlugin\Provider\RequestParams\RequestParamsProvider"
-                 id="bitbag.sylius_imoje_plugin.provider.request_params.request_params_provider"
+        <service class="BitBag\SyliusIngPayPlugin\Provider\RequestParams\RequestParamsProvider"
+                 id="bitbag.sylius_ing_pay_plugin.provider.request_params.request_params_provider"
         >
-            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.serializer.serializer_factory"/>
-            <argument type="service" id="bitbag.sylius_imoje_plugin.factory.status.refund_model_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.factory.serializer.serializer_factory"/>
+            <argument type="service" id="bitbag.sylius_ing_pay_plugin.factory.status.refund_model_factory"/>
         </service>
     </services>
 </container>

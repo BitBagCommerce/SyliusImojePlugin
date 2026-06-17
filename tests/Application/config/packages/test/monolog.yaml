@@ -1,13 +1,13 @@
 monolog:
-    channels: ['imoje']
+    channels: ['ing_pay']
 
     handlers:
         main:
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             level: error
-        imoje:
+        ing_pay:
             type: stream
-            path: "%kernel.logs_dir%/%kernel.environment%_imoje.log"
+            path: "%kernel.logs_dir%/%kernel.environment%_ing_pay.log"
             level: error
-            channels: [ 'imoje' ]
+            channels: [ 'ing_pay' ]

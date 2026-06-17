@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Controller\Shop\Webhook;
+namespace BitBag\SyliusIngPayPlugin\Controller\Shop\Webhook;
 
-use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
-use BitBag\SyliusImojePlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\ImojeTransactionPaymentResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\Webhook\oneClickWebhookResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\Webhook\WebhookResolverInterface;
+use BitBag\SyliusIngPayPlugin\Model\Status\StatusResponseModelInterface;
+use BitBag\SyliusIngPayPlugin\Processor\Webhook\Status\WebhookResponseProcessorInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Payment\IngPayTransactionPaymentResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Webhook\oneClickWebhookResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Webhook\WebhookResolverInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 final class WebhookController
 {
-    public const SIGNATURE_HEADER_NAME = 'X-Imoje-Signature';
+    public const SIGNATURE_HEADER_NAME = 'X-IngPay-Signature';
 
-    private ImojeTransactionPaymentResolverInterface $imojeTransactionPaymentResolver;
+    private IngPayTransactionPaymentResolverInterface $ingPayTransactionPaymentResolver;
 
     private WebhookResolverInterface $webhookResolver;
 
@@ -26,12 +26,12 @@ final class WebhookController
     private oneClickWebhookResolverInterface $oneClickWebhookResolver;
 
     public function __construct(
-        ImojeTransactionPaymentResolverInterface $imojeTransactionPaymentResolver,
+        IngPayTransactionPaymentResolverInterface $ingPayTransactionPaymentResolver,
         WebhookResolverInterface $webhookResolver,
         WebhookResponseProcessorInterface $webhookResponseProcessor,
         oneClickWebhookResolverInterface $oneClickWebhookResolver,
     ) {
-        $this->imojeTransactionPaymentResolver = $imojeTransactionPaymentResolver;
+        $this->ingPayTransactionPaymentResolver = $ingPayTransactionPaymentResolver;
         $this->webhookResolver = $webhookResolver;
         $this->webhookResponseProcessor = $webhookResponseProcessor;
         $this->oneClickWebhookResolver = $oneClickWebhookResolver;
@@ -48,7 +48,7 @@ final class WebhookController
         }
         /** @var StatusResponseModelInterface $webhookModel */
         $webhookModel = $this->webhookResolver->resolve();
-        $payment = $this->imojeTransactionPaymentResolver->resolve($webhookModel->getTransactionId());
+        $payment = $this->ingPayTransactionPaymentResolver->resolve($webhookModel->getTransactionId());
 
         $this->webhookResponseProcessor->process($webhookModel, $payment);
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\TransactionMethod;
+namespace BitBag\SyliusIngPayPlugin\Resolver\TransactionMethod;
 
 use Sylius\Component\Core\Model\PaymentInterface;
 
@@ -14,7 +14,7 @@ interface TransactionMethodResolverInterface
 
     public const PAYMENT_METHOD_ING = 'ing';
 
-    public const PAYMENT_METHOD_PAY_LATER = 'imoje_paylater';
+    public const PAYMENT_METHOD_PAY_LATER = 'ing_pay_paylater';
 
     public const PAYMENT_METHOD_PBL = 'pbl';
 

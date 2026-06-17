@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Order;
+namespace Tests\BitBag\SyliusIngPayPlugin\Unit\Resolver\Order;
 
-use BitBag\SyliusImojePlugin\Exception\MissingOrderException;
-use BitBag\SyliusImojePlugin\Resolver\Order\OrderResolver;
-use BitBag\SyliusImojePlugin\Resolver\Order\OrderResolverInterface;
+use BitBag\SyliusIngPayPlugin\Exception\MissingOrderException;
+use BitBag\SyliusIngPayPlugin\Resolver\Order\OrderResolver;
+use BitBag\SyliusIngPayPlugin\Resolver\Order\OrderResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;

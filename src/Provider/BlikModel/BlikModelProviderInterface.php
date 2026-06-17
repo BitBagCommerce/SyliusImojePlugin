@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Provider\BlikModel;
+namespace BitBag\SyliusIngPayPlugin\Provider\BlikModel;
 
-use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\Blik\BlikModelInterface;
 
 interface BlikModelProviderInterface
 {

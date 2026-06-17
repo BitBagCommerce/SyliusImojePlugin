@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Model\ReadyTransaction;
+namespace BitBag\SyliusIngPayPlugin\Model\ReadyTransaction;
 
-use BitBag\SyliusImojePlugin\Entity\ImojeTransactionInterface;
+use BitBag\SyliusIngPayPlugin\Entity\IngPayTransactionInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class ReadyTransactionModel implements ReadyTransactionModelInterface
 {
     private string $status;
 
-    private ImojeTransactionInterface $imojeTransaction;
+    private IngPayTransactionInterface $ingPayTransaction;
 
     private OrderInterface $order;
 
     public function __construct(
         string $status,
-        ImojeTransactionInterface $imojeTransaction,
+        IngPayTransactionInterface $ingPayTransaction,
         OrderInterface $order,
     ) {
         $this->status = $status;
-        $this->imojeTransaction = $imojeTransaction;
+        $this->ingPayTransaction = $ingPayTransaction;
         $this->order = $order;
     }
 
@@ -30,9 +30,9 @@ final class ReadyTransactionModel implements ReadyTransactionModelInterface
         return $this->status;
     }
 
-    public function getimojeTransaction(): ImojeTransactionInterface
+    public function getingPayTransaction(): IngPayTransactionInterface
     {
-        return $this->imojeTransaction;
+        return $this->ingPayTransaction;
     }
 
     public function getOrder(): OrderInterface

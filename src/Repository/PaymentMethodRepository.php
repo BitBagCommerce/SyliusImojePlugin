@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Repository;
+namespace BitBag\SyliusIngPayPlugin\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
@@ -18,7 +18,7 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
         $this->baseRepository = $baseRepository;
     }
 
-    public function findOneForImojeCode(string $code): ?PaymentMethodInterface
+    public function findOneForIngPayCode(string $code): ?PaymentMethodInterface
     {
         return $this->baseRepository->createQueryBuilder('o')
             ->innerJoin('o.gatewayConfig', 'gatewayConfig')
@@ -31,7 +31,7 @@ final class PaymentMethodRepository implements PaymentMethodRepositoryInterface
         ;
     }
 
-    public function findOneForImoje(): ?PaymentMethodInterface
+    public function findOneForIngPay(): ?PaymentMethodInterface
     {
         $result = $this->baseRepository->createQueryBuilder('o')
             ->innerJoin('o.gatewayConfig', 'gatewayConfig')

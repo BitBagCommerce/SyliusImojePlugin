@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Repository\Order;
+namespace BitBag\SyliusIngPayPlugin\Repository\Order;
 
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\OrderInterface;

@@ -1,3 +1,3 @@
-import '../../sdk_imoje/entry';
+import '../../sdk_ing_pay/entry';
 import './handleSelectPaymentMethod';
 import './handlePaymentRedirect';

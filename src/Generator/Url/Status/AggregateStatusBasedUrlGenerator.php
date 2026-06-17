@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Generator\Url\Status;
+namespace BitBag\SyliusIngPayPlugin\Generator\Url\Status;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\HttpFoundation\Request;

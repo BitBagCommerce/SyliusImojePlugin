@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Signature;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Signature;
 
-use BitBag\SyliusImojePlugin\Exception\InvalidSignatureException;
+use BitBag\SyliusIngPayPlugin\Exception\InvalidSignatureException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class SignatureResolver implements SignatureResolverInterface

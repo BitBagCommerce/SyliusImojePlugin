@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\Configuration;
+namespace BitBag\SyliusIngPayPlugin\Resolver\Configuration;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,8 +44,8 @@ final class ConfigurationResolver implements ConfigurationResolverInterface
             'bspb' => '',
             'nest' => '',
             'envelo' => '',
-            'imoje_paylater' => '',
-            'imoje_twisto' => '',
+            'ing_pay_paylater' => '',
+            'ing_pay_twisto' => '',
             'paypo' => '',
         ]);
 

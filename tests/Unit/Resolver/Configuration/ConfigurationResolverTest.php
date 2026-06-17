@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Configuration;
+namespace Tests\BitBag\SyliusIngPayPlugin\Unit\Resolver\Configuration;
 
-use BitBag\SyliusImojePlugin\Resolver\Configuration\ConfigurationResolver;
+use BitBag\SyliusIngPayPlugin\Resolver\Configuration\ConfigurationResolver;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
@@ -52,8 +52,8 @@ final class ConfigurationResolverTest extends TestCase
             'bspb' => '',
             'nest' => '',
             'envelo' => '',
-            'imoje_paylater' => '',
-            'imoje_twisto' => '',
+            'ing_pay_paylater' => '',
+            'ing_pay_twisto' => '',
             'paypo' => '',
         ];
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Signature;
+namespace Tests\BitBag\SyliusIngPayPlugin\Unit\Resolver\Signature;
 
-use BitBag\SyliusImojePlugin\Exception\InvalidSignatureException;
-use BitBag\SyliusImojePlugin\Resolver\Signature\SignatureResolver;
-use BitBag\SyliusImojePlugin\Resolver\Signature\SignatureResolverInterface;
+use BitBag\SyliusIngPayPlugin\Exception\InvalidSignatureException;
+use BitBag\SyliusIngPayPlugin\Resolver\Signature\SignatureResolver;
+use BitBag\SyliusIngPayPlugin\Resolver\Signature\SignatureResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Model;
+namespace BitBag\SyliusIngPayPlugin\Model;
 
 final class RedirectModel implements RedirectModelInterface
 {

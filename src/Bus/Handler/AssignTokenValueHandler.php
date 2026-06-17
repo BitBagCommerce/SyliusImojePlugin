@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Bus\Handler;
+namespace BitBag\SyliusIngPayPlugin\Bus\Handler;
 
-use BitBag\SyliusImojePlugin\Bus\Command\AssignTokenValue;
+use BitBag\SyliusIngPayPlugin\Bus\Command\AssignTokenValue;
 
 final class AssignTokenValueHandler
 {

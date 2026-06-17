@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Model\Payment;
+namespace BitBag\SyliusIngPayPlugin\Model\Payment;
 
 interface PaymentDataModelInterface
 {

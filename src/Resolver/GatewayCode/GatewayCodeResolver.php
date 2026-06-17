@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusIngPayPlugin\Resolver\GatewayCode;
 
-use BitBag\SyliusImojePlugin\Exception\NoImojeGatewayPaymentException;
+use BitBag\SyliusIngPayPlugin\Exception\NoIngPayGatewayPaymentException;
 use Sylius\Bundle\PayumBundle\Model\GatewayConfigInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,7 +22,7 @@ final class GatewayCodeResolver implements GatewayCodeResolverInterface
         /** @var GatewayConfigInterface|null $config */
         $config = $this->repository->findOneBy(['factoryName' => $factoryName]);
         if (null === $config) {
-            throw new NoImojeGatewayPaymentException('No gateway code found');
+            throw new NoIngPayGatewayPaymentException('No gateway code found');
         }
 
         return $config->getGatewayName();

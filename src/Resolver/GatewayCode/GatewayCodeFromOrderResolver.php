@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\GatewayCode;
+namespace BitBag\SyliusIngPayPlugin\Resolver\GatewayCode;
 
-use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Provider\ImojeClientConfigurationProviderInterface;
-use BitBag\SyliusImojePlugin\Resolver\Payment\OrderPaymentResolverInterface;
+use BitBag\SyliusIngPayPlugin\Configuration\IngPayClientConfigurationInterface;
+use BitBag\SyliusIngPayPlugin\Provider\IngPayClientConfigurationProviderInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\Payment\OrderPaymentResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 final class GatewayCodeFromOrderResolver implements GatewayCodeFromOrderResolverInterface
 {
-    private ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider;
+    private IngPayClientConfigurationProviderInterface $ingPayClientConfigurationProvider;
 
     private OrderPaymentResolverInterface $orderPaymentResolver;
 
     public function __construct(
-        ImojeClientConfigurationProviderInterface $imojeClientConfigurationProvider,
+        IngPayClientConfigurationProviderInterface $ingPayClientConfigurationProvider,
         OrderPaymentResolverInterface $orderPaymentResolver,
     ) {
-        $this->imojeClientConfigurationProvider = $imojeClientConfigurationProvider;
+        $this->ingPayClientConfigurationProvider = $ingPayClientConfigurationProvider;
         $this->orderPaymentResolver = $orderPaymentResolver;
     }
 
-    public function resolve(OrderInterface $order): ImojeClientConfigurationInterface
+    public function resolve(OrderInterface $order): IngPayClientConfigurationInterface
     {
         $payment = $this->orderPaymentResolver->resolve($order);
         $gatewayCode = $payment->getMethod()->getCode();
 
-        return $this->imojeClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
+        return $this->ingPayClientConfigurationProvider->getPaymentMethodConfiguration($gatewayCode);
     }
 }

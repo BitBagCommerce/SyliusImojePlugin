@@ -1,5 +1,5 @@
-bitbag_imoje_localized:
-  resource: "@BitBagSyliusImojePlugin/Resources/config/routing/shop_routing.yaml"
+bitbag_ing_pay_localized:
+  resource: "@BitBagSyliusIngPayPlugin/Resources/config/routing/shop_routing.yaml"
 sylius_refund:
   resource: "@SyliusRefundPlugin/Resources/config/routing.yml"
 

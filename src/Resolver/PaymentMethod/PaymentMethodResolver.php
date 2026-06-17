@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\PaymentMethod;
+namespace BitBag\SyliusIngPayPlugin\Resolver\PaymentMethod;
 
-use BitBag\SyliusImojePlugin\Exception\MissingPaymentMethodException;
+use BitBag\SyliusIngPayPlugin\Exception\MissingPaymentMethodException;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 

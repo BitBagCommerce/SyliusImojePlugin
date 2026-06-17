@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Model;
+namespace BitBag\SyliusIngPayPlugin\Factory\Model;
 
-use BitBag\SyliusImojePlugin\Configuration\ImojeClientConfigurationInterface;
-use BitBag\SyliusImojePlugin\Model\TransactionModelInterface;
+use BitBag\SyliusIngPayPlugin\Configuration\IngPayClientConfigurationInterface;
+use BitBag\SyliusIngPayPlugin\Model\TransactionModelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 interface TransactionModelFactoryInterface
 {
-    public const REDIRECT_URL = 'bitbag_imoje_redirect';
+    public const REDIRECT_URL = 'bitbag_ing_pay_redirect';
 
-    public const REDIRECT_ONECLICK_URL = 'bitbag_imoje_one_click_redirect';
+    public const REDIRECT_ONECLICK_URL = 'bitbag_ing_pay_one_click_redirect';
 
     public const SALE_TYPE = 'sale';
 
     public function create(
         OrderInterface $order,
-        ImojeClientConfigurationInterface $imojeClientConfiguration,
+        IngPayClientConfigurationInterface $ingPayClientConfiguration,
         string $type,
         string $paymentMethod,
         string $paymentMethodCode,

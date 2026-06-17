@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Resolver\GatewayFactoryName;
+namespace BitBag\SyliusIngPayPlugin\Resolver\GatewayFactoryName;
 
 interface GatewayFactoryNameResolverInterface
 {

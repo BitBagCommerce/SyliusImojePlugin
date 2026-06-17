@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\TransactionData;
+namespace Tests\BitBag\SyliusIngPayPlugin\Unit\Resolver\TransactionData;
 
-use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolver;
-use BitBag\SyliusImojePlugin\Resolver\TransactionData\TransactionDataResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\TransactionData\TransactionDataResolver;
+use BitBag\SyliusIngPayPlugin\Resolver\TransactionData\TransactionDataResolverInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;

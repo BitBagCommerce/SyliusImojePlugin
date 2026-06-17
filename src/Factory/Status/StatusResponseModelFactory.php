@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Status;
+namespace BitBag\SyliusIngPayPlugin\Factory\Status;
 
-use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModel;
-use BitBag\SyliusImojePlugin\Model\Status\StatusResponseModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\Status\StatusResponseModel;
+use BitBag\SyliusIngPayPlugin\Model\Status\StatusResponseModelInterface;
 
 final class StatusResponseModelFactory implements StatusResponseModelFactoryInterface
 {

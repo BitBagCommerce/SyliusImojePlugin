@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests\BitBag\SyliusImojePlugin\Unit\Resolver\Status;
+namespace Tests\BitBag\SyliusIngPayPlugin\Unit\Resolver\Status;
 
-use BitBag\SyliusImojePlugin\Exception\NoCorrectStatusException;
-use BitBag\SyliusImojePlugin\Resolver\Status\StatusResolver;
-use BitBag\SyliusImojePlugin\Resolver\Status\StatusResolverInterface;
+use BitBag\SyliusIngPayPlugin\Exception\NoCorrectStatusException;
+use BitBag\SyliusIngPayPlugin\Resolver\Status\StatusResolver;
+use BitBag\SyliusIngPayPlugin\Resolver\Status\StatusResolverInterface;
 use PHPUnit\Framework\TestCase;
 
 final class StatusResolverTest extends TestCase

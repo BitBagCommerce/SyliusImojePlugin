@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Repository;
+namespace BitBag\SyliusIngPayPlugin\Repository;
 
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 
 interface PaymentMethodRepositoryInterface
 {
-    public const FACTORY_NAME = 'BitBag_imoje';
+    public const FACTORY_NAME = 'BitBag_ing_pay';
 
-    public function findOneForImojeCode(string $code): ?PaymentMethodInterface;
+    public function findOneForIngPayCode(string $code): ?PaymentMethodInterface;
 
-    public function findOneForImoje(): ?PaymentMethodInterface;
+    public function findOneForIngPay(): ?PaymentMethodInterface;
 }

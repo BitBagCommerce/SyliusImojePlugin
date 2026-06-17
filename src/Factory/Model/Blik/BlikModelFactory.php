@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Factory\Model\Blik;
+namespace BitBag\SyliusIngPayPlugin\Factory\Model\Blik;
 
-use BitBag\SyliusImojePlugin\Model\Blik\BlikModel;
-use BitBag\SyliusImojePlugin\Model\Blik\BlikModelInterface;
+use BitBag\SyliusIngPayPlugin\Model\Blik\BlikModel;
+use BitBag\SyliusIngPayPlugin\Model\Blik\BlikModelInterface;
 
 final class BlikModelFactory implements BlikModelFactoryInterface
 {

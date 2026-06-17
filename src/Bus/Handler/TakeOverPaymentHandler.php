@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Bus\Handler;
+namespace BitBag\SyliusIngPayPlugin\Bus\Handler;
 
-use BitBag\SyliusImojePlugin\Bus\Command\TakeOverPayment;
-use BitBag\SyliusImojePlugin\Repository\PaymentMethodRepositoryInterface;
-use BitBag\SyliusImojePlugin\Resolver\PaymentMethod\PaymentMethodResolver;
+use BitBag\SyliusIngPayPlugin\Bus\Command\TakeOverPayment;
+use BitBag\SyliusIngPayPlugin\Repository\PaymentMethodRepositoryInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\PaymentMethod\PaymentMethodResolver;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -37,7 +37,7 @@ final class TakeOverPaymentHandler implements MessageHandlerInterface
             return;
         }
 
-        $paymentMethod = $this->paymentMethodRepository->findOneForImojeCode($command->getPaymentCode());
+        $paymentMethod = $this->paymentMethodRepository->findOneForIngPayCode($command->getPaymentCode());
         $payment->setMethod($paymentMethod);
 
         $this->paymentRepository->add($payment);

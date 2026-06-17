@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BitBag\SyliusImojePlugin\Controller\Shop\Oneclick;
+namespace BitBag\SyliusIngPayPlugin\Controller\Shop\Oneclick;
 
-use BitBag\SyliusImojePlugin\Factory\Request\RedirectFactoryInterface;
-use BitBag\SyliusImojePlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
-use BitBag\SyliusImojePlugin\Resolver\ImojeOneClickSignature\ImojeOneClickSignatureResolverInterface;
+use BitBag\SyliusIngPayPlugin\Factory\Request\RedirectFactoryInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\GatewayCode\GatewayCodeFromOrderResolverInterface;
+use BitBag\SyliusIngPayPlugin\Resolver\IngPayOneClickSignature\IngPayOneClickSignatureResolverInterface;
 use function strtoupper;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -17,11 +17,11 @@ use Webmozart\Assert\Assert;
 
 final class OneClickController
 {
-    public const IMOJE_KEY_DETAIL = 'imojePaymentMethods';
+    public const ING_PAY_KEY_DETAIL = 'ingPayPaymentMethods';
 
     private GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver;
 
-    private ImojeOneClickSignatureResolverInterface $signatureResolver;
+    private IngPayOneClickSignatureResolverInterface $signatureResolver;
 
     private RedirectFactoryInterface $redirectFactory;
 
@@ -29,7 +29,7 @@ final class OneClickController
 
     public function __construct(
         GatewayCodeFromOrderResolverInterface $gatewayCodeFromOrderResolver,
-        ImojeOneClickSignatureResolverInterface $signatureResolver,
+        IngPayOneClickSignatureResolverInterface $signatureResolver,
         RedirectFactoryInterface $redirectFactory,
         OrderRepositoryInterface $orderRepository,
     ) {
